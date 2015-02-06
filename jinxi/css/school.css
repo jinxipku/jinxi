@@ -1,0 +1,35 @@
+#choose-a-province a {
+	display: inline-block;
+	height: 19px;
+	line-height: 15px;
+	font-size: 15px;
+	margin: 2px 5px;
+	padding: 1px;
+	text-align: center;
+}
+#choose-a-province a:hover {
+	cursor: pointer;
+}
+#choose-a-province .choosen {
+	background: #3498DB;
+	color: white;
+}
+#choose-a-school {
+	overflow-x: hidden;
+	overflow-y: auto;
+	height: 250px;
+}
+#choose-a-school a {
+	height: 19px;
+	line-height: 15px;
+	color: #1ABC9C;
+	font-size: 16px;
+	float: left;
+	width: 255px;
+	margin: 4px 12px;
+	padding-left: 15px;
+}
+#choose-a-school a:hover {
+	background: #1ABC9C;
+	color: white;
+}

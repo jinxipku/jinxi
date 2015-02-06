@@ -1,0 +1,370 @@
+body {
+	background-color: #f4f4f4;
+	font-family: 微软雅黑,黑体,幼圆,宋体;
+	color: #080808;
+}
+div.leftpart{
+	position: relative;
+	float: left;
+	width: 772px;
+	margin-right: 20px;
+}
+div.leftpart2{
+	position: relative;
+	padding-left: 60px;
+	float: left;
+	width: 264px;
+	margin-right: 20px;
+}
+div.rightpart{
+	position: relative;
+	float: left;
+	width: 264px;
+}
+div.rightpart2{
+	position: relative;
+	float: left;
+	width: 772px;
+}
+div.leftchoose{
+	position: relative;
+	float: left;
+	width: 122px;
+	margin-right: 20px;
+}
+div.righttext{
+	position: relative;
+	float: left;
+	padding-top: 30px;
+	padding-bottom: 40px;
+	padding-left: 40px;
+	padding-right: 40px;
+	width: 630px;
+}
+div.righttextall{
+	position: relative;
+	float: left;
+	padding-top: 30px;
+	padding-bottom: 40px;
+	padding-left: 40px;
+	padding-right: 323px;
+	width: 913px;
+}
+div.righttext div.con{
+	margin-left: 20px;
+}
+div.rightcontent{
+	background-color: #ffffff;
+	padding: 20px;
+}
+div.lefttitle{
+	padding: 5px 20px 5px 20px;
+	background-color: #1ABC9C;
+	margin-top: 25px;
+	font-size: 23px;
+	font-family: 微软雅黑,黑体,幼圆,宋体;
+	color: #FFFFFF;
+}
+div.postitembig{
+	width: 772px;
+	height: 136px;
+}
+div.postitembig img.postimage{
+	position: relative;
+	float: left;
+	margin-top: 10px;
+	width: 114px;
+	height: 114px;
+	margin-right: 15px;
+	overflow: hidden;
+}
+div.postitembig div.postinfo{
+	position: relative;
+	float: left;
+	width: 543px;
+	height: 136px;
+}
+div.postitembig div.postquality{
+	position: relative;
+	float: left;
+	width: 100px;
+	height: 136px;
+}
+div.postitembig div.postquality img.quality{
+	margin-top: -10px;
+	width: 100px;
+}
+div.tableline{
+	height: 50px;
+}
+div.tableleft{
+	position: relative;
+	float: left;
+	width: 82px;
+	padding-top: 6px;
+}
+div.tableright{
+	position: relative;
+	float: left;
+	width: 446px;
+}
+div.textbookitem{
+	position: relative;
+	float: left;
+	width: 200.5px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+div.userheader{
+	width: 772px;
+	height: 250px;
+}
+div.ujian-hook img{
+	width: 110px !important;
+	border-radius: 1px !important;
+}
+div.ujian-hook div{
+	border-radius: 1px !important;
+}
+div.colordis{
+	position: relative;
+	float: left;
+	height: 35px;
+	width: 60px;
+	text-align: center;
+	color: #FFF;
+	margin-bottom: 15px;
+	margin-right: 15px;
+}
+div.signwraper{
+	height: 25px;
+	width: 543px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	white-space: nowrap;
+}
+div.titlewraper{
+	margin-top: 5px;
+	width: 543px;
+	height: 45px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	white-space: nowrap;
+}
+li.breadwraper{
+	width: 300px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	white-space: nowrap;
+}
+p.righttitle{
+	font-size: 23px;
+	font-family: 微软雅黑,黑体,幼圆,宋体;
+	color: #16A085;
+}
+p.rightcontent{
+	font-size: 14px;
+	font-family: 宋体;
+}
+p.rightlink{
+	font-size: 13px;
+	font-family: 宋体;
+	margin-left: 90px;
+	margin-bottom: 0px;
+}
+p.righttag{
+	font-size: 17px;
+	margin-bottom: 0;
+}
+p.righttag:hover{
+	cursor: pointer;
+}
+p.righttagcon{
+	font-size: 13px;
+	font-family: 宋体;
+	margin-bottom: 0px;
+	color: #7F8C8D;
+}
+p.postaddress{
+	font-family: 微软雅黑,黑体,幼圆,宋体;
+	font-size: 20px;
+	margin-left: 12px;
+}
+p.postuser{
+	font-family: 宋体;
+	margin-left: 12px;
+	margin-bottom: 0;
+	color: #808080;
+}
+p.postusersm{
+	font-family: 宋体;
+	font-size: 15px;
+	color: #808080;
+	margin-right: 5px;
+}
+p.postprice{
+	font-family: 宋体;
+	font-weight: 600;
+	font-size: 24px;
+	margin-top: 5px;
+	margin-bottom: 0;
+	color: #E74C3C;	
+}
+p.userschool{
+	font-family: 微软雅黑,黑体,幼圆,宋体;
+	font-size: 18px;
+	margin-bottom: 2px;
+}
+p.userstat{
+	font-family: 微软雅黑,黑体,幼圆,宋体;
+	color: #3498DB;
+	font-size: 15px;
+	margin-bottom: 0;
+}
+p.postcontent{
+	font-family: 微软雅黑,黑体,幼圆,宋体;
+	color: #333;
+	font-size: 18px;
+}
+norb.userlatest{
+	font-family: 宋体;
+	font-size: 13px;
+	margin-bottom: 2px;
+	margin-left: 5px;
+	color: #808080;
+}
+p.footer{
+	color: #FFFFFF;
+	font-size: 14px;
+	font-family: 微软雅黑,黑体,幼圆,宋体;
+	margin-top: 5px;
+}
+p.footerinfo{
+	color: #222222;
+	font-size: 14px;
+	font-family: 宋体;
+	font-weight: 500;
+	margin-bottom: 0;
+}
+p.tbtitle{
+	color: #404040;
+	font-size: 15px;
+	font-weight: 500;
+	margin: 0;
+}
+p.tbinfo{
+	font-family: 宋体;
+	font-size: 13px;
+	color: #808080;
+	margin-right: 5px;
+}
+p.title{
+	font-family: 微软雅黑,黑体,幼圆,宋体;
+	font-size: 20px;
+}
+p.con{
+	font-family: 宋体;
+	font-size: 14px;
+	color: #95A5A6;
+}
+p.postcon{
+	font-family: 微软雅黑,黑体,幼圆,宋体;
+	font-size: 15px;
+}
+p.replycon{
+	font-family: 宋体;
+	font-size: 14px;
+	color: #95A5A6;
+}
+p.username{
+	font-family: 微软雅黑,黑体,幼圆,宋体;
+	font-size: 22px;
+	margin-bottom: 0;
+}
+p.username small{
+	font-family: 微软雅黑,黑体,幼圆,宋体;
+	font-size: 14px;
+	color: #666;
+	margin-bottom: 3px;
+}
+p.userlevel{
+	font-family: 微软雅黑,黑体,幼圆,宋体;
+	font-size: 15px;
+	color: #999;
+	margin-bottom: 3px;
+}
+p.userinfo{
+	font-family: 微软雅黑,黑体,幼圆,宋体;
+	font-size: 17px;
+	margin-bottom: 3px;
+}
+p.usermark{
+	font-family: 微软雅黑,黑体,幼圆,宋体;
+	font-size: 15px;
+	color: #3498DB;
+	margin-bottom: 3px;
+}
+p.usersign{
+	font-family: 宋体;
+	font-size: 14px;
+	color: #666;
+	margin-bottom: 3px;
+}
+p.numinfo{
+	margin: 5px 0 5px 20px;
+	height: 25px;
+}
+a.commreport{
+	margin-bottom: 0;
+	font-family: 微软雅黑,黑体,幼圆,宋体;
+	font-size: 12px;
+	color: #E74C3C;
+	display: none;
+}
+a.switch{
+	color: #666666;
+	font-size: 14px;
+	font-family: 宋体;
+	margin-left: 8px;
+}
+a.switch:hover {
+	color: #000000;
+}
+a.all{
+	color: #FFFFFF;
+}
+a.all:hover {
+  	color: #CCCCCC;
+}
+a.footer{
+  	color: #FFFFFF;
+}
+a.footer:hover {
+ 	color: #CCCCCC;
+}
+a.posttitle{
+	color: #404040;
+	font-size: 24px;
+	font-weight: 600;
+	margin-top: 0;
+}
+a.posttitlesm{
+	color: #404040;
+	font-size: 15px;
+	font-weight: 500;
+	margin-top: 0;
+}
+span.check{
+	font-size: 14px;
+}
+span.numinfo{
+	margin: 5px 0 5px 20px;
+	height: 25px;
+	font-size: 14px;
+}
+#backtotop:hover{
+	cursor: pointer;
+}
