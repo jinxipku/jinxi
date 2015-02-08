@@ -53,6 +53,7 @@ $autoload['packages'] = array();
 */
 
 
+
 /*
 | -------------------------------------------------------------------
 |  Auto-load Helper Files
@@ -61,8 +62,6 @@ $autoload['packages'] = array();
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-
-$autoload['helper'] = array();
 
 
 /*

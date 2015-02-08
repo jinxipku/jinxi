@@ -1,11 +1,17 @@
 <?php
-class Account extends CI_Controller {
+class Account extends MY_Controller {
 	public function __construct() {
 		parent::__construct ();
 		$this->load->model ( 'user_model' );
 		$this->load->library('session');
 		$this->load->helper('url');
 	}
+	
+	public function register(){
+		echo pwdHash('wodemima');
+	}
+
+
 	public function regidit() {
 		$user_id =  $this->session->userdata('login_user');
 		
