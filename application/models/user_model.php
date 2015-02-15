@@ -2,70 +2,56 @@
 class user_model extends CI_Model {
 	public function __construct() {
 		$this->load->database ();
+		$this->load->library('encrypt');
+		$this->load->library('user_agent');
+		$this->load->helper('date');
 	}
 	public function get_user($user_id = 0) {
 		if ($user_id === 0) {
-			$query = $this->db->get ( 'jx_user' );
+			$query = $this->db->get ( 'jx_account' );
 			return $query->result_array ();
 		}
 		
-		$query = $this->db->get_where ( 'jx_user', array (
+		$query = $this->db->get_where ( 'jx_account', array (
 				'user_id' => $user_id 
 		) );
 		return $query->row_array ();
 	}
 	public function get_user2($mail = 0) {
 		if ($mail === 0) {
-			$query = $this->db->get ( 'jx_user' );
+			$query = $this->db->get ( 'jx_account' );
 			return $query->result_array ();
 		}
 		
-		$query = $this->db->get_where ( 'jx_user', array (
-				'mail' => $mail 
+		$query = $this->db->get_where ( 'jx_account', array (
+				'email' => $mail 
 		) );
 		return $query->row_array ();
 	}
 	public function login($mail, $pw) {
-		$query = $this->db->get_where ( 'jx_user', array (
-				'mail' => $mail,
-				'password' => $pw 
-		) );
-		$num = $query->num_rows ();
-		if ($num > 0) {
-			$array = $query->row_array ();
-			$verify = $array['is_verified'];
-			if ($verify == 1){
-				$userinfo = $query->row_array ();
-				$score = $userinfo['score'];
-				$level = $userinfo['level'];
-				$last_login = $userinfo['last_login'];
-				$login_days = $userinfo['login_days'];
-				$nowtime = date ( "Y-m-d" );
-				$delta = (strtotime($nowtime) - strtotime($last_login))/86400;
-				if($delta>0){
-					if($delta==1)
-						$login_days += 1;
-					else if($delta==2 && $userinfo['is_star']==1)
-						$login_days += 1;
-					else if($delta>1)
-						$login_days = 1;
-					$score += ld_score($login_days);
-					$level = get_level($score);
-					$data = array (
-							'last_login' => $nowtime,
-							'login_days' => $login_days,
-							'score' => $score,
-							'level' => $level
-					);
-					$this->db->where ( 'mail', $mail );
-					$this->db->update ( 'jx_user', $data );
-				}		
+		$user = $this->get_user2($mail);
+		if(!empty($user)){
+			$rpw = $this->encrypt->decode($user['password']);
+			if($pw == $rpw){
+				$daysec = 86400;
+				$login =  $user['last_login'] - $user['last_login'] % $daysec;
+				echo date("Y:m:d H:i:s",$user['last_login']);
+				$delta = (time() - $login)/$daysec;
+				if($delta >= 1 && $delta < 2){
+					$user['logins'] = $user['logins'] + 1;
+				}else{
+					$user['logins'] = 1;
+				}
+				$data = array(
+					'logins' => $user['logins'],
+					'last_login' => time()
+				);
+				$this->db->where ( 'email', $mail );
+				$this->db->update ( 'jx_account', $data );
 				return 1;
-			}
-			else
-				return 0;
+			}else return 0;
 		}
-		return - 1;
+		return -1;
 	}
 	public function changehi($uid, $type) {
 		$query = $this->db->get_where ( 'jx_user', array (
@@ -82,27 +68,20 @@ class user_model extends CI_Model {
 		return $this->db->update ( 'jx_user', $data );
 	}
 	public function regidit($mail, $name, $pw) {
-		$randpwd = '';
-		for($i = 0; $i < 6; $i ++) {
-			$tp = mt_rand ( 48, 90 );
-			while ( $tp < 65 && $tp > 57 ) {
-				$tp = mt_rand ( 48, 90 );
-			}
-			$randpwd .= chr ( $tp );
-		}
-		$nowtime = date ( "Y-m-d" );
+		$encryptPwd = $this->encrypt->encode($pw);
+		$nowtime = time();
 		$data = array (
-				'mail' => "$mail",
+				'email' => "$mail",
 				'user_name' => "$name",
-				'password' => "$pw",
-				'code' => "$randpwd",
-				'sign' => '我是一只快乐的今昔兔~',
-				'last_login' => "$nowtime" 
+				'password' => "$encryptPwd",
+				'is_verified' => 0,
+				'reg_ip' => getClientIp(),
+				'last_login' => "$nowtime",
+				'logins' => 1,
+				
 		);
-		$res = $this->db->insert ( 'jx_user', $data );
-		if ($res > 0)
-			return $mail . '*&*' . $randpwd;
-		return 0;
+		$res = $this->db->insert ( 'jx_account', $data );
+		return $res;
 	}
 	public function verify($mail, $code) {
 		$data = array (

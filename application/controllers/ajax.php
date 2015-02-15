@@ -18,85 +18,13 @@ class Ajax extends CI_Controller {
 		}
 		echo $logresult;
 	}
+	
 	public function logout() {
 		if ($_SERVER ['REQUEST_METHOD'] == 'GET')
 			exit ( "PERMISSION DENIED!" );
 		$this->session->unset_userdata ( 'login_user' );
 	}
-	public function regidit($mail1, $mail2, $pw) {
-		if ($_SERVER ['REQUEST_METHOD'] == 'GET')
-			exit ( "PERMISSION DENIED!" );
-		$uname = $_POST ['user_name'];
-		if (strlen ( $mail1 ) == 0 || strlen ( $mail2 ) == 0 || strlen ( $uname ) == 0 || strlen ( $pw ) < 6)
-			exit ( "PERMISSION DENIED!" );
-		$regres = $this->user_model->regidit ( $mail1 . '@' . $mail2, $uname, $pw );
-		if ($regres == '0')
-			exit ( "0" );
-		$this->load->library ( 'encrypt' );
-		$encrypted_string_mail = $this->encrypt->encode ( explode ( '*&*', $regres )[0] );
-		$encrypted_string_code = $this->encrypt->encode ( explode ( '*&*', $regres )[1] );
-		
-		$this->load->library ( 'email' );
-		// 设置Email参数
-		$config ['protocol'] = 'smtp';
-		$config ['smtp_host'] = 'smtp.163.com';
-		$config ['smtp_user'] = 'jinxicn2013';
-		$config ['smtp_pass'] = 'jinxicn';
-		$config ['smtp_port'] = '25';
-		$config ['charset'] = 'utf-8';
-		$config ['wordwrap'] = TRUE;
-		$config ['mailtype'] = 'html';
-		$this->email->initialize ( $config );
-		// 发送
-		$content = '
-		<style type="text/css">
-a.footer{
-  	color: #FFFFFF;
-}
-a.footer:hover {
- 	color: #CCCCCC;
-}
-p.footer{
-	color: #FFFFFF;
-	font-size: 14px;
-	font-family: 微软雅黑,黑体,幼圆,宋体;
-	margin-top: 5px;
-}
 
-       </style>
-	<div style="width: 450px; margin-top: 15px; margin-left: auto; margin-right: auto;"><img 
-
-style="width: 100%;" src="http://xn--wmqr18c.cn/img/icon/invite.png" /></div>
-	<p style="font-size: 22px; font-family: 微软雅黑,黑体,宋体">&nbsp;&nbsp;&nbsp;&nbsp;尊敬的用户<span style="color: #1ABC9C"> ' . $uname . ' </span>您好，欢迎加入今昔网，您的账号已经注册完毕，请点击以下链接完成验证：<a href="http://xn--wmqr18c.cn/account/verify?mail=' . $encrypted_string_mail . '&code=' . $encrypted_string_code . '">立即激活</a></p>
-	<div class="row"
-		style="height: 35px; background-color: #1ABC9C; text-align: center; margin-bottom: 
-
-10px; ">
-		<p class="footer">
-			<a href="#" class="footer">关于今昔</a><span> &nbsp;&nbsp;| &nbsp;&nbsp;</span>
-			<a href="#" class="footer">今昔历程</a><span> &nbsp;&nbsp;| &nbsp;&nbsp;</span>
-			<a href="#" class="footer">联系我们</a><span> &nbsp;&nbsp;| &nbsp;&nbsp;</span>
-			<a href="#" class="footer">用户协议</a><span> &nbsp;&nbsp;| &nbsp;&nbsp;</span>
-			<a href="#" class="footer">帮助中心</a><span> &nbsp;&nbsp;| &nbsp;&nbsp;</span>
-			<a href="#" class="footer">意见建议</a>
-		</p>
-	</div>
-
-	<div style="text-align: center; margin-bottom: 40px; margin-top: 10px;">
-		<p class="footerinfo">&copy; 2013 今昔网 &middot;
-			版权所有&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 京ICP备13053152号</p>
-		<p class="footerinfo">后夏科技&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;地址：北京市海淀区</p>
-		<p class="footerinfo">Designed and Developed by FABKXD</p>
-	</div>
-				';
-		$this->email->from ( 'jinxicn2013@163.com', '今昔网' );
-		$this->email->to ( $mail1 . '@' . $mail2 );
-		$this->email->subject ( '今昔网账号邮件验证' );
-		$this->email->message ( $content );
-		
-		$this->email->send ();
-		echo 1;
-	}
 	public function captcha() {
 		if ($_SERVER ['REQUEST_METHOD'] == 'GET')
 			exit ( "PERMISSION DENIED!" );
