@@ -1,5 +1,5 @@
 <?php
-class Index extends CI_Controller {
+class Index extends MY_Controller {
 	public function __construct() {
 		parent::__construct ();
 		$this->load->model ( 'user_model' );
@@ -17,16 +17,12 @@ class Index extends CI_Controller {
 		$data ['choose'] = 1;
 		$data ['baseurl'] = base_url();
 		$data ['title'] = '主页';
-
+		$this->assign('data', $data);
 		
-		$this->load->view ( 'templates/header', $data );
-		$this->load->view ( 'index/leftflash' );
-		$this->load->view ( 'index/leftrec' );
-		$this->load->view ( 'index/leftall' );
-		$this->load->view ( 'index/lefttextbook' );
-		$this->load->view ( 'index/leftinfo' );
-		$this->load->view ( 'index/right' );
-		$this->load->view ( 'templates/footer' );
+		$this->display ( 'templates/header.php' );
+		//$this->load->view ( 'index/main' );
+		//$this->load->view ( 'index/right' );
+		//$this->load->view ( 'templates/footer' );
 
 	}
 }

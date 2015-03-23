@@ -5,16 +5,16 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="description" content="jinxi">
 	<meta name="author" content="fabkxd">
-	<link rel="shortcut icon" href="<?=$baseurl?>img/icon/icon.png">
+	<link rel="shortcut icon" href="{$data.baseurl}img/icon/icon.png">
 	<title>今昔网</title> <!-- Bootstrap core CSS -->
-	<link href="<?=$baseurl?>css/bootstrap.css" rel="stylesheet"/>
-	<link href="<?=$baseurl?>css/font-awesome.css" rel="stylesheet"/>
-	<link href="<?=$baseurl?>css/flat-ui.css" rel="stylesheet"/>
+	<link href="{$data.baseurl}css/bootstrap.css" rel="stylesheet"/>
+	<link href="{$data.baseurl}css/font-awesome.css" rel="stylesheet"/>
+	<link href="{$data.baseurl}css/flat-ui.css" rel="stylesheet"/>
 	<!-- my CSS -->
-	<link href="<?=$baseurl?>css/jinxi.css" rel="stylesheet"/>
-	<link href="<?=$baseurl?>css/Jcrop.css" rel="stylesheet"/>
-	<link href="<?=$baseurl?>css/sticky-footer-navbar.css" rel="stylesheet"/>
-	<script src="<?=$baseurl?>js/jquery.js"></script>
+	<link href="{$data.baseurl}css/jinxi.css" rel="stylesheet"/>
+	<link href="{$data.baseurl}css/Jcrop.css" rel="stylesheet"/>
+	<link href="{$data.baseurl}css/sticky-footer-navbar.css" rel="stylesheet"/>
+	<script src="{$data.baseurl}js/jquery.js"></script>
 
 </head>
 

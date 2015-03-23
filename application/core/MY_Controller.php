@@ -13,6 +13,14 @@ class MY_Controller extends CI_Controller{
 		parent::__construct();
 		$this->load->helper('common');
 	}
+    
+    public function assign($key,$val) {
+        $this->cismarty->assign($key,$val);
+    }
+
+    public function display($html) {
+        $this->cismarty->display($html);
+    }
 
 	/**
      +----------------------------------------------------------
