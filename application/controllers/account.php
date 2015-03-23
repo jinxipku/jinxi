@@ -16,7 +16,7 @@ class Account extends MY_Controller {
 	
 	// public function regidit() {
 	// 	$user_id =  $this->session->userdata('login_user');
-		
+	
 	// 	if($user_id != ''){
 	// 		$login_user = $this->user_model->get_user($user_id);
 	// 		$data ['login_user'] = $login_user;
@@ -24,7 +24,7 @@ class Account extends MY_Controller {
 	// 	$data ['choose'] = 0;
 	// 	$data ['baseurl'] = base_url();
 	// 	$data ['title'] = '注册';
-		
+	
 	// 	$this->load->view ( 'templates/header', $data );
 	// 	$this->load->view ( 'account/regidit' );
 	// 	$this->load->view ( 'templates/footer' );
@@ -32,7 +32,7 @@ class Account extends MY_Controller {
 	// public function login() {
 	// 	$this->output->enable_profiler(TRUE);
 	// 	$user_id =  $this->session->userdata('login_user');
-		
+	
 	// 	if($user_id != ''){
 	// 		$login_user = $this->user_model->get_user($user_id);
 	// 		$data ['login_user'] = $login_user;
@@ -45,7 +45,7 @@ class Account extends MY_Controller {
 	// 	$data ['choose'] = 0;
 	// 	$data ['baseurl'] = base_url();
 	// 	$data ['title'] = '登录';
-		
+	
 	// 	$this->load->view ( 'templates/header', $data );
 	// 	$this->load->view ( 'account/login' );
 	// 	$this->load->view ( 'templates/footer' );
@@ -84,7 +84,7 @@ class Account extends MY_Controller {
 	// 	$data ['baseurl'] = base_url();
 	// 	$data ['title'] = '注册提示';
 	// 	$data ['mail'] = $mail;
-		
+	
 	// 	$this->load->view ( 'templates/header', $data );
 	// 	$this->load->view ( 'account/reg'.$status );
 	// 	$this->load->view ( 'templates/footer' );
@@ -134,7 +134,7 @@ class Account extends MY_Controller {
 			$this->_sendVerifyEmail( $email );//发送验证邮件
 			$this->ajaxReturn( null , '注册成功' , 1 );
 		}else
-			$this->ajaxReturn( null , '账号已被注册' , 0 );
+		$this->ajaxReturn( null , '账号已被注册' , 0 );
 	}
 
 	//用户登录
@@ -180,45 +180,45 @@ class Account extends MY_Controller {
 		// 发送
 		$content = '
 		<style type="text/css">
-a.footer{
-  	color: #FFFFFF;
-}
-a.footer:hover {
- 	color: #CCCCCC;
-}
-p.footer{
-	color: #FFFFFF;
-	font-size: 14px;
-	font-family: 微软雅黑,黑体,幼圆,宋体;
-	margin-top: 5px;
-}
+		a.footer{
+			color: #FFFFFF;
+		}
+		a.footer:hover {
+			color: #CCCCCC;
+		}
+		p.footer{
+			color: #FFFFFF;
+			font-size: 14px;
+			font-family: 微软雅黑,黑体,幼圆,宋体;
+			margin-top: 5px;
+		}
 
-       </style>
-	<div style="width: 450px; margin-top: 15px; margin-left: auto; margin-right: auto;"><img 
+		</style>
+		<div style="width: 450px; margin-top: 15px; margin-left: auto; margin-right: auto;"><img 
 
-style="width: 100%;" src="http://xn--wmqr18c.cn/img/icon/invite.png" /></div>
-	<p style="font-size: 22px; font-family: 微软雅黑,黑体,宋体">&nbsp;&nbsp;&nbsp;&nbsp;尊敬的用户<span style="color: #1ABC9C"> ' . $uname . ' </span>您好，欢迎加入今昔网，您的账号已经注册完毕，请点击以下链接完成验证：<a href="http://xn--wmqr18c.cn/account/verify?mail=' . $encrypted_string_mail . '&code=' . $encrypted_string_code . '">立即激活</a></p>
-	<div class="row"
+		style="width: 100%;" src="http://xn--wmqr18c.cn/img/icon/invite.png" /></div>
+		<p style="font-size: 22px; font-family: 微软雅黑,黑体,宋体">&nbsp;&nbsp;&nbsp;&nbsp;尊敬的用户<span style="color: #1ABC9C"> ' . $uname . ' </span>您好，欢迎加入今昔网，您的账号已经注册完毕，请点击以下链接完成验证：<a href="http://xn--wmqr18c.cn/account/verify?mail=' . $encrypted_string_mail . '&code=' . $encrypted_string_code . '">立即激活</a></p>
+		<div class="row"
 		style="height: 35px; background-color: #1ABC9C; text-align: center; margin-bottom: 
 
-10px; ">
+		10px; ">
 		<p class="footer">
-			<a href="#" class="footer">关于今昔</a><span> &nbsp;&nbsp;| &nbsp;&nbsp;</span>
-			<a href="#" class="footer">今昔历程</a><span> &nbsp;&nbsp;| &nbsp;&nbsp;</span>
-			<a href="#" class="footer">联系我们</a><span> &nbsp;&nbsp;| &nbsp;&nbsp;</span>
-			<a href="#" class="footer">用户协议</a><span> &nbsp;&nbsp;| &nbsp;&nbsp;</span>
-			<a href="#" class="footer">帮助中心</a><span> &nbsp;&nbsp;| &nbsp;&nbsp;</span>
-			<a href="#" class="footer">意见建议</a>
+		<a href="#" class="footer">关于今昔</a><span> &nbsp;&nbsp;| &nbsp;&nbsp;</span>
+		<a href="#" class="footer">今昔历程</a><span> &nbsp;&nbsp;| &nbsp;&nbsp;</span>
+		<a href="#" class="footer">联系我们</a><span> &nbsp;&nbsp;| &nbsp;&nbsp;</span>
+		<a href="#" class="footer">用户协议</a><span> &nbsp;&nbsp;| &nbsp;&nbsp;</span>
+		<a href="#" class="footer">帮助中心</a><span> &nbsp;&nbsp;| &nbsp;&nbsp;</span>
+		<a href="#" class="footer">意见建议</a>
 		</p>
-	</div>
+		</div>
 
-	<div style="text-align: center; margin-bottom: 40px; margin-top: 10px;">
+		<div style="text-align: center; margin-bottom: 40px; margin-top: 10px;">
 		<p class="footerinfo">&copy; 2013 今昔网 &middot;
-			版权所有&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 京ICP备13053152号</p>
+		版权所有&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 京ICP备13053152号</p>
 		<p class="footerinfo">后夏科技&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;地址：北京市海淀区</p>
 		<p class="footerinfo">Designed and Developed by FABKXD</p>
-	</div>
-				';
+		</div>
+		';
 		$this->email->from ( 'jinxicn2013@163.com', '今昔网' );
 		$this->email->to ( $mail );
 		$this->email->subject ( '今昔网账号邮件验证' );
