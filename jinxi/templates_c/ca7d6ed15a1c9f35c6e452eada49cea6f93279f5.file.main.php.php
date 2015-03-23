@@ -1,4 +1,29 @@
-<div id="main" class="row">
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-23 22:35:49
+         compiled from "..\application\views\index\main.php" */ ?>
+<?php /*%%SmartyHeaderCode:693255101c865d85f0-13024236%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    'ca7d6ed15a1c9f35c6e452eada49cea6f93279f5' => 
+    array (
+      0 => '..\\application\\views\\index\\main.php',
+      1 => 1427121138,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '693255101c865d85f0-13024236',
+  'function' => 
+  array (
+  ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_55101c86611c52_78738231',
+  'variables' => 
+  array (
+    'baseurl' => 0,
+  ),
+  'has_nocache_code' => false,
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_55101c86611c52_78738231')) {function content_55101c86611c52_78738231($_smarty_tpl) {?><div id="main" class="row">
     <div id="slide_show" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
         <ol class="carousel-indicators">
@@ -9,10 +34,14 @@
         </ol>
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
-            <div class="item active"><img src="{$baseurl}img/bg/1.jpg" alt=""/></div>
-            <div class="item"><img src="{$baseurl}img/bg/2.jpg" alt=""/></div>
-            <div class="item"><img src="{$baseurl}img/bg/3.jpg" alt=""/></div>
-            <div class="item"><img src="{$baseurl}img/bg/4.jpg" alt=""/></div>
+            <div class="item active"><img src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
+img/bg/1.jpg" alt=""/></div>
+            <div class="item"><img src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
+img/bg/2.jpg" alt=""/></div>
+            <div class="item"><img src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
+img/bg/3.jpg" alt=""/></div>
+            <div class="item"><img src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
+img/bg/4.jpg" alt=""/></div>
         </div>
         <!-- Controls --> 
         <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev"> 
@@ -30,7 +59,8 @@
 
 <div class="leftrow">
   <div class="postitembig">
-    <img class="postimage" src="{$baseurl}img/jinxismall.jpg" alt=""/>
+    <img class="postimage" src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
+img/jinxismall.jpg" alt=""/>
     
     <div class="postinfo">
       <a href="#" class="posttitle text-primary">【求购】手机：诺基亚C6</a>
@@ -44,7 +74,8 @@
     </div>
     
     <div class="postquality">
-      <img class="quality" src="{$baseurl}img/class/2.png" alt=""/>
+      <img class="quality" src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
+img/class/2.png" alt=""/>
       <p class="postprice">￥800</p>
     </div>
   </div>
@@ -99,7 +130,8 @@
 
 <div class="leftrow">
   <div class="postitembig">
-    <img class="postimage" src="{$baseurl}img/jinxismall.jpg" alt="" />
+    <img class="postimage" src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
+img/jinxismall.jpg" alt="" />
 
     <div class="postinfo">
       <a href="#" class="posttitle text-primary">【求购】手机：诺基亚C6</a>
@@ -113,7 +145,8 @@
       </div>
 
       <div class="postquality">
-        <img class="quality" src="{$baseurl}img/class/2.png" alt="" />
+        <img class="quality" src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
+img/class/2.png" alt="" />
         <p class="postprice">￥500</p>
       </div>
     </div>
@@ -169,25 +202,29 @@
   <div class="leftrow"
   style="width: 802px; margin-left: -15px; margin-top: 15px;">
   <div class="textbookitem">
-    <img src="{$baseurl}img/textbook/gslc.jpg" alt="" style="width: 100%" />
+    <img src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
+img/textbook/gslc.jpg" alt="" style="width: 100%" />
     <p class="tbtitle">公司理财（罗斯著）</p>
     <p class="tbtitle">机械工业出版社</p>
     <p class="tbinfo">已有119人求购，300人转让</p>
   </div>
   <div class="textbookitem">
-    <img src="{$baseurl}img/textbook/gslc.jpg" alt="" style="width: 100%" />
+    <img src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
+img/textbook/gslc.jpg" alt="" style="width: 100%" />
     <p class="tbtitle">公司理财（罗斯著）</p>
     <p class="tbtitle">机械工业出版社</p>
     <p class="tbinfo">已有119人求购，300人转让</p>
   </div>
   <div class="textbookitem">
-    <img src="{$baseurl}img/textbook/gslc.jpg" alt="" style="width: 100%" />
+    <img src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
+img/textbook/gslc.jpg" alt="" style="width: 100%" />
     <p class="tbtitle">公司理财（罗斯著）</p>
     <p class="tbtitle">机械工业出版社</p>
     <p class="tbinfo">已有119人求购，300人转让</p>
   </div>
   <div class="textbookitem">
-    <img src="{$baseurl}img/textbook/gslc.jpg" alt="" style="width: 100%" />
+    <img src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
+img/textbook/gslc.jpg" alt="" style="width: 100%" />
     <p class="tbtitle">公司理财（罗斯著）</p>
     <p class="tbtitle">机械工业出版社</p>
     <p class="tbinfo">已有119人求购，300人转让</p>
@@ -224,4 +261,4 @@ style="margin-left: 16px; width: 378px; padding: 20px; position: relative; float
   <!-- UJian Button BEGIN -->
   <div class="ujian-hook"></div>
   <!-- UJian Button END -->
-</div>
+</div><?php }} ?>

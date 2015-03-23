@@ -1,6 +1,5 @@
-<div class=" rightpart">
-
-	<div id="loginbox" class="rightcontent panel panel-default" style="display: none;">
+<div class="side">
+	<div id="login_box" class="rightcontent panel panel-default" style="display: none;">
 		<button type="button" class="close" onClick="prelogin(1)" style="margin-top: -20px; margin-left: 15px;">&times;</button>
 		<form method="post" id="loginform" style=" dispaly: none;">
 			<div class="form-group">
