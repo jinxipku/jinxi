@@ -4,6 +4,7 @@ class Index extends MY_Controller {
 		parent::__construct ();
 		$this->load->model ( 'user_model' );
 		$this->load->helper('url');
+		$this->load->helper('array');
 	}
 	public function index() {
 		$this->output->enable_profiler(FALSE);
@@ -17,11 +18,12 @@ class Index extends MY_Controller {
 		$this->assign('title', '今昔网-主页');
 		$this->assign('baseurl', base_url());
 		$this->assign('uri_string', $this->uri->uri_string());
+		$this->assign('tips',show_tips());
 		
 		$this->display ( 'templates/header.php' );
 		$this->display ( 'index/main.php' );
-		$this->load->view ( 'index/side.php' );
-		$this->load->view ( 'templates/footer' );
+		$this->display ( 'index/side.php' );
+		$this->display ( 'templates/footer.php' );
 
 	}
 }

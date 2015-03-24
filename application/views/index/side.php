@@ -20,19 +20,13 @@
 	</a> <a href="{$baseurl}item/newpost/type" type="button"
 		class="btn btn-primary btn-hg btn-block" style="margin-bottom: 20px;">发布信息
 	</a>
-	<?php
-		$this->load->helper('array');
-		$gettips = show_tips();
-		$strtit = $gettips['strtit'];
-		$strcon = $gettips['strcon'];
-	?>
 	<div>
 		<blockquote>
 			<p class="righttitle">今昔贴士</p>
 		</blockquote>
 		<div class="rightcontent panel panel-default">
-			<p class="rightcontent" style=" font-weight: 600"><?=$strtit?></p>
-			<p class="rightcontent">&nbsp;&nbsp;&nbsp;&nbsp;<?=$strcon?></p>
+			<p class="rightcontent" style=" font-weight: 600">{$tips.strtit}</p>
+			<p class="rightcontent">&nbsp;&nbsp;&nbsp;&nbsp;{$tips.strcon}</p>
 			<p class="rightcontent">&nbsp;&nbsp;&nbsp;&nbsp;精彩大学生活，今昔网将与您共同分享！</p>
 			<p class="rightlink">
 				<a class="text-info btn-link">关于今昔</a><span> | </span><a
@@ -99,7 +93,16 @@
 </div>
 </div>
 <!-- JiaThis Button BEGIN -->
-<script type="text/javascript">var ujian_config = {num:6,target:1,itemTitle:'相关链接：',picSize:120,textHeight:45,mouseoverColor:'#1ABC9C'};</script>
+<script type="text/javascript">
+	var ujian_config = {
+		num: 6,
+		target: 1,
+		itemTitle: '相关链接：',
+		picSize: 120,
+		textHeight: 45,
+		mouseoverColor: '#1ABC9C'
+	};
+</script>
 <script type="text/javascript"
 	src="http://v1.ujian.cc/code/ujian.js?uid=1867235"></script>
 <a href="http://www.ujian.cc" style="border: 0;"><img

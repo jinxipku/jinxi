@@ -22,7 +22,7 @@ style="text-align: center;background-color: #999999;">
 <img id="backtotop" onmouseover="totop1()" onmouseout="totop2()"
 onclick="gototop(0)"
 style="display: none; width: 50px; position: fixed; bottom: 20px; right: 20px;"
-src="<?=$baseurl?>img/top.png" alt="回到顶部" />
+src="{$baseurl}img/top.png" alt="回到顶部" />
 
 
 
@@ -80,11 +80,11 @@ aria-labelledby="myModalLabel" aria-hidden="true">
 <!-- Bootstrap core JavaScript
 	================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="{$data.baseurl}js/bootstrap.js"></script>
-	<script src="{$data.baseurl}js/stickup.js"></script>
-	<script src="{$data.baseurl}js/jquery.ellipsis.js"></script>
-	<script src="{$data.baseurl}js/flatui-checkbox.js"></script>
-	<script src="{$data.baseurl}js/flatui-radio.js"></script>
-	<script src="{$data.baseurl}js/jinxi.js"></script>
+	<script src="{$baseurl}js/bootstrap.js"></script>
+	<script src="{$baseurl}js/stickup.js"></script>
+	<script src="{$baseurl}js/jquery.ellipsis.js"></script>
+	<script src="{$baseurl}js/flatui-checkbox.js"></script>
+	<script src="{$baseurl}js/flatui-radio.js"></script>
+	<script src="{$baseurl}js/jinxi.js"></script>
 </body>
 </html>
