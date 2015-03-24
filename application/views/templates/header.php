@@ -42,7 +42,7 @@
 		</div>
 	</div>
 
-	<div id="navbar" class="navbar-wrapper">
+	<div id="navbar" class="navbar-wrapper row">
 		<div class="navbar navbar-inverse">
 			<div class="mycontainer">
 				<div>
@@ -81,7 +81,7 @@
 						</li>
 						{elseif $uri_string == ''}						
 						<li>
-							<a id="navbarlogin" href="#" onClick="prelogin(0);return false;">登录</a>
+							<a id="navbarlogin" href="#" onClick="pre_login(0);return false;">登录</a>
 						</li>
 						{else}
 						<li>

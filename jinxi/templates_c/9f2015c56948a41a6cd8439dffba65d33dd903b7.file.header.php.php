@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-23 21:59:21
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-24 20:31:02
          compiled from "..\application\views\templates\header.php" */ ?>
 <?php /*%%SmartyHeaderCode:28843550fb3d06e9f62-69507363%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '9f2015c56948a41a6cd8439dffba65d33dd903b7' => 
     array (
       0 => '..\\application\\views\\templates\\header.php',
-      1 => 1427119158,
+      1 => 1427200259,
       2 => 'file',
     ),
   ),
@@ -89,7 +89,7 @@ account/regidit">立即注册</a>
 		</div>
 	</div>
 
-	<div id="navbar" class="navbar-wrapper">
+	<div id="navbar" class="navbar-wrapper row">
 		<div class="navbar navbar-inverse">
 			<div class="mycontainer">
 				<div>
@@ -135,7 +135,7 @@ setup">设置</a>
 						</li>
 						<?php } elseif ($_smarty_tpl->tpl_vars['uri_string']->value=='') {?>						
 						<li>
-							<a id="navbarlogin" href="#" onClick="prelogin(0);return false;">登录</a>
+							<a id="navbarlogin" href="#" onClick="pre_login(0);return false;">登录</a>
 						</li>
 						<?php } else { ?>
 						<li>

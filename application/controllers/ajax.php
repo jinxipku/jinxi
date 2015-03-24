@@ -49,7 +49,8 @@ class Ajax extends CI_Controller {
 	public function check_mail($mail1, $mail2) {
 		if ($_SERVER ['REQUEST_METHOD'] == 'GET')
 			exit ( "PERMISSION DENIED!" );
-		echo $this->user_model->check_mail ( $mail1 . '@' . $mail2 );
+		echo 1;
+		//echo $this->user_model->check_mail ( $mail1 . '@' . $mail2 );
 	}
 	public function check_captcha() {
 		if ($_SERVER ['REQUEST_METHOD'] == 'GET')

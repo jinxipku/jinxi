@@ -1,29 +1,30 @@
-<div id="main" class="row">
-    <div id="slide_show" class="carousel slide" data-ride="carousel">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="3"></li>
-        </ol>
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner">
-            <div class="item active"><img src="{$baseurl}img/bg/1.jpg" alt=""/></div>
-            <div class="item"><img src="{$baseurl}img/bg/2.jpg" alt=""/></div>
-            <div class="item"><img src="{$baseurl}img/bg/3.jpg" alt=""/></div>
-            <div class="item"><img src="{$baseurl}img/bg/4.jpg" alt=""/></div>
-        </div>
-        <!-- Controls --> 
-        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev"> 
-            <span class="glyphicon glyphicon-chevron-left"></span> 
-        </a>
-        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right"></span> 
-        </a> 
-    </div>
+    <div id="body" class="row">
+        <div id="main">
+            <div id="slide_show" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+                </ol>
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner">
+                    <div class="item active"><img src="{$baseurl}img/bg/1.jpg" alt=""/></div>
+                    <div class="item"><img src="{$baseurl}img/bg/2.jpg" alt=""/></div>
+                    <div class="item"><img src="{$baseurl}img/bg/3.jpg" alt=""/></div>
+                    <div class="item"><img src="{$baseurl}img/bg/4.jpg" alt=""/></div>
+                </div>
+                <!-- Controls --> 
+                <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev"> 
+                    <span class="glyphicon glyphicon-chevron-left"></span> 
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span> 
+                </a> 
+            </div>
 <!--
-    <div class="left_title">自动匹配 | 本站
+    <div class="main_title">自动匹配 | 本站
         <a class=" text-muted switch btn-link">切换到绑定BBS</a>
         <a class=" text-primary all pull-right" href="#">全部</a>
     </div>
@@ -225,5 +226,7 @@ style="margin-left: 16px; width: 378px; padding: 20px; position: relative; float
 
   <div class="ujian-hook"></div>
 
-  -->
+  
+</div>
+-->
 </div>

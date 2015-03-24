@@ -1,4 +1,30 @@
-		<div id="side">
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-24 22:04:56
+         compiled from "..\application\views\index\side.php" */ ?>
+<?php /*%%SmartyHeaderCode:32327551121561564f3-61777981%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    'fed332f032a7c140b0dddfebc79879fd1f9560ff' => 
+    array (
+      0 => '..\\application\\views\\index\\side.php',
+      1 => 1427205893,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '32327551121561564f3-61777981',
+  'function' => 
+  array (
+  ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5511215621b913_91874970',
+  'variables' => 
+  array (
+    'baseurl' => 0,
+    'tips' => 0,
+  ),
+  'has_nocache_code' => false,
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_5511215621b913_91874970')) {function content_5511215621b913_91874970($_smarty_tpl) {?>		<div id="side">
 			<div id="login_box" class="side_content panel panel-default">
 				<button type="button" class="close" onClick="pre_login(1)">&times;</button>
 				<form method="post" id="login_form">
@@ -10,22 +36,28 @@
 						<input id="password" name="password" type="password" placeholder="密码" class="form-control flat" onblur="check_pw()"> 
 						<span class="danger" id="check_pw"> </span>
 					</div>
-					<button type="button" class="btn btn-primary btn-block" onClick="login('{$baseurl}')">登录</button>
+					<button type="button" class="btn btn-primary btn-block" onClick="login('<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
+')">登录</button>
 					<p class="p_info">还木有账号？</p>
-					<a href="{$baseurl}/account/register" type="button" class="btn btn-info btn-block">立即注册</a>
+					<a href="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
+/account/register" type="button" class="btn btn-info btn-block">立即注册</a>
 				</form>
 			</div>
 
-			<a href="{$baseurl}hall" type="button" class="btn btn-primary btn-hg btn-block">商品大厅</a>
-			<a href="{$baseurl}item/newpost/type" type="button" class="btn btn-primary btn-hg btn-block">发布信息</a>
+			<a href="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
+hall" type="button" class="btn btn-primary btn-hg btn-block">商品大厅</a>
+			<a href="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
+item/newpost/type" type="button" class="btn btn-primary btn-hg btn-block">发布信息</a>
 
 			<div id="side_tips">
 				<blockquote>
 					<p class="side_title">今昔贴士</p>
 				</blockquote>
 				<div class="side_content panel panel-default">
-					<p class="p_song_content" style=" font-weight: 600">{$tips.strtit}</p>
-					<p class="p_song_content">&nbsp;&nbsp;{$tips.strcon}</p>
+					<p class="p_song_content" style=" font-weight: 600"><?php echo $_smarty_tpl->tpl_vars['tips']->value['strtit'];?>
+</p>
+					<p class="p_song_content">&nbsp;&nbsp;<?php echo $_smarty_tpl->tpl_vars['tips']->value['strcon'];?>
+</p>
 					<p class="p_song_content">&nbsp;&nbsp;精彩大学生活，今昔网将与您共同分享！</p>
 					<p class="p_song_link">
 						<a class="text-info btn-link">关于今昔</a>
@@ -40,7 +72,8 @@
 					<p class="side_title">商品品质</p>
 				</blockquote>
 				<div class="panel panel-default">
-					<img src="{$baseurl}img/quality.jpg" alt="quality.jpg"/>
+					<img src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
+img/quality.jpg" alt="quality.jpg"/>
 				</div>
 			</div>
 
@@ -74,6 +107,7 @@
 				</div>
 			</div>
 			
-			<img id="side_icon" src="{$baseurl}img/jinxibig.jpg" alt="http://www.xn--wmqr18c.cn"/>
+			<img id="side_icon" src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
+img/jinxibig.jpg" alt="http://www.xn--wmqr18c.cn"/>
 		</div>
-	</div>
+	</div><?php }} ?>

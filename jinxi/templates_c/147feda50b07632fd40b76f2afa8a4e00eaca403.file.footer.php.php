@@ -1,4 +1,29 @@
-	<div id="footer">
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-24 22:04:18
+         compiled from "..\application\views\templates\footer.php" */ ?>
+<?php /*%%SmartyHeaderCode:5748551121562c11d9-20568918%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '147feda50b07632fd40b76f2afa8a4e00eaca403' => 
+    array (
+      0 => '..\\application\\views\\templates\\footer.php',
+      1 => 1427205855,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '5748551121562c11d9-20568918',
+  'function' => 
+  array (
+  ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_551121563009f7_76609568',
+  'variables' => 
+  array (
+    'baseurl' => 0,
+  ),
+  'has_nocache_code' => false,
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_551121563009f7_76609568')) {function content_551121563009f7_76609568($_smarty_tpl) {?>	<div id="footer">
 		<div id="footer_links" class="row">
 			<p class="footer_links">
 				<a href="#" class="footer">关于今昔</a><span> &nbsp;&nbsp;| &nbsp;&nbsp;</span>
@@ -17,7 +42,8 @@
 		</div>
 	</div>
 
-	<img id="back_to_top" onmouseover="back_to_top1()" onmouseout="back_to_top2()" onclick="go_to_top()" src="{$baseurl}img/top.png" alt="回到顶部" />
+	<img id="back_to_top" onmouseover="back_to_top1()" onmouseout="back_to_top2()" onclick="go_to_top()" src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
+img/top.png" alt="回到顶部" />
 
 <!--
 	<div id="report_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -67,7 +93,8 @@
 -->
 
 	<!-- JiaThis Button BEGIN -->
-	<script type="text/javascript">
+	<?php echo '<script'; ?>
+ type="text/javascript">
 		var ujian_config = {
 			num: 6,
 			target: 1,
@@ -76,12 +103,16 @@
 			textHeight: 45,
 			mouseoverColor: '#1ABC9C'
 		};
-	</script>
-	<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?uid=1867235"></script>
+	<?php echo '</script'; ?>
+>
+	<?php echo '<script'; ?>
+ type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?uid=1867235"><?php echo '</script'; ?>
+>
 	<a id="ujian" href="http://www.ujian.cc">
 		<img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐"/>
 	</a>
-	<script type="text/javascript">
+	<?php echo '<script'; ?>
+ type="text/javascript">
 		var jiathis_config={
 			url:"http://www.今昔.cn",
 			summary:"亲，有闲置不用的小物件么？想要便宜实用的二手商品？快加入今昔吧，加入专属大学生的二手交易世界^-^",
@@ -95,15 +126,36 @@
 			shortUrl:false,
 			hideMore:false
 	}
-	</script>
-	<script type="text/javascript" src="http://v3.jiathis.com/code/jiathis_r.js?btn=r3.gif&move=0" charset="utf-8"></script>
+	<?php echo '</script'; ?>
+>
+	<?php echo '<script'; ?>
+ type="text/javascript" src="http://v3.jiathis.com/code/jiathis_r.js?btn=r3.gif&move=0" charset="utf-8"><?php echo '</script'; ?>
+>
 	<!-- JiaThis Button END -->
 
-	<script src="{$baseurl}js/bootstrap.js"></script>
-	<script src="{$baseurl}js/stickup.js"></script>
-	<script src="{$baseurl}js/jquery.ellipsis.js"></script>
-	<script src="{$baseurl}js/flatui-checkbox.js"></script>
-	<script src="{$baseurl}js/flatui-radio.js"></script>
-	<script src="{$baseurl}js/jinxi.js"></script>
+	<?php echo '<script'; ?>
+ src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
+js/bootstrap.js"><?php echo '</script'; ?>
+>
+	<?php echo '<script'; ?>
+ src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
+js/stickup.js"><?php echo '</script'; ?>
+>
+	<?php echo '<script'; ?>
+ src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
+js/jquery.ellipsis.js"><?php echo '</script'; ?>
+>
+	<?php echo '<script'; ?>
+ src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
+js/flatui-checkbox.js"><?php echo '</script'; ?>
+>
+	<?php echo '<script'; ?>
+ src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
+js/flatui-radio.js"><?php echo '</script'; ?>
+>
+	<?php echo '<script'; ?>
+ src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
+js/jinxi.js"><?php echo '</script'; ?>
+>
 </body>
-</html>
+</html><?php }} ?>
