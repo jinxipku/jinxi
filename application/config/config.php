@@ -361,3 +361,7 @@ $config['proxy_ips'] = '';
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */
+$config['school'] = array(
+		1 => array("name"=>"北京大学","mailext"=>"pku.edu.cn"),
+		2 => array("name"=>"北航","mailext"=>"buaa.edu.cn"),
+	);

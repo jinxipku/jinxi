@@ -6,28 +6,6 @@ class user_model extends CI_Model {
 		$this->load->library('user_agent');
 		$this->load->helper('date');
 	}
-	public function get_user($user_id = 0) {
-		if ($user_id === 0) {
-			$query = $this->db->get ( 'jx_account' );
-			return $query->result_array ();
-		}
-		
-		$query = $this->db->get_where ( 'jx_account', array (
-				'user_id' => $user_id 
-		) );
-		return $query->row_array ();
-	}
-	public function get_user2($mail = 0) {
-		if ($mail === 0) {
-			$query = $this->db->get ( 'jx_account' );
-			return $query->result_array ();
-		}
-		
-		$query = $this->db->get_where ( 'jx_account', array (
-				'email' => $mail 
-		) );
-		return $query->row_array ();
-	}
 	public function login($mail, $pw) {
 		$user = $this->get_user2($mail);
 		if(!empty($user)){
@@ -66,22 +44,6 @@ class user_model extends CI_Model {
 		);
 		$this->db->where ( 'user_id', $uid );
 		return $this->db->update ( 'jx_user', $data );
-	}
-	public function regidit($mail, $name, $pw) {
-		$encryptPwd = $this->encrypt->encode($pw);
-		$nowtime = time();
-		$data = array (
-				'email' => "$mail",
-				'user_name' => "$name",
-				'password' => "$encryptPwd",
-				'is_verified' => 0,
-				'reg_ip' => getClientIp(),
-				'last_login' => "$nowtime",
-				'logins' => 1,
-				
-		);
-		$res = $this->db->insert ( 'jx_account', $data );
-		return $res;
 	}
 	public function verify($mail, $code) {
 		$data = array (

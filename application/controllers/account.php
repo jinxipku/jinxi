@@ -9,149 +9,84 @@
 class Account extends MY_Controller {
 	public function __construct() {
 		parent::__construct ();
-		$this->load->model ( 'user_model' );
+		$this->load->model ( 'account_model' );
 		$this->load->library('session');
 		$this->load->helper('url');
 	}
-	
-	// public function regidit() {
-	// 	$user_id =  $this->session->userdata('login_user');
-	
-	// 	if($user_id != ''){
-	// 		$login_user = $this->user_model->get_user($user_id);
-	// 		$data ['login_user'] = $login_user;
-	// 	}
-	// 	$data ['choose'] = 0;
-	// 	$data ['baseurl'] = base_url();
-	// 	$data ['title'] = '注册';
-	
-	// 	$this->load->view ( 'templates/header', $data );
-	// 	$this->load->view ( 'account/regidit' );
-	// 	$this->load->view ( 'templates/footer' );
-	// }
-	// public function login() {
-	// 	$this->output->enable_profiler(TRUE);
-	// 	$user_id =  $this->session->userdata('login_user');
-	
-	// 	if($user_id != ''){
-	// 		$login_user = $this->user_model->get_user($user_id);
-	// 		$data ['login_user'] = $login_user;
-	// 	}
-	// 	$memurl = $this->session->userdata ( 'mem_url' );
-	// 	if($memurl == '')
-	// 		$data ['memurl'] = base_url();
-	// 	else 
-	// 		$data ['memurl'] = $memurl;
-	// 	$data ['choose'] = 0;
-	// 	$data ['baseurl'] = base_url();
-	// 	$data ['title'] = '登录';
-	
-	// 	$this->load->view ( 'templates/header', $data );
-	// 	$this->load->view ( 'account/login' );
-	// 	$this->load->view ( 'templates/footer' );
-	// }
-	// public function verify() {
-	// 	$this->load->library('encrypt');
-	// 	$mail = $this->encrypt->decode(str_replace(' ','+',$_GET['mail']));
-	// 	$code = $this->encrypt->decode(str_replace(' ','+',$_GET['code']));
-	// 	$veres = $this->user_model->verify($mail,$code);
-	// 	if($veres == 0){
-	// 		header("Location: http://xn--wmqr18c.cn/account/reginfo/fail");
-	// 		return;
-	// 	}
-	// 	$fres = $this->user_model->get_user2($mail);
-	// 	$user_id =  $fres['user_id'];
-	// 	$pw =  $fres['password'];		
-	// 	if($user_id == ''||$pw == ''){
-	// 		header("Location: http://xn--wmqr18c.cn/account/reginfo/fail");
-	// 		return;
-	// 	}
-	// 	$logresult = $this->user_model->login ( $mail, $pw );
-	// 	if ($logresult == 1) {
-	// 		$this->session->set_userdata ( 'login_user', $user_id );
-	// 		header("Location: http://xn--wmqr18c.cn/account/reginfo/success");
-	// 	}
-	// 	else 
-	// 		header("Location: http://xn--wmqr18c.cn/account/reginfo/fail");
-	// }
-	// public function reginfo($status,$mail = 'none'){
-	// 	$user_id =  $this->session->userdata('login_user');
-	// 	if($user_id != ''){
-	// 		$login_user = $this->user_model->get_user($user_id);
-	// 		$data ['login_user'] = $login_user;
-	// 	}
-	// 	$data ['choose'] = 0;
-	// 	$data ['baseurl'] = base_url();
-	// 	$data ['title'] = '注册提示';
-	// 	$data ['mail'] = $mail;
-	
-	// 	$this->load->view ( 'templates/header', $data );
-	// 	$this->load->view ( 'account/reg'.$status );
-	// 	$this->load->view ( 'templates/footer' );
-	// }
-	// public function loginfo(){
-	// 	$user_id =  $this->session->userdata('login_user');
-	// 	if($user_id != ''){
-	// 		$login_user = $this->user_model->get_user($user_id);
-	// 		$data ['login_user'] = $login_user;
-	// 	}
-	// 	$data ['choose'] = 0;
-	// 	$data ['baseurl'] = base_url();
-	// 	$data ['title'] = '登录提示';
-	// 	if(!isset($_SERVER["HTTP_REFERER"])||strpos($_SERVER["HTTP_REFERER"],'account/loginfo'))
-	// 		$this->session->set_userdata ( 'mem_url', base_url());
-	// 	else
-	// 		$this->session->set_userdata ( 'mem_url', $_SERVER["HTTP_REFERER"]);
-	
-	// 	$this->load->view ( 'templates/header', $data );
-	// 	$this->load->view ( 'account/loginfo' );
-	// 	$this->load->view ( 'templates/footer' );
-	// }
+
+// +----------------------------------------------------------------------
+// | 前台页面跳转
+// +----------------------------------------------------------------------
+
+	public function login(){
+
+	}
+
+	public function regidit(){
+
+	}
+
+	public function userInfo(){
+
+	}
+
+	public function test(){
+		echo "h";
+		//var_dump($this->config->item('school'));
+		//var_dump( $this->config->item('school')[2] );
+		//echo phpversion();
+		//$this->account_model->regidit("443021181@qq.com","asdfss","cuida",1);
+		echo $this->account_model->login("443021181@qq.com","asdfss");
+	}
 
 // +----------------------------------------------------------------------
 // | 以下为ajax接口
 // +----------------------------------------------------------------------
 
 	//用户注册
-	//post参数  user_name  mail1  mail2  pw
-	//返回 status  0：注册失败   1：注册成功
+	//post参数  student_id school_id  pwd pwd2 nick
+	//status  0：注册失败   1：注册成功
 	public function doregister(){
 
-		$uname = $_POST ['user_name'];
-		$mail1 = $_POST ['mail1'];
-		$mail2 = $_POST ['mail2'];
-		$email = $mail1 .'@'. $mail2;
-		$pw = $_POST ['pw'];
+		$student_id = $_POST ['student_id'];
+		$school_id = $_POST ['school_id'];
+		$nick = $_POST ['nick'];
+		//计算email
+		$school = $this->config->item('school');
+		$email = $student_id . '@' . $school[$school_id]['mailext'];
+		$pwd = $_POST ['pwd'];
+		$pwd2 = $_POST ['pwd2'];
+		if($pwd != $pwd2)
+			$this->ajaxReturn(null , '两次输入的密码不一致' , 0);
 
-		if (strlen ( $mail1 ) == 0 || strlen ( $mail2 ) == 0 || strlen ( $uname ) == 0 || strlen ( $pw ) < 6)
-			$this->ajaxReturn( null , '注册信息不全' , 0 );
+		if (strlen ( $student_id ) == 0 || empty($school_id) || empty($nick) )
+			$this->ajaxReturn( null , '学号、学校、昵称未填写完整' , 0 );
 
-		$regres = $this->user_model->regidit( $email, $uname, $pw );
-		$regres = !empty($regres)? 1:0;
-		if($regres == 1){
-			$user = $this->user_model->get_user2( $email );
-			$this->session->set_userdata( 'login_user' , $user['id'] );
+		$regres = $this->account_model->regidit( $email, $pwd, $nick, $school_id );
+		if( !empty($regres) ){
+			$user = $this->account_model->get_account(null ,$email );
+			$this->session->set_userdata( 'login_user' , $user );
 			$this->_sendVerifyEmail( $email );//发送验证邮件
 			$this->ajaxReturn( null , '注册成功' , 1 );
 		}else
-		$this->ajaxReturn( null , '账号已被注册' , 0 );
+			$this->ajaxReturn( null , '账号已被注册' , 0 );
 	}
 
 	//用户登录
 	//post参数 mail pw
 	public function dologin(){
 		$email = $_POST ['mail'];
-		$pw = $_POST ['pw'];
+		$pwd = $_POST ['pwd'];
 
 
-		if(strlen( $pw ) == 0 || strlen( $email ) == 0){
+		if(strlen( $pwd ) == 0 || strlen( $email ) == 0){
 			$this->ajaxReturn(null,'登录信息不全',0);
 		}
 
-		$logres = $this->user_model->login( $email, $pw );
+		$logres = $this->account_model->login( $email, $pwd );
 		if ($logres == 1) {
-			$user = $this->user_model->get_user2 ( $email );
-			$this->session->set_userdata ( 'login_user', $user ['id'] );
+			$user = $this->account_model->get_account (null ,$email );
+			$this->session->set_userdata ( 'login_user', $user );
 			$this->ajaxReturn(null,"登录成功",1);
 		}else{
 			$this->ajaxReturn(null,"登录失败",1);
