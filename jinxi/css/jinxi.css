@@ -104,6 +104,17 @@ div.side {
 	float: left;
 	width: 264px;
 }
+div#login_box {
+	display: none;
+}
+div#login_box>button {
+	margin-top: -20px;
+	margin-left: 15px;
+}
+
+
+
+
 div.rightpart2{
 	position: relative;
 	float: left;

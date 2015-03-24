@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-23 22:35:49
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-24 16:00:24
          compiled from "..\application\views\index\main.php" */ ?>
 <?php /*%%SmartyHeaderCode:693255101c865d85f0-13024236%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'ca7d6ed15a1c9f35c6e452eada49cea6f93279f5' => 
     array (
       0 => '..\\application\\views\\index\\main.php',
-      1 => 1427121138,
+      1 => 1427184022,
       2 => 'file',
     ),
   ),
@@ -51,7 +51,7 @@ img/bg/4.jpg" alt=""/></div>
             <span class="glyphicon glyphicon-chevron-right"></span> 
         </a> 
     </div>
-
+<!--
     <div class="left_title">自动匹配 | 本站
         <a class=" text-muted switch btn-link">切换到绑定BBS</a>
         <a class=" text-primary all pull-right" href="#">全部</a>
@@ -258,7 +258,9 @@ style="margin-left: 16px; width: 378px; padding: 20px; position: relative; float
 </div>
 </div>
 <div class="leftrow">
-  <!-- UJian Button BEGIN -->
+
+
   <div class="ujian-hook"></div>
-  <!-- UJian Button END -->
+
+  -->
 </div><?php }} ?>

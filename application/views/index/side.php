@@ -1,26 +1,23 @@
 <div class="side">
-	<div id="login_box" class="rightcontent panel panel-default" style="display: none;">
-		<button type="button" class="close" onClick="prelogin(1)" style="margin-top: -20px; margin-left: 15px;">&times;</button>
-		<form method="post" id="loginform" style=" dispaly: none;">
+	<div id="login_box" class="rightcontent panel panel-default">
+		<button type="button" class="close" onClick="prelogin(1)">&times;</button>
+		<form method="post" id="loginform">
 			<div class="form-group">
-				<input id="mail" name="mail" type="text" placeholder="邮箱"
-					class="form-control" style=" border-radius: 1px;" onblur="checkmail(0)">
+				<input id="mail" name="mail" type="mail" placeholder="校园邮箱" class="form-control" onblur="checkmail(0)">
 				<span class="check" id="checkmail"></span>
 			</div>
-
 			<div class="form-group">
-				<input id="password" name="password" type="password"
-					placeholder="密码" class="form-control" style=" border-radius: 1px;" onblur="checkpw()"> 
+				<input id="password" name="password" type="password" placeholder="密码" class="form-control" onblur="checkpw()"> 
 				<span class="check" id="checkpw"></span>
 			</div>
-			<button type="button" class="btn btn-primary" style=" border-radius: 1px; width: 100%;" onClick="login('<?=$baseurl?>')">登录</button>
+			<button type="button" class="btn btn-primary" style=" border-radius: 1px; width: 100%;" onClick="login('{$baseurl}')">登录</button>
 			<p style=" font-size: 15px; margin-top: 8px; margin-bottom: 8px; color: #7F8C8D;">还木有账号？</p>
 			<a href="http://jinxi.net/account/regidit" type="button" class="btn btn-info" style=" border-radius: 1px; width: 100%;">立即注册</a>
 		</form>
 	</div>
-	<a href="<?=$baseurl?>display/hall" type="button"
+	<a href="{$baseurl}display/hall" type="button"
 		class="btn btn-primary btn-hg btn-block" style="margin-bottom: 10px; ">商品大厅
-	</a> <a href="<?=$baseurl?>item/newpost/type" type="button"
+	</a> <a href="{$baseurl}item/newpost/type" type="button"
 		class="btn btn-primary btn-hg btn-block" style="margin-bottom: 20px;">发布信息
 	</a>
 	<?php
@@ -50,7 +47,7 @@
 			<p class="righttitle">商品品质</p>
 		</blockquote>
 		<div class="panel panel-default">
-			<img src="<?=$baseurl?>img/quality.jpg" alt="" style="width: 100%;" />
+			<img src="{$baseurl}img/quality.jpg" alt="" style="width: 100%;" />
 		</div>
 	</div>
 

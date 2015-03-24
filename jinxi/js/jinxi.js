@@ -6,9 +6,9 @@ $(document).ready( function() {
 		if(event.keyCode==13){
 			var url = window.location.href;
 			if(url.indexOf("account/login")<0)
-				login("http://www.jinxi.com");
+				login("http://www.xn--wmqr18c.cn/");
 			else{
-				$.post("http://www.jinxi.com/ajax/get_mem_url",function(str){
+				$.post("http://www.xn--wmqr18c.cn/ajax/get_mem_url",function(str){
 					login(str);
 				});
 			}
@@ -19,10 +19,10 @@ $(window).bind('scroll',function(){
 	$(this).scrollTop()>600?$("#backtotop").fadeIn(500):$("#backtotop").fadeOut(500)
 });
 function totop1(){
-	$("#backtotop").attr('src','http://www.jinxi.com/img/top2.png');
+	$("#backtotop").attr('src','http://www.xn--wmqr18c.cn/img/top2.png');
 }
 function totop2(){
-	$("#backtotop").attr('src','http://www.jinxi.com/img/top.png');
+	$("#backtotop").attr('src','http://www.xn--wmqr18c.cn/img/top.png');
 }
 function gototop(loca){
 	$("html,body").animate({scrollTop:loca}, 700);
@@ -37,15 +37,15 @@ function prelogin(st){
 	}
 }
 function memlogin(){
-	var loca = "http://www.jinxi.com";
-	if(window.location.href.indexOf("account/loginfo")<0)
+	var loca = "http://www.xn--wmqr18c.cn";
+	if(window.location.href.indexOf("account/loginfo") < 0)
 		loca = window.location.href;
-	$.post("http://www.jinxi.com/ajax/mem_url",{memurl:loca},function(){
-		window.location.href = "http://www.jinxi.com/account/login";
+	$.post("http://www.xn--wmqr18c.cn/ajax/mem_url",{memurl:loca},function(){
+		window.location.href = "http://www.xn--wmqr18c.cn/account/login";
 	});
 }
 function prememlogin(){
-	$.post("http://www.jinxi.com/ajax/mem_url",{memurl:window.location.href});
+	$.post("http://www.xn--wmqr18c.cn/ajax/mem_url",{memurl:window.location.href});
 }
 function login(loca){
 	$("input").blur();
@@ -55,7 +55,7 @@ function login(loca){
 	else{
 		var mail = $("#mail").val();
 		var password = $("#password").val();
-		var url = "http://www.jinxi.com/ajax/login/"+mail.split("@")[0]+"/"+mail.split("@")[1]+"/"+password;
+		var url = "http://www.xn--wmqr18c.cn/ajax/login/"+mail.split("@")[0]+"/"+mail.split("@")[1]+"/"+password;
 		$.post(url,function(str){   
 			if(str == '1'){ 
 				window.location.href=loca;
@@ -74,7 +74,7 @@ function login(loca){
 }
 
 function logout(){
-	var url = "http://www.jinxi.com/ajax/logout";
+	var url = "http://www.xn--wmqr18c.cn/ajax/logout";
 	$.post(url,function(){   
 		window.location.href=window.location.href;
 	});
@@ -96,7 +96,7 @@ function checkmail(type){
 		$("#checkmail").css('color','#E74C3C');
 	}
 	else{
-		var url = "http://www.jinxi.com/ajax/check_mail/"+mail.split("@")[0]+"/"+mail.split("@")[1]; 
+		var url = "http://www.xn--wmqr18c.cn/ajax/check_mail/"+mail.split("@")[0]+"/"+mail.split("@")[1]; 
 		if(mail.length==0){
 			$("#checkmail").html("请输入邮箱！");
 			$("#checkmail").addClass(" fui-cross");
@@ -232,7 +232,7 @@ function checkpw2(){
 }
 
 function checkcaptcha(){
-	var url = "http://www.jinxi.com/ajax/check_captcha"; 
+	var url = "http://www.xn--wmqr18c.cn/ajax/check_captcha"; 
 	$.post(url,{captcha:$("#captchaw").val()},function(str){ 
 		if(str=='0'){
 			$("#check5").html("验证码不正确，请重新输入");
@@ -257,25 +257,25 @@ function regidit(){
 		var mail=$("#mail").val();
 		var pw1=$("#password1").val();
 		var pw2=$("#password2").val();
-		var url = "http://www.jinxi.com/ajax/regidit/"+mail.split("@")[0]+"/"+mail.split("@")[1]+"/"+pw1;
+		var url = "http://www.xn--wmqr18c.cn/ajax/regidit/"+mail.split("@")[0]+"/"+mail.split("@")[1]+"/"+pw1;
 		$.post(url,{user_name:$("#user_name").val()},function(str){ 
    			if(str == '1'){ 
-    			window.location.href="http://www.jinxi.com/account/reginfo/mail/"+mail.split("@")[1].split(".")[0];
+    			window.location.href="http://www.xn--wmqr18c.cn/account/reginfo/mail/"+mail.split("@")[1].split(".")[0];
    			}else{   
-				window.location.href="http://www.jinxi.com/account/reginfo/fail"; 
+				window.location.href="http://www.xn--wmqr18c.cn/account/reginfo/fail"; 
    			}
   		});
 		$("#bt4reg").hide(0);
 	}
 }
 function createcaptcha(){
-	$.post("http://www.jinxi.com/ajax/captcha",function(str){
+	$.post("http://www.xn--wmqr18c.cn/ajax/captcha",function(str){
 		$("#captcha").html(str);
 	});
 }
 function createcaptcha2(){
 	if($("#captcha").html()==''){
-		$.post("http://www.jinxi.com/ajax/captcha",function(str){
+		$.post("http://www.xn--wmqr18c.cn/ajax/captcha",function(str){
 			$("#captcha").html(str);
 		});
 	}
@@ -290,9 +290,9 @@ function savebi(){
 	var sign = $("#sign").val();
 	var qq = $("#qq").val();
 	var phone = $("#phone").val();
-	var url = "http://www.jinxi.com/ajax/savebi";
+	var url = "http://www.xn--wmqr18c.cn/ajax/savebi";
 	$.post(url,{username:username,sex:sex,school:school,degree:degree,year:year,sign:sign,qq:qq,phone:phone},function(){ 
-    	window.location.href="http://www.jinxi.com/setup";
+    	window.location.href="http://www.xn--wmqr18c.cn/setup";
   	});
 }
 function saveac(){
@@ -303,18 +303,18 @@ function saveac(){
 	var sign1 = $("#sign1").is(':checked')?1:0;
 	var sign2 = $("#sign2").is(':checked')?1:0;
 	var righton = $("#righton").is(':checked')?1:0;
-	var url = "http://www.jinxi.com/ajax/saveac";
+	var url = "http://www.xn--wmqr18c.cn/ajax/saveac";
 	$.post(url,{mailcheck:mailcheck,qqcheck:qqcheck,phonecheck:phonecheck,sign1:sign1,sign2:sign2,righton:righton},function(){ 
-    	window.location.href="http://www.jinxi.com/setup/account";
+    	window.location.href="http://www.xn--wmqr18c.cn/setup/account";
   	});
 }
 function savest(){
 	$("#savest").parent().html('<i class="icon-spinner icon-spin"></i> 正在保存');
 	var namecolor = $("#namecolor").val();
 	var autoon = $("#autoon").is(':checked')?1:0;
-	var url = "http://www.jinxi.com/ajax/savest";
+	var url = "http://www.xn--wmqr18c.cn/ajax/savest";
 	$.post(url,{namecolor:namecolor,autoon:autoon},function(){ 
-    	window.location.href="http://www.jinxi.com/setup/star";
+    	window.location.href="http://www.xn--wmqr18c.cn/setup/star";
   	});
 }
 function addfavorite(title, url) {
@@ -332,13 +332,13 @@ function addfavorite(title, url) {
     }
 }
 function addlove(lover,lovee,love){
-	$.post("http://www.jinxi.com/ajax/addlove",{lover:lover,lovee:lovee,love:love},function(){
+	$.post("http://www.xn--wmqr18c.cn/ajax/addlove",{lover:lover,lovee:lovee,love:love},function(){
 		window.location.href=window.location.href;
 	})
 	$("#lovebox").html('<i class="icon-spinner icon-spin"></i> 正在处理');
 }
 function deletelove(lover,lovee,love){
-	$.post("http://www.jinxi.com/ajax/deletelove",{lover:lover,lovee:lovee,love:love},function(){
+	$.post("http://www.xn--wmqr18c.cn/ajax/deletelove",{lover:lover,lovee:lovee,love:love},function(){
 		window.location.href=window.location.href;
 	})
 	$("#lovebox").html('<i class="icon-spinner icon-spin"></i> 正在处理');
@@ -351,14 +351,14 @@ function change2al(){
 }
 
 function addfocus(focuser,focusee,focuss){
-	$.post("http://www.jinxi.com/ajax/addfocus",{focuser:focuser,focusee:focusee,focuss:focuss},function(str){
+	$.post("http://www.xn--wmqr18c.cn/ajax/addfocus",{focuser:focuser,focusee:focusee,focuss:focuss},function(str){
 		alert(str);
 		window.location.href=window.location.href;
 	})
 	$("#focusbox").html('<i class="icon-spinner icon-spin"></i> 正在处理');
 }
 function deletefocus(focuser,focusee,focuss){
-	$.post("http://www.jinxi.com/ajax/deletefocus",{focuser:focuser,focusee:focusee,focuss:focuss},function(){
+	$.post("http://www.xn--wmqr18c.cn/ajax/deletefocus",{focuser:focuser,focusee:focusee,focuss:focuss},function(){
 		window.location.href=window.location.href;
 	})
 	$("#focusbox").html('<i class="icon-spinner icon-spin"></i> 正在处理');
@@ -414,7 +414,7 @@ function showuserpage(tab,uid,page,type){
 	}
 	$("html,body").animate({scrollTop:$("#scrollhead1").offset().top}, 700);
 	if($(objstr).html()==''||type==1){
-		$.post("http://www.jinxi.com/ajax/show_user_page",{tab:tab,uid:uid,page:page},function(gethtml){
+		$.post("http://www.xn--wmqr18c.cn/ajax/show_user_page",{tab:tab,uid:uid,page:page},function(gethtml){
         	$(objstr).html(gethtml);
 		})
 		$(objstr).html('<center><i class="icon-spinner icon-spin"></i> 正在加载</center>');
@@ -423,7 +423,7 @@ function showuserpage(tab,uid,page,type){
 function gotocomm(uid){
 	$('#mycommlink').tab('show');
 	if($("#mycomm").html()==''){
-		$.post("http://www.jinxi.com/ajax/show_user_page",{tab:5,uid:uid,page:1},function(gethtml){
+		$.post("http://www.xn--wmqr18c.cn/ajax/show_user_page",{tab:5,uid:uid,page:1},function(gethtml){
 			$("#mycomm").html(gethtml);
 			$("html,body").animate({scrollTop:$("#scrollfoot").offset().top}, 700);
 		})
@@ -436,7 +436,7 @@ function docomment(subject_id,user_id){
 	var ctype = $("#ctype").val();
 	var cscore = $("#cscore").val();
 	var ccontent = $("#commcont").val();
-	$.post("http://www.jinxi.com/ajax/addcomment",{user_id:user_id,subject_id:subject_id,ctype:ctype,cscore:cscore,ccontent:ccontent},function(){
+	$.post("http://www.xn--wmqr18c.cn/ajax/addcomment",{user_id:user_id,subject_id:subject_id,ctype:ctype,cscore:cscore,ccontent:ccontent},function(){
         showuserpage(5,user_id,1,1);
 	})
 }
@@ -451,5 +451,5 @@ function reportconfirm(){
 	var rcontent = $('input[name="reportreason"]:checked').val();
 	if(rcontent == '其他')
 		rcontent = $("#report_or").val();
-	$.post("http://www.jinxi.com/ajax/addreport",{object_id:object_id,rtype:rtype,rcontent:rcontent});
+	$.post("http://www.xn--wmqr18c.cn/ajax/addreport",{object_id:object_id,rtype:rtype,rcontent:rcontent});
 }

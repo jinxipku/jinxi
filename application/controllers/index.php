@@ -20,8 +20,8 @@ class Index extends MY_Controller {
 		
 		$this->display ( 'templates/header.php' );
 		$this->display ( 'index/main.php' );
-		$this->load->view ( 'index/right.php' );
-		//$this->load->view ( 'templates/footer' );
+		$this->load->view ( 'index/side.php' );
+		$this->load->view ( 'templates/footer' );
 
 	}
 }

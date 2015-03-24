@@ -22,7 +22,7 @@
             <span class="glyphicon glyphicon-chevron-right"></span> 
         </a> 
     </div>
-
+<!--
     <div class="left_title">自动匹配 | 本站
         <a class=" text-muted switch btn-link">切换到绑定BBS</a>
         <a class=" text-primary all pull-right" href="#">全部</a>
@@ -221,7 +221,9 @@ style="margin-left: 16px; width: 378px; padding: 20px; position: relative; float
 </div>
 </div>
 <div class="leftrow">
-  <!-- UJian Button BEGIN -->
+
+
   <div class="ujian-hook"></div>
-  <!-- UJian Button END -->
+
+  -->
 </div>
