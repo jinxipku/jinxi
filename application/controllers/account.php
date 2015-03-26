@@ -31,12 +31,21 @@ class Account extends MY_Controller {
 	}
 
 	public function test(){
-		echo "h";
+	
+		$verify_url = base_url('account/doverify').'?code=' . $this->_genCodeForVerify(9);
+		echo 'h'.$verify_url;
+		echo urlencode($verify_url);
 		//var_dump($this->config->item('school'));
 		//var_dump( $this->config->item('school')[2] );
 		//echo phpversion();
 		//$this->account_model->regidit("443021181@qq.com","asdfss","cuida",1);
-		echo $this->account_model->login("443021181@qq.com","asdfss");
+		//echo $this->account_model->login("443021181@qq.com","asdfss");
+		// $user = $this->account_model->get_account(6,null);
+		// $this->_sendVerifyEmail( $user['email'], $user );
+	// 	$key = $this->config->item('verify_pkey');
+	// 	$c = $this->encrypt->encode(1,$key);
+	// 	echo $c."<br>";
+	// 	echo $this->encrypt->decode('Y0I/BGZHh211vFyQ86sOmckDxNqXZ1f3SbFsC5RtfpOaOiGGnbsAEpf3Z8D0pAjZzGGlhxIgp5Yc0T0RqA4QQ==',$key);
 	}
 
 // +----------------------------------------------------------------------
@@ -51,11 +60,13 @@ class Account extends MY_Controller {
 		$student_id = $_POST ['student_id'];
 		$school_id = $_POST ['school_id'];
 		$nick = $_POST ['nick'];
+		$pwd = $_POST ['pwd'];
+		$pwd2 = $_POST ['pwd2'];
+
 		//计算email
 		$school = $this->config->item('school');
 		$email = $student_id . '@' . $school[$school_id]['mailext'];
-		$pwd = $_POST ['pwd'];
-		$pwd2 = $_POST ['pwd2'];
+		
 		if($pwd != $pwd2)
 			$this->ajaxReturn(null , '两次输入的密码不一致' , 0);
 
@@ -66,7 +77,7 @@ class Account extends MY_Controller {
 		if( !empty($regres) ){
 			$user = $this->account_model->get_account(null ,$email );
 			$this->session->set_userdata( 'login_user' , $user );
-			$this->_sendVerifyEmail( $email );//发送验证邮件
+			$this->_sendVerifyEmail( $email, $user );//发送验证邮件
 			$this->ajaxReturn( null , '注册成功' , 1 );
 		}else
 			$this->ajaxReturn( null , '账号已被注册' , 0 );
@@ -95,12 +106,25 @@ class Account extends MY_Controller {
 
 	}
 
+	public function doverify(){
+		if(!empty( $_GET['code'] )){
+			/*TODO: 判断合法 */
+			$key = $this->config->item('verify_pkey');
+			$id = $this->_genIdFromCode( $_GET['code'] );
+			$this->account_model->verify( $id );
+		}
+
+	}
+
 
 // +----------------------------------------------------------------------
 // | 私有函数
 // +----------------------------------------------------------------------
 
-	private function _sendVerifyEmail($mail){
+	/**
+	**TODO: 修改baseurl
+	*/
+	private function _sendVerifyEmail( $mail, $user ){
 		$this->load->library ( 'email' );
 		// 设置Email参数
 		$config ['protocol'] = 'smtp';
@@ -112,6 +136,9 @@ class Account extends MY_Controller {
 		$config ['wordwrap'] = TRUE;
 		$config ['mailtype'] = 'html';
 		$this->email->initialize ( $config );
+
+		$verify_url = base_url('account/doverify').'?code=' . $this->_genCodeForVerify($user['id']);
+		//$verify_url = urlencode($verify_url);
 		// 发送
 		$content = '
 		<style type="text/css">
@@ -131,8 +158,8 @@ class Account extends MY_Controller {
 		</style>
 		<div style="width: 450px; margin-top: 15px; margin-left: auto; margin-right: auto;"><img 
 
-		style="width: 100%;" src="http://xn--wmqr18c.cn/img/icon/invite.png" /></div>
-		<p style="font-size: 22px; font-family: 微软雅黑,黑体,宋体">&nbsp;&nbsp;&nbsp;&nbsp;尊敬的用户<span style="color: #1ABC9C"> ' . $uname . ' </span>您好，欢迎加入今昔网，您的账号已经注册完毕，请点击以下链接完成验证：<a href="http://xn--wmqr18c.cn/account/verify?mail=' . $encrypted_string_mail . '&code=' . $encrypted_string_code . '">立即激活</a></p>
+		style="width: 100%;" src="'.base_url('img/icon/invite.png').'" /></div>
+		<p style="font-size: 22px; font-family: 微软雅黑,黑体,宋体">&nbsp;&nbsp;&nbsp;&nbsp;尊敬的用户<span style="color: #1ABC9C"> ' . $user['nick'] . ' </span>您好，欢迎加入今昔网，您的账号已经注册完毕，请点击以下链接完成验证：<a href="'. $verify_url .'">立即激活</a></p>
 		<div class="row"
 		style="height: 35px; background-color: #1ABC9C; text-align: center; margin-bottom: 
 
@@ -160,5 +187,15 @@ class Account extends MY_Controller {
 		$this->email->message ( $content );
 		
 		$this->email->send ();
+	}
+
+	private function _genCodeForVerify($id=0){
+		$key = $this->config->item('verify_pkey');
+		return $this->encrypt->encode( $id, $key);
+	}
+
+	private function _genIdFromCode($code){
+		$key = $this->config->item('verify_pkey');
+		return $this->encrypt->decode( $code, $key);
 	}
 }

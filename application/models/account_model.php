@@ -13,7 +13,7 @@ class account_model extends CI_Model{
 		}
 		else if(!empty( $user_id )){
 			$query = $this->db->get_where ( 'jx_account', array (
-				'user_id' => $user_id 
+				'id' => $user_id 
 				) );
 			return $query->row_array ();
 		}else if(!empty( $email )){
@@ -72,6 +72,12 @@ class account_model extends CI_Model{
 			);
 		$res = $this->db->insert ( 'jx_account', $data );
 		return $res;
+	}
+
+	public function verify($id){
+		$data = array("is_verified" => 1);
+		$this->db->where( 'id', $id);
+		$this->db->update ( 'jx_account', $data );
 	}
 }
 ?>
