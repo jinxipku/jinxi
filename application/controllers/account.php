@@ -33,19 +33,8 @@ class Account extends MY_Controller {
 	public function test(){
 	
 		$verify_url = base_url('account/doverify').'?code=' . $this->_genCodeForVerify(9);
-		echo 'h'.$verify_url;
-		echo urlencode($verify_url);
-		//var_dump($this->config->item('school'));
-		//var_dump( $this->config->item('school')[2] );
-		//echo phpversion();
-		//$this->account_model->regidit("443021181@qq.com","asdfss","cuida",1);
-		//echo $this->account_model->login("443021181@qq.com","asdfss");
-		// $user = $this->account_model->get_account(6,null);
-		// $this->_sendVerifyEmail( $user['email'], $user );
-	// 	$key = $this->config->item('verify_pkey');
-	// 	$c = $this->encrypt->encode(1,$key);
-	// 	echo $c."<br>";
-	// 	echo $this->encrypt->decode('Y0I/BGZHh211vFyQ86sOmckDxNqXZ1f3SbFsC5RtfpOaOiGGnbsAEpf3Z8D0pAjZzGGlhxIgp5Yc0T0RqA4QQ==',$key);
+		$char_array = 'ABCDEFGHIJKMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789';	
+		echo strlen($char_array);
 	}
 
 // +----------------------------------------------------------------------
@@ -59,14 +48,13 @@ class Account extends MY_Controller {
 
 		$student_id = $_POST ['student_id'];
 		$school_id = $_POST ['school_id'];
+		$school = $this->config->item('school');
+		$email = $student_id . '@' . $school[$school_id]['mailext'];
 		$nick = $_POST ['nick'];
 		$pwd = $_POST ['pwd'];
 		$pwd2 = $_POST ['pwd2'];
 
-		//计算email
-		$school = $this->config->item('school');
-		$email = $student_id . '@' . $school[$school_id]['mailext'];
-		
+		//计算email	
 		if($pwd != $pwd2)
 			$this->ajaxReturn(null , '两次输入的密码不一致' , 0);
 
@@ -83,8 +71,21 @@ class Account extends MY_Controller {
 			$this->ajaxReturn( null , '账号已被注册' , 0 );
 	}
 
+	//验证邮箱是否存在
+	//post参数 student_id school_id
+	public function docheck(){
+		$student_id = $_POST ['student_id'];
+		$school_id = $_POST ['school_id'];
+		$school = $this->config->item('school');
+		$email = $student_id . '@' . $school[$school_id]['mailext'];
+		$account = $this->account_model->get_account(null, $email);
+		if( !empty(  $account ) ){
+			$this->ajaxReturn(null , '账号已经被注册' , 0);
+		}else $this->ajaxReturn(null , '' , 1);
+	}
+
 	//用户登录
-	//post参数 mail pw
+	//post参数 mail pwd
 	public function dologin(){
 		$email = $_POST ['mail'];
 		$pwd = $_POST ['pwd'];

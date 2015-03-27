@@ -1,40 +1,107 @@
 <?php
-class User extends CI_Controller {
+// +----------------------------------------------------------------------
+// | User 用户Profile操作
+// +----------------------------------------------------------------------
+// | Author: cuida
+// +----------------------------------------------------------------------
+// | date: 2015-2-9
+// +----------------------------------------------------------------------
+class User extends MY_Controller {
+	protected $head_dir = './img/head/';
 	public function __construct() {
 		parent::__construct ();
 		$this->load->model ( 'user_model' );
-		$this->load->model ( 'love_model' );
-		$this->load->library ( 'session' );
-		$this->load->helper ( 'url' );
+		$this->load->library('session');
+		$this->load->helper('url');
 	}
-	public function _remap($uid) {
-		$user_id = $this->session->userdata ( 'login_user' );
-		if($user_id != ''){
-			$login_user = $this->user_model->get_user($user_id);
-			$data ['login_user'] = $login_user;
+
+// +----------------------------------------------------------------------
+// | 前台页面跳转
+// +----------------------------------------------------------------------
+
+
+
+// +----------------------------------------------------------------------
+// | 以下为ajax接口
+// +----------------------------------------------------------------------
+
+	//用户上传头像接口
+	//post参数 无  
+	//前端表单name为head_image
+	public function upload_photo() { // ajax上传图片
+		$user = $this->session->userdata ( 'login_user' );
+		$user_id = isset($user)? $user['id'] : 0; 
+		$field = 'head_image';
+		$config ['upload_path'] = $this->head_dir;
+		$config ['allowed_types'] = 'jpg|png|gif';
+		$config ['max_size'] = '2048';
+		$config ['overwrite'] = true;
+		$config ['file_name'] = genFileName($user_id,'');
+
+		$this->load->library('upload',$config);
+
+		if( !$this->upload->do_upload($field) ){
+			$this->ajaxReturn(null,"上传失败:".$this->upload->display_errors ( '', '' ),0);//可以删掉$this->upload->display_errors ( '', '' )
+		}else{			
+			$res = $this->upload->data();
+			$data['file_name'] = $this->head_dir . $res['file_name'];  //返回上传后的文件名
+			$data['image_width'] = $res['image_width'];
+			$this->ajaxReturn($data,"上传成功",1);
 		}
-		$cur_user = $this->user_model->get_user ( $uid );
-		if(empty($cur_user)){
-			show_404('page');
+	} 
+	//用户裁剪头像,前端需要限制裁剪框大小为100*100
+	//post 参数 file_name
+	//TODO:删除原图
+	public function crop_photo(){
+		$user = $this->session->userdata ( 'login_user' );
+		$user_id = isset($user)? $user['id'] : 0; 
+		$source_image = $_POST['file_name'];
+		$ext = getFileExt($source_image);
+		$config ['image_library'] = 'gd2';
+		$config ['source_image'] = $this->head_dir . $source_image;
+		$new_image = $this->head_dir . genFileName($user_id,$ext);
+		$config ['new_image'] = $new_image;
+		$config ['maintain_ratio'] = FALSE; // 保证设置的长宽有效
+		$config ['x_axis'] = $_POST ['p_x'] * $_POST ['p_k']; // 一定要乘以p_k，因为这里存放的
+		$config ['y_axis'] = $_POST ['p_y'] * $_POST ['p_k']; // 是原图而不是浏览器上经过缩放的
+		$config ['width'] = $_POST ['p_w'] * $_POST ['p_k']; // 的图
+		$config ['height'] = $_POST ['p_h'] * $_POST ['p_k'];
+		$this->load->library ( 'image_lib', $config );
+		if (! $this->image_lib->crop ()) {
+			$this->ajaxReturn(null,"裁剪失败",0);
+		} else {
+			//分别生成一张100*100的图和一张60*60的图
+			unset($config);
+			$config ['image_library'] = 'gd2';
+			$config ['source_image'] = $new_image;
+			$head_image = $this->head_dir . genFileName($user_id,$ext);
+			$config ['new_image'] = $head_image;
+			$config ['maintain_ratio'] = FALSE; 
+			$config ['width'] = 100;
+			$config ['height'] = 100;
+			$this->load->library ( 'image_lib', $config );
+			$this->image_lib->resize ();
+			unset($config);
+			$config ['image_library'] = 'gd2';
+			$config ['source_image'] = $new_image;
+			$head_image_thumb = $this->head_dir . genFileName($user_id,$ext);
+			$config ['new_image'] = $head_image_thumb;
+			$config ['maintain_ratio'] = FALSE; 
+			$config ['width'] = 60;
+			$config ['height'] = 60;
+			$this->load->library ( 'image_lib', $config );
+			$this->image_lib->resize ();
+			
+			$data['head_image'] = $head_image;  
+			$data['head_image_thumb'] = $head_image_thumb;
+			$this->ajaxReturn($data,"裁剪成功",1);
 		}
-		if($user_id != '' && $this->love_model->get_love($user_id,$uid)>0)
-			$data ['haslove'] = 1;
-		else 
-			$data ['haslove'] = 0;
-		$data ['cur_user'] = $cur_user;
-		$data ['baseurl'] = base_url ();
-		$data ['title'] = $cur_user ['user_name'];
-		if($uid == $user_id)
-			$data ['choose'] = 2;
-		else {
-			$this->user_model->visit ( $uid );
-			$data ['choose'] = 0;
-		}
-		$this->load->view ( 'templates/header', $data );
-		if ($cur_user ['right_on'])
-			$this->load->view ( 'user/index1' );
-		else
-			$this->load->view ( 'user/index2' );
-		$this->load->view ( 'templates/footer' );
 	}
+
+
+
+// +----------------------------------------------------------------------
+// | 私有函数
+// +----------------------------------------------------------------------
+
 }
