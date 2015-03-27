@@ -73,9 +73,14 @@ class Account extends MY_Controller {
 		
 		$email = $_POST ['email'];
 		$account = $this->account_model->get_account(null, $email);
-		if( !empty(  $account ) ){
-			$this->ajaxReturn(null , '账号已经被注册' , 0);
-		}else $this->ajaxReturn(null , '' , 1);
+		if( empty(  $account ) ){
+			$this->ajaxReturn(null , '账号未被注册' , 1);
+		}else{
+			if($account['is_verified']==0){
+				$this->ajaxReturn(null , '账号已经被注册但未通过验证' , 0);
+			}
+			else $this->ajaxReturn(null , '账号已经被注册并且已经通过验证' , -1);
+		}
 	}
 
 	//用户登录
