@@ -27,12 +27,12 @@ function getClientIp() {
 if (! function_exists ( 'show_tips' )) {
     function show_tips() {
         $quotes = array (
-                "我们是谁？#我们来自北京市海淀区三所高校，是一个致力于为大学生提供便利的高校创业团队，您的支持是我们不断改进的动力，我们将竭诚为您服务！",
-                "今昔能干什么？#今昔网致力于为您提供最全面的校园二手信息。",
-                "新版今昔有哪些新功能？#新版今昔网强化了自动匹配功能，提供了教材专区并强力推出绑定校园BBS跳蚤版面功能，更好的界面，更多功能，更多便利！小伙伴们快去尝试吧！",
-                "商品品质是什么？#今昔网商品四种品质S、A、B、C描述了商品的新旧程度、外观及功能现状。",
-                "今昔网四大特色#1、系统自动匹配；<br/>&nbsp;&nbsp;&nbsp;&nbsp;2、教材专区；<br/>&nbsp;&nbsp;&nbsp;&nbsp;3、绑定本校BBS；<br/>&nbsp;&nbsp;&nbsp;&nbsp;4、精心制作的网页UI" 
-        );
+            "我们是谁？#我们来自北京市海淀区三所高校，是一个致力于为大学生提供便利的高校创业团队，您的支持是我们不断改进的动力，我们将竭诚为您服务！",
+            "今昔能干什么？#今昔网致力于为您提供最全面的校园二手信息。",
+            "新版今昔有哪些新功能？#新版今昔网强化了自动匹配功能，提供了教材专区并强力推出绑定校园BBS跳蚤版面功能，更好的界面，更多功能，更多便利！小伙伴们快去尝试吧！",
+            "商品品质是什么？#今昔网商品四种品质S、A、B、C描述了商品的新旧程度、外观及功能现状。",
+            "今昔网四大特色#1、系统自动匹配；<br/>&nbsp;&nbsp;&nbsp;&nbsp;2、教材专区；<br/>&nbsp;&nbsp;&nbsp;&nbsp;3、绑定本校BBS；<br/>&nbsp;&nbsp;&nbsp;&nbsp;4、精心制作的网页UI" 
+            );
         $str = random_element ( $quotes );
         $array = explode ( '#', $str );
         $ret ['strtit'] = $array[0];
@@ -44,10 +44,10 @@ if (! function_exists ( 'show_tips' )) {
 if (! function_exists ( 'get_sex' )) {
     function get_sex($sexint) {
         $sex = array (
-                "兔星人",
-                "喵星人",
-                "汪星人" 
-        );
+            "兔星人",
+            "喵星人",
+            "汪星人" 
+            );
         return $sex [$sexint];
     }
 }
@@ -55,12 +55,12 @@ if (! function_exists ( 'get_sex' )) {
 if (! function_exists ( 'get_namecolor' )) {
     function get_namecolor($clr) {
         $color = array (
-                "text-primary",
-                "text-info",
-                "text-danger",
-                "text-warning",
-                "text-purple" 
-        );
+            "text-primary",
+            "text-info",
+            "text-danger",
+            "text-warning",
+            "text-purple" 
+            );
         return $color [$clr];
     }
 }
@@ -201,9 +201,9 @@ if (! function_exists ( 'get_class_name' )) {
                 "护肤工具",
                 "美容化妆", // 50
                 "其他" 
-        );
-        return $allclass [$class];
-    }
+                );
+return $allclass [$class];
+}
 }
 
 if (! function_exists ( 'get_class1' )) {
@@ -282,6 +282,28 @@ if (! function_exists ( 'get_title_full' )) {
         $titlestr .= $brand . $modal;
         return $titlestr;
     }
+}
+
+/* 生成文件名 其中uniquedata为区别符 ext为后缀 */
+function genFileName($uniquedata,$ext=''){
+    $rand = '';
+    $char_array = 'ABCDEFGHIJKMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789';
+    for($i = 0; $i < 8; $i ++) {
+        $rand = $rand . $char_array[mt_rand(0,55)];
+    }
+    $rand = $rand.$uniquedata;    
+    for($i = 0; $i < 8; $i ++) {
+        $rand = $rand . $char_array[mt_rand(0,47)];
+    }
+    $rand = $rand. time();
+    if(!empty($ext)) $rand = $rand. '.' . $ext;
+    return $rand;
+}
+
+function getFileExt($file_name){
+    $extend =explode("." , $file_name); 
+    $va=count($extend)-1; 
+    return $extend[$va]; 
 }
 
 
