@@ -42,26 +42,22 @@ class Account extends MY_Controller {
 // +----------------------------------------------------------------------
 
 	//用户注册
-	//post参数  student_id school_id  pwd pwd2 nick
+	//post参数  email school_id  password passworda
 	//status  0：注册失败   1：注册成功
 	public function doregister(){
 
-		$student_id = $_POST ['student_id'];
 		$school_id = $_POST ['school_id'];
-		$school = $this->config->item('school');
-		$email = $student_id . '@' . $school[$school_id]['mailext'];
-		$nick = $_POST ['nick'];
-		$pwd = $_POST ['pwd'];
-		$pwd2 = $_POST ['pwd2'];
+		$email = $_POST['email'];
+		$pwd = $_POST ['password'];
+		$pwd2 = $_POST ['passworda'];
 
 		//计算email	
 		if($pwd != $pwd2)
 			$this->ajaxReturn(null , '两次输入的密码不一致' , 0);
 
-		if (strlen ( $student_id ) == 0 || empty($school_id) || empty($nick) )
-			$this->ajaxReturn( null , '学号、学校、昵称未填写完整' , 0 );
-
-		$regres = $this->account_model->regidit( $email, $pwd, $nick, $school_id );
+		if (empty ( $school_id ) ||  empty($email) )
+			$this->ajaxReturn( null , '学校、email未填写完整' , 0 );
+		$regres = $this->account_model->regidit( $email, $pwd, $school_id );
 		if( !empty($regres) ){
 			$user = $this->account_model->get_account(null ,$email );
 			$this->session->set_userdata( 'login_user' , $user );
@@ -72,12 +68,10 @@ class Account extends MY_Controller {
 	}
 
 	//验证邮箱是否存在
-	//post参数 student_id school_id
+	//post参数 email
 	public function docheck(){
-		$student_id = $_POST ['student_id'];
-		$school_id = $_POST ['school_id'];
-		$school = $this->config->item('school');
-		$email = $student_id . '@' . $school[$school_id]['mailext'];
+		
+		$email = $_POST ['email'];
 		$account = $this->account_model->get_account(null, $email);
 		if( !empty(  $account ) ){
 			$this->ajaxReturn(null , '账号已经被注册' , 0);
@@ -160,7 +154,7 @@ class Account extends MY_Controller {
 		<div style="width: 450px; margin-top: 15px; margin-left: auto; margin-right: auto;"><img 
 
 		style="width: 100%;" src="'.base_url('img/icon/invite.png').'" /></div>
-		<p style="font-size: 22px; font-family: 微软雅黑,黑体,宋体">&nbsp;&nbsp;&nbsp;&nbsp;尊敬的用户<span style="color: #1ABC9C"> ' . $user['nick'] . ' </span>您好，欢迎加入今昔网，您的账号已经注册完毕，请点击以下链接完成验证：<a href="'. $verify_url .'">立即激活</a></p>
+		<p style="font-size: 22px; font-family: 微软雅黑,黑体,宋体">&nbsp;&nbsp;&nbsp;&nbsp;尊敬的用户<span style="color: #1ABC9C"> ' . ' </span>您好，欢迎加入今昔网，您的账号已经注册完毕，请点击以下链接完成验证：<a href="'. $verify_url .'">立即激活</a></p>
 		<div class="row"
 		style="height: 35px; background-color: #1ABC9C; text-align: center; margin-bottom: 
 

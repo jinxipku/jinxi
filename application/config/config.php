@@ -362,7 +362,6 @@ $config['proxy_ips'] = '';
 $config['verify_pkey'] = 'ohacPttIzN/ANmCeWWhn41Q2fbhnZT.dtK2CEOFTPMsK9N3zHW0lm9yE6xG';
 /* End of file config.php */
 /* Location: ./application/config/config.php */
-$config['school'] = array(
-		1 => array("name"=>"北京大学","mailext"=>"pku.edu.cn"),
-		2 => array("name"=>"北航","mailext"=>"buaa.edu.cn"),
-	);
+
+$config['default_head'] = './img/head/default_head';
+$config['default_thumb'] = './img/head/default_thumb';
