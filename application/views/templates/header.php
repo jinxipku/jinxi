@@ -52,10 +52,10 @@
 							<a href="{$baseurl}">首页</a>
 						</li>
 						<li {if $nav_tab == 2} class=" active" {/if}>
-							<a href="{$baseurl}{if isset($login_user)}user/{$login_user.user_id}{else}account/loginfo}{/if}">个人中心</a>
+							<a href="{$baseurl}{if isset($login_user)}display/user/{$login_user.user_id}{else}account/login{/if}">个人中心</a>
 						</li>
 						<li {if $nav_tab == 3} class=" active" {/if}>
-							<a href="#">商品大厅</a>
+							<a href="{$baseurl}display/hall">商品大厅</a>
 						</li>
 					</ul>
 					<ul class="nav pull-right">

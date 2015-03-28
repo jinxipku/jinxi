@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-27 20:17:30
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-28 18:07:08
          compiled from "..\application\views\templates\header.php" */ ?>
 <?php /*%%SmartyHeaderCode:28843550fb3d06e9f62-69507363%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '9f2015c56948a41a6cd8439dffba65d33dd903b7' => 
     array (
       0 => '..\\application\\views\\templates\\header.php',
-      1 => 1427458595,
+      1 => 1427536997,
       2 => 'file',
     ),
   ),
@@ -102,11 +102,12 @@ account/register">立即注册</a>
 						</li>
 						<li <?php if ($_smarty_tpl->tpl_vars['nav_tab']->value==2) {?> class=" active" <?php }?>>
 							<a href="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;
-if (isset($_smarty_tpl->tpl_vars['login_user']->value)) {?>user/<?php echo $_smarty_tpl->tpl_vars['login_user']->value['user_id'];
-} else { ?>account/loginfo}<?php }?>">个人中心</a>
+if (isset($_smarty_tpl->tpl_vars['login_user']->value)) {?>display/user/<?php echo $_smarty_tpl->tpl_vars['login_user']->value['user_id'];
+} else { ?>account/login<?php }?>">个人中心</a>
 						</li>
 						<li <?php if ($_smarty_tpl->tpl_vars['nav_tab']->value==3) {?> class=" active" <?php }?>>
-							<a href="#">商品大厅</a>
+							<a href="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
+display/hall">商品大厅</a>
 						</li>
 					</ul>
 					<ul class="nav pull-right">
