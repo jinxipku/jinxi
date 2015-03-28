@@ -66,6 +66,7 @@
 	</div>
 -->
 
+	{if isset($is_index)}
 	<!-- JiaThis Button BEGIN -->
 	<script type="text/javascript">
 		var ujian_config = {
@@ -98,6 +99,10 @@
 	</script>
 	<script type="text/javascript" src="http://v3.jiathis.com/code/jiathis_r.js?btn=r3.gif&move=0" charset="utf-8"></script>
 	<!-- JiaThis Button END -->
+	{/if}
+	{if isset($aaa)}
+	<p>{$aaa}</p>
+	{/if}
 
 	<script src="{$baseurl}js/bootstrap.js"></script>
 	<script src="{$baseurl}js/stickup.js"></script>

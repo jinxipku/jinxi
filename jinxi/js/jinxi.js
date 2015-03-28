@@ -1,3 +1,4 @@
+var baseurl = "http://www.xn--wmqr18c.cn";
 $(document).ready( function() {
 	$(".carousel").carousel();
 	$(".ellipsis").ellipsis();
@@ -6,9 +7,9 @@ $(document).ready( function() {
 		if(event.keyCode==13){
 			var url = window.location.href;
 			if(url.indexOf("account/login")<0)
-				login("http://www.xn--wmqr18c.cn/");
+				login(baseurl + "/");
 			else{
-				$.post("http://www.xn--wmqr18c.cn/ajax/get_mem_url",function(str){
+				$.post(baseurl + "/ajax/get_mem_url",function(str){
 					login(str);
 				});
 			}
@@ -30,10 +31,10 @@ $('#choose_school').on('hidden.bs.modal', function () {
 	$('#school').attr('disabled', false);
 })
 function back_to_top1() {
-	$("#back_to_top").attr('src','http://www.xn--wmqr18c.cn/img/top2.png');
+	$("#back_to_top").attr('src','../img/top2.png');
 }
 function back_to_top2() {
-	$("#back_to_top").attr('src','http://www.xn--wmqr18c.cn/img/top.png');
+	$("#back_to_top").attr('src','../img/top.png');
 }
 function go_to_top() {
 	$("html,body").animate({scrollTop:0}, 700);
@@ -46,22 +47,25 @@ function register(){
 	}
 	else{
 		$.post(
-			"http://www.xn--wmqr18c.cn/ajax/register",
+			baseurl + "/account/doregister",
 			{
-				school: $("school").val(),
-				school_id: $("school_id").val(),
-				email: $("#email").val() + $("email_surfix").val(),
+				school_id: $("#school_id").val(),
+				email: $("#email").val() + $("#email_surfix").text(),
 				password: $("#password").val(),
 				passworda: $("#passworda").val(),
 			},
-			function(str){ 
-   			if(str == '1'){ 
-    			window.location.href="http://www.xn--wmqr18c.cn/account/reginfo/mail/"+mail.split("@")[1].split(".")[0];
-   			}else{   
-				window.location.href="http://www.xn--wmqr18c.cn/account/reginfo/fail"; 
-   			}
-  		});
-		$("#btn_register").hide(0);
+			function(res) {
+   				if (res.status == 1) {
+   					var email = $("#email").val() + $("#email_surfix").text();
+    				window.location.href=baseurl + "/account/reginfo/" + email.split("@")[1];
+   				}
+   				else {   
+					window.location.href=baseurl + "/account/reginfo"; 
+   				}
+  			},
+  			'json'
+  		);
+		$("#btn_register").attr("disable",true);
 	}
 }
 function pre_login(st) {
@@ -78,12 +82,12 @@ function mem_login() {
 	var loca = "http://www.xn--wmqr18c.cn";
 	if (window.location.href.indexOf("account/loginfo") < 0)
 		loca = window.location.href;
-	$.post("http://www.xn--wmqr18c.cn/ajax/mem_url",{memurl:loca},function(){
-		window.location.href = "http://www.xn--wmqr18c.cn/account/login";
+	$.post(baseurl + "/ajax/mem_url",{memurl:loca},function(){
+		window.location.href = baseurl + "/account/login";
 	});
 }
 function prememlogin() {
-	$.post("http://www.xn--wmqr18c.cn/ajax/mem_url",{memurl:window.location.href});
+	$.post(baseurl + "/ajax/mem_url",{memurl:window.location.href});
 }
 function login(loca) {
 	$("input").blur();
@@ -93,7 +97,7 @@ function login(loca) {
 	else{
 		var mail = $("#mail").val();
 		var password = $("#password").val();
-		var url = "http://www.xn--wmqr18c.cn/ajax/login/"+mail.split("@")[0]+"/"+mail.split("@")[1]+"/"+password;
+		var url = baseurl + "/ajax/login/"+mail.split("@")[0]+"/"+mail.split("@")[1]+"/"+password;
 		$.post(url,function(str){   
 			if(str == '1'){ 
 				window.location.href=loca;
@@ -112,7 +116,7 @@ function login(loca) {
 }
 
 function logout() {
-	var url = "http://www.xn--wmqr18c.cn/ajax/logout";
+	var url = baseurl + "/ajax/logout";
 	$.post(url,function(){   
 		window.location.href=window.location.href;
 	});
@@ -158,18 +162,18 @@ function check_email(login) {
 	}
 	else {
 		$.post(
-			"http://www.xn--wmqr18c.cn/account/docheck",
+			baseurl + "/account/docheck",
 			{
 				email: email
 			},
 			function(res) {
 				if (login == 1) {  
-					if (res == 1) {
+					if (res.status == -1) {
 						$("#check_email").html("邮箱存在！")
 						$("#check_email").removeClass("fui-cross danger");
 						$("#check_email").addClass("fui-check success");
 						return true;
-					} else if (res == 0) {   
+					} else if (res.status == 1) {   
 						$("#check_email").html("您输入的邮箱不存在！请重新输入！");
 						$("#check_email").removeClass("fui-check success");
 						$("#check_email").addClass("fui-cross danger");
@@ -180,7 +184,7 @@ function check_email(login) {
 					}
 				}
 				else {
-					if (res == 1) {   
+					if (res.status == 1) {   
 						$("#check_email").html("邮箱可用！");
 						$("#check_email").removeClass("fui-cross danger");
 						$("#check_email").addClass("fui-check success");
@@ -191,7 +195,8 @@ function check_email(login) {
 						$("#check_email").addClass("fui-cross danger");  
 					}
 				}
-			}
+			},
+			'json'
 		);
 	}
 	return false; 
@@ -242,7 +247,7 @@ function check_pwa(){
 }
 
 function check_captcha(){
-	var url = "http://www.xn--wmqr18c.cn/ajax/check_captcha"; 
+	var url = baseurl + "/ajax/check_captcha"; 
 	$.post(url,{captcha:$("#captchaw").val()},function(str){ 
 		if(str=='0'){
 			$("#check5").html("验证码不正确，请重新输入");
@@ -260,13 +265,13 @@ function check_captcha(){
 
 
 function createcaptcha(){
-	$.post("http://www.xn--wmqr18c.cn/ajax/captcha",function(str){
+	$.post(baseurl + "/ajax/captcha",function(str){
 		$("#captcha").html(str);
 	});
 }
 function createcaptcha2(){
 	if($("#captcha").html()==''){
-		$.post("http://www.xn--wmqr18c.cn/ajax/captcha",function(str){
+		$.post(baseurl + "/ajax/captcha",function(str){
 			$("#captcha").html(str);
 		});
 	}
@@ -281,9 +286,9 @@ function savebi(){
 	var sign = $("#sign").val();
 	var qq = $("#qq").val();
 	var phone = $("#phone").val();
-	var url = "http://www.xn--wmqr18c.cn/ajax/savebi";
+	var url = baseurl + "/ajax/savebi";
 	$.post(url,{username:username,sex:sex,school:school,degree:degree,year:year,sign:sign,qq:qq,phone:phone},function(){ 
-    	window.location.href="http://www.xn--wmqr18c.cn/setup";
+    	window.location.href=baseurl + "/setup";
   	});
 }
 function saveac(){
@@ -294,18 +299,18 @@ function saveac(){
 	var sign1 = $("#sign1").is(':checked')?1:0;
 	var sign2 = $("#sign2").is(':checked')?1:0;
 	var righton = $("#righton").is(':checked')?1:0;
-	var url = "http://www.xn--wmqr18c.cn/ajax/saveac";
+	var url = baseurl + "/ajax/saveac";
 	$.post(url,{mailcheck:mailcheck,qqcheck:qqcheck,phonecheck:phonecheck,sign1:sign1,sign2:sign2,righton:righton},function(){ 
-    	window.location.href="http://www.xn--wmqr18c.cn/setup/account";
+    	window.location.href=baseurl + "/setup/account";
   	});
 }
 function savest(){
 	$("#savest").parent().html('<i class="icon-spinner icon-spin"></i> 正在保存');
 	var namecolor = $("#namecolor").val();
 	var autoon = $("#autoon").is(':checked')?1:0;
-	var url = "http://www.xn--wmqr18c.cn/ajax/savest";
+	var url = baseurl + "/ajax/savest";
 	$.post(url,{namecolor:namecolor,autoon:autoon},function(){ 
-    	window.location.href="http://www.xn--wmqr18c.cn/setup/star";
+    	window.location.href=baseurl + "/setup/star";
   	});
 }
 function addfavorite(title, url) {
@@ -323,13 +328,13 @@ function addfavorite(title, url) {
     }
 }
 function addlove(lover,lovee,love){
-	$.post("http://www.xn--wmqr18c.cn/ajax/addlove",{lover:lover,lovee:lovee,love:love},function(){
+	$.post(baseurl + "/ajax/addlove",{lover:lover,lovee:lovee,love:love},function(){
 		window.location.href=window.location.href;
 	})
 	$("#lovebox").html('<i class="icon-spinner icon-spin"></i> 正在处理');
 }
 function deletelove(lover,lovee,love){
-	$.post("http://www.xn--wmqr18c.cn/ajax/deletelove",{lover:lover,lovee:lovee,love:love},function(){
+	$.post(baseurl + "/ajax/deletelove",{lover:lover,lovee:lovee,love:love},function(){
 		window.location.href=window.location.href;
 	})
 	$("#lovebox").html('<i class="icon-spinner icon-spin"></i> 正在处理');
@@ -342,14 +347,14 @@ function change2al(){
 }
 
 function addfocus(focuser,focusee,focuss){
-	$.post("http://www.xn--wmqr18c.cn/ajax/addfocus",{focuser:focuser,focusee:focusee,focuss:focuss},function(str){
+	$.post(baseurl + "/ajax/addfocus",{focuser:focuser,focusee:focusee,focuss:focuss},function(str){
 		alert(str);
 		window.location.href=window.location.href;
 	})
 	$("#focusbox").html('<i class="icon-spinner icon-spin"></i> 正在处理');
 }
 function deletefocus(focuser,focusee,focuss){
-	$.post("http://www.xn--wmqr18c.cn/ajax/deletefocus",{focuser:focuser,focusee:focusee,focuss:focuss},function(){
+	$.post(baseurl + "/ajax/deletefocus",{focuser:focuser,focusee:focusee,focuss:focuss},function(){
 		window.location.href=window.location.href;
 	})
 	$("#focusbox").html('<i class="icon-spinner icon-spin"></i> 正在处理');
@@ -405,7 +410,7 @@ function showuserpage(tab,uid,page,type){
 	}
 	$("html,body").animate({scrollTop:$("#scrollhead1").offset().top}, 700);
 	if($(objstr).html()==''||type==1){
-		$.post("http://www.xn--wmqr18c.cn/ajax/show_user_page",{tab:tab,uid:uid,page:page},function(gethtml){
+		$.post(baseurl + "/ajax/show_user_page",{tab:tab,uid:uid,page:page},function(gethtml){
         	$(objstr).html(gethtml);
 		})
 		$(objstr).html('<center><i class="icon-spinner icon-spin"></i> 正在加载</center>');
@@ -414,7 +419,7 @@ function showuserpage(tab,uid,page,type){
 function gotocomm(uid){
 	$('#mycommlink').tab('show');
 	if($("#mycomm").html()==''){
-		$.post("http://www.xn--wmqr18c.cn/ajax/show_user_page",{tab:5,uid:uid,page:1},function(gethtml){
+		$.post(baseurl + "/ajax/show_user_page",{tab:5,uid:uid,page:1},function(gethtml){
 			$("#mycomm").html(gethtml);
 			$("html,body").animate({scrollTop:$("#scrollfoot").offset().top}, 700);
 		})
@@ -427,7 +432,7 @@ function docomment(subject_id,user_id){
 	var ctype = $("#ctype").val();
 	var cscore = $("#cscore").val();
 	var ccontent = $("#commcont").val();
-	$.post("http://www.xn--wmqr18c.cn/ajax/addcomment",{user_id:user_id,subject_id:subject_id,ctype:ctype,cscore:cscore,ccontent:ccontent},function(){
+	$.post(baseurl + "/ajax/addcomment",{user_id:user_id,subject_id:subject_id,ctype:ctype,cscore:cscore,ccontent:ccontent},function(){
         showuserpage(5,user_id,1,1);
 	})
 }
@@ -442,5 +447,5 @@ function reportconfirm(){
 	var rcontent = $('input[name="reportreason"]:checked').val();
 	if(rcontent == '其他')
 		rcontent = $("#report_or").val();
-	$.post("http://www.xn--wmqr18c.cn/ajax/addreport",{object_id:object_id,rtype:rtype,rcontent:rcontent});
+	$.post(baseurl + "/ajax/addreport",{object_id:object_id,rtype:rtype,rcontent:rcontent});
 }

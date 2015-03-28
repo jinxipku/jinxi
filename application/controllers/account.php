@@ -2,7 +2,7 @@
 // +----------------------------------------------------------------------
 // | Account 用户账户操作（注册、登录）
 // +----------------------------------------------------------------------
-// | Author: cuida
+// | Author: JINXI
 // +----------------------------------------------------------------------
 // | date: 2015-2-9
 // +----------------------------------------------------------------------
@@ -10,8 +10,9 @@ class Account extends MY_Controller {
 	public function __construct() {
 		parent::__construct ();
 		$this->load->model ( 'account_model' );
-		$this->load->library('session');
+		$this->load->model ( 'user_model' );
 		$this->load->helper('url');
+		$this->load->helper('array');
 	}
 
 // +----------------------------------------------------------------------
@@ -26,7 +27,7 @@ class Account extends MY_Controller {
 		$this->assign('nav_tab', 7);
 		$this->assign('title', '今昔网-登录');
 		$this->assign('baseurl', base_url());
-		$this->assign('tips',show_tips());
+		$this->assign('tips', show_tips());
 		
 		$this->display ( 'templates/header.php' );
 		$this->display ( 'account/login.php' );
@@ -38,14 +39,62 @@ class Account extends MY_Controller {
 		if($user_id != ''){
 			redirect(base_url());
 		}
+		$this->session->set_userdata( 'mem_url' ,  $_SERVER['HTTP_REFERER'] );
 		$this->assign('nav_tab', 8);
 		$this->assign('title', '今昔网-注册');
 		$this->assign('baseurl', base_url());
-		$this->assign('tips',show_tips());
+		$this->assign('tips', show_tips());
 		
 		$this->display ( 'templates/header.php' );
 		$this->display ( 'account/register.php' );
 		$this->display ( 'templates/footer.php' );
+	}
+
+	public function reginfo($surfix = ""){
+		$this->assign('nav_tab', 8);
+		$this->assign('title', '今昔网-注册');
+		$this->assign('baseurl', base_url());
+		$this->assign('tips',show_tips());
+		$this->assign('verify_email', 'http://mail.'.$surfix);
+
+		$this->display ( 'templates/header.php' );
+		if ($surfix != "") {
+			$this->display ( 'account/regmail.php' );
+		}
+		else {
+			$this->display ( 'account/regfail.php' );
+		}
+		$this->display ( 'templates/footer.php' );
+	}
+
+	public function verify(){
+		if (!empty( $_GET['code'] )) {
+			/*TODO: 判断合法 */
+			$key = $this->config->item('verify_pkey');
+			$id = $this->_genIdFromCode( $_GET['code'] );
+			$this->account_model->verify( $id );
+
+			if ($id != '') {
+				$login_user = $this->user_model->get_info($id);
+				$this->session->set_userdata ( 'login_user', $id);
+				$this->assign('login_user', $login_user);
+			}
+
+			$mem_url =  $this->session->userdata('mem_url');
+			if($mem_url != ''){
+				$this->assign('mem_url', $mem_url);
+			}
+
+			$this->assign('nav_tab', 8);
+			$this->assign('title', '今昔网-注册');
+			$this->assign('baseurl', base_url());
+			$this->assign('tips',show_tips());
+
+			$this->display ( 'templates/header.php' );
+			$this->display ( 'account/regsuccess.php' );
+			$this->display ( 'templates/footer.php' );
+		}
+
 	}
 
 	public function userInfo(){
@@ -67,19 +116,16 @@ class Account extends MY_Controller {
 	//post参数  email school_id  password passworda
 	//status  0：注册失败   1：注册成功
 	public function doregister(){
-
 		$school_id = $_POST ['school_id'];
 		$email = $_POST['email'];
 		$pwd = $_POST ['password'];
 		$pwd2 = $_POST ['passworda'];
-
-		//计算email	
 		if($pwd != $pwd2)
 			$this->ajaxReturn(null , '两次输入的密码不一致' , 0);
 
 		if (empty ( $school_id ) ||  empty($email) )
 			$this->ajaxReturn( null , '学校、email未填写完整' , 0 );
-		$regres = $this->account_model->regidit( $email, $pwd, $school_id );
+		$regres = $this->account_model->register( $email, $pwd, $school_id );
 		if( !empty($regres) ){
 			$user = $this->account_model->get_account(null ,$email );
 			$this->session->set_userdata( 'login_user' , $user );
@@ -119,22 +165,12 @@ class Account extends MY_Controller {
 		$logres = $this->account_model->login( $email, $pwd );
 		if ($logres == 1) {
 			$user = $this->account_model->get_account (null ,$email );
-			$this->session->set_userdata ( 'login_user', $user );
+			$this->session->set_userdata ( 'login_user', $user['id'] );
 			$this->ajaxReturn(null,"登录成功",1);
 		}else{
 			$this->ajaxReturn(null,"登录失败",1);
 		}
 		
-
-	}
-
-	public function doverify(){
-		if(!empty( $_GET['code'] )){
-			/*TODO: 判断合法 */
-			$key = $this->config->item('verify_pkey');
-			$id = $this->_genIdFromCode( $_GET['code'] );
-			$this->account_model->verify( $id );
-		}
 
 	}
 
@@ -159,7 +195,7 @@ class Account extends MY_Controller {
 		$config ['mailtype'] = 'html';
 		$this->email->initialize ( $config );
 
-		$verify_url = base_url('account/doverify').'?code=' . $this->_genCodeForVerify($user['id']);
+		$verify_url = base_url('account/verify').'?code=' . $this->_genCodeForVerify($user['id']);
 		//$verify_url = urlencode($verify_url);
 		// 发送
 		$content = '
