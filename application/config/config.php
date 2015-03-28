@@ -15,7 +15,7 @@
 |
 */
 // $config['base_url']	= 'http://www.今昔.cn';
-$config['base_url']	= 'http://wwww.jinxi.com/';
+$config['base_url']	= 'http://www.xn--wmqr18c.cn';
 
 
 /*
@@ -362,6 +362,7 @@ $config['proxy_ips'] = '';
 $config['verify_pkey'] = 'ohacPttIzN/ANmCeWWhn41Q2fbhnZT.dtK2CEOFTPMsK9N3zHW0lm9yE6xG';
 /* End of file config.php */
 /* Location: ./application/config/config.php */
-
-$config['default_head'] = './img/head/default_head';
-$config['default_thumb'] = './img/head/default_thumb';
+$config['school'] = array(
+		1001 => array("name"=>"北京大学","mailext"=>"@pku.edu.cn"),
+		1004 => array("name"=>"北京航空航天大学","mailext"=>"@buaa.edu.cn"),
+	);

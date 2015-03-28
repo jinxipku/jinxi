@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-24 20:31:02
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-27 20:17:30
          compiled from "..\application\views\templates\header.php" */ ?>
 <?php /*%%SmartyHeaderCode:28843550fb3d06e9f62-69507363%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '9f2015c56948a41a6cd8439dffba65d33dd903b7' => 
     array (
       0 => '..\\application\\views\\templates\\header.php',
-      1 => 1427200259,
+      1 => 1427458595,
       2 => 'file',
     ),
   ),
@@ -23,7 +23,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'title' => 0,
     'login_user' => 0,
     'nav_tab' => 0,
-    'uri_string' => 0,
+    'is_index' => 0,
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
@@ -44,6 +44,8 @@ css/bootstrap.css" rel="stylesheet"/>
 css/font-awesome.css" rel="stylesheet"/>
 	<link href="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
 css/flat-ui.css" rel="stylesheet"/>
+	<link href="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
+css/school.css" rel="stylesheet"/>
 	<link href="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
 css/jinxi.css" rel="stylesheet"/>
 	<link href="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
@@ -84,7 +86,7 @@ img/icon/invite.png" alt="invite.png"/>
 ')">收藏本站</a>
 			<?php } else { ?>
 			<a type="button" class="btn btn-primary" href="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
-account/regidit">立即注册</a>
+account/register">立即注册</a>
 			<?php }?>
 		</div>
 	</div>
@@ -133,13 +135,23 @@ setup">设置</a>
 						<li>
 							<a href="#" onClick="logout();return false;">退出</a>
 						</li>
-						<?php } elseif ($_smarty_tpl->tpl_vars['uri_string']->value=='') {?>						
+						<?php } elseif (isset($_smarty_tpl->tpl_vars['is_index']->value)) {?>						
 						<li>
-							<a id="navbarlogin" href="#" onClick="pre_login(0);return false;">登录</a>
+							<a href="#" onClick="pre_login(0);return false;">登录</a>
+						</li>
+						<?php } elseif ($_smarty_tpl->tpl_vars['nav_tab']->value==7) {?>
+						<li class=" active">
+							<a  href="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
+account/login">登录</a>
+						</li>
+						<?php } elseif ($_smarty_tpl->tpl_vars['nav_tab']->value==8) {?>
+						<li class=" active">
+							<a  href="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
+account/register">注册</a>
 						</li>
 						<?php } else { ?>
 						<li>
-							<a id="navbarlogin" href="#" onClick="memlogin();return false;">登录</a>
+							<a  href="#" onClick="mem_login();return false;">登录</a>
 						</li>
 						<?php }?>
 					</ul>

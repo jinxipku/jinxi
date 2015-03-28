@@ -19,9 +19,9 @@ p.p_info {
 	color: #7F8C8D;
 }
 p.p_song_title{
-	font-size: 23px;
-	font-family: 微软雅黑,黑体,幼圆,宋体;
-	color: #16A085;
+	font-size: 16px;
+	font-weight: 600;
+	font-family: 宋体;
 }
 p.p_song_content{
 	font-size: 14px;
@@ -36,14 +36,14 @@ p.p_song_link{
 span.danger {
 	font-size: 13px;
 	color: #E74C3C;
-	width: 168px;
+	min-width: 168px;
 	height: 24px;
 	display: block;
 }
 span.success {
 	font-size: 13px;
 	color: #2ECC71;
-	width: 168px;
+	min-width: 168px;
 	height: 24px;
 	display: block;
 }
@@ -184,6 +184,42 @@ p.side_tagcon{
 	color: #7F8C8D;
 }
 
+div#register_form {
+	float: left;
+	width: 400px !important;
+}
+div#register_form>p,div#register_alter>p {
+	font-size: 22px;
+}
+div#register_form>form {
+	width: 350px;
+}
+div#register_form>form>div.form-group{
+	margin: 0px;
+}
+div#register_form>form input {
+	background-color: #f4f4f4;
+	width: 300px;
+}
+div#register_form>form span{
+	width: 300px;
+}
+div#register_alter {
+	float: left;
+	margin-right: 132px;
+	width: 240px !important;
+}
+div#register_alter img{
+	width: 100%;
+	margin-top: 15px;
+}
+
+
+
+
+
+
+
 /*
 footer
 */
@@ -219,6 +255,14 @@ p.footer_address{
 	font-weight: 500;
 	margin-bottom: 0;
 }
+
+/*
+modals
+*/
+div#choose_school>div {
+	width: 650px;
+}
+
 
 /*
 others

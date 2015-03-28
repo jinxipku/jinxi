@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-24 22:04:56
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-27 20:21:10
          compiled from "..\application\views\index\side.php" */ ?>
 <?php /*%%SmartyHeaderCode:32327551121561564f3-61777981%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'fed332f032a7c140b0dddfebc79879fd1f9560ff' => 
     array (
       0 => '..\\application\\views\\index\\side.php',
-      1 => 1427205893,
+      1 => 1427458867,
       2 => 'file',
     ),
   ),
@@ -29,8 +29,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 				<button type="button" class="close" onClick="pre_login(1)">&times;</button>
 				<form method="post" id="login_form">
 					<div class="form-group">
-						<input id="mail" name="mail" type="mail" placeholder="校园邮箱" class="form-control flat" onblur="check_mail(1)">
-						<span class="danger" id="check_mail"> </span>
+						<input id="email" name="email" type="mail" placeholder="校园邮箱" class="form-control flat" onblur="check_email(1)">
+						<span class="danger" id="check_email"> </span>
 					</div>
 					<div class="form-group">
 						<input id="password" name="password" type="password" placeholder="密码" class="form-control flat" onblur="check_pw()"> 
@@ -54,7 +54,7 @@ item/newpost/type" type="button" class="btn btn-primary btn-hg btn-block">发布
 					<p class="side_title">今昔贴士</p>
 				</blockquote>
 				<div class="side_content panel panel-default">
-					<p class="p_song_content" style=" font-weight: 600"><?php echo $_smarty_tpl->tpl_vars['tips']->value['strtit'];?>
+					<p class="p_song_title"><?php echo $_smarty_tpl->tpl_vars['tips']->value['strtit'];?>
 </p>
 					<p class="p_song_content">&nbsp;&nbsp;<?php echo $_smarty_tpl->tpl_vars['tips']->value['strcon'];?>
 </p>

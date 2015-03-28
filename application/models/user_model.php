@@ -13,8 +13,9 @@ class user_model extends CI_Model {
 		return $query->row_array ();
 	}
 
-	public function update_info($user_id, $info){
-		$this->db->where("id",$user_id);
-		$this->db->update("jx_user",$info);
+	public function update_head($user_id, $head){
+		$data = array("head" => $head);
+		$this->db->where( 'id', $id);
+		$this->db->update ( 'jx_user', $data );
 	}
 }

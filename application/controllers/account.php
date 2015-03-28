@@ -19,11 +19,33 @@ class Account extends MY_Controller {
 // +----------------------------------------------------------------------
 
 	public function login(){
-
+		$user_id =  $this->session->userdata('login_user');
+		if($user_id != ''){
+			redirect(base_url());
+		}
+		$this->assign('nav_tab', 7);
+		$this->assign('title', '今昔网-登录');
+		$this->assign('baseurl', base_url());
+		$this->assign('tips',show_tips());
+		
+		$this->display ( 'templates/header.php' );
+		$this->display ( 'account/login.php' );
+		$this->display ( 'templates/footer.php' );
 	}
 
-	public function regidit(){
-
+	public function register(){
+		$user_id =  $this->session->userdata('login_user');
+		if($user_id != ''){
+			redirect(base_url());
+		}
+		$this->assign('nav_tab', 8);
+		$this->assign('title', '今昔网-注册');
+		$this->assign('baseurl', base_url());
+		$this->assign('tips',show_tips());
+		
+		$this->display ( 'templates/header.php' );
+		$this->display ( 'account/register.php' );
+		$this->display ( 'templates/footer.php' );
 	}
 
 	public function userInfo(){

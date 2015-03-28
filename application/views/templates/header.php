@@ -10,6 +10,7 @@
 	<link href="{$baseurl}css/bootstrap.css" rel="stylesheet"/>
 	<link href="{$baseurl}css/font-awesome.css" rel="stylesheet"/>
 	<link href="{$baseurl}css/flat-ui.css" rel="stylesheet"/>
+	<link href="{$baseurl}css/school.css" rel="stylesheet"/>
 	<link href="{$baseurl}css/jinxi.css" rel="stylesheet"/>
 	<link href="{$baseurl}css/Jcrop.css" rel="stylesheet"/>
 	<link href="{$baseurl}css/sticky-footer-navbar.css" rel="stylesheet"/>
@@ -37,7 +38,7 @@
 			{if isset($login_user)}
 			<a type="button" class="btn btn-primary" href="#" onclick="addfavorite('<?php echo '今昔网'?>', '{$baseurl}')">收藏本站</a>
 			{else}
-			<a type="button" class="btn btn-primary" href="{$baseurl}account/regidit">立即注册</a>
+			<a type="button" class="btn btn-primary" href="{$baseurl}account/register">立即注册</a>
 			{/if}
 		</div>
 	</div>
@@ -79,13 +80,21 @@
 						<li>
 							<a href="#" onClick="logout();return false;">退出</a>
 						</li>
-						{elseif $uri_string == ''}						
+						{elseif isset($is_index)}						
 						<li>
-							<a id="navbarlogin" href="#" onClick="pre_login(0);return false;">登录</a>
+							<a href="#" onClick="pre_login(0);return false;">登录</a>
+						</li>
+						{elseif $nav_tab == 7}
+						<li class=" active">
+							<a  href="{$baseurl}account/login">登录</a>
+						</li>
+						{elseif $nav_tab == 8}
+						<li class=" active">
+							<a  href="{$baseurl}account/register">注册</a>
 						</li>
 						{else}
 						<li>
-							<a id="navbarlogin" href="#" onClick="memlogin();return false;">登录</a>
+							<a  href="#" onClick="mem_login();return false;">登录</a>
 						</li>
 						{/if}
 					</ul>

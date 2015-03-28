@@ -18,6 +18,17 @@ $(document).ready( function() {
 $(window).bind('scroll',function() {
 	$(this).scrollTop() > 600 ? $("#back_to_top").fadeIn(500) : $("#back_to_top").fadeOut(500);
 });
+$("input").bind('blur',function() {
+	if ($(this).attr("id") == "school" || $(this).val().length > 0) {
+		$(this).removeClass("flat");
+	}
+	else {
+		$(this).addClass("flat");
+	}
+});
+$('#choose_school').on('hidden.bs.modal', function () {
+	$('#school').attr('disabled', false);
+})
 function back_to_top1() {
 	$("#back_to_top").attr('src','http://www.xn--wmqr18c.cn/img/top2.png');
 }
@@ -26,6 +37,32 @@ function back_to_top2() {
 }
 function go_to_top() {
 	$("html,body").animate({scrollTop:0}, 700);
+}
+function register(){
+	$("#email").focus();
+	$("input").blur();
+	if ($("#check_school").hasClass("fui-cross") || $("#check_email").hasClass("fui-cross") || $("#check_pw").hasClass("fui-cross") || $("#check_pwa").hasClass("fui-cross")){
+		return;
+	}
+	else{
+		$.post(
+			"http://www.xn--wmqr18c.cn/ajax/register",
+			{
+				school: $("school").val(),
+				school_id: $("school_id").val(),
+				email: $("#email").val() + $("email_surfix").val(),
+				password: $("#password").val(),
+				passworda: $("#passworda").val(),
+			},
+			function(str){ 
+   			if(str == '1'){ 
+    			window.location.href="http://www.xn--wmqr18c.cn/account/reginfo/mail/"+mail.split("@")[1].split(".")[0];
+   			}else{   
+				window.location.href="http://www.xn--wmqr18c.cn/account/reginfo/fail"; 
+   			}
+  		});
+		$("#btn_register").hide(0);
+	}
 }
 function pre_login(st) {
 	if (st == 0) {
@@ -37,9 +74,9 @@ function pre_login(st) {
 		$("#login_box").slideUp(700);
 	}
 }
-function memlogin() {
+function mem_login() {
 	var loca = "http://www.xn--wmqr18c.cn";
-	if(window.location.href.indexOf("account/loginfo") < 0)
+	if (window.location.href.indexOf("account/loginfo") < 0)
 		loca = window.location.href;
 	$.post("http://www.xn--wmqr18c.cn/ajax/mem_url",{memurl:loca},function(){
 		window.location.href = "http://www.xn--wmqr18c.cn/account/login";
@@ -66,7 +103,7 @@ function login(loca) {
 				$("#checkpw").css('color','#E74C3C'); 
 			}
 			else{
-				$("#check_mail").html("您的邮箱尚未激活，请立即前往邮箱激活！");
+				$("#check_mail").html("您的邮箱尚未激活，请先激活！");
 				$("#check_mail").addClass(" fui-cross");
 				$("#check_mail").css('color','#E74C3C');
 			}
@@ -82,59 +119,80 @@ function logout() {
 	return false;
 }
 
-function check_mail(login) {
-	/*
-	if($("#check_mail").html() == "您的邮箱尚未激活，请立即前往邮箱激活！")
-		return;
-	*/
-	var mail = $("#mail").val();
-	if (mail.length == 0){
-		$("#check_mail").html("请输入校园邮箱！");
-		$("#check_mail").removeClass("fui-check success");
-		$("#check_mail").addClass("fui-cross danger");
+function check_school(){
+	var school = $("#school").val();   
+  	var len = school.length; 
+	if(len == 0){
+		$("#check_school").html("请选择学校！");
+		$("#check_school").removeClass("fui-check success");
+		$("#check_school").addClass("fui-cross danger");
 	}
-	else if (mail.indexOf("@")<0 || mail.split("@")[0].length == 0 || mail.split("@")[1].length == 0) {
-		$("#check_mail").html("请输入合法的邮箱格式！");
-		$("#check_mail").removeClass("fui-check success");
-		$("#check_mail").addClass("fui-cross danger");
-	} else if (mail.length > 30) {
-		$("#check_mail").html("邮箱长度不要超过30个字符，请重新输入！");
-		$("#check_mail").removeClass("fui-check success");
-		$("#check_mail").addClass("fui-cross danger");
+	else{
+		$("#check_school").html("学校选择完毕！");
+		$("#check_school").removeClass("fui-cross danger");
+		$("#check_school").addClass("fui-check success");
+		return true;
+	}
+  	return false; 
+}
+
+function check_email(login) {
+	var email = $("#email").val() + $("#email_surfix").text();
+	if (email.length == $("#email_surfix").text().length){
+		$("#check_email").html("请输入校园邮箱！");
+		$("#check_email").removeClass("fui-check success");
+		$("#check_email").addClass("fui-cross danger");
+	}
+	else if (email.indexOf("@")<0 || email.split("@")[0].length == 0 || email.split("@")[1].length == 0) {
+		$("#check_email").html("请输入合法的邮箱格式！");
+		$("#check_email").removeClass("fui-check success");
+		$("#check_email").addClass("fui-cross danger");
+	} else if (email.length > 30) {
+		$("#check_email").html("邮箱长度不要超过30个字符，请重新输入！");
+		$("#check_email").removeClass("fui-check success");
+		$("#check_email").addClass("fui-cross danger");
+	} else if (email.indexOf("edu") < 0) {
+		$("#check_email").html("请使用你的校园邮箱！");
+		$("#check_email").removeClass("fui-check success");
+		$("#check_email").addClass("fui-cross danger");
 	}
 	else {
-		var url = "http://www.xn--wmqr18c.cn/ajax/check_mail/"+mail.split("@")[0]+"/"+mail.split("@")[1]; 
-		$.post(url,function(res) { 
-			alert(res);
-			if (login == 1) {  
-				if (res == 1) {
-					$("#check_mail").html("邮箱存在！")
-					$("#check_mail").removeClass("fui-cross danger");
-					$("#check_mail").addClass("fui-check success");
-					return true;
-				} else if (res == 0) {   
-					$("#check_mail").html("您输入的邮箱不存在！请重新输入！");
-					$("#check_mail").removeClass("fui-check success");
-					$("#check_mail").addClass("fui-cross danger");
-				} else {
-					$("#check_mail").html("您的邮箱尚未激活，请立即前往邮箱激活！");
-					$("#check_mail").removeClass("fui-check success");
-					$("#check_mail").addClass("fui-cross danger");
+		$.post(
+			"http://www.xn--wmqr18c.cn/account/docheck",
+			{
+				email: email
+			},
+			function(res) {
+				if (login == 1) {  
+					if (res == 1) {
+						$("#check_email").html("邮箱存在！")
+						$("#check_email").removeClass("fui-cross danger");
+						$("#check_email").addClass("fui-check success");
+						return true;
+					} else if (res == 0) {   
+						$("#check_email").html("您输入的邮箱不存在！请重新输入！");
+						$("#check_email").removeClass("fui-check success");
+						$("#check_email").addClass("fui-cross danger");
+					} else {
+						$("#check_email").html("您的邮箱尚未激活，请立即前往邮箱激活！");
+						$("#check_email").removeClass("fui-check success");
+						$("#check_email").addClass("fui-cross danger");
+					}
+				}
+				else {
+					if (res == 1) {   
+						$("#check_email").html("邮箱可用！");
+						$("#check_email").removeClass("fui-cross danger");
+						$("#check_email").addClass("fui-check success");
+						return true;
+					} else { 
+						$("#check_email").html("您输入的邮箱已被注册！请重新输入！");
+						$("#check_email").removeClass("fui-check success");
+						$("#check_email").addClass("fui-cross danger");  
+					}
 				}
 			}
-			else {
-				if (res == 1) {   
-					$("#check_mail").html("邮箱可用！");
-					$("#check_mail").removeClass("fui-cross danger");
-					$("#check_mail").addClass("fui-check success");
-					return true;
-				} else { 
-					$("#check_mail").html("您输入的邮箱已被注册！请重新输入！");
-					$("#check_mail").removeClass("fui-check success");
-					$("#check_mail").addClass("fui-cross danger");  
-				}
-			}
-		});
+		);
 	}
 	return false; 
 }
@@ -147,18 +205,18 @@ function check_pw() {
 		$("#check_pw").removeClass("fui-check success");
 		$("#check_pw").addClass("fui-cross danger");
 	}
-	else if(len<6){
+	else if(len < 6) {
 		$("#check_pw").html("密码长度不能少于6位，请重新输入！");
 		$("#check_pw").removeClass("fui-check success");
 		$("#check_pw").addClass("fui-cross danger");
 	}
-	else if(len>16){
-		$("#checkpw").html("密码长度不要超过16位，请重新输入！");
+	else if(len > 16) {
+		$("#check_pw").html("密码长度不要超过16位，请重新输入！");
 		$("#check_pw").removeClass("fui-check success");
 		$("#check_pw").addClass("fui-cross danger");
 	}
-	else{
-		$("#checkpw").html("密码长度合法！");
+	else {
+		$("#check_pw").html("密码长度合法！");
 		$("#check_pw").removeClass("fui-cross danger");
 		$("#check_pw").addClass("fui-check success");
 		return true;
@@ -166,41 +224,19 @@ function check_pw() {
 	return false; 
 }
 
-function check_name(){
-	var username = $("#user_name").val();   
-  	var len = username.length; 
-	if(len==0){
-		$("#check2").html("请输入姓名！");
-		$("#check2").addClass(" fui-cross");
-		$("#check2").css('color','#E74C3C');
-	}
-	else if(len>10){
-		$("#check2").html("姓名不要超过10个字符，请重新输入！");
-		$("#check2").addClass(" fui-cross");
-		$("#check2").css('color','#E74C3C');
-	}
-	else{
-		$("#check2").html("姓名可用！");
-		$("#check2").removeClass(" fui-cross");
-		$("#check2").addClass(" fui-check");
-		$("#check2").css('color','#2ECC71');
-	}
-  	return false; 
-}
-
 function check_pwa(){
-	var pw1 = $("#password1").val();
-	var pw2 = $("#password2").val();   
-	if(pw1!=pw2){
-		$("#check4").html("两次输入的密码不匹配，请重新输入！");
-		$("#check4").addClass(" fui-cross");
-		$("#check4").css('color','#E74C3C');
+	var pw = $("#password").val();
+	var pwa = $("#passworda").val();   
+	if(pw != pwa) {
+		$("#check_pwa").html("两次输入的密码不匹配，请重新输入！");
+		$("#check_pwa").removeClass("fui-check success");
+		$("#check_pwa").addClass("fui-cross danger");
 	}
-	else{
-		$("#check4").html("密码匹配！");
-		$("#check4").removeClass(" fui-cross");
-		$("#check4").addClass(" fui-check");
-		$("#check4").css('color','#2ECC71');
+	else {
+		$("#check_pwa").html("密码匹配！");
+		$("#check_pwa").removeClass("fui-cross danger");
+		$("#check_pwa").addClass("fui-check success");
+		return true;
 	}
   	return false; 
 }
@@ -222,26 +258,7 @@ function check_captcha(){
 	});
 }
 
-function register(){
-	$("input").blur();
-	if($("#check_mail").hasClass("fui-cross")||$("#check2").hasClass("fui-cross")||$("#checkpw1").hasClass("fui-cross")||$("#check4").hasClass("fui-cross")){
-		return;
-	}
-	else{
-		var mail=$("#mail").val();
-		var pw1=$("#password1").val();
-		var pw2=$("#password2").val();
-		var url = "http://www.xn--wmqr18c.cn/ajax/regidit/"+mail.split("@")[0]+"/"+mail.split("@")[1]+"/"+pw1;
-		$.post(url,{user_name:$("#user_name").val()},function(str){ 
-   			if(str == '1'){ 
-    			window.location.href="http://www.xn--wmqr18c.cn/account/reginfo/mail/"+mail.split("@")[1].split(".")[0];
-   			}else{   
-				window.location.href="http://www.xn--wmqr18c.cn/account/reginfo/fail"; 
-   			}
-  		});
-		$("#bt4reg").hide(0);
-	}
-}
+
 function createcaptcha(){
 	$.post("http://www.xn--wmqr18c.cn/ajax/captcha",function(str){
 		$("#captcha").html(str);

@@ -27,6 +27,7 @@ class account_model extends CI_Model{
 		$account = $this->get_account(null , $email );
 		if( !empty($account) ){
 			$rpwd = $this->encrypt->decode($account['password']);
+			echo $rpwd.'*'.$pwd;
 			if($pwd == $rpwd){
 				$daysec = 86400;
 				$login =  $account['last_login'] - $account['last_login'] % $daysec;
@@ -37,10 +38,14 @@ class account_model extends CI_Model{
 				}else{
 					$account['logins'] = 1;
 				}
+				if($delta > 1){
+					$account['points'] = $account['points'] + 1;//暂时每天加1积分
+				}
 				$data = array(
 					'logins' => $account['logins'],
 					'last_login' => time(),
 					'last_ip' => getClientIp(),
+					'points' => $account['points'],
 					);
 				$this->db->where ( 'email', $email );
 				$this->db->update ( 'jx_account', $data );
@@ -50,7 +55,7 @@ class account_model extends CI_Model{
 		return 0;
 	}
 
-	public function regidit($email, $pwd, $school_id) {
+	public function register($email, $pwd, $school_id) {
 		$encryptPwd = $this->encrypt->encode($pwd);
 		$nowtime = time();
 		$data = array (
@@ -61,18 +66,9 @@ class account_model extends CI_Model{
 			'reg_ip' => getClientIp(),
 			'last_ip' => getClientIp(),
 			'last_login' => "$nowtime",
-			'logins' => 1,
+			'logins' => 1
 			);
 		$res = $this->db->insert ( 'jx_account', $data );
-		if($res){
-			$userdata['id'] = $this->db->insert_id();
-			$userdata['nick'] = $email;
-			$userdata['points'] = 0;
-			$userdata['head'] = $this->config->item('default_head');
-			$userdata['thumb'] = $this->config->item('default_thumb');
-			$this->db->insert('jx_user',$userdata); //插入新记录到user表中
-		}
-		
 		return $res;
 	}
 
