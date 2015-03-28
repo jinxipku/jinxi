@@ -56,7 +56,6 @@ class account_model extends CI_Model{
 		$data = array (
 			'email' => "$email",
 			'password' => "$encryptPwd",
-			'school_id' => $school_id,
 			'is_verified' => 0,
 			'reg_ip' => getClientIp(),
 			'last_ip' => getClientIp(),
@@ -66,8 +65,10 @@ class account_model extends CI_Model{
 		$res = $this->db->insert ( 'jx_account', $data );
 		if($res){
 			$userdata['id'] = $this->db->insert_id();
-			$userdata['nick'] = $email;
+			$userdata['nick'] = "今昔兔";
 			$userdata['points'] = 0;
+			$userdata['email'] = $email;
+			$userdata['school_id'] = $school_id;
 			$userdata['head'] = $this->config->item('default_head');
 			$userdata['thumb'] = $this->config->item('default_thumb');
 			$this->db->insert('jx_user',$userdata); //插入新记录到user表中

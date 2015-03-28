@@ -76,8 +76,8 @@ class User extends MY_Controller {
 			$head_image = $this->head_dir.genFileName($user_id,$ext);
 			$config2 ['new_image'] = $head_image;
 			$config2 ['maintain_ratio'] = FALSE; 
-			$config2 ['width'] = 100;
-			$config2 ['height'] = 100;
+			$config2 ['width'] = 300;
+			$config2 ['height'] = 300;
 			$this->image_lib->initialize($config2);
 			$this->image_lib->resize ();
 			
