@@ -77,7 +77,7 @@ $autoload['libraries'] = array('database','session','Cismarty');
 |
 */
 
-$autoload['config'] = array();
+$autoload['config'] = array('jinxiconfig');
 
 
 /*

@@ -50,7 +50,7 @@ class account_model extends CI_Model{
 		return 0;
 	}
 
-	public function regidit($email, $pwd, $school_id) {
+	public function register($email, $pwd, $school_id) {
 		$encryptPwd = $this->encrypt->encode($pwd);
 		$nowtime = time();
 		$data = array (

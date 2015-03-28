@@ -128,7 +128,7 @@ class Account extends MY_Controller {
 
 		if (empty ( $school_id ) ||  empty($email) )
 			$this->ajaxReturn( null , '学校、email未填写完整' , 0 );
-		$regres = $this->account_model->regidit( $email, $pwd, $school_id );
+		$regres = $this->account_model->register( $email, $pwd, $school_id );
 		if( !empty($regres) ){
 			$user = $this->account_model->get_account(null ,$email );
 			$this->session->set_userdata( 'login_user' , $user );
@@ -270,4 +270,4 @@ class Account extends MY_Controller {
 		$key = $this->config->item('verify_pkey');
 		return $this->encrypt->decode( $code, $key);
 	}
-}}
+}

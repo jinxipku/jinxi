@@ -1,4 +1,4 @@
-var baseurl = "http://www.xn--wmqr18c.cn";
+var baseurl = "../";
 $(document).ready( function() {
 	$(".carousel").carousel();
 	$(".ellipsis").ellipsis();
@@ -161,6 +161,7 @@ function check_email(login) {
 		$("#check_email").addClass("fui-cross danger");
 	}
 	else {
+		alert(email);
 		$.post(
 			baseurl + "/account/docheck",
 			{
