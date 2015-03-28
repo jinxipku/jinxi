@@ -30,7 +30,7 @@ class User extends MY_Controller {
 	//前端表单name为head_image
 	public function upload_photo() { // ajax上传图片
 		$user = $this->session->userdata ( 'login_user' );
-		$user_id = isset($user)? $user['id'] : 0; 
+		$user_id = !empty($user) ? $user['id'] : 0; 
 		$field = 'head_image';
 		$config ['upload_path'] = $this->head_dir;
 		$config ['allowed_types'] = 'jpg|png|gif';
@@ -58,7 +58,7 @@ class User extends MY_Controller {
 		$source_image = $_POST['file_name'];
 		$ext = getFileExt($source_image);
 		$config ['image_library'] = 'gd2';
-		$config ['source_image'] = $this->head_dir . $source_image;
+		$config ['source_image'] = $source_image;
 		$new_image = $this->head_dir . genFileName($user_id,$ext);
 		$config ['new_image'] = $new_image;
 		$config ['maintain_ratio'] = FALSE; // 保证设置的长宽有效
@@ -68,33 +68,37 @@ class User extends MY_Controller {
 		$config ['height'] = $_POST ['p_h'] * $_POST ['p_k'];
 		$this->load->library ( 'image_lib', $config );
 		if (! $this->image_lib->crop ()) {
-			$this->ajaxReturn(null,"裁剪失败",0);
+			$this->ajaxReturn(null,"裁剪失败".$this->image_lib->display_errors (),0);
 		} else {
 			//分别生成一张100*100的图和一张60*60的图
-			unset($config);
-			$config ['image_library'] = 'gd2';
-			$config ['source_image'] = $new_image;
-			$head_image = $this->head_dir . genFileName($user_id,$ext);
-			$config ['new_image'] = $head_image;
-			$config ['maintain_ratio'] = FALSE; 
-			$config ['width'] = 100;
-			$config ['height'] = 100;
-			$this->load->library ( 'image_lib', $config );
-			$this->image_lib->resize ();
-			unset($config);
-			$config ['image_library'] = 'gd2';
-			$config ['source_image'] = $new_image;
-			$head_image_thumb = $this->head_dir . genFileName($user_id,$ext);
-			$config ['new_image'] = $head_image_thumb;
-			$config ['maintain_ratio'] = FALSE; 
-			$config ['width'] = 60;
-			$config ['height'] = 60;
-			$this->load->library ( 'image_lib', $config );
+			$config2 ['image_library'] = 'gd2';
+			$config2 ['source_image'] = $new_image;
+			$head_image = $this->head_dir.genFileName($user_id,$ext);
+			$config2 ['new_image'] = $head_image;
+			$config2 ['maintain_ratio'] = FALSE; 
+			$config2 ['width'] = 100;
+			$config2 ['height'] = 100;
+			$this->image_lib->initialize($config2);
 			$this->image_lib->resize ();
 			
-			$data['head_image'] = $head_image;  
-			$data['head_image_thumb'] = $head_image_thumb;
-			$this->ajaxReturn($data,"裁剪成功",1);
+			$config3 ['image_library'] = 'gd2';
+			$config3 ['source_image'] = $new_image;
+			$head_image_thumb = $this->head_dir . genFileName($user_id,$ext);
+			$config3 ['new_image'] = $head_image_thumb;
+			$config3 ['maintain_ratio'] = FALSE; 
+			$config3 ['width'] = 60;
+			$config3 ['height'] = 60;
+			$this->image_lib->initialize($config3);
+			$this->image_lib->resize ();
+			
+	
+			$info['head'] = $head_image;
+			$info['thumb'] = $head_image_thumb;
+			$this->user_model->update_info($user_id,$info);
+
+			unlink($source_image);
+			unlink($new_image);
+			$this->ajaxReturn('',"裁剪成功",1);
 		}
 	}
 
