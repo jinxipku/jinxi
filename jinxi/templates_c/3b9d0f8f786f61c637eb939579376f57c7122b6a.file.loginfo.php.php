@@ -1,22 +1,22 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-30 21:24:34
-         compiled from "..\application\views\account\regfail.php" */ ?>
-<?php /*%%SmartyHeaderCode:31452551663b95ef5f2-92469490%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-30 21:28:51
+         compiled from "..\application\views\account\loginfo.php" */ ?>
+<?php /*%%SmartyHeaderCode:1693555194dd97ac582-05815655%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
-    '08f296efe854dd0df27e06126590d3ff92246a3e' => 
+    '3b9d0f8f786f61c637eb939579376f57c7122b6a' => 
     array (
-      0 => '..\\application\\views\\account\\regfail.php',
-      1 => 1427720920,
+      0 => '..\\application\\views\\account\\loginfo.php',
+      1 => 1427722129,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '31452551663b95ef5f2-92469490',
+  'nocache_hash' => '1693555194dd97ac582-05815655',
   'function' => 
   array (
   ),
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_551663b96f8898_78785591',
+  'unifunc' => 'content_55194dd97e1d24_09351948',
   'variables' => 
   array (
     'baseurl' => 0,
@@ -24,16 +24,19 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_551663b96f8898_78785591')) {function content_551663b96f8898_78785591($_smarty_tpl) {?>	<div id="body" class="row">
+<?php if ($_valid && !is_callable('content_55194dd97e1d24_09351948')) {function content_55194dd97e1d24_09351948($_smarty_tpl) {?>	<div id="body" class="row">
 		<div id="main">
 			<div id="info_img">
 				<img class="passive" src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
-img/info/fail.png" alt="register fail">
+img/info/login.png" alt="register fail">
 			</div>
 			<div id="info_cont">
-				<p>对不起注册失败，请您检查注册信息是否完善。</p>
+				<p>您木有登录哦，请先登录，再尽情使用今昔网~</p>
+				<p>什么？您还木有账号？赶紧注册吧~</p>
 				<a href="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
-account/register" type="button" class="btn btn-info btn-hg">返回注册</a>
+account/login" type="button" class="btn btn-info btn-hg">前往登录</a>
+				<a href="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
+account/register" type="button" class="btn btn-info btn-hg">立即注册</a>
 			</div>
 		</div>
 		<div id="side">
