@@ -45,8 +45,8 @@ class Script extends MY_Controller {
 	}
 
 	public function test(){
-		$this->load->model("account_model");
-		$this->account_model->regidit("1000012887@pku.edu.cn",'123456',1002);
+		$c=$this->session->userdata('login_user');
+		var_dump($c);
 	}
 }
 ?>

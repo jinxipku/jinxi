@@ -44,7 +44,7 @@ class account_model extends CI_Model{
 					);
 				$this->db->where ( 'email', $email );
 				$this->db->update ( 'jx_account', $data );
-				return 1;
+				return $account['id'];
 			}else return 0;
 		}
 		return 0;
@@ -72,6 +72,7 @@ class account_model extends CI_Model{
 			$userdata['head'] = $this->config->item('default_head');
 			$userdata['thumb'] = $this->config->item('default_thumb');
 			$this->db->insert('jx_user',$userdata); //插入新记录到user表中
+			$res = $userdata['id'];
 		}
 		
 		return $res;

@@ -7,9 +7,8 @@ class user_model extends CI_Model {
 	}
 
 	public function get_info($user_id){
-		$query = $this->db->get_where ( 'jx_user', array (
-			'id' => $user_id 
-			) );
+		$sql = "select jx_user.*,jx_school_info.school_name,jx_school_info.school_region from jx_user left join jx_school_info on jx_school_info.school_id=jx_user.school_id where jx_user.id=".$user_id;
+		$query = $this->db->query($sql);
 		return $query->row_array ();
 	}
 

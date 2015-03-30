@@ -121,9 +121,9 @@ class Account extends MY_Controller {
 
 		if (empty ( $school_id ) ||  empty($email) )
 			$this->ajaxReturn( null , '学校、email未填写完整' , 0 );
-		$regres = $this->account_model->register( $email, $pwd, $school_id );
+		$regres = $this->account_model->register( $email, $pwd, $school_id );//返回用户id
 		if( !empty($regres) ){
-			$user = $this->account_model->get_account(null ,$email );
+			$user = $this->user_model->get_info($regres);
 			$this->session->set_userdata( 'login_user' , $user );
 			$this->_sendVerifyEmail( $user );//发送验证邮件
 			$this->ajaxReturn( null , '注册成功' , 1 );
@@ -159,8 +159,8 @@ class Account extends MY_Controller {
 		}
 
 		$logres = $this->account_model->login( $email, $pwd );
-		if ($logres == 1) {
-			$user = $this->account_model->get_account (null ,$email );
+		if (!empty($logres)) {
+			$user = $this->user_model->get_info ($logres );
 			$this->session->set_userdata ( 'login_user', $user );
 			$this->ajaxReturn(null,"登录成功",1);
 		}else{
