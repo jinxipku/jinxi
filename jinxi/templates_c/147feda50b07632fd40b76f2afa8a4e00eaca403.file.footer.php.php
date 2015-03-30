@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-28 17:16:24
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-30 20:53:17
          compiled from "..\application\views\templates\footer.php" */ ?>
 <?php /*%%SmartyHeaderCode:5748551121562c11d9-20568918%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '147feda50b07632fd40b76f2afa8a4e00eaca403' => 
     array (
       0 => '..\\application\\views\\templates\\footer.php',
-      1 => 1427534182,
+      1 => 1427719984,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   array (
     'baseurl' => 0,
     'is_index' => 0,
-    'aaa' => 0,
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
@@ -95,7 +94,7 @@ img/top.png" alt="回到顶部" />
 -->
 
 	<?php if (isset($_smarty_tpl->tpl_vars['is_index']->value)) {?>
-	<!-- JiaThis Button BEGIN -->
+	<!-- 
 	<?php echo '<script'; ?>
  type="text/javascript">
 		var ujian_config = {
@@ -114,6 +113,8 @@ img/top.png" alt="回到顶部" />
 	<a id="ujian" href="http://www.ujian.cc">
 		<img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐"/>
 	</a>
+	JiaThis Button BEGIN -->
+	<!--
 	<?php echo '<script'; ?>
  type="text/javascript">
 		var jiathis_config={
@@ -134,12 +135,13 @@ img/top.png" alt="回到顶部" />
 	<?php echo '<script'; ?>
  type="text/javascript" src="http://v3.jiathis.com/code/jiathis_r.js?btn=r3.gif&move=0" charset="utf-8"><?php echo '</script'; ?>
 >
-	<!-- JiaThis Button END -->
+	-->
 	<?php }?>
-	<?php if (isset($_smarty_tpl->tpl_vars['aaa']->value)) {?>
-	<p><?php echo $_smarty_tpl->tpl_vars['aaa']->value;?>
-</p>
-	<?php }?>
+	<!-- JiaThis Button BEGIN -->
+<?php echo '<script'; ?>
+ type="text/javascript" src="http://v3.jiathis.com/code/jiathis_r.js?uid=1427183820919265&move=0" charset="utf-8"><?php echo '</script'; ?>
+>
+<!-- JiaThis Button END -->
 
 	<?php echo '<script'; ?>
  src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>

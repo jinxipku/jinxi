@@ -22,7 +22,7 @@
 	<div id="header" class="row">
 		<div>
 			<a href="{$baseurl}">
-				<img src="{$baseurl}img/icon/header.png" alt="header.png"/>
+				<img class="passive" src="{$baseurl}img/icon/header.png" alt="header.png"/>
 			</a>
 		</div>
 		<div class="form-group">
@@ -32,7 +32,7 @@
 			</a>
 		</div>
 		<div>
-			<img src="{$baseurl}img/icon/invite.png" alt="invite.png"/>
+			<img class="passive" src="{$baseurl}img/icon/invite.png" alt="invite.png"/>
 		</div>
 		<div>
 			{if isset($login_user)}
@@ -52,7 +52,7 @@
 							<a href="{$baseurl}">首页</a>
 						</li>
 						<li {if $nav_tab == 2} class=" active" {/if}>
-							<a href="{$baseurl}{if isset($login_user)}display/user/{$login_user.id}{else}account/login{/if}">个人中心</a>
+							<a href="{$baseurl}user/profile{if isset($login_user)}/{$login_user.id}{/if}">个人中心</a>
 						</li>
 						<li {if $nav_tab == 3} class=" active" {/if}>
 							<a href="{$baseurl}display/hall">商品大厅</a>
@@ -61,8 +61,8 @@
 					<ul class="nav pull-right">
 						{if isset($login_user)}
 						<li>
-							<a href="{$baseurl}user/{$login_user.id}">
-								<img id="user_headimg_thumb" src="{$baseurl|cat:'img/head/'|cat:$login_user.thumb}"/>
+							<a href="{$baseurl}user/info/{$login_user.id}">
+								<img id="user_headimg_thumb" class="passive" src="{$baseurl}img/head/{$login_user.thumb}"/>
 								{$login_user.nick}
 							</a>
 						</li>
@@ -82,7 +82,7 @@
 						</li>
 						{elseif isset($is_index)}						
 						<li>
-							<a href="#" onClick="pre_login(0);return false;">登录</a>
+							<a href="#" onClick="pre_login();return false;">登录</a>
 						</li>
 						{elseif $nav_tab == 7}
 						<li class=" active">

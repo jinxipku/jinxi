@@ -1,7 +1,7 @@
 	<div id="body" class="row">
 		<div id="main">
 			<div id="info_img">
-				<img src="{$baseurl}img/info/mail.png" alt="register fail">
+				<img class="passive" src="{$baseurl}img/info/mail.png" alt="register fail">
 			</div>
 			<div id="info_cont">
 				<p>恭喜注册成功，今昔网已经向您的注册邮箱发送了一封激活邮件，请您立即前往激活。</p>

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-28 18:07:52
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-30 21:29:10
          compiled from "..\application\views\account\register.php" */ ?>
 <?php /*%%SmartyHeaderCode:31583551523a76dabb0-94537843%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '20f5b271dc58fc9c978f225536114f4da2a34e2e' => 
     array (
       0 => '..\\application\\views\\account\\register.php',
-      1 => 1427537045,
+      1 => 1427720931,
       2 => 'file',
     ),
   ),
@@ -43,7 +43,7 @@ js/myschool.js"><?php echo '</script'; ?>
 						<span class="danger" id="check_school"></span>
 					</div>
 					<div class="form-group">
-						<input id="email" name="email" type="text" placeholder="邮箱" class="form-control flat input-lg" onblur="check_email(0)" onfocus="check_school()"/>
+						<input id="email" name="email" type="mail" placeholder="邮箱" class="form-control flat input-lg" onblur="check_email(0)" onfocus="check_school()"/>
 						<span id="email_surfix"></span>
 						<span class="danger" id="check_email"></span>
 					</div>
@@ -62,7 +62,7 @@ js/myschool.js"><?php echo '</script'; ?>
 				<p>已有今昔网账号？</p>
 				<a href="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
 account/login" type="button" class="btn btn-info btn-lg btn-block">立即登录</a>
-				<img src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
+				<img class="passive" src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
 img/jinxibig.jpg" alt="http://www.xn--wmqr18c.cn"/>
 			</div>
 		</div>

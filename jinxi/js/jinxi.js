@@ -68,12 +68,12 @@ function register(){
 		$("#btn_register").attr("disable",true);
 	}
 }
-function pre_login(st) {
-	if (st == 0) {
+function pre_login() {
+	if ($("#login_box").css('display') == 'none') {
 		go_to_top();
 		$("#login_box").slideDown(700);
 	}
-	else if (st == 1){
+	else {
 		go_to_top();
 		$("#login_box").slideUp(700);
 	}
@@ -89,37 +89,41 @@ function mem_login() {
 function prememlogin() {
 	$.post(baseurl + "ajax/mem_url",{memurl:window.location.href});
 }
-function login(loca) {
+function login(mem) {
 	$("input").blur();
-	if($("#check_mail").hasClass("fui-cross")||$("#checkpw").hasClass("fui-cross")){
+	if ($("#check_email").hasClass("fui-cross") || $("#check_pw").hasClass("fui-cross")) {
 		return;
-	}
-	else{
-		var mail = $("#mail").val();
-		var password = $("#password").val();
-		var url = baseurl + "ajax/login/"+mail.split("@")[0]+"/"+mail.split("@")[1]+"/"+password;
-		$.post(url,function(str){   
-			if(str == '1'){ 
-				window.location.href=loca;
-			}else if(str == '-1'){  
-				$("#checkpw").html("密码输入错误，请重新输入！")
-				$("#checkpw").addClass(" fui-cross");
-				$("#checkpw").css('color','#E74C3C'); 
-			}
-			else{
-				$("#check_mail").html("您的邮箱尚未激活，请先激活！");
-				$("#check_mail").addClass(" fui-cross");
-				$("#check_mail").css('color','#E74C3C');
-			}
-		});
+	} else {
+		$.post(
+			baseurl + "account/dologin/",
+			{
+				email: $("#email").val(),
+				password: $("#password").val()
+			},
+			function(res) {
+				if (res.status == 1 && mem == 1) { 
+					window.location.href = res.data;
+				} else if (res.status == 1 && mem == 0) {
+					window.location.href = baseurl;
+				} else {  
+					$("#check_pw").html("密码输入错误，请重新输入！")
+					$("#check_pw").removeClass("fui-check success");
+					$("#check_pw").addClass("fui-cross danger");
+				}
+			},
+			'json'
+		);
 	}
 }
 
 function logout() {
-	var url = baseurl + "ajax/logout";
-	$.post(url,function(){   
-		window.location.href=window.location.href;
-	});
+	var url = baseurl + "account/dologout";
+	$.post(
+		baseurl + "account/dologout",
+		function() {   
+			window.location.href=window.location.href;
+		}
+	);
 	return false;
 }
 

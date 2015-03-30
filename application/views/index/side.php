@@ -1,6 +1,6 @@
 		<div id="side">
 			<div id="login_box" class="side_content panel panel-default">
-				<button type="button" class="close" onClick="pre_login(1)">&times;</button>
+				<button type="button" class="close" onClick="pre_login()">&times;</button>
 				<form method="post" id="login_form">
 					<div class="form-group">
 						<input id="email" name="email" type="mail" placeholder="校园邮箱" class="form-control flat" onblur="check_email(1)">
@@ -10,13 +10,13 @@
 						<input id="password" name="password" type="password" placeholder="密码" class="form-control flat" onblur="check_pw()"> 
 						<span class="danger" id="check_pw"> </span>
 					</div>
-					<button type="button" class="btn btn-primary btn-block" onClick="login('{$baseurl}')">登录</button>
+					<button type="button" class="btn btn-primary btn-block" onClick="login(0)">登录</button>
 					<p class="p_info">还木有账号？</p>
-					<a href="{$baseurl}/account/register" type="button" class="btn btn-info btn-block">立即注册</a>
+					<a href="{$baseurl}account/register" type="button" class="btn btn-info btn-block">立即注册</a>
 				</form>
 			</div>
 
-			<a href="{$baseurl}hall" type="button" class="btn btn-primary btn-hg btn-block">商品大厅</a>
+			<a href="{$baseurl}display/hall" type="button" class="btn btn-primary btn-hg btn-block">商品大厅</a>
 			<a href="{$baseurl}item/newpost/type" type="button" class="btn btn-primary btn-hg btn-block">发布信息</a>
 
 			<div id="side_tips">
@@ -40,7 +40,7 @@
 					<p class="side_title">商品品质</p>
 				</blockquote>
 				<div class="panel panel-default">
-					<img src="{$baseurl}img/quality.jpg" alt="quality.jpg"/>
+					<img class="passive" src="{$baseurl}img/quality.jpg" alt="quality.jpg"/>
 				</div>
 			</div>
 
@@ -74,6 +74,6 @@
 				</div>
 			</div>
 			
-			<img id="side_icon" src="{$baseurl}img/jinxibig.jpg" alt="http://www.xn--wmqr18c.cn"/>
+			<img class="passive" id="side_icon" src="{$baseurl}img/jinxibig.jpg" alt="http://www.xn--wmqr18c.cn"/>
 		</div>
 	</div>

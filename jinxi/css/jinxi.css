@@ -6,7 +6,7 @@ body {
 	font-family: 微软雅黑,黑体,幼圆,宋体;
 	color: #080808;
 }
-img {
+img.passive {
 	width: 100%;
 }
 h6 {
@@ -220,7 +220,8 @@ div#info_img {
 div#info_cont {
 	float: left;
 	margin-top: 50px;
-	width: 442px !important;
+	margin-right: 42px;
+	width: 400px !important;
 }
 div#info_cont>p {
 	font-size: 22px;

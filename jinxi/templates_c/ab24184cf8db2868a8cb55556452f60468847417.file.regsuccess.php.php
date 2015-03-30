@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-28 17:04:02
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-30 19:22:58
          compiled from "..\application\views\account\regsuccess.php" */ ?>
 <?php /*%%SmartyHeaderCode:1229555166e314bfeb8-85705769%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'ab24184cf8db2868a8cb55556452f60468847417' => 
     array (
       0 => '..\\application\\views\\account\\regsuccess.php',
-      1 => 1427533440,
+      1 => 1427714575,
       2 => 'file',
     ),
   ),
@@ -20,6 +20,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'variables' => 
   array (
     'baseurl' => 0,
+    'mem_url' => 0,
     'tips' => 0,
   ),
   'has_nocache_code' => false,
@@ -31,9 +32,16 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 img/info/success.png" alt="register fail">
 			</div>
 			<div id="info_cont">
-				<p>恭喜您验证完毕，今昔网已经自动为您登录，欢迎加入今昔网，请尽情使用。</p>
+				<p>恭喜您验证完毕，今昔网已经自动为您登录，您可以返回注册前页面或立即进入设置页面修改个人资料。</p>
+				<?php if (isset($_smarty_tpl->tpl_vars['mem_url']->value)) {?>
+				<a href="<?php echo $_smarty_tpl->tpl_vars['mem_url']->value;?>
+" type="button" class="btn btn-info btn-hg" title="返回注册前页面">返回页面</a>
+				<?php } else { ?>
 				<a href="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
-" type="button" class="btn btn-info btn-hg" title="若您的邮箱符合常见后缀规则，请点击此按钮登录邮箱。">返回主页</a>
+" type="button" class="btn btn-info btn-hg" title="返回主页">返回主页</a>
+				<?php }?>
+				<a href="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
+setup" type="button" class="btn btn-info btn-hg" title="前往设置页面">设置页面</a>
 			</div>
 		</div>
 		<div id="side">

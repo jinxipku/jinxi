@@ -11,7 +11,7 @@
 						<span class="danger" id="check_school"></span>
 					</div>
 					<div class="form-group">
-						<input id="email" name="email" type="text" placeholder="邮箱" class="form-control flat input-lg" onblur="check_email(0)" onfocus="check_school()"/>
+						<input id="email" name="email" type="mail" placeholder="邮箱" class="form-control flat input-lg" onblur="check_email(0)" onfocus="check_school()"/>
 						<span id="email_surfix"></span>
 						<span class="danger" id="check_email"></span>
 					</div>
@@ -29,7 +29,7 @@
 			<div id="register_alter">
 				<p>已有今昔网账号？</p>
 				<a href="{$baseurl}account/login" type="button" class="btn btn-info btn-lg btn-block">立即登录</a>
-				<img src="{$baseurl}img/jinxibig.jpg" alt="http://www.xn--wmqr18c.cn"/>
+				<img class="passive" src="{$baseurl}img/jinxibig.jpg" alt="http://www.xn--wmqr18c.cn"/>
 			</div>
 		</div>
 		<div id="side">

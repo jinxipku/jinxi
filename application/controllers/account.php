@@ -19,10 +19,13 @@ class Account extends MY_Controller {
 // | 前台页面跳转
 // +----------------------------------------------------------------------
 
-	public function login(){
-		$user_id =  $this->session->userdata('login_user');
-		if($user_id != ''){
+	public function login() {
+		$login_user =  $this->session->userdata('login_user');
+		if (!empty($login_user)) {
 			redirect(base_url());
+		}
+		if (strpos($_SERVER['HTTP_REFERER'], "account") == false) {
+			$this->session->set_userdata( 'mem_url' ,  $_SERVER['HTTP_REFERER'] );
 		}
 		$this->assign('nav_tab', 7);
 		$this->assign('title', '今昔网-登录');
@@ -34,12 +37,29 @@ class Account extends MY_Controller {
 		$this->display ( 'templates/footer.php' );
 	}
 
-	public function register(){
-		$user_id =  $this->session->userdata('login_user');
-		if($user_id != ''){
+	public function loginfo() {
+		$login_user =  $this->session->userdata('login_user');
+		if(!empty($login_user)){
 			redirect(base_url());
 		}
-		$this->session->set_userdata( 'mem_url' ,  $_SERVER['HTTP_REFERER'] );
+		$this->assign('nav_tab', 7);
+		$this->assign('title', '今昔网-登录');
+		$this->assign('baseurl', base_url());
+		$this->assign('tips',show_tips());
+
+		$this->display ( 'templates/header.php' );
+		$this->display ( 'account/loginfo.php' );
+		$this->display ( 'templates/footer.php' );
+	}
+
+	public function register() {
+		$login_user =  $this->session->userdata('login_user');
+		if(!empty($login_user)){
+			redirect(base_url());
+		}
+		if (strpos($_SERVER['HTTP_REFERER'], "account") == false) {
+			$this->session->set_userdata( 'mem_url' ,  $_SERVER['HTTP_REFERER'] );
+		}
 		$this->assign('nav_tab', 8);
 		$this->assign('title', '今昔网-注册');
 		$this->assign('baseurl', base_url());
@@ -50,7 +70,7 @@ class Account extends MY_Controller {
 		$this->display ( 'templates/footer.php' );
 	}
 
-	public function reginfo($surfix = ""){
+	public function reginfo($surfix = "") {
 		$this->assign('nav_tab', 8);
 		$this->assign('title', '今昔网-注册');
 		$this->assign('baseurl', base_url());
@@ -67,21 +87,20 @@ class Account extends MY_Controller {
 		$this->display ( 'templates/footer.php' );
 	}
 
-	public function verify(){
+	public function verify() {
 		if (!empty( $_GET['code'] )) {
-			/*TODO: 判断合法 */
 			$key = $this->config->item('verify_pkey');
 			$id = $this->_genIdFromCode( $_GET['code'] );
 			$this->account_model->verify( $id );
 
 			if ($id != '') {
 				$login_user = $this->user_model->get_info($id);
-				$this->session->set_userdata ( 'login_user', $id);
+				$this->session->set_userdata ( 'login_user', $login_user);
 				$this->assign('login_user', $login_user);
 			}
 
-			$mem_url =  $this->session->userdata('mem_url');
-			if($mem_url != ''){
+			$mem_url = $this->session->userdata('mem_url');
+			if ($mem_url != '' && strpos($mem_url, "account") == false) {
 				$this->assign('mem_url', $mem_url);
 			}
 
@@ -97,9 +116,6 @@ class Account extends MY_Controller {
 
 	}
 
-	public function userInfo(){
-
-	}
 
 // +----------------------------------------------------------------------
 // | 以下为ajax接口
@@ -108,7 +124,7 @@ class Account extends MY_Controller {
 	//用户注册
 	//post参数  email school_id  password passworda
 	//status  0：注册失败   1：注册成功
-	public function doregister(){
+	public function doregister() {
 
 		$school_id = $_POST ['school_id'];
 		$email = $_POST['email'];
@@ -133,7 +149,7 @@ class Account extends MY_Controller {
 
 	//验证邮箱是否存在
 	//post参数 email
-	public function docheck(){
+	public function docheck() {
 		
 		$email = $_POST ['email'];
 		$account = $this->account_model->get_account(null, $email);
@@ -149,10 +165,9 @@ class Account extends MY_Controller {
 
 	//用户登录
 	//post参数 mail pwd
-	public function dologin(){
-		$email = $_POST ['mail'];
-		$pwd = $_POST ['pwd'];
-
+	public function dologin() {
+		$email = $_POST ['email'];
+		$pwd = $_POST ['password'];
 
 		if(strlen( $pwd ) == 0 || strlen( $email ) == 0){
 			$this->ajaxReturn(null,'登录信息不全',0);
@@ -162,23 +177,19 @@ class Account extends MY_Controller {
 		if (!empty($logres)) {
 			$user = $this->user_model->get_info ($logres );
 			$this->session->set_userdata ( 'login_user', $user );
-			$this->ajaxReturn(null,"登录成功",1);
-		}else{
-			$this->ajaxReturn(null,"登录失败",1);
+			$mem_url = $this->session->userdata('mem_url');
+			if ($mem_url != '' && strpos($mem_url, "account") == false) {
+				$this->ajaxReturn($mem_url,"登录成功",1);
+			} else {
+				$this->ajaxReturn(null,"登录成功",1);
+			}
+		} else {
+			$this->ajaxReturn(null,"登录失败",0);
 		}
-		
-
 	}
 
-	public function doverify(){
-		if(!empty( $_GET['code'] )){
-			/*TODO: 判断合法 */
-			$key = $this->config->item('verify_pkey');
-			$id = $this->_genIdFromCode( $_GET['code'] );
-			$this->account_model->verify( $id );
-			//TODO:加入页面跳转的功能
-		}
-
+	public function dologout() {
+		$this->session->unset_userdata ( 'login_user' );
 	}
 
 
@@ -228,7 +239,7 @@ class Account extends MY_Controller {
 		<div class="row"
 		style="height: 35px; background-color: #1ABC9C; text-align: center; margin-bottom: 
 
-		10px; ">
+		10px; padding-top: 8px;">
 		<p class="footer">
 		<a href="#" class="footer">关于今昔</a><span> &nbsp;&nbsp;| &nbsp;&nbsp;</span>
 		<a href="#" class="footer">今昔历程</a><span> &nbsp;&nbsp;| &nbsp;&nbsp;</span>
@@ -243,7 +254,7 @@ class Account extends MY_Controller {
 		<p class="footerinfo">&copy; 2013 今昔网 &middot;
 		版权所有&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 京ICP备13053152号</p>
 		<p class="footerinfo">后夏科技&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;地址：北京市海淀区</p>
-		<p class="footerinfo">Designed and Developed by FABKXD</p>
+		<p class="footerinfo">Designed and Developed by JINXI</p>
 		</div>
 		';
 		$this->email->from ( 'jinxicn2013@163.com', '今昔网' );

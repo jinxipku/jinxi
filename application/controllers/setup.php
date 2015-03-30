@@ -3,15 +3,15 @@ class Setup extends CI_Controller {
 	public function __construct() {
 		parent::__construct ();
 		$this->load->model ( 'user_model' );
-		$this->load->library('session');
 		$this->load->helper('url');
 	}
 	public function index() {
 		$this->output->enable_profiler(TRUE);
-		$user_id =  $this->session->userdata('login_user');	
-		if($user_id == '')
-			header("Location: ".base_url("account/loginfo"));
-		$login_user = $this->user_model->get_user($user_id);
+		$login_user =  $this->session->userdata('login_user');	
+		if(empty($login_user)) {
+			$this->session->set_userdata('mem_url', base_url('setup'));
+			redirect('account/loginfo');
+		}
 		$data ['login_user'] = $login_user;
 		$data ['baseurl'] = base_url();
 		$data ['title'] = '设置';
@@ -23,9 +23,9 @@ class Setup extends CI_Controller {
 	}
 	public function headimg() {
 		$this->output->enable_profiler(TRUE);
-		$user_id =  $this->session->userdata('login_user');		
-		if($user_id == '')
-			header("Location: ".base_url("account/loginfo"));
+		$login_user =  $this->session->userdata('login_user');	
+		if(empty($login_user))
+			redirect('account/login');
 		$login_user = $this->user_model->get_user($user_id);
 		$data ['login_user'] = $login_user;
 		$data ['baseurl'] = base_url();
@@ -36,10 +36,10 @@ class Setup extends CI_Controller {
 		$this->load->view ( 'setup/index' );
 		$this->load->view ( 'templates/footer' );
 	}
-	public function account() {
-		$user_id =  $this->session->userdata('login_user');		
-		if($user_id == '')
-			header("Location: ".base_url("account/loginfo"));
+	public function account() {	
+		$login_user =  $this->session->userdata('login_user');	
+		if(empty($login_user))
+			redirect('account/login');
 		$login_user = $this->user_model->get_user($user_id);
 		$data ['login_user'] = $login_user;
 		$data ['baseurl'] = base_url();
@@ -51,9 +51,9 @@ class Setup extends CI_Controller {
 		$this->load->view ( 'templates/footer' );
 	}
 	public function tiebbs() {
-		$user_id =  $this->session->userdata('login_user');		
-		if($user_id == '')
-			header("Location: ".base_url("account/loginfo"));
+		$login_user =  $this->session->userdata('login_user');	
+		if(empty($login_user))
+			redirect('account/login');
 		$login_user = $this->user_model->get_user($user_id);
 		$data ['login_user'] = $login_user;
 		$data ['baseurl'] = base_url();
@@ -65,9 +65,9 @@ class Setup extends CI_Controller {
 		$this->load->view ( 'templates/footer' );
 	}
 	public function star() {
-		$user_id =  $this->session->userdata('login_user');
-		if($user_id == '')
-			header("Location: ".base_url("account/loginfo"));
+		$login_user =  $this->session->userdata('login_user');	
+		if(empty($login_user))
+			redirect('account/login');
 		$login_user = $this->user_model->get_user($user_id);
 		$data ['login_user'] = $login_user;
 		$data ['baseurl'] = base_url();

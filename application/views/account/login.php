@@ -11,13 +11,13 @@
 						<input id="password" name="password" type="password" placeholder="密码" class="form-control flat input-lg" onblur="check_pw()"/>
 						<span class="danger" id="check_pw"></span>
 					</div>
-					<button id="btn_login" type="button" class="btn btn-primary btn-lg" onClick="login()">登录</button>
+					<button id="btn_login" type="button" class="btn btn-primary btn-lg" onClick="login(1)">登录</button>
 				</form>
 			</div>
 			<div id="register_alter">
 				<p>没有今昔网账号？</p>
 				<a href="{$baseurl}account/register" type="button" class="btn btn-info btn-lg btn-block">立即注册</a>
-				<img src="{$baseurl}img/jinxibig.jpg" alt="http://www.xn--wmqr18c.cn"/>
+				<img class="passive" src="{$baseurl}img/jinxibig.jpg" alt="http://www.xn--wmqr18c.cn"/>
 			</div>
 		</div>
 		<div id="side">

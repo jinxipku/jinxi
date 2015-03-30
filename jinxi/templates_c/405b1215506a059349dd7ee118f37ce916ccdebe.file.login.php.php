@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-28 18:08:18
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-30 21:29:00
          compiled from "..\application\views\account\login.php" */ ?>
 <?php /*%%SmartyHeaderCode:3159555155d038a0922-15090205%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '405b1215506a059349dd7ee118f37ce916ccdebe' => 
     array (
       0 => '..\\application\\views\\account\\login.php',
-      1 => 1427537296,
+      1 => 1427720866,
       2 => 'file',
     ),
   ),
@@ -37,14 +37,14 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 						<input id="password" name="password" type="password" placeholder="密码" class="form-control flat input-lg" onblur="check_pw()"/>
 						<span class="danger" id="check_pw"></span>
 					</div>
-					<button id="btn_login" type="button" class="btn btn-primary btn-lg" onClick="login()">登录</button>
+					<button id="btn_login" type="button" class="btn btn-primary btn-lg" onClick="login(1)">登录</button>
 				</form>
 			</div>
 			<div id="register_alter">
 				<p>没有今昔网账号？</p>
 				<a href="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
 account/register" type="button" class="btn btn-info btn-lg btn-block">立即注册</a>
-				<img src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
+				<img class="passive" src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
 img/jinxibig.jpg" alt="http://www.xn--wmqr18c.cn"/>
 			</div>
 		</div>

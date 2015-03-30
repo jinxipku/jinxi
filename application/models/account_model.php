@@ -45,9 +45,9 @@ class account_model extends CI_Model{
 				$this->db->where ( 'email', $email );
 				$this->db->update ( 'jx_account', $data );
 				return $account['id'];
-			}else return 0;
+			}else return null;
 		}
-		return 0;
+		return null;
 	}
 
 	public function register($email, $pwd, $school_id) {
