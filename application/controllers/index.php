@@ -7,6 +7,7 @@ class Index extends MY_Controller {
 		$this->load->helper('array');
 	}
 	public function index() {
+		$this->output->enable_profiler(TRUE);
 		$login_user =  $this->session->userdata('login_user');
 		if (!empty($login_user)) {
 			$this->assign('login_user', $login_user);

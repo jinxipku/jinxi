@@ -62,7 +62,7 @@
 						{if isset($login_user)}
 						<li>
 							<a href="{$baseurl}user/{$login_user.id}">
-								<img id="user_headimg_thumb" src="{$baseurl . 'img/head/' . $login_user.thumb}"/>
+								<img id="user_headimg_thumb" src="{$baseurl|cat:'img/head/'|cat:$login_user.thumb}"/>
 								{$login_user.nick}
 							</a>
 						</li>
