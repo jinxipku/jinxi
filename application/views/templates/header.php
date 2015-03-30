@@ -52,7 +52,7 @@
 							<a href="{$baseurl}">首页</a>
 						</li>
 						<li {if $nav_tab == 2} class=" active" {/if}>
-							<a href="{$baseurl}{if isset($login_user)}display/user/{$login_user.user_id}{else}account/login{/if}">个人中心</a>
+							<a href="{$baseurl}{if isset($login_user)}display/user/{$login_user.id}{else}account/login{/if}">个人中心</a>
 						</li>
 						<li {if $nav_tab == 3} class=" active" {/if}>
 							<a href="{$baseurl}display/hall">商品大厅</a>
@@ -61,9 +61,9 @@
 					<ul class="nav pull-right">
 						{if isset($login_user)}
 						<li>
-							<a href="{$baseurl}user/{$login_user.user_id}">
-								<img id="user_headimg_thumb" src="$baseurl . 'img/head/' . $login_user.user_headimg . '_thumb.jpg'"/>
-								{$login_user.user_name}
+							<a href="{$baseurl}user/{$login_user.id}">
+								<img id="user_headimg_thumb" src="{$baseurl|cat:'img/head/'|cat:$login_user.thumb}"/>
+								{$login_user.nick}
 							</a>
 						</li>
 						{/if}

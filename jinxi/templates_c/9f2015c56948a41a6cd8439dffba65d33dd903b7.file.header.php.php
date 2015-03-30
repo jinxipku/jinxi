@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-28 18:07:08
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-30 14:29:58
          compiled from "..\application\views\templates\header.php" */ ?>
 <?php /*%%SmartyHeaderCode:28843550fb3d06e9f62-69507363%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '9f2015c56948a41a6cd8439dffba65d33dd903b7' => 
     array (
       0 => '..\\application\\views\\templates\\header.php',
-      1 => 1427536997,
+      1 => 1427696995,
       2 => 'file',
     ),
   ),
@@ -102,7 +102,7 @@ account/register">立即注册</a>
 						</li>
 						<li <?php if ($_smarty_tpl->tpl_vars['nav_tab']->value==2) {?> class=" active" <?php }?>>
 							<a href="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;
-if (isset($_smarty_tpl->tpl_vars['login_user']->value)) {?>display/user/<?php echo $_smarty_tpl->tpl_vars['login_user']->value['user_id'];
+if (isset($_smarty_tpl->tpl_vars['login_user']->value)) {?>display/user/<?php echo $_smarty_tpl->tpl_vars['login_user']->value['id'];
 } else { ?>account/login<?php }?>">个人中心</a>
 						</li>
 						<li <?php if ($_smarty_tpl->tpl_vars['nav_tab']->value==3) {?> class=" active" <?php }?>>
@@ -114,10 +114,11 @@ display/hall">商品大厅</a>
 						<?php if (isset($_smarty_tpl->tpl_vars['login_user']->value)) {?>
 						<li>
 							<a href="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
-user/<?php echo $_smarty_tpl->tpl_vars['login_user']->value['user_id'];?>
+user/<?php echo $_smarty_tpl->tpl_vars['login_user']->value['id'];?>
 ">
-								<img id="user_headimg_thumb" src="$baseurl . 'img/head/' . $login_user.user_headimg . '_thumb.jpg'"/>
-								<?php echo $_smarty_tpl->tpl_vars['login_user']->value['user_name'];?>
+								<img id="user_headimg_thumb" src="<?php echo (($_smarty_tpl->tpl_vars['baseurl']->value).('img/head/')).($_smarty_tpl->tpl_vars['login_user']->value['thumb']);?>
+"/>
+								<?php echo $_smarty_tpl->tpl_vars['login_user']->value['nick'];?>
 
 							</a>
 						</li>

@@ -203,7 +203,7 @@ class Account extends MY_Controller {
 		$this->email->initialize ( $config );
 
 		//$verify_url = "http://wwww.jinxi.com/account/doverify".'?code=' . $this->_genCodeForVerify($user['id']);
-		$verify_url = base_url('account/doverify?code=').urlencode($this->_genCodeForVerify($user['id']));
+		$verify_url = base_url('account/verify?code=').urlencode($this->_genCodeForVerify($user['id']));
 		// 发送
 		$content = '
 		<style type="text/css">
