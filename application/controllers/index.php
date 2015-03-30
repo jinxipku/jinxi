@@ -7,9 +7,8 @@ class Index extends MY_Controller {
 		$this->load->helper('array');
 	}
 	public function index() {
-		$user_id =  $this->session->userdata('login_user');
-		if ($user_id != '') {
-			$login_user = $this->user_model->get_info($user_id);
+		$login_user =  $this->session->userdata('login_user');
+		if (!empty($login_user)) {
 			$this->assign('login_user', $login_user);
 		}
 		$this->assign('nav_tab', 1);
