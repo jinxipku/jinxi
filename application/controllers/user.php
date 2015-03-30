@@ -25,6 +25,14 @@ class User extends MY_Controller {
 // | 以下为ajax接口
 // +----------------------------------------------------------------------
 
+
+	//用户更新
+	//post参数  参考sql建表中的参数
+	public function update_info(){
+		$user = $this->session->userdata ( 'login_user' );
+		$this->user_model->update_info($user['id'],$_POST);
+	}
+	
 	//用户上传头像接口
 	//post参数 无  
 	//前端表单name为head_image
