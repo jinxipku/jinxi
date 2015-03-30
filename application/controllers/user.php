@@ -44,7 +44,7 @@ class User extends MY_Controller {
 			$this->ajaxReturn(null,"上传失败:".$this->upload->display_errors ( '', '' ),0);//可以删掉$this->upload->display_errors ( '', '' )
 		}else{			
 			$res = $this->upload->data();
-			$data['file_name'] = $this->head_dir . $res['file_name'];  //返回上传后的文件名
+			$data['file_name'] = $res['file_name'];  //返回上传后的文件名
 			$data['image_width'] = $res['image_width'];
 			$this->ajaxReturn($data,"上传成功",1);
 		}
@@ -55,7 +55,7 @@ class User extends MY_Controller {
 	public function crop_photo(){
 		$user = $this->session->userdata ( 'login_user' );
 		$user_id = isset($user)? $user['id'] : 0; 
-		$source_image = $_POST['file_name'];
+		$source_image = $this->head_dir . $_POST['file_name'];
 		$ext = getFileExt($source_image);
 		$config ['image_library'] = 'gd2';
 		$config ['source_image'] = $source_image;
@@ -73,7 +73,10 @@ class User extends MY_Controller {
 			//分别生成一张100*100的图和一张60*60的图
 			$config2 ['image_library'] = 'gd2';
 			$config2 ['source_image'] = $new_image;
-			$head_image = $this->head_dir.genFileName($user_id,$ext);
+
+			$h_image = genFileName($user_id,$ext);
+			$head_image = $this->head_dir.$h_image;
+			
 			$config2 ['new_image'] = $head_image;
 			$config2 ['maintain_ratio'] = FALSE; 
 			$config2 ['width'] = 300;
@@ -83,7 +86,9 @@ class User extends MY_Controller {
 			
 			$config3 ['image_library'] = 'gd2';
 			$config3 ['source_image'] = $new_image;
-			$head_image_thumb = $this->head_dir . genFileName($user_id,$ext);
+
+			$t_image = genFileName($user_id,$ext);
+			$head_image_thumb = $this->head_dir . $t_image;
 			$config3 ['new_image'] = $head_image_thumb;
 			$config3 ['maintain_ratio'] = FALSE; 
 			$config3 ['width'] = 60;
@@ -92,8 +97,8 @@ class User extends MY_Controller {
 			$this->image_lib->resize ();
 			
 	
-			$info['head'] = $head_image;
-			$info['thumb'] = $head_image_thumb;
+			$info['head'] = $h_image;
+			$info['thumb'] = $t_image;
 			$this->user_model->update_info($user_id,$info);
 
 			unlink($source_image);

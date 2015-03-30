@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-28 23:13:00
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-30 22:14:13
          compiled from "..\application\views\index\side.php" */ ?>
 <?php /*%%SmartyHeaderCode:109355516c4fc35f999-73408572%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '0b57210d2a581896bfea5e50c380cd04e1942bed' => 
     array (
       0 => '..\\application\\views\\index\\side.php',
-      1 => 1427553485,
+      1 => 1427723485,
       2 => 'file',
     ),
   ),
@@ -15,18 +15,18 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5516c4fc53ed87_25416319',
   'variables' => 
   array (
     'baseurl' => 0,
     'tips' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5516c4fc53ed87_25416319',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5516c4fc53ed87_25416319')) {function content_5516c4fc53ed87_25416319($_smarty_tpl) {?>		<div id="side">
 			<div id="login_box" class="side_content panel panel-default">
-				<button type="button" class="close" onClick="pre_login(1)">&times;</button>
+				<button type="button" class="close" onClick="pre_login()">&times;</button>
 				<form method="post" id="login_form">
 					<div class="form-group">
 						<input id="email" name="email" type="mail" placeholder="校园邮箱" class="form-control flat" onblur="check_email(1)">
@@ -36,16 +36,15 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 						<input id="password" name="password" type="password" placeholder="密码" class="form-control flat" onblur="check_pw()"> 
 						<span class="danger" id="check_pw"> </span>
 					</div>
-					<button type="button" class="btn btn-primary btn-block" onClick="login('<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
-')">登录</button>
+					<button type="button" class="btn btn-primary btn-block" onClick="login(0)">登录</button>
 					<p class="p_info">还木有账号？</p>
 					<a href="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
-/account/register" type="button" class="btn btn-info btn-block">立即注册</a>
+account/register" type="button" class="btn btn-info btn-block">立即注册</a>
 				</form>
 			</div>
 
 			<a href="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
-hall" type="button" class="btn btn-primary btn-hg btn-block">商品大厅</a>
+display/hall" type="button" class="btn btn-primary btn-hg btn-block">商品大厅</a>
 			<a href="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
 item/newpost/type" type="button" class="btn btn-primary btn-hg btn-block">发布信息</a>
 
@@ -72,7 +71,7 @@ item/newpost/type" type="button" class="btn btn-primary btn-hg btn-block">发布
 					<p class="side_title">商品品质</p>
 				</blockquote>
 				<div class="panel panel-default">
-					<img src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
+					<img class="passive" src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
 img/quality.jpg" alt="quality.jpg"/>
 				</div>
 			</div>
@@ -107,7 +106,7 @@ img/quality.jpg" alt="quality.jpg"/>
 				</div>
 			</div>
 			
-			<img id="side_icon" src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
+			<img class="passive" id="side_icon" src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
 img/jinxibig.jpg" alt="http://www.xn--wmqr18c.cn"/>
 		</div>
 	</div><?php }} ?>

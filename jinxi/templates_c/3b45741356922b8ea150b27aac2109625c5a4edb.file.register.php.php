@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-28 23:13:35
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-30 22:14:18
          compiled from "..\application\views\account\register.php" */ ?>
 <?php /*%%SmartyHeaderCode:196125516c51fcbc8c8-62670863%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '3b45741356922b8ea150b27aac2109625c5a4edb' => 
     array (
       0 => '..\\application\\views\\account\\register.php',
-      1 => 1427553485,
+      1 => 1427723485,
       2 => 'file',
     ),
   ),
@@ -15,14 +15,14 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5516c51fe2b1e0_03830074',
   'variables' => 
   array (
     'baseurl' => 0,
     'tips' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5516c51fe2b1e0_03830074',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5516c51fe2b1e0_03830074')) {function content_5516c51fe2b1e0_03830074($_smarty_tpl) {?>	<div id="body" class="row">
 		<div id="main">
@@ -43,7 +43,7 @@ js/myschool.js"><?php echo '</script'; ?>
 						<span class="danger" id="check_school"></span>
 					</div>
 					<div class="form-group">
-						<input id="email" name="email" type="text" placeholder="邮箱" class="form-control flat input-lg" onblur="check_email(0)" onfocus="check_school()"/>
+						<input id="email" name="email" type="mail" placeholder="邮箱" class="form-control flat input-lg" onblur="check_email(0)" onfocus="check_school()"/>
 						<span id="email_surfix"></span>
 						<span class="danger" id="check_email"></span>
 					</div>
@@ -62,7 +62,7 @@ js/myschool.js"><?php echo '</script'; ?>
 				<p>已有今昔网账号？</p>
 				<a href="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
 account/login" type="button" class="btn btn-info btn-lg btn-block">立即登录</a>
-				<img src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
+				<img class="passive" src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
 img/jinxibig.jpg" alt="http://www.xn--wmqr18c.cn"/>
 			</div>
 		</div>

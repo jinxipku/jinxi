@@ -5,6 +5,7 @@ class account_model extends CI_Model{
 		$this->load->library('encrypt');
 		$this->load->library('user_agent');
 		$this->load->helper('date');
+		$this->load->model('user_model');
 	}
 	//获取用户账户信息
 	public function get_account($user_id,$email){
@@ -37,6 +38,11 @@ class account_model extends CI_Model{
 				}else{
 					$account['logins'] = 1;
 				}
+				
+				//登录奖励
+				$pointdata['points'] = ld_score($account['logins']);
+				$this->user_model->update_info($account['id'],$pointdata);
+				
 				$data = array(
 					'logins' => $account['logins'],
 					'last_login' => time(),

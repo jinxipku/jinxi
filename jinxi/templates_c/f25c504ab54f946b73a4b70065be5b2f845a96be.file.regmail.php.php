@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-29 01:55:40
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-30 22:15:30
          compiled from "..\application\views\account\regmail.php" */ ?>
 <?php /*%%SmartyHeaderCode:55235516eb1cf02860-86228916%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'f25c504ab54f946b73a4b70065be5b2f845a96be' => 
     array (
       0 => '..\\application\\views\\account\\regmail.php',
-      1 => 1427553485,
+      1 => 1427723485,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5516eb1d1b27f3_00181672',
   'variables' => 
   array (
     'baseurl' => 0,
@@ -22,13 +24,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'tips' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5516eb1d1b27f3_00181672',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5516eb1d1b27f3_00181672')) {function content_5516eb1d1b27f3_00181672($_smarty_tpl) {?>	<div id="body" class="row">
 		<div id="main">
 			<div id="info_img">
-				<img src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
+				<img class="passive" src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
 img/info/mail.png" alt="register fail">
 			</div>
 			<div id="info_cont">

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-28 23:12:59
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-30 22:14:12
          compiled from "..\application\views\templates\header.php" */ ?>
 <?php /*%%SmartyHeaderCode:208175516c4fb94b6f0-28521864%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '504028fbb0acb0602fc4fb7b5dcf21c25fbd1ba3' => 
     array (
       0 => '..\\application\\views\\templates\\header.php',
-      1 => 1427553485,
+      1 => 1427723485,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5516c4fc0aa041_89752017',
   'variables' => 
   array (
     'baseurl' => 0,
@@ -24,8 +26,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'is_index' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5516c4fc0aa041_89752017',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5516c4fc0aa041_89752017')) {function content_5516c4fc0aa041_89752017($_smarty_tpl) {?><!DOCTYPE html>
 <html lang="zh_CN">
@@ -64,7 +64,7 @@ js/jquery.js"><?php echo '</script'; ?>
 		<div>
 			<a href="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
 ">
-				<img src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
+				<img class="passive" src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
 img/icon/header.png" alt="header.png"/>
 			</a>
 		</div>
@@ -75,7 +75,7 @@ img/icon/header.png" alt="header.png"/>
 			</a>
 		</div>
 		<div>
-			<img src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
+			<img class="passive" src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
 img/icon/invite.png" alt="invite.png"/>
 		</div>
 		<div>
@@ -101,9 +101,9 @@ account/register">立即注册</a>
 ">首页</a>
 						</li>
 						<li <?php if ($_smarty_tpl->tpl_vars['nav_tab']->value==2) {?> class=" active" <?php }?>>
-							<a href="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;
-if (isset($_smarty_tpl->tpl_vars['login_user']->value)) {?>display/user/<?php echo $_smarty_tpl->tpl_vars['login_user']->value['user_id'];
-} else { ?>account/login<?php }?>">个人中心</a>
+							<a href="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
+user/profile<?php if (isset($_smarty_tpl->tpl_vars['login_user']->value)) {?>/<?php echo $_smarty_tpl->tpl_vars['login_user']->value['id'];
+}?>">个人中心</a>
 						</li>
 						<li <?php if ($_smarty_tpl->tpl_vars['nav_tab']->value==3) {?> class=" active" <?php }?>>
 							<a href="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
@@ -114,10 +114,12 @@ display/hall">商品大厅</a>
 						<?php if (isset($_smarty_tpl->tpl_vars['login_user']->value)) {?>
 						<li>
 							<a href="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
-user/<?php echo $_smarty_tpl->tpl_vars['login_user']->value['user_id'];?>
+user/info/<?php echo $_smarty_tpl->tpl_vars['login_user']->value['id'];?>
 ">
-								<img id="user_headimg_thumb" src="$baseurl . 'img/head/' . $login_user.user_headimg . '_thumb.jpg'"/>
-								<?php echo $_smarty_tpl->tpl_vars['login_user']->value['user_name'];?>
+								<img id="user_headimg_thumb" class="passive" src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
+img/head/<?php echo $_smarty_tpl->tpl_vars['login_user']->value['thumb'];?>
+"/>
+								<?php echo $_smarty_tpl->tpl_vars['login_user']->value['nick'];?>
 
 							</a>
 						</li>
@@ -138,7 +140,7 @@ setup">设置</a>
 						</li>
 						<?php } elseif (isset($_smarty_tpl->tpl_vars['is_index']->value)) {?>						
 						<li>
-							<a href="#" onClick="pre_login(0);return false;">登录</a>
+							<a href="#" onClick="pre_login();return false;">登录</a>
 						</li>
 						<?php } elseif ($_smarty_tpl->tpl_vars['nav_tab']->value==7) {?>
 						<li class=" active">

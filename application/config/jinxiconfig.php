@@ -1,5 +1,5 @@
 <?php
 $config['verify_pkey'] = 'ohacPttIzN/ANmCeWWhn41Q2fbhnZT.dtK2CEOFTPMsK9N3zHW0lm9yE6xG';
-$config['default_head'] = './img/head/default_head';
-$config['default_thumb'] = './img/head/default_thumb';
+$config['default_head'] = 'default_head.jpg';
+$config['default_thumb'] = 'default_thumb.jpg';
 ?>
