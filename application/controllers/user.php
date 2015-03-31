@@ -11,14 +11,34 @@ class User extends MY_Controller {
 	public function __construct() {
 		parent::__construct ();
 		$this->load->model ( 'user_model' );
-		$this->load->library('session');
+		$this->load->model ( 'love_model' );
 		$this->load->helper('url');
+		$this->load->helper('array');
 	}
 
 // +----------------------------------------------------------------------
 // | 前台页面跳转
 // +----------------------------------------------------------------------
-
+	public function profile($id) {
+		$login_user =  $this->session->userdata('login_user');
+		if (!empty($login_user)) {
+			$this->assign('login_user', $login_user);
+			if ($login_user['id'] == $id) {
+				$this->assign('myself', true);
+			}
+		}
+		$user = $this->user_model->get_info($id);
+		$this->assign('user', $user);
+		$this->assign('nav_tab', 0);
+		$this->assign('title', '今昔网-'.$user['nick']);
+		$this->assign('baseurl', base_url());
+		$this->assign('tips', show_tips());
+		
+		$this->display ( 'templates/header.php' );
+		$this->display ( 'user/index1.php' );
+		//$this->display ( 'user/index2.php' );
+		$this->display ( 'templates/footer.php' );
+	}
 
 
 // +----------------------------------------------------------------------

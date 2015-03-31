@@ -61,7 +61,7 @@
 					<ul class="nav pull-right">
 						{if isset($login_user)}
 						<li>
-							<a href="{$baseurl}user/info/{$login_user.id}">
+							<a href="{$baseurl}user/profile/{$login_user.id}">
 								<img id="user_headimg_thumb" class="passive" src="{$baseurl}img/head/{$login_user.thumb}"/>
 								{$login_user.nick}
 							</a>
