@@ -65,6 +65,21 @@ if (! function_exists ( 'get_namecolor' )) {
     }
 }
 
+if(!function_exists('get_user_type')){
+    function get_user_type($type){
+        $types = array(
+            "未填写",
+            "本科生",
+            "硕士生",
+            "博士生",
+            "教职工",
+            "校友",
+            "校外合作者"
+        );
+        return $types[$type];
+    }
+}
+
 if (! function_exists ( 'ld_score' )) {
     function ld_score($ld) {
         if ($ld <= 3)

@@ -19,12 +19,20 @@ create table jx_user(
 	points int(11) comment '分数',
 	head varchar(200) null comment '用户头像',
 	thumb varchar(200) null comment '用户头像缩略图',
+
+	signature varchar(140) null comment '用户个性签名',
+	visits int(11) not null default 0 comment '访问量',
+	nick_color tinyint(1) not null default 0 comment '昵称颜色',
+	
 	sex tinyint(1) not null default 0 comment '性别，0兔星人，1汪星人，2猫星人',
-	type smallint null comment '账户类型(本科生，硕士生，博士生，教职工，校友，校外合作者)',
-	email varchar(30) null comment '用户常用邮箱',
-	qq varchar(20) null comment 'qq',
-	phone varchar(20) null comment '手机号',
-	weixin varchar(30) null comment '微信号',
+	type smallint not null default 0 comment '账户类型(其他0,本科生1，硕士生2，博士生3，教职工4，校友5，校外合作者6)',
+
+	year smallint null comment '学历年份',
+
+	email varchar(30) null default '未填写' comment '用户常用邮箱',
+	qq varchar(20) null default '未填写' comment 'qq',
+	phone varchar(20) null default '未填写' comment '手机号',
+	weixin varchar(30) null default '未填写' comment '微信号',
 	is_email_public tinyint(1) unsigned not null default 0 comment '是否开放邮箱',
 	is_phone_public tinyint(1) unsigned not null default 0 comment '是否开放手机',
 	is_qq_public tinyint(1) unsigned not null default 0 comment '是否开放qq',
@@ -33,6 +41,14 @@ create table jx_user(
 	active_post_number int(11) not null default 0 comment '活跃帖子数量',
 	primary key(id)
 )DEFAULT CHARSET=utf8 COMMENT='用户profile表';
+
+drop table if exists jx_love;
+create table jx_love(
+	lover int(11) not null comment '关注者id',
+	lovee int(11) not null comment '被关注者id'
+
+)DEFAULT CHARSET=utf8 COMMENT='关注表';
+
 drop table if exists jx_school_info;
 create table jx_school_info(
 	school_id int(11) not null comment '学校id',
