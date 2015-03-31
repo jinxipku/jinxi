@@ -19,25 +19,84 @@ class User extends MY_Controller {
 // +----------------------------------------------------------------------
 // | 前台页面跳转
 // +----------------------------------------------------------------------
-	public function profile($id) {
+	public function profile($id = '') {
+		if ($id == '') {
+			redirect(base_url());
+		}
+		else if ($id == 0) {
+			$login_user =  $this->session->userdata('login_user');
+			if (!empty($login_user)) {
+				redirect(base_url('user/profile/' . $login_user['id']));
+			}
+			else {
+				$this->session->set_userdata('mem_url', base_url('user/profile/0'));
+				redirect('account/loginfo/redirect');
+			}
+		}
+		$this->assign('nav_tab', 0);
 		$login_user =  $this->session->userdata('login_user');
 		if (!empty($login_user)) {
 			$this->assign('login_user', $login_user);
 			if ($login_user['id'] == $id) {
 				$this->assign('myself', true);
+				$this->assign('nav_tab', 2);
+			}
+			else if ($this->love_model->get_love($login_user['id'], $id) > 0) {
+				$this->assign('has_love', true);
 			}
 		}
 		$user = $this->user_model->get_info($id);
 		$this->assign('user', $user);
-		$this->assign('nav_tab', 0);
 		$this->assign('title', '今昔网-'.$user['nick']);
 		$this->assign('baseurl', base_url());
 		$this->assign('tips', show_tips());
 		
 		$this->display ( 'templates/header.php' );
-		$this->display ( 'user/index1.php' );
-		//$this->display ( 'user/index2.php' );
+		$this->display ( 'user/main.php' );
+		$this->display ( 'user/side.php' );
 		$this->display ( 'templates/footer.php' );
+	}
+
+	public function show_user_page() {
+		if ($_SERVER ['REQUEST_METHOD'] == 'GET')
+			exit ( "PERMISSION DENIED!" );
+		$tab = $_POST ['tab_id'];
+		$page = $_POST ['page'];
+		$id = $_POST ['user_id'];
+		$user = $this->user_model->get_info ( $id );
+		$this->assign('baseurl', base_url());
+		switch ($tab) {
+			case '#user_post' :
+				{
+					$this->display ( 'user/userpost.php' );
+					break;
+				}
+			case '#user_best' :
+				{
+					$this->display ( 'user/userbest.php' );
+					break;
+				}
+			case '#user_coll' :
+				{
+					$this->display ( 'user/usercoll.php' );
+					break;
+				}
+			case '#user_love' :
+				{
+					$this->assign('tuser', 0);
+					$this->assign('tpage', 0);
+					$this->assign('cpage', 0);
+					$this->display ( 'user/userlove.php' );
+					break;
+				}
+			case '#user_mess' :
+				{
+					$this->display ( 'user/usermess.php' );
+					break;
+				}
+			default :
+				break;
+		}
 	}
 
 

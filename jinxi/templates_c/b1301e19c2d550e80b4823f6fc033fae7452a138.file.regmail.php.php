@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-28 17:41:26
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-31 14:49:03
          compiled from "..\application\views\account\regmail.php" */ ?>
 <?php /*%%SmartyHeaderCode:1602855166b7708f1d7-11536018%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'b1301e19c2d550e80b4823f6fc033fae7452a138' => 
     array (
       0 => '..\\application\\views\\account\\regmail.php',
-      1 => 1427534799,
+      1 => 1427720951,
       2 => 'file',
     ),
   ),
@@ -28,7 +28,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 <?php if ($_valid && !is_callable('content_55166b770c2224_84288953')) {function content_55166b770c2224_84288953($_smarty_tpl) {?>	<div id="body" class="row">
 		<div id="main">
 			<div id="info_img">
-				<img src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
+				<img class="passive" src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
 img/info/mail.png" alt="register fail">
 			</div>
 			<div id="info_cont">

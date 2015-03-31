@@ -10,7 +10,7 @@ class Setup extends CI_Controller {
 		$login_user =  $this->session->userdata('login_user');	
 		if(empty($login_user)) {
 			$this->session->set_userdata('mem_url', base_url('setup'));
-			redirect('account/loginfo');
+			redirect('account/loginfo/redirect');
 		}
 		$data ['login_user'] = $login_user;
 		$data ['baseurl'] = base_url();

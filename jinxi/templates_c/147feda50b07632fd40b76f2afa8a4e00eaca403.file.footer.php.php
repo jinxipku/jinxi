@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-31 13:14:16
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-31 15:52:53
          compiled from "..\application\views\templates\footer.php" */ ?>
 <?php /*%%SmartyHeaderCode:5748551121562c11d9-20568918%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '147feda50b07632fd40b76f2afa8a4e00eaca403' => 
     array (
       0 => '..\\application\\views\\templates\\footer.php',
-      1 => 1427778855,
+      1 => 1427788371,
       2 => 'file',
     ),
   ),
@@ -119,7 +119,7 @@ img/top.png" alt="回到顶部" />
 			summary:"亲，有闲置不用的小物件么？想要便宜实用的二手商品？快加入今昔吧，加入专属大学生的二手交易世界^-^",
 			title:"今昔网欢迎您！ #今昔二手#",
 			pic:"http://jinxi.net/img/jinxibig.jpg",
-			marginTop:350,
+			marginTop:500,
 			ralateuid:{
 				"tsina":"3894185518"
 			},
