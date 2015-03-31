@@ -67,7 +67,6 @@
 -->
 
 	{if isset($is_index)}
-	<!-- 
 	<script type="text/javascript">
 		var ujian_config = {
 			num: 6,
@@ -82,8 +81,6 @@
 	<a id="ujian" href="http://www.ujian.cc">
 		<img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐"/>
 	</a>
-	JiaThis Button BEGIN -->
-	<!--
 	<script type="text/javascript">
 		var jiathis_config={
 			url:"http://www.今昔.cn",
@@ -100,10 +97,8 @@
 	}
 	</script>
 	<script type="text/javascript" src="http://v3.jiathis.com/code/jiathis_r.js?btn=r3.gif&move=0" charset="utf-8"></script>
-	-->
 	{/if}
 	<!-- JiaThis Button BEGIN -->
-<script type="text/javascript" src="http://v3.jiathis.com/code/jiathis_r.js?uid=1427183820919265&move=0" charset="utf-8"></script>
 <!-- JiaThis Button END -->
 
 	<script src="{$baseurl}js/bootstrap.js"></script>
