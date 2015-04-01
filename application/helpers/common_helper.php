@@ -45,8 +45,8 @@ if (! function_exists ( 'get_sex' )) {
     function get_sex($sexint) {
         $sex = array (
             "兔星人",
-            "喵星人",
-            "汪星人" 
+            "汪星人",
+            "喵星人" 
             );
         return $sex [$sexint];
     }
@@ -68,7 +68,7 @@ if (! function_exists ( 'get_namecolor' )) {
 if(!function_exists('get_user_type')){
     function get_user_type($type){
         $types = array(
-            "未填写",
+            "未选择",
             "本科生",
             "硕士生",
             "博士生",

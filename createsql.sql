@@ -25,9 +25,9 @@ create table jx_user(
 	nick_color tinyint(1) not null default 0 comment '昵称颜色',
 	
 	sex tinyint(1) not null default 0 comment '性别，0兔星人，1汪星人，2猫星人',
-	type smallint not null default 0 comment '账户类型(其他0,本科生1，硕士生2，博士生3，教职工4，校友5，校外合作者6)',
+	type smallint not null default 0 comment '账户类型(未选择0,本科生1，硕士生2，博士生3，教职工4，校友5，校外合作者6)',
 
-	year smallint null comment '学历年份',
+	year smallint null default 0 comment '学历年份（未选择0，其他1）',
 
 	email varchar(30) null default '未填写' comment '用户常用邮箱',
 	qq varchar(20) null default '未填写' comment 'qq',

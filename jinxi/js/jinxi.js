@@ -27,6 +27,14 @@ $("input").bind('blur',function() {
 		$(this).addClass("flat");
 	}
 });
+$("textarea").bind('blur',function() {
+	if ($(this).val().length > 0) {
+		$(this).removeClass("flat");
+	}
+	else {
+		$(this).addClass("flat");
+	}
+});
 $('#choose_school').on('hidden.bs.modal', function () {
 	$('#school').attr('disabled', false);
 });
@@ -344,27 +352,27 @@ function show_user_page(tabid, uid, page, first){
 		$(tabid).html('<center><i class="icon-spinner icon-spin"></i> 正在加载</center>');
 	}
 }
-
-
-
-
-
-
-
-function savebi(){
-	$("#savebi").parent().html('<i class="icon-spinner icon-spin"></i> 正在保存');
-	var username = $("#username").val();
-	var sex = $('input[name="sex"]:checked').val()
-	var school = $("#university").val();
-	var degree = $("#degree").val();
-	var year = $("#year").val();
-	var sign = $("#sign").val();
-	var qq = $("#qq").val();
-	var phone = $("#phone").val();
-	var url = baseurl + "ajax/savebi";
-	$.post(url,{username:username,sex:sex,school:school,degree:degree,year:year,sign:sign,qq:qq,phone:phone},function(){ 
-    	window.location.href=baseurl + "setup";
-  	});
+function save_info(){
+	$.post(
+		baseurl + "user/save_info",
+		{
+			nick: $("#nick").val(),
+			sex: $("#sex").val(),
+			signature: $("#signature").val(),
+			type: $("#type").val(),
+			year: $("#year").val(),
+			email: $("#email").val(),
+			qq: $("#qq").val(),
+			weixin: $("#weixin").val(),
+			phone: $("#phone").val()
+		},
+		function(res) { 
+    		window.location.href = window.location.href;
+    	},
+    	'json'
+  	);
+	$("#btn_saveinfo").html('<i class="icon-spinner icon-spin"></i> 保存中');
+	$("#btn_saveinfo").attr('disabled', true);
 }
 function saveac(){
 	$("#saveac").parent().html('<i class="icon-spinner icon-spin"></i> 正在保存');

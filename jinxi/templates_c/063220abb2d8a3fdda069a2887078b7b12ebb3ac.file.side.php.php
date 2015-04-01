@@ -1,30 +1,30 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-31 21:50:51
-         compiled from "..\application\views\user\side.php" */ ?>
-<?php /*%%SmartyHeaderCode:21583551a474828c8a4-07355264%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-01 00:57:49
+         compiled from "..\application\views\setup\side.php" */ ?>
+<?php /*%%SmartyHeaderCode:24554551ad20d9077d8-34185234%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
-    '108de6c2646d45d91b866525882cb32f127e7d65' => 
+    '063220abb2d8a3fdda069a2887078b7b12ebb3ac' => 
     array (
-      0 => '..\\application\\views\\user\\side.php',
+      0 => '..\\application\\views\\setup\\side.php',
       1 => 1427809849,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '21583551a474828c8a4-07355264',
+  'nocache_hash' => '24554551ad20d9077d8-34185234',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_551a474829cdf3_75353669',
   'variables' => 
   array (
     'baseurl' => 0,
     'tips' => 0,
   ),
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_551ad20d916d74_25684236',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_551a474829cdf3_75353669')) {function content_551a474829cdf3_75353669($_smarty_tpl) {?>		<div id="side">
+<?php if ($_valid && !is_callable('content_551ad20d916d74_25684236')) {function content_551ad20d916d74_25684236($_smarty_tpl) {?>		<div id="side">
 			<a href="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
 display/hall" type="button" class="btn btn-primary btn-hg btn-block">商品大厅</a>
 			<a href="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>

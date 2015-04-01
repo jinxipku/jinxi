@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-31 20:42:37
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-01 20:41:46
          compiled from "..\application\views\user\main.php" */ ?>
 <?php /*%%SmartyHeaderCode:28334551a47481eeca8-13466585%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '169c3ef0eab18217ce7242055b7ead1a3b478071' => 
     array (
       0 => '..\\application\\views\\user\\main.php',
-      1 => 1427805681,
+      1 => 1427892104,
       2 => 'file',
     ),
   ),
@@ -58,8 +58,9 @@ user/profile/<?php echo $_smarty_tpl->tpl_vars['user']->value['id'];?>
 					<p class="user_info"><?php echo $_smarty_tpl->tpl_vars['user']->value['sex'];?>
  | <?php echo $_smarty_tpl->tpl_vars['user']->value['school_name'];?>
  | <?php echo $_smarty_tpl->tpl_vars['user']->value['type'];?>
- | <?php echo $_smarty_tpl->tpl_vars['user']->value['year'];?>
-</p>
+ | <?php if ($_smarty_tpl->tpl_vars['user']->value['year']==0) {?>未选择<?php } elseif ($_smarty_tpl->tpl_vars['user']->value['year']==1) {?>其他<?php } else {
+echo $_smarty_tpl->tpl_vars['user']->value['year'];?>
+级<?php }?></p>
 					<p class="user_post">发帖总数：<?php echo $_smarty_tpl->tpl_vars['user']->value['post_number'];?>
  | 有效帖数：<?php echo $_smarty_tpl->tpl_vars['user']->value['active_post_number'];?>
 </p>
