@@ -107,9 +107,15 @@ class User extends MY_Controller {
 
 	//用户更新
 	//post参数  参考sql建表中的参数
-	public function update_info(){
+	public function save_info(){
 		$user = $this->session->userdata ( 'login_user' );
-		$this->user_model->update_info($user['id'],$_POST);
+		$res = $this->user_model->update_info($user['id'],$_POST);
+		if(empty($res)){
+			$this->ajaxReturn(null,'',0);
+		}else{
+			$this->session->set_userdata('login_user',$this->user_model->get_info($user['id']));
+			$this->ajaxReturn(null,'',1);
+		}
 	}
 	
 	//用户上传头像接口

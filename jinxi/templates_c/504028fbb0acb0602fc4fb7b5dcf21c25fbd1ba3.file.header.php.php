@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-01 00:07:52
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-01 21:35:53
          compiled from "..\application\views\templates\header.php" */ ?>
 <?php /*%%SmartyHeaderCode:208175516c4fb94b6f0-28521864%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '504028fbb0acb0602fc4fb7b5dcf21c25fbd1ba3' => 
     array (
       0 => '..\\application\\views\\templates\\header.php',
-      1 => 1427783870,
+      1 => 1427894953,
       2 => 'file',
     ),
   ),
@@ -80,9 +80,7 @@ img/icon/invite.png" alt="invite.png"/>
 		</div>
 		<div>
 			<?php if (isset($_smarty_tpl->tpl_vars['login_user']->value)) {?>
-			<a type="button" class="btn btn-primary" href="#" onclick="addfavorite('<?php echo '<?php'; ?>
- echo '今昔网'<?php echo '?>'; ?>
-', '<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
+			<a type="button" class="btn btn-primary" href="#" onclick="add_favorite('今昔网', '<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
 ')">收藏本站</a>
 			<?php } else { ?>
 			<a type="button" class="btn btn-primary" href="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
@@ -96,16 +94,15 @@ account/register">立即注册</a>
 			<div class="mycontainer">
 				<div>
 					<ul class="nav">
-						<li <?php if ($_smarty_tpl->tpl_vars['nav_tab']->value==1) {?> class=" active" <?php }?>>
+						<li <?php if ($_smarty_tpl->tpl_vars['nav_tab']->value==1) {?>class=" active"<?php }?>>
 							<a href="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
 ">首页</a>
 						</li>
-						<li <?php if ($_smarty_tpl->tpl_vars['nav_tab']->value==2) {?> class=" active" <?php }?>>
+						<li <?php if ($_smarty_tpl->tpl_vars['nav_tab']->value==2) {?>class=" active"<?php }?>>
 							<a href="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
-user/profile<?php if (isset($_smarty_tpl->tpl_vars['login_user']->value)) {?>/<?php echo $_smarty_tpl->tpl_vars['login_user']->value['id'];
-}?>">个人中心</a>
+user/profile/0">个人中心</a>
 						</li>
-						<li <?php if ($_smarty_tpl->tpl_vars['nav_tab']->value==3) {?> class=" active" <?php }?>>
+						<li <?php if ($_smarty_tpl->tpl_vars['nav_tab']->value==3) {?>class=" active"<?php }?>>
 							<a href="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
 display/hall">商品大厅</a>
 						</li>
@@ -124,23 +121,23 @@ img/head/<?php echo $_smarty_tpl->tpl_vars['login_user']->value['thumb'];?>
 							</a>
 						</li>
 						<?php }?>
-						<li <?php if ($_smarty_tpl->tpl_vars['nav_tab']->value==4) {?> class=" active" <?php }?>>
+						<li <?php if ($_smarty_tpl->tpl_vars['nav_tab']->value==4) {?>class=" active"<?php }?>>
 							<a href="#">关于</a>
 						</li>
-						<li <?php if ($_smarty_tpl->tpl_vars['nav_tab']->value==5) {?> class=" active" <?php }?>>
+						<li <?php if ($_smarty_tpl->tpl_vars['nav_tab']->value==5) {?>class=" active"<?php }?>>
 							<a href="#">帮助</a>
 						</li>
-						<li <?php if ($_smarty_tpl->tpl_vars['nav_tab']->value==6) {?> class=" active" <?php }?>>
+						<li <?php if ($_smarty_tpl->tpl_vars['nav_tab']->value==6) {?>class=" active"<?php }?>>
 							<a href="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
 setup">设置</a>
 						</li>
 						<?php if (isset($_smarty_tpl->tpl_vars['login_user']->value)) {?>
 						<li>
-							<a href="#" onClick="logout();return false;">退出</a>
+							<a href="" onClick="logout();return false;">退出</a>
 						</li>
 						<?php } elseif (isset($_smarty_tpl->tpl_vars['is_index']->value)) {?>						
 						<li>
-							<a href="#" onClick="pre_login();return false;">登录</a>
+							<a href="" onClick="pre_login();return false;">登录</a>
 						</li>
 						<?php } elseif ($_smarty_tpl->tpl_vars['nav_tab']->value==7) {?>
 						<li class=" active">
@@ -154,7 +151,8 @@ account/register">注册</a>
 						</li>
 						<?php } else { ?>
 						<li>
-							<a  href="#" onClick="mem_login();return false;">登录</a>
+							<a  href="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
+account/login">登录</a>
 						</li>
 						<?php }?>
 					</ul>

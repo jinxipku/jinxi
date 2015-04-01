@@ -48,6 +48,8 @@ create table jx_love(
 	lovee int(11) not null comment '被关注者id'
 
 )DEFAULT CHARSET=utf8 COMMENT='关注表';
+create index lover_index on jx_love(lover);
+create index lovee_index on jx_love(lovee);
 
 drop table if exists jx_school_info;
 create table jx_school_info(

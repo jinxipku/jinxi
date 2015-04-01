@@ -14,7 +14,7 @@ class user_model extends CI_Model {
 		$user['sex'] = get_sex($user['sex']);
 		$user['nick_color'] = get_namecolor($user['nick_color']);
 		$user['type'] = get_user_type($user['type']);
-		$user['year'] = empty($user['year'])? "未填写":$user['year'];
+		$user['year'] = empty($user['year'])? 0:$user['year'];
 		$this->db->where('lovee', $user['id']);
 		$this->db->from('jx_love');
 		$user['lovers'] = $this->db->count_all_results();
@@ -31,6 +31,7 @@ class user_model extends CI_Model {
 
 	public function update_info($user_id, $info){
 		$this->db->where("id",$user_id);
-		$this->db->update("jx_user",$info);
+		$res = $this->db->update("jx_user",$info);
+		return $res;
 	}
 }

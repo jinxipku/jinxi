@@ -39,9 +39,10 @@ class love_model extends CI_Model {
 			$query = $this->db->get_where ( 'jx_user', array (
 					'user_id' => $user_id 
 			) );
-			$sell_mark = $query->row_array ()['sell_mark'];
-			$sell_comment = $query->row_array ()['sell_comment'];
-			$has_sign = $query->row_array ()['sign_on2'];
+			$arr = $query->row_array ();
+			$sell_mark = $arr['sell_mark'];
+			$sell_comment = $arr['sell_comment'];
+			$has_sign = $arr['sign_on2'];
 			$data = array (
 					'sell_mark' => $sell_mark + $cscore,
 					'sell_comment' => $sell_comment + 1 
@@ -51,9 +52,10 @@ class love_model extends CI_Model {
 			$query = $this->db->get_where ( 'jx_user', array (
 					'user_id' => $user_id 
 			) );
-			$buy_mark = $query->row_array ()['buy_mark'];
-			$buy_comment = $query->row_array ()['buy_comment'];
-			$has_sign = $query->row_array ()['sign_on2'];
+			$arr = $query->row_array ();
+			$buy_mark = $arr['buy_mark'];
+			$buy_comment = $arr['buy_comment'];
+			$has_sign = $arr['sign_on2'];
 			$data = array (
 					'buy_mark' => $buy_mark + $cscore,
 					'buy_comment' => $buy_comment + 1 
@@ -64,7 +66,8 @@ class love_model extends CI_Model {
 		$query = $this->db->get_where ( 'jx_user', array (
 				'user_id' => $subject_id
 		) );
-		$has_sign = $query->row_array ()['sign_on2'];
+		$arr = $query->row_array ();
+		$has_sign = $arr['sign_on2'];
 		
 		$ctime = date ( 'Y-m-d H:i:s' );
 		$data = array (
