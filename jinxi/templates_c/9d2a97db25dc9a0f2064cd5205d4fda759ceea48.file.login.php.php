@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-29 01:43:37
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-01 22:49:50
          compiled from "..\application\views\account\login.php" */ ?>
 <?php /*%%SmartyHeaderCode:323475516e8497eac86-82538270%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '9d2a97db25dc9a0f2064cd5205d4fda759ceea48' => 
     array (
       0 => '..\\application\\views\\account\\login.php',
-      1 => 1427553485,
+      1 => 1427723485,
       2 => 'file',
     ),
   ),
@@ -15,14 +15,14 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5516e849936088_73328924',
   'variables' => 
   array (
     'baseurl' => 0,
     'tips' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5516e849936088_73328924',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5516e849936088_73328924')) {function content_5516e849936088_73328924($_smarty_tpl) {?>	<div id="body" class="row">
 		<div id="main">
@@ -37,14 +37,14 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 						<input id="password" name="password" type="password" placeholder="密码" class="form-control flat input-lg" onblur="check_pw()"/>
 						<span class="danger" id="check_pw"></span>
 					</div>
-					<button id="btn_login" type="button" class="btn btn-primary btn-lg" onClick="login()">登录</button>
+					<button id="btn_login" type="button" class="btn btn-primary btn-lg" onClick="login(1)">登录</button>
 				</form>
 			</div>
 			<div id="register_alter">
 				<p>没有今昔网账号？</p>
 				<a href="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
 account/register" type="button" class="btn btn-info btn-lg btn-block">立即注册</a>
-				<img src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
+				<img class="passive" src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
 img/jinxibig.jpg" alt="http://www.xn--wmqr18c.cn"/>
 			</div>
 		</div>

@@ -3,6 +3,14 @@ class post_model extends CI_Model {
 	public function __construct() {
 		$this->load->database ();
 	}
+
+
+	
+
+
+
+
+	
 	public function add_post($user_id) {
 		$ptime = date ( 'Y-m-d H:i:s' );
 		$data = array (

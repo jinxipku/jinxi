@@ -142,12 +142,11 @@ class Account extends MY_Controller {
 			$this->ajaxReturn( null , '学校、email未填写完整' , 0 );
 		$regres = $this->account_model->register( $email, $pwd, $school_id );//返回用户id
 		if( !empty($regres) ){
-			$user = $this->user_model->get_info($regres);
-			$this->session->set_userdata( 'login_user' , $user );
+			$user = $this->account_model->get_account(null, $email);
 			$this->_sendVerifyEmail( $user );//发送验证邮件
 			$this->ajaxReturn( null , '注册成功' , 1 );
 		}else
-			$this->ajaxReturn( null , '账号已被注册' , 0 );
+		$this->ajaxReturn( null , '账号已被注册' , 0 );
 	}
 
 	//验证邮箱是否存在
@@ -179,13 +178,18 @@ class Account extends MY_Controller {
 		$logres = $this->account_model->login( $email, $pwd );
 		if (!empty($logres)) {
 			$user = $this->user_model->get_info ($logres );
-			$this->session->set_userdata ( 'login_user', $user );
-			$mem_url = $this->session->userdata('mem_url');
-			if ($mem_url != '' && strpos($mem_url, "account") == false) {
-				$this->ajaxReturn($mem_url,"登录成功",1);
-			} else {
-				$this->ajaxReturn(null,"登录成功",1);
+			if($user['is_verified']!=1){
+				$this->ajaxReturn(null,"账户尚未激活",0);
+			}else{
+				$this->session->set_userdata ( 'login_user', $user );
+				$mem_url = $this->session->userdata('mem_url');
+				if ($mem_url != '' && strpos($mem_url, "account") == false) {
+					$this->ajaxReturn($mem_url,"登录成功",1);
+				} else {
+					$this->ajaxReturn(null,"登录成功",1);
+				}
 			}
+			
 		} else {
 			$this->ajaxReturn(null,"登录失败",0);
 		}
