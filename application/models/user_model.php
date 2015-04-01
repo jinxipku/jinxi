@@ -14,16 +14,19 @@ class user_model extends CI_Model {
 		$user['sex'] = get_sex($user['sex']);
 		$user['nick_color'] = get_namecolor($user['nick_color']);
 		$user['type'] = get_user_type($user['type']);
-
+		$user['year'] = empty($user['year'])? "未填写":$user['year'];
 		$this->db->where('lovee', $user['id']);
 		$this->db->from('jx_love');
 		$user['lovers'] = $this->db->count_all_results();
 		return $user;
 	}
 
-	//TODO:
+	//TODO:根据公开等字段返回相应的信息，当前为全部返回
 	public function get_contact($user_id){
-
+		$this->db->select('email, qq, phone, weixin');
+		$query = $this->db->get('jx_user',array("id"=>$user_id));
+		$user = $query->row_array ();
+		return $user;
 	}
 
 	public function update_info($user_id, $info){

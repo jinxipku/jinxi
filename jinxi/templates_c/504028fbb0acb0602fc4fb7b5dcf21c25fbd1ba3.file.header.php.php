@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-30 22:14:12
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-01 00:07:52
          compiled from "..\application\views\templates\header.php" */ ?>
 <?php /*%%SmartyHeaderCode:208175516c4fb94b6f0-28521864%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '504028fbb0acb0602fc4fb7b5dcf21c25fbd1ba3' => 
     array (
       0 => '..\\application\\views\\templates\\header.php',
-      1 => 1427723485,
+      1 => 1427783870,
       2 => 'file',
     ),
   ),
@@ -114,7 +114,7 @@ display/hall">商品大厅</a>
 						<?php if (isset($_smarty_tpl->tpl_vars['login_user']->value)) {?>
 						<li>
 							<a href="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
-user/info/<?php echo $_smarty_tpl->tpl_vars['login_user']->value['id'];?>
+user/profile/<?php echo $_smarty_tpl->tpl_vars['login_user']->value['id'];?>
 ">
 								<img id="user_headimg_thumb" class="passive" src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
 img/head/<?php echo $_smarty_tpl->tpl_vars['login_user']->value['thumb'];?>

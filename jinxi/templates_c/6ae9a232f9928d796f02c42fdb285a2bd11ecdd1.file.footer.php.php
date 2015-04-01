@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-30 22:14:13
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-01 00:07:52
          compiled from "..\application\views\templates\footer.php" */ ?>
 <?php /*%%SmartyHeaderCode:87405516c4fc5e8f08-42857488%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '6ae9a232f9928d796f02c42fdb285a2bd11ecdd1' => 
     array (
       0 => '..\\application\\views\\templates\\footer.php',
-      1 => 1427723485,
+      1 => 1427783870,
       2 => 'file',
     ),
   ),
@@ -94,7 +94,6 @@ img/top.png" alt="回到顶部" />
 -->
 
 	<?php if (isset($_smarty_tpl->tpl_vars['is_index']->value)) {?>
-	<!-- 
 	<?php echo '<script'; ?>
  type="text/javascript">
 		var ujian_config = {
@@ -113,8 +112,6 @@ img/top.png" alt="回到顶部" />
 	<a id="ujian" href="http://www.ujian.cc">
 		<img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐"/>
 	</a>
-	JiaThis Button BEGIN -->
-	<!--
 	<?php echo '<script'; ?>
  type="text/javascript">
 		var jiathis_config={
@@ -135,12 +132,8 @@ img/top.png" alt="回到顶部" />
 	<?php echo '<script'; ?>
  type="text/javascript" src="http://v3.jiathis.com/code/jiathis_r.js?btn=r3.gif&move=0" charset="utf-8"><?php echo '</script'; ?>
 >
-	-->
 	<?php }?>
 	<!-- JiaThis Button BEGIN -->
-<?php echo '<script'; ?>
- type="text/javascript" src="http://v3.jiathis.com/code/jiathis_r.js?uid=1427183820919265&move=0" charset="utf-8"><?php echo '</script'; ?>
->
 <!-- JiaThis Button END -->
 
 	<?php echo '<script'; ?>

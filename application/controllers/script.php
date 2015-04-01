@@ -44,9 +44,14 @@ class Script extends MY_Controller {
 		}
 	}
 
-	public function test(){
+	public function testSession(){
 		$c=$this->session->userdata('login_user');
 		var_dump($c);
+	}
+	public function testContact(){
+		$this->load->model("user_model");
+		$user = $this->user_model->get_contact(1);
+		var_dump($user);
 	}
 }
 ?>

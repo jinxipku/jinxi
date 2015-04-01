@@ -56,3 +56,41 @@ create table jx_school_info(
 	school_region varchar(30) comment '所处省市',
 	primary key(school_id)
 )DEFAULT CHARSET=utf8 COMMENT='学校信息表';
+
+
+drop table if exists jx_seller_post;
+create table jx_seller_post(
+	post_id int(11) not null comment '帖子id',
+	user_id int(11) not null comment '发帖用户id',
+	category1 smallint not null comment '一级分类',
+	category2 smallint not null comment '二级分类',
+	brand varchar(20) null comment '品牌',
+	model varchar(40) null comment '型号',
+	class smallint not null comment '商品级别',
+	createat int(11) not null comment '创建时间',
+	updateat int(11) not null comment '最后更新时间',
+	description text null comment '商品描述',
+	images text null comment '图片列表(json序列化对象)',
+	price int(11) null comment '预期出售价格(1赠送，0面议)',
+	contactby varchar(20) null comment '期望的联系方式（0邮箱，1手机，2qq，3微信，4站内），可多选，以逗号分隔',
+	primary key(post_id)
+)DEFAULT CHARSET=utf8 COMMENT='卖家帖子';
+create index user_index on jx_seller_post(user_id);
+
+drop table if exists jx_buyer_post;
+create table jx_buyer_post(
+	post_id int(11) not null comment '帖子id',
+	user_id int(11) not null comment '发帖用户id',
+	category1 smallint not null comment '一级分类',
+	category2 smallint not null comment '二级分类',
+	brand varchar(20) null comment '品牌',
+	model varchar(40) null comment '型号',
+	class smallint not null comment '商品级别',
+	createat int(11) not null comment '创建时间',
+	updateat int(11) not null comment '最后更新时间',
+	description text null comment '描述',
+	price int(11) null comment '预期买入价格(1赠送，0面议)',
+	contactby varchar(20) null comment '期望的联系方式（0邮箱，1手机，2qq，3微信，4站内），可多选，以逗号分隔',
+	primary key(post_id)
+)DEFAULT CHARSET=utf8 COMMENT='卖家帖子';
+create index user_index on jx_buyer_post(user_id);
