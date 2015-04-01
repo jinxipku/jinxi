@@ -53,5 +53,22 @@ class Script extends MY_Controller {
 		$user = $this->user_model->get_contact(1);
 		var_dump($user);
 	}
+
+	public function testPost(){
+		// for($i=0;$i<10;$i++){
+		// 	$data = array(
+		// 		"user_id"=>1,
+		// 		"category1"=>1,
+		// 		"category2"=>1,
+		// 		"class"=>1,
+		// 		"createat"=>time(),
+		// 		"updateat"=>time(),
+		// 		);
+		// 	$this->db->insert ( 'jx_buyer_post', $data );
+		// }
+		$this->load->model("post_model");
+		$res = $this->post_model->get_buyer_post(1);
+		var_dump($res);
+	}
 }
 ?>
