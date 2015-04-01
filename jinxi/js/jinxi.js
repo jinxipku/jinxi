@@ -366,8 +366,25 @@ function save_info(){
 			weixin: $("#weixin").val(),
 			phone: $("#phone").val()
 		},
-		function(res) { 
-    		window.location.href = window.location.href;
+		function(res) {
+			if (res.status == 1) {
+				$("#info_modal").find('.modal-title').text("设置成功");
+				$("#info_modal").find('.modal-cont').text("恭喜，设置成功！");
+				$("#info_modal").find('.btn-default').css('display','none');
+				$("#info_modal").find('.btn-primary').bind('click',function() {
+					window.location.href = window.location.href;
+				});
+				$("#info_modal").modal();
+			} else {
+				$("#info_modal").find('.modal-title').text("设置失败");
+				$("#info_modal").find('.modal-cont').text("对不起，操作失败，请重试！");
+				$("#info_modal").find('.btn-default').css('display','none');
+				$("#info_modal").find('.btn-primary').bind('click',function() {
+					$("#btn_saveinfo").html('保 存');
+					$("#btn_saveinfo").attr('disabled', false);
+				});
+				$("#info_modal").modal();
+			}
     	},
     	'json'
   	);
