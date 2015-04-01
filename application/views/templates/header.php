@@ -36,7 +36,7 @@
 		</div>
 		<div>
 			{if isset($login_user)}
-			<a type="button" class="btn btn-primary" href="#" onclick="addfavorite('<?php echo '今昔网'?>', '{$baseurl}')">收藏本站</a>
+			<a type="button" class="btn btn-primary" href="#" onclick="add_favorite('今昔网', '{$baseurl}')">收藏本站</a>
 			{else}
 			<a type="button" class="btn btn-primary" href="{$baseurl}account/register">立即注册</a>
 			{/if}
@@ -48,13 +48,13 @@
 			<div class="mycontainer">
 				<div>
 					<ul class="nav">
-						<li {if $nav_tab == 1} class=" active" {/if}>
+						<li {if $nav_tab == 1}class=" active"{/if}>
 							<a href="{$baseurl}">首页</a>
 						</li>
-						<li {if $nav_tab == 2} class=" active" {/if}>
-							<a href="{$baseurl}user/profile{if isset($login_user)}/{$login_user.id}{/if}">个人中心</a>
+						<li {if $nav_tab == 2}class=" active"{/if}>
+							<a href="{$baseurl}user/profile/0">个人中心</a>
 						</li>
-						<li {if $nav_tab == 3} class=" active" {/if}>
+						<li {if $nav_tab == 3}class=" active"{/if}>
 							<a href="{$baseurl}display/hall">商品大厅</a>
 						</li>
 					</ul>
@@ -67,22 +67,22 @@
 							</a>
 						</li>
 						{/if}
-						<li {if $nav_tab == 4} class=" active" {/if}>
+						<li {if $nav_tab == 4}class=" active"{/if}>
 							<a href="#">关于</a>
 						</li>
-						<li {if $nav_tab == 5} class=" active" {/if}>
+						<li {if $nav_tab == 5}class=" active"{/if}>
 							<a href="#">帮助</a>
 						</li>
-						<li {if $nav_tab == 6} class=" active" {/if}>
+						<li {if $nav_tab == 6}class=" active"{/if}>
 							<a href="{$baseurl}setup">设置</a>
 						</li>
 						{if isset($login_user)}
 						<li>
-							<a href="#" onClick="logout();return false;">退出</a>
+							<a href="" onClick="logout();return false;">退出</a>
 						</li>
 						{elseif isset($is_index)}						
 						<li>
-							<a href="#" onClick="pre_login();return false;">登录</a>
+							<a href="" onClick="pre_login();return false;">登录</a>
 						</li>
 						{elseif $nav_tab == 7}
 						<li class=" active">
@@ -94,7 +94,7 @@
 						</li>
 						{else}
 						<li>
-							<a  href="#" onClick="mem_login();return false;">登录</a>
+							<a  href="{$baseurl}account/login">登录</a>
 						</li>
 						{/if}
 					</ul>

@@ -171,5 +171,6 @@ jQuery(function($) {
 										});
 						$(".navbar-wrapper").stickUp();
 						
+						
 					});
 });

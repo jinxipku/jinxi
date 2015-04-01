@@ -37,10 +37,13 @@ class Account extends MY_Controller {
 		$this->display ( 'templates/footer.php' );
 	}
 
-	public function loginfo() {
+	public function loginfo($redirect = '') {
 		$login_user =  $this->session->userdata('login_user');
-		if(!empty($login_user)){
+		if (!empty($login_user)) {
 			redirect(base_url());
+		}
+		else if ($redirect == '' && strpos($_SERVER['HTTP_REFERER'], "account") == false) {
+			$this->session->set_userdata('mem_url', $_SERVER['HTTP_REFERER']);
 		}
 		$this->assign('nav_tab', 7);
 		$this->assign('title', '今昔网-登录');

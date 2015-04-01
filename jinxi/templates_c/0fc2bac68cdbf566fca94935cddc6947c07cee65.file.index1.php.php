@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-31 14:26:48
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-31 15:03:30
          compiled from "..\application\views\user\index1.php" */ ?>
 <?php /*%%SmartyHeaderCode:12525551a2b07cd7421-01674241%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '0fc2bac68cdbf566fca94935cddc6947c07cee65' => 
     array (
       0 => '..\\application\\views\\user\\index1.php',
-      1 => 1427783206,
+      1 => 1427785408,
       2 => 'file',
     ),
   ),
@@ -27,12 +27,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_551a2b07d6cb73_28220585')) {function content_551a2b07d6cb73_28220585($_smarty_tpl) {?><div class="row" style="margin-top: 20px;">
-	<div id="scrollhead1" style="position: absolute; top: 310px;"></div>
-	<div class="leftpart">
-		<div class="userheader">
-			<div
-				style="position: relative; float: left; width: 200px; height: 200px;">
+<?php if ($_valid && !is_callable('content_551a2b07d6cb73_28220585')) {function content_551a2b07d6cb73_28220585($_smarty_tpl) {?>	<div id="body" class="row">
+        <div id="main">
+            <div class="userheader">
+			<div style="position: relative; float: left; width: 200px; height: 200px;">
 				<a href="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
 user/profile/<?php echo $_smarty_tpl->tpl_vars['user']->value['id'];?>
 "><img src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
@@ -88,9 +86,12 @@ user/profile/<?php echo $_smarty_tpl->tpl_vars['user']->value['id'];?>
 级 连续登陆<?php echo $_smarty_tpl->tpl_vars['user']->value['logins'];?>
 天</p>
 				<p class="userinfo"><?php echo $_smarty_tpl->tpl_vars['user']->value['sex'];?>
- | <?php echo $_smarty_tpl->tpl_vars['user']->value['school'];?>
+ | <?php echo $_smarty_tpl->tpl_vars['user']->value['school_name'];?>
  | <?php echo $_smarty_tpl->tpl_vars['user']->value['type'];?>
  | <?php echo $_smarty_tpl->tpl_vars['user']->value['year'];?>
+</p>
+				<p class="usermark">发帖总数：<?php echo $_smarty_tpl->tpl_vars['user']->value['post_number'];?>
+ | 有效帖数：<?php echo $_smarty_tpl->tpl_vars['user']->value['active_post_number'];?>
 </p>
 				<p class="usersign">签名：<?php echo $_smarty_tpl->tpl_vars['user']->value['signature'];?>
 </p>
@@ -159,5 +160,5 @@ user/profile/<?php echo $_smarty_tpl->tpl_vars['user']->value['id'];?>
 			</div>
 			<?php }?>
 		</div>
-	</div>
+        </div>
 <?php }} ?>

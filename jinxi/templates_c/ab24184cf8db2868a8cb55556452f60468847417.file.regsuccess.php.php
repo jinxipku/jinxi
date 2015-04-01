@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-30 19:22:58
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-31 14:49:21
          compiled from "..\application\views\account\regsuccess.php" */ ?>
 <?php /*%%SmartyHeaderCode:1229555166e314bfeb8-85705769%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'ab24184cf8db2868a8cb55556452f60468847417' => 
     array (
       0 => '..\\application\\views\\account\\regsuccess.php',
-      1 => 1427714575,
+      1 => 1427720955,
       2 => 'file',
     ),
   ),
@@ -28,7 +28,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 <?php if ($_valid && !is_callable('content_55166e31533ce8_76855395')) {function content_55166e31533ce8_76855395($_smarty_tpl) {?>	<div id="body" class="row">
 		<div id="main">
 			<div id="info_img">
-				<img src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
+				<img class="passive" src="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
 img/info/success.png" alt="register fail">
 			</div>
 			<div id="info_cont">

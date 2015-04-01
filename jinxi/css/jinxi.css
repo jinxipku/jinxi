@@ -50,8 +50,12 @@ span.success {
 	height: 24px;
 	display: block;
 }
-#back_to_top:hover{
+img#back_to_top:hover {
 	cursor: pointer;
+}
+hr {
+	margin-top: 3px;
+	margin-bottom: 3px;
 }
 
 /*
@@ -228,8 +232,147 @@ div#info_cont>p {
 	margin-bottom: 30px;
 }
 
+div#user_header {
+	height: 200px;
+	margin-bottom: -22px;
+}
+div#user_header div#user_img{
+	float: left;
+	height: 200px;
+	width: 200px;
+}
+div#user_header div#user_info{
+	float: left;
+	height: 200px;
+	width: 462px;
+	margin-left: 30px;
+}
+div#user_header div#user_edit{
+	float: left;
+	height: 200px;
+	width: 80px;
+}
+div#user_header div#user_edit>a{
+	width: 80px;
+}
+div#user_header p.user_name{
+	font-size: 22px;
+	margin-bottom: 0;
+}
+div#user_header p.user_name small{
+	font-size: 14px;
+	color: #666;
+	margin-bottom: 3px;
+}
+div#user_header p.user_level{
+	font-size: 15px;
+	color: #999;
+	margin-bottom: 3px;
+}
+div#user_header p.user_info{
+	font-size: 17px;
+	margin-bottom: 3px;
+}
+div#user_header p.user_post{
+	font-size: 15px;
+	color: #3498DB;
+	margin-bottom: 3px;
+}
+div#user_header p.user_sign{
+	font-family: 宋体;
+	font-size: 14px;
+	color: #666;
+	margin-bottom: 3px;
+}
+div#user_tabs {
+	height: 47px;
+	margin-top: 45px;
+	background-color: #f4f4f4;
+}
+div#user_panels {
+	margin-top: -1px;
+	min-height: 300px;
+	border-top: none;
+}
+div#user_panels div.tab-pane{
+	padding: 5px 30px 10px 30px;
+}
 
+div.sorry_box {
+	height: 240px;
+}
+div.sorry_box>div:nth-child(1){
+	float: left;
+	margin: 20px;
+	height: 200px;
+	width: 200px;
+}
+div.sorry_box>div:nth-child(2){
+	float: left;
+	margin: 20px;
+	height: 200px;
+	width: 430px;
+}
+div.sorry_box p{
+	font-size: 23px;
+	margin: 20px;
+}
 
+div#set_tabs{
+	float: left;
+	width: 115px !important;
+	margin-right: 17px;
+}
+div#set_panels{
+	float: left;
+	width: 640px !important;
+}
+div#set_panels>div>div {
+	margin: 30px 40px 30px 40px;
+}
+div#set_panels p.set_title {
+	font-family: 微软雅黑,黑体,幼圆,宋体;
+	font-size: 20px;
+}
+div#set_panels div.set_content {
+	width: 100%;
+}
+div#set_panels button.set_save {
+	margin-top: 5px;
+	margin-left: 450px;
+	width: 110px;
+}
+div.set_table p.set_table_title {
+	font-family: 宋体;
+	font-size: 14px;
+	color: #95A5A6;
+	margin-left: 15px;
+}
+div.set_table div.set_table_content {
+	margin-left: 10px;
+}
+div.set_table_content div.set_row {
+	margin-bottom: 10px;
+}
+div.set_row>div.set_label {
+	float: left;
+	width: 148px;
+	padding-top: 8px;
+}
+div.set_row>div.set_input {
+	float: left;
+	width: 400px;
+}
+div.set_row>div.set_label>p {
+	font-family: 微软雅黑,黑体,幼圆,宋体;
+	font-size: 15px;
+}
+div.set_row>div.set_input input{
+	width: 220px;
+}
+div.set_row>div.set_input textarea{
+	width: 300px;
+}
 
 
 
@@ -275,6 +418,10 @@ modals
 */
 div#choose_school>div {
 	width: 650px;
+}
+div#info_modal>div {
+	margin-top: 100px;
+	width: 400px;
 }
 
 
@@ -331,33 +478,7 @@ div.rightpart2{
 	float: left;
 	width: 772px;
 }
-div.leftchoose{
-	position: relative;
-	float: left;
-	width: 122px;
-	margin-right: 20px;
-}
-div.righttext{
-	position: relative;
-	float: left;
-	padding-top: 30px;
-	padding-bottom: 40px;
-	padding-left: 40px;
-	padding-right: 40px;
-	width: 630px;
-}
-div.righttextall{
-	position: relative;
-	float: left;
-	padding-top: 30px;
-	padding-bottom: 40px;
-	padding-left: 40px;
-	padding-right: 323px;
-	width: 913px;
-}
-div.righttext div.con{
-	margin-left: 20px;
-}
+
 
 
 div.postitembig{
@@ -518,15 +639,7 @@ p.tbinfo{
 	color: #808080;
 	margin-right: 5px;
 }
-p.title{
-	font-family: 微软雅黑,黑体,幼圆,宋体;
-	font-size: 20px;
-}
-p.con{
-	font-family: 宋体;
-	font-size: 14px;
-	color: #95A5A6;
-}
+
 p.postcon{
 	font-family: 微软雅黑,黑体,幼圆,宋体;
 	font-size: 15px;
@@ -536,40 +649,7 @@ p.replycon{
 	font-size: 14px;
 	color: #95A5A6;
 }
-p.username{
-	font-family: 微软雅黑,黑体,幼圆,宋体;
-	font-size: 22px;
-	margin-bottom: 0;
-}
-p.username small{
-	font-family: 微软雅黑,黑体,幼圆,宋体;
-	font-size: 14px;
-	color: #666;
-	margin-bottom: 3px;
-}
-p.userlevel{
-	font-family: 微软雅黑,黑体,幼圆,宋体;
-	font-size: 15px;
-	color: #999;
-	margin-bottom: 3px;
-}
-p.userinfo{
-	font-family: 微软雅黑,黑体,幼圆,宋体;
-	font-size: 17px;
-	margin-bottom: 3px;
-}
-p.usermark{
-	font-family: 微软雅黑,黑体,幼圆,宋体;
-	font-size: 15px;
-	color: #3498DB;
-	margin-bottom: 3px;
-}
-p.usersign{
-	font-family: 宋体;
-	font-size: 14px;
-	color: #666;
-	margin-bottom: 3px;
-}
+
 p.numinfo{
 	margin: 5px 0 5px 20px;
 	height: 25px;

@@ -1,31 +1,16 @@
-<?php
-$totalpage = ceil ( $total / 20 );
-$pagegroup = ceil ( $totalpage / 10 );
-$stpage = ceil ( $page / 10 ) * 10 - 9;
-$edpage = $stpage + 9;
-if (ceil ( $page / 10 ) == $pagegroup)
-	$edpage = $totalpage;
-?>
-<p class="numinfo">共<?=$total?>名用户，这是第<?=$page?>页（每页20项）。</p>
-<hr style="margin-top: 1px; margin-bottom: 1px;" />
-<?php
-if ($totalpage == 0 || $page == 0) :
-	?>
-<div style="height: 240px;">
-	<img src="<?=$baseurl?>img/sorry.png" alt="sorry"
-		style="position: relative; float: left; width: 200px; margin: 20px;" />
-	<p
-		style="position: relative; float: left; margin: 40px; font-size: 23px;">sorry，今昔网木有为您找到数据~</p>
-	<p
-		style="position: relative; float: left; margin: 0 40px 40px 40px; font-size: 23px;">立刻去关注些小伙伴，了解他们的动态吧~</p>
+<p class="numinfo">共{$tpage}页（{$tuser}名用户），这是第{$cpage}页（每页20项）。</p>
+<hr/>
+{if $tuser == 0}
+<div class="sorry_box">
+	<div>
+		<img class="passive" src="{$baseurl}img/info/sorry.png" alt="sorry"/>
+	</div>
+	<div>
+		<p>sorry，今昔网木有为您找到数据~</p>
+		<p>立刻去关注些小伙伴，了解他们的动态吧~</p>
+	</div>
 </div>
-<?php
-	
-	return;
-
-
-endif;
-?>
+{else}
 <?php foreach ($loves as $loveitem): ?>
 <div class="postitembig">
 	<div class="postimage">
@@ -118,3 +103,4 @@ endif;
 		</ul>
 	</div>
 </center>
+{/if}

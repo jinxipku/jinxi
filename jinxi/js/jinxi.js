@@ -1,4 +1,4 @@
-var baseurl = "../";
+var baseurl = "http://www.xn--wmqr18c.cn/";
 $(document).ready( function() {
 	$(".carousel").carousel();
 	$(".ellipsis").ellipsis();
@@ -27,14 +27,36 @@ $("input").bind('blur',function() {
 		$(this).addClass("flat");
 	}
 });
+$("textarea").bind('blur',function() {
+	if ($(this).val().length > 0) {
+		$(this).removeClass("flat");
+	}
+	else {
+		$(this).addClass("flat");
+	}
+});
 $('#choose_school').on('hidden.bs.modal', function () {
 	$('#school').attr('disabled', false);
-})
+});
+function add_favorite(title, url) {
+    try {
+        window.external.addFavorite(url, title);
+    }
+    catch (e) {
+        try {
+            window.sidebar.addPanel(title, url, "");
+        }
+        catch (e) {
+            alert("抱歉，您所使用的浏览器无法完成此操作。\n\n加入收藏失败，请使用Ctrl+D进行添加");
+        }
+
+    }
+}
 function back_to_top1() {
-	$("#back_to_top").attr('src','../img/top2.png');
+	$("#back_to_top").attr('src',baseurl + 'img/top2.png');
 }
 function back_to_top2() {
-	$("#back_to_top").attr('src','../img/top.png');
+	$("#back_to_top").attr('src',baseurl + 'img/top.png');
 }
 function go_to_top() {
 	$("html,body").animate({scrollTop:0}, 700);
@@ -78,24 +100,13 @@ function pre_login() {
 		$("#login_box").slideUp(700);
 	}
 }
-function mem_login() {
-	var loca = "http://www.xn--wmqr18c.cn";
-	if (window.location.href.indexOf("account/loginfo") < 0)
-		loca = window.location.href;
-	$.post(baseurl + "ajax/mem_url",{memurl:loca},function(){
-		window.location.href = baseurl + "account/login";
-	});
-}
-function prememlogin() {
-	$.post(baseurl + "ajax/mem_url",{memurl:window.location.href});
-}
 function login(mem) {
 	$("input").blur();
 	if ($("#check_email").hasClass("fui-cross") || $("#check_pw").hasClass("fui-cross")) {
 		return;
 	} else {
 		$.post(
-			baseurl + "account/dologin/",
+			baseurl + "account/dologin",
 			{
 				email: $("#email").val(),
 				password: $("#password").val()
@@ -115,18 +126,15 @@ function login(mem) {
 		);
 	}
 }
-
 function logout() {
-	var url = baseurl + "account/dologout";
 	$.post(
 		baseurl + "account/dologout",
-		function() {   
-			window.location.href=window.location.href;
+		function() {
+			window.location.href = window.location.href;
 		}
 	);
 	return false;
 }
-
 function check_school(){
 	var school = $("#school").val();   
   	var len = school.length; 
@@ -143,7 +151,6 @@ function check_school(){
 	}
   	return false; 
 }
-
 function check_email(login) {
 	var email = $("#email").val() + $("#email_surfix").text();
 	if (email.length == $("#email_surfix").text().length){
@@ -205,7 +212,6 @@ function check_email(login) {
 	}
 	return false; 
 }
-
 function check_pw() {
 	var password = $("#password").val();   
 	var len = password.length; 
@@ -232,7 +238,6 @@ function check_pw() {
 	}
 	return false; 
 }
-
 function check_pwa(){
 	var pw = $("#password").val();
 	var pwa = $("#passworda").val();   
@@ -249,51 +254,125 @@ function check_pwa(){
 	}
   	return false; 
 }
-
-function check_captcha(){
-	var url = baseurl + "ajax/check_captcha"; 
-	$.post(url,{captcha:$("#captchaw").val()},function(str){ 
-		if(str=='0'){
-			$("#check5").html("验证码不正确，请重新输入");
-			$("#check5").addClass(" fui-cross");
-			$("#check5").css('color','#E74C3C');
-		}
-		else{
-			$("#check5").html("验证码匹配！");
-			$("#check5").removeClass(" fui-cross");
-			$("#check5").addClass(" fui-check");
-			$("#check5").css('color','#2ECC71');
-		}
-	});
+function add_love(lover, lovee){
+	$.post(
+		baseurl + "love/addlove",
+		{
+			lover: lover,
+			lovee: lovee
+		},
+		function(res) {
+			if (res.status == 1) {
+				$("#info_modal").find('.modal-title').text("关注成功");
+				$("#info_modal").find('.modal-cont').text("恭喜，关注成功！");
+				$("#info_modal").find('.btn-default').css('display','none');
+				$("#info_modal").find('.btn-primary').bind('click',function() {
+					window.location.href = window.location.href;
+				});
+				$("#info_modal").modal();
+			} else {
+				$("#info_modal").find('.modal-title').text("关注失败");
+				$("#info_modal").find('.modal-cont').text("对不起，操作失败，请重试！");
+				$("#info_modal").find('.btn-default').css('display','none');
+				$("#info_modal").find('.btn-primary').bind('click',function() {
+					$("#btn_love").html('<span class="fui-plus"></span>关注');
+					$("#btn_love").attr('disabled', false);
+				});
+				$("#info_modal").modal();
+			}
+		},
+		'json'
+	);
+	$("#btn_love").html('<i class="icon-spinner icon-spin"></i> 处理中');
+	$("#btn_love").attr('disabled', true);
 }
-
-
-function createcaptcha(){
-	$.post(baseurl + "ajax/captcha",function(str){
-		$("#captcha").html(str);
+function delete_love(lover,lovee,love){
+	$("#info_modal").find('.modal-title').text("取消关注");
+	$("#info_modal").find('.modal-cont').text("您确定要取消关注此用户吗？");
+	$("#info_modal").find('.btn-primary').bind('click',function() {
+		$("#info_modal").modal('hide');
+		$.post(
+			baseurl + "account/deletelove",
+			{
+				lover: lover,
+				lovee: lovee
+			},
+			function(res) {
+				if (res.status == 1) {
+					$("#info_modal").find('.modal-title').text("取消关注成功");
+					$("#info_modal").find('.modal-cont').text("恭喜，取消关注成功！");
+					$("#info_modal").find('.btn-default').css('display','none');
+					$("#info_modal").find('.btn-primary').bind('click',function() {
+						window.location.href = window.location.href;
+					});
+					$("#info_modal").modal();
+				} else {
+					$("#info_modal").find('.modal-title').text("关注失败");
+					$("#info_modal").find('.modal-cont').text("对不起，操作失败，请重试！");
+					$("#info_modal").find('.btn-default').css('display','none');
+					$("#info_modal").find('.btn-primary').bind('click',function() {
+						$("#btn_love").html(' 已关注');
+						$("#btn_love").attr('disabled', false);
+					});
+					$("#info_modal").modal();
+				}
+			},
+			'json'
+		);
+		$("#btn_love").html('<i class="icon-spinner icon-spin"></i> 处理中');
+		$("#btn_love").attr('disabled', true);
 	});
+	$("#info_modal").modal();	
 }
-function createcaptcha2(){
-	if($("#captcha").html()==''){
-		$.post(baseurl + "ajax/captcha",function(str){
-			$("#captcha").html(str);
-		});
+function change2dl(){
+	$("#btn_love").html('&nbsp;- 取消');
+}
+function change2al(){
+	$("#btn_love").html(' 已关注');
+}
+function show_user_page(tabid, uid, page, first){
+	$("html,body").animate(
+		{
+			scrollTop: $("#scroll_bench").offset().top 
+		},
+		700
+	);
+	if(first == 0 || $(tabid).html() == '') {	
+		$.post(
+			baseurl + "user/show_user_page",
+			{
+				tab_id: tabid,
+				user_id: uid,
+				page: page
+			},
+			function(gethtml) {
+        		$(tabid).html(gethtml);
+			}
+		);
+		$(tabid).html('<center><i class="icon-spinner icon-spin"></i> 正在加载</center>');
 	}
 }
-function savebi(){
-	$("#savebi").parent().html('<i class="icon-spinner icon-spin"></i> 正在保存');
-	var username = $("#username").val();
-	var sex = $('input[name="sex"]:checked').val()
-	var school = $("#university").val();
-	var degree = $("#degree").val();
-	var year = $("#year").val();
-	var sign = $("#sign").val();
-	var qq = $("#qq").val();
-	var phone = $("#phone").val();
-	var url = baseurl + "ajax/savebi";
-	$.post(url,{username:username,sex:sex,school:school,degree:degree,year:year,sign:sign,qq:qq,phone:phone},function(){ 
-    	window.location.href=baseurl + "setup";
-  	});
+function save_info(){
+	$.post(
+		baseurl + "user/save_info",
+		{
+			nick: $("#nick").val(),
+			sex: $("#sex").val(),
+			signature: $("#signature").val(),
+			type: $("#type").val(),
+			year: $("#year").val(),
+			email: $("#email").val(),
+			qq: $("#qq").val(),
+			weixin: $("#weixin").val(),
+			phone: $("#phone").val()
+		},
+		function(res) { 
+    		window.location.href = window.location.href;
+    	},
+    	'json'
+  	);
+	$("#btn_saveinfo").html('<i class="icon-spinner icon-spin"></i> 保存中');
+	$("#btn_saveinfo").attr('disabled', true);
 }
 function saveac(){
 	$("#saveac").parent().html('<i class="icon-spinner icon-spin"></i> 正在保存');
@@ -317,38 +396,7 @@ function savest(){
     	window.location.href=baseurl + "setup/star";
   	});
 }
-function addfavorite(title, url) {
-    try {
-        window.external.addFavorite(url, title);
-    }
-    catch (e) {
-        try {
-            window.sidebar.addPanel(title, url, "");
-        }
-        catch (e) {
-            alert("抱歉，您所使用的浏览器无法完成此操作。\n\n加入收藏失败，请使用Ctrl+D进行添加");
-        }
 
-    }
-}
-function addlove(lover,lovee,love){
-	$.post(baseurl + "ajax/addlove",{lover:lover,lovee:lovee,love:love},function(){
-		window.location.href=window.location.href;
-	})
-	$("#lovebox").html('<i class="icon-spinner icon-spin"></i> 正在处理');
-}
-function deletelove(lover,lovee,love){
-	$.post(baseurl + "ajax/deletelove",{lover:lover,lovee:lovee,love:love},function(){
-		window.location.href=window.location.href;
-	})
-	$("#lovebox").html('<i class="icon-spinner icon-spin"></i> 正在处理');
-}
-function change2dl(){
-	$("#lovebt").html('&nbsp;- 取消');
-}
-function change2al(){
-	$("#lovebt").html(' 已关注');
-}
 
 function addfocus(focuser,focusee,focuss){
 	$.post(baseurl + "ajax/addfocus",{focuser:focuser,focusee:focusee,focuss:focuss},function(str){
@@ -370,56 +418,7 @@ function change2af(){
 	$("#focusbt").html(' 已收藏');
 }
 
-function showuserpage(tab,uid,page,type){
-	var objstr = "#x";
-	switch(tab){
-		case 0:{
-			objstr = "#thisrec";
-			break;
-		}
-		case 1:{
-			objstr = "#bbsrec";
-			break;
-		}
-		case 2:{
-			objstr = "#mypost";
-			break;
-		}
-		case 3:{
-			objstr = "#myfocus";
-			break;
-		}
-		case 4:{
-			objstr = "#mylove";
-			break;
-		}
-		case 5:{
-			objstr = "#mycomm";
-			break;
-		}
-		case 6:{
-			objstr = "#mycomm";
-			break;
-		}
-		case 7:{
-			objstr = "#mycomm";
-			break;
-		}
-		case 8:{
-			objstr = "#mymess";
-			break;
-		}
-		default:
-			break;
-	}
-	$("html,body").animate({scrollTop:$("#scrollhead1").offset().top}, 700);
-	if($(objstr).html()==''||type==1){
-		$.post(baseurl + "ajax/show_user_page",{tab:tab,uid:uid,page:page},function(gethtml){
-        	$(objstr).html(gethtml);
-		})
-		$(objstr).html('<center><i class="icon-spinner icon-spin"></i> 正在加载</center>');
-	}
-}
+
 function gotocomm(uid){
 	$('#mycommlink').tab('show');
 	if($("#mycomm").html()==''){
