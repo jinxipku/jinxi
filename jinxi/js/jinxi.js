@@ -19,6 +19,19 @@ $(document).ready( function() {
 $(window).bind('scroll',function() {
 	$(this).scrollTop() > 600 ? $("#back_to_top").fadeIn(500) : $("#back_to_top").fadeOut(500);
 });
+$("input#qq,input#weixin,input#phone,textarea").bind('blur',function() {
+	if ($(this).val().length == 0) {
+		$(this).val("未填写");
+	}
+});
+$("input#qq,input#weixin,input#phone,textarea").bind('focus',function() {
+	if ($(this).val() == "未填写") {
+		$(this).val("");
+	}
+});
+$('#choose_school').on('hidden.bs.modal', function () {
+	$('#school').attr('disabled', false);
+});
 $("input").bind('blur',function() {
 	if ($(this).attr("id") == "school" || $(this).val().length > 0) {
 		$(this).removeClass("flat");
@@ -34,9 +47,6 @@ $("textarea").bind('blur',function() {
 	else {
 		$(this).addClass("flat");
 	}
-});
-$('#choose_school').on('hidden.bs.modal', function () {
-	$('#school').attr('disabled', false);
 });
 function add_favorite(title, url) {
     try {
@@ -357,7 +367,7 @@ function save_info(){
 		baseurl + "user/save_info",
 		{
 			nick: $("#nick").val(),
-			sex: $("#sex").val(),
+			sex: $("input[name='sex']:checked").val(),
 			signature: $("#signature").val(),
 			type: $("#type").val(),
 			year: $("#year").val(),

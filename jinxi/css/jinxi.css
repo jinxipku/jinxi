@@ -280,8 +280,10 @@ div#user_header p.user_post{
 }
 div#user_header p.user_sign{
 	font-family: 宋体;
-	font-size: 14px;
+	font-size: 15px;
+	line-height: 1.4;
 	color: #666;
+	margin-top: 10px;
 	margin-bottom: 3px;
 }
 div#user_tabs {
@@ -373,6 +375,24 @@ div.set_row>div.set_input input{
 div.set_row>div.set_input textarea{
 	width: 300px;
 }
+
+div.set_table_content button#btn_upload_head {
+	width: 110px;
+	margin-bottom: 20px;
+}
+div#show_head img {
+	width: 200px;
+}
+div#show_head button#btn_save_head {
+	margin-top: 30px;
+	width: 110px;
+}
+div#show_head button#btn_cancel_head {
+	margin-top: 30px;
+	margin-left: 20px;
+	width: 110px;"
+}
+
 
 
 

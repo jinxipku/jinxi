@@ -247,8 +247,8 @@ $.fn.ajaxSubmit = function(options) {
         var id = 'jqFormIO' + $.fn.ajaxSubmit.counter++;
         var $io = $('<iframe id="' + id + '" name="' + id + '" />');
         var io = $io[0];
-        var op8 = $.browser.opera && window.opera.version() < 9;
-        if ($.browser.msie || op8) io.src = 'javascript:false;document.write("");';
+        var op8 = /opera/.test(navigator.userAgent.toLowerCase()) && window.opera.version() < 9;
+        if (/msie/.test(navigator.userAgent.toLowerCase()) || op8) io.src = 'javascript:false;document.write("");';
         $io.css({ position: 'absolute', top: '-1000px', left: '-1000px' });
 
         // make sure form attrs are set

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-01 21:05:03
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-01 23:15:05
          compiled from "..\application\views\setup\setinfo.php" */ ?>
 <?php /*%%SmartyHeaderCode:28967551ad88057ca33-60526982%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '4844f194e5eb3a6167e55daecb5bbe0b7346c724' => 
     array (
       0 => '..\\application\\views\\setup\\setinfo.php',
-      1 => 1427893501,
+      1 => 1427901302,
       2 => 'file',
     ),
   ),
@@ -47,14 +47,14 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 					<p>性 别</p>
 				</div>
 				<div class="set_input">
-					<label class="radio <?php if ($_smarty_tpl->tpl_vars['login_user']->value['sex']=="兔星人") {?>checked<?php }?>">
-						<input type="radio" id="sex" name="sex" value="0" data-toggle="radio"/>兔星人
+					<label class="radio<?php if ($_smarty_tpl->tpl_vars['login_user']->value['sex']=='兔星人') {?> checked<?php }?>">
+						<input type="radio" id="sex0" name="sex" value="0" data-toggle="radio"<?php if ($_smarty_tpl->tpl_vars['login_user']->value['sex']=='兔星人') {?> checked<?php }?>/>兔星人
 					</label>
-					<label class="radio <?php if ($_smarty_tpl->tpl_vars['login_user']->value['sex']=='汪星人') {?>checked<?php }?>">
-						<input type="radio" id="sex" name="sex" value="1" data-toggle="radio"/>汪星人
+					<label class="radio<?php if ($_smarty_tpl->tpl_vars['login_user']->value['sex']=='汪星人') {?> checked<?php }?>">
+						<input type="radio" id="sex1" name="sex" value="1" data-toggle="radio"<?php if ($_smarty_tpl->tpl_vars['login_user']->value['sex']=='汪星人') {?> checked<?php }?>/>汪星人
 					</label>
-					<label class="radio <?php if ($_smarty_tpl->tpl_vars['login_user']->value['sex']=='喵星人') {?>checked<?php }?>"> 
-						<input type="radio" id="sex" name="sex" value="2" data-toggle="radio"/>喵星人
+					<label class="radio<?php if ($_smarty_tpl->tpl_vars['login_user']->value['sex']=='喵星人') {?> checked<?php }?>"> 
+						<input type="radio" id="sex2" name="sex" value="2" data-toggle="radio"<?php if ($_smarty_tpl->tpl_vars['login_user']->value['sex']=='喵星人') {?> checked<?php }?>/>喵星人
 					</label> 
 				</div>
 				<div class="clear"></div>
@@ -65,7 +65,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 					<p>签 名</p>
 				</div>
 				<div class="set_input">
-					<textarea rows="4" id="signature" name="signature" class="form-control flat" maxlength=100><?php echo $_smarty_tpl->tpl_vars['login_user']->value['signature'];?>
+					<textarea rows="4" id="signature" name="signature" class="form-control flat" maxlength=80><?php echo $_smarty_tpl->tpl_vars['login_user']->value['signature'];?>
 </textarea>
 				</div>
 				<div class="clear"></div>
@@ -94,13 +94,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 				</div>
 				<div class="set_input">
 					<select id="type" name="type">
-						<option value="0" <?php if ($_smarty_tpl->tpl_vars['login_user']->value['type']=='未选择') {?>'selected'<?php }?>>未选择</option>
-						<option value="1" <?php if ($_smarty_tpl->tpl_vars['login_user']->value['type']=='本科生') {?>'selected'<?php }?>>本科生</option>
-						<option value="2" <?php if ($_smarty_tpl->tpl_vars['login_user']->value['type']=='硕士生') {?>'selected'<?php }?>>硕士生</option>
-						<option value="3" <?php if ($_smarty_tpl->tpl_vars['login_user']->value['type']=='博士生') {?>'selected'<?php }?>>博士生</option>
-						<option value="4" <?php if ($_smarty_tpl->tpl_vars['login_user']->value['type']=='教职工') {?>'selected'<?php }?>>教职工</option>
-						<option value="5" <?php if ($_smarty_tpl->tpl_vars['login_user']->value['type']=='校友') {?>'selected'<?php }?>>校友</option>
-						<option value="6" <?php if ($_smarty_tpl->tpl_vars['login_user']->value['type']=='校外合作者') {?>'selected'<?php }?>>校外合作者</option>
+						<option value="0"<?php if ($_smarty_tpl->tpl_vars['login_user']->value['type']=='未选择') {?> selected<?php }?>>未选择</option>
+						<option value="1"<?php if ($_smarty_tpl->tpl_vars['login_user']->value['type']=='本科生') {?> selected<?php }?>>本科生</option>
+						<option value="2"<?php if ($_smarty_tpl->tpl_vars['login_user']->value['type']=='硕士生') {?> selected<?php }?>>硕士生</option>
+						<option value="3"<?php if ($_smarty_tpl->tpl_vars['login_user']->value['type']=='博士生') {?> selected<?php }?>>博士生</option>
+						<option value="4"<?php if ($_smarty_tpl->tpl_vars['login_user']->value['type']=='教职工') {?> selected<?php }?>>教职工</option>
+						<option value="5"<?php if ($_smarty_tpl->tpl_vars['login_user']->value['type']=='校友') {?> selected<?php }?>>校友</option>
+						<option value="6"<?php if ($_smarty_tpl->tpl_vars['login_user']->value['type']=='校外合作者') {?> selected<?php }?>>校外合作者</option>
 					</select>
 				</div>
 				<div class="clear"></div>
@@ -112,7 +112,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 				</div>
 				<div class="set_input">
 					<select id="year">
-						<option value="0"<?php if ($_smarty_tpl->tpl_vars['login_user']->value['year']==0) {?> 'selected'<?php }?>>未选择</option>
+						<option value="0"<?php if ($_smarty_tpl->tpl_vars['login_user']->value['year']==0) {?> selected<?php }?>>未选择</option>
 					<?php $_smarty_tpl->tpl_vars["loop"] = new Smarty_variable("8", null, 0);?>
 					<?php if (isset($_smarty_tpl->tpl_vars['smarty']->value['section']["loop"])) unset($_smarty_tpl->tpl_vars['smarty']->value['section']["loop"]);
 $_smarty_tpl->tpl_vars['smarty']->value['section']["loop"]['name'] = "loop";
@@ -138,13 +138,13 @@ $_smarty_tpl->tpl_vars['smarty']->value['section']["loop"]['index_next'] = $_sma
 $_smarty_tpl->tpl_vars['smarty']->value['section']["loop"]['first']      = ($_smarty_tpl->tpl_vars['smarty']->value['section']["loop"]['iteration'] == 1);
 $_smarty_tpl->tpl_vars['smarty']->value['section']["loop"]['last']       = ($_smarty_tpl->tpl_vars['smarty']->value['section']["loop"]['iteration'] == $_smarty_tpl->tpl_vars['smarty']->value['section']["loop"]['total']);
 ?>
-　　						<option value="<?php echo $_smarty_tpl->getVariable('smarty')->value['section']['loop']['index']+1998;?>
-"<?php if ($_smarty_tpl->tpl_vars['login_user']->value['year']==$_smarty_tpl->getVariable('smarty')->value['section']['loop']['index']+2008) {?> 'selected'<?php }?>>
+　　						<option value="<?php echo $_smarty_tpl->getVariable('smarty')->value['section']['loop']['index']+2008;?>
+"<?php if ($_smarty_tpl->tpl_vars['login_user']->value['year']==$_smarty_tpl->getVariable('smarty')->value['section']['loop']['index']+2008) {?> selected<?php }?>>
 						<?php echo $_smarty_tpl->getVariable('smarty')->value['section']['loop']['index']+2008;?>
 级
 						</option>
 　　					<?php endfor; endif; ?>
-						<option value="1"<?php if ($_smarty_tpl->tpl_vars['login_user']->value['year']==1) {?> 'selected'<?php }?>>其他</option>
+						<option value="1"<?php if ($_smarty_tpl->tpl_vars['login_user']->value['year']==1) {?> selected<?php }?>>其他</option>
 					</select>
 				</div>
 				<div class="clear"></div>

@@ -99,6 +99,27 @@ class User extends MY_Controller {
 		}
 	}
 
+	public function setup($set_tabs = 1) {
+		$this->output->enable_profiler(TRUE);
+		$login_user =  $this->session->userdata('login_user');	
+		if(empty($login_user)) {
+			$this->session->set_userdata('mem_url', base_url('setup'));
+			redirect('account/loginfo/redirect');
+		}
+		$this->assign('login_user', $login_user);
+		$this->assign('title', '今昔网-设置');
+		$this->assign('baseurl', base_url());
+		$this->assign('tips', show_tips());
+		$this->assign('nav_tab', 6);
+		$this->assign('set_tab', $set_tabs);
+		$this->assign('this', $this);
+		
+		$this->display ( 'templates/header.php' );
+		$this->display ( 'setup/main.php' );
+		$this->display ( 'setup/side.php' );
+		$this->display ( 'templates/footer.php' );
+	}
+
 
 // +----------------------------------------------------------------------
 // | 以下为ajax接口
@@ -134,11 +155,12 @@ class User extends MY_Controller {
 		$this->load->library('upload',$config);
 
 		if( !$this->upload->do_upload($field) ){
-			$this->ajaxReturn(null,"上传失败:".$this->upload->display_errors ( '', '' ),0);//可以删掉$this->upload->display_errors ( '', '' )
+			$this->ajaxReturn(null, $this->upload->display_errors ( '', '' ),0);//可以删掉$this->upload->display_errors ( '', '' )
 		}else{			
 			$res = $this->upload->data();
 			$data['file_name'] = $res['file_name'];  //返回上传后的文件名
 			$data['image_width'] = $res['image_width'];
+			$data['image_height'] = $res['image_height'];
 			$this->ajaxReturn($data,"上传成功",1);
 		}
 	} 
@@ -163,7 +185,7 @@ class User extends MY_Controller {
 		if (! $this->image_lib->crop ()) {
 			$this->ajaxReturn(null,"裁剪失败".$this->image_lib->display_errors (),0);
 		} else {
-			//分别生成一张100*100的图和一张60*60的图
+			//分别生成一张200*200的图和一张60*60的图
 			$config2 ['image_library'] = 'gd2';
 			$config2 ['source_image'] = $new_image;
 
@@ -172,8 +194,8 @@ class User extends MY_Controller {
 			
 			$config2 ['new_image'] = $head_image;
 			$config2 ['maintain_ratio'] = FALSE; 
-			$config2 ['width'] = 300;
-			$config2 ['height'] = 300;
+			$config2 ['width'] = 200;
+			$config2 ['height'] = 200;
 			$this->image_lib->initialize($config2);
 			$this->image_lib->resize ();
 			
@@ -194,10 +216,20 @@ class User extends MY_Controller {
 			$info['thumb'] = $t_image;
 			$this->user_model->update_info($user_id,$info);
 
-			unlink($source_image);
-			unlink($new_image);
+			//unlink ( './img/head/' . $source_image );
+			//unlink ( './img/head/' . $new_image );
+			$this->session->set_userdata('login_user',$this->user_model->get_info($user_id));
 			$this->ajaxReturn('',"裁剪成功",1);
 		}
+	}
+
+	public function delete_file($url) {
+		$login_user =  $this->session->userdata('login_user');	
+		if(empty($login_user)) {
+			$this->ajaxReturn(null,"删除失败",0);
+		}
+		unlink ( './img/head/' . $url );
+		$this->ajaxReturn(null,"删除成功",1);
 	}
 
 

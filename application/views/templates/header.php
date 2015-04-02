@@ -74,7 +74,7 @@
 							<a href="#">帮助</a>
 						</li>
 						<li {if $nav_tab == 6}class=" active"{/if}>
-							<a href="{$baseurl}setup">设置</a>
+							<a href="{$baseurl}user/setup">设置</a>
 						</li>
 						{if isset($login_user)}
 						<li>

@@ -12,7 +12,7 @@
 						<small>（{$user.visits}人看过，{$user.lovers}名关注者）</small>
 					</p>
 					<p class="user_level">{$user.level}级 连续登陆{$user.logins}天</p>
-					<p class="user_info">{$user.sex} | {$user.school_name} | {$user.type} | {if $user.year == 0}未选择{else if $user.year == 1}其他{else}{$user.year}级{/if}</p>
+					<p class="user_info">{$user.sex} | {$user.school_name}{if $user.type != '未选择'} | {$user.type}{/if}{if $user.year > 1} | {$user.year}级{/if}</p>
 					<p class="user_post">发帖总数：{$user.post_number} | 有效帖数：{$user.active_post_number}</p>
 					<p class="user_sign">签名：{$user.signature}</p>
 				</div>
@@ -22,7 +22,7 @@
 						<span class="fui-plus"></span>关注
 					</a>
 					{elseif isset($myself)}
-					<a type="button" class="btn btn-sm btn-info" href="{$baseurl}setup">
+					<a type="button" class="btn btn-sm btn-info" href="{$baseurl}user/setup">
 						<span class="fui-gear"></span>编辑
 					</a>
 					{elseif isset($has_love)}

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-31 19:55:17
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-02 01:04:40
          compiled from "..\application\views\templates\header.php" */ ?>
 <?php /*%%SmartyHeaderCode:28843550fb3d06e9f62-69507363%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '9f2015c56948a41a6cd8439dffba65d33dd903b7' => 
     array (
       0 => '..\\application\\views\\templates\\header.php',
-      1 => 1427802915,
+      1 => 1427907852,
       2 => 'file',
     ),
   ),
@@ -129,7 +129,7 @@ img/head/<?php echo $_smarty_tpl->tpl_vars['login_user']->value['thumb'];?>
 						</li>
 						<li <?php if ($_smarty_tpl->tpl_vars['nav_tab']->value==6) {?>class=" active"<?php }?>>
 							<a href="<?php echo $_smarty_tpl->tpl_vars['baseurl']->value;?>
-setup">设置</a>
+user/setup">设置</a>
 						</li>
 						<?php if (isset($_smarty_tpl->tpl_vars['login_user']->value)) {?>
 						<li>

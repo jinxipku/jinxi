@@ -22,7 +22,7 @@
 						{$this->display ( 'setup/setinfo.php' )}
 					</div>
 					<div id="set_head" class="tab-pane fade{if $set_tab == 2} in active{/if}">
-						{$this->display ( 'setup/setinfo.php' )}
+						{$this->display ( 'setup/sethead.php' )}
 					</div>
 					<div id="set_pw" class="tab-pane fade{if $set_tab == 3} in active{/if}">
 						{$this->display ( 'setup/setinfo.php' )}

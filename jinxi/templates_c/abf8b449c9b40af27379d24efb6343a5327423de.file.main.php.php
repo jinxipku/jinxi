@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-01 01:47:54
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-02 00:04:03
          compiled from "..\application\views\setup\main.php" */ ?>
 <?php /*%%SmartyHeaderCode:19413551ad20d8a86f1-96717695%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'abf8b449c9b40af27379d24efb6343a5327423de' => 
     array (
       0 => '..\\application\\views\\setup\\main.php',
-      1 => 1427824072,
+      1 => 1427903695,
       2 => 'file',
     ),
   ),
@@ -49,7 +49,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
 					</div>
 					<div id="set_head" class="tab-pane fade<?php if ($_smarty_tpl->tpl_vars['set_tab']->value==2) {?> in active<?php }?>">
-						<?php echo $_smarty_tpl->tpl_vars['this']->value->display('setup/setinfo.php');?>
+						<?php echo $_smarty_tpl->tpl_vars['this']->value->display('setup/sethead.php');?>
 
 					</div>
 					<div id="set_pw" class="tab-pane fade<?php if ($_smarty_tpl->tpl_vars['set_tab']->value==3) {?> in active<?php }?>">

@@ -2,73 +2,98 @@
 	$(function() {
 		var truewidth;
 		var trueheight;
+		var file;
 		$("#form_photo").ajaxForm();// ajaxForm()只是绑定表单事件，并不是提交表单。。。
 		$("#save_photo").ajaxForm();// ajaxForm()只是绑定表单事件，并不是提交表单。。。
-		$("#button_photo").click(function() {
-			if ($("#userfile").val() == '') {
-				$("#fileinfo").html('请先选择一张图片！支持gif、jpg、png图片格式，大小不要超过2M');
+		$("#btn_upload_head").click(function() {
+			if ($("#head_image").val() == '') {
+				$("#file_info").html('请先选择一张图片！支持gif、jpg、png图片格式，大小不要超过2M');
 				return;
 			}
 			// 判断上传格式，判断图片大小好像只能在服务端检测，所以预览图片必须先传上去
 			var options = {
 				success : showResponse,// 上传成功回调函数
+				dataType : 'json'
 			};
 
 			$("#form_photo").ajaxSubmit(options);
-			$("#fileinfo").html('正在上传');
+			$("#file_info").html('正在上传');
+			$("#btn_upload_head").html('<i class="icon-spinner icon-spin"></i> 上传中');
+			$("#btn_upload_head").attr('disabled', true);
 		});
 		function showResponse(data) {
-			if (data.indexOf('.jpg') < 0 && data.indexOf('.gif') < 0
-					&& data.indexOf('.png') < 0) {
-				if (data == 'The filetype you are attempting to upload is not allowed.')
-					data = '您上传的图片格式不符合要求，请重新上传。';
-				else if (data == 'The uploaded file exceeds the maximum allowed size in your PHP configuration file.')
-					data = '您上传的图片大小超过了2M，请重新上传。';
-				$("#fileinfo").html(data);
+			$("#btn_upload_head").html('上 传');
+			$("#btn_upload_head").attr('disabled', false);
+			if (data.status == 0) {
+				if (data.data == 'The filetype you are attempting to upload is not allowed.')
+					$("#file_info").html('您上传的图片格式不符合要求，请重新上传。');
+				else if (data.data == 'The uploaded file exceeds the maximum allowed size in your PHP configuration file.')
+					$("#file_info").html('您上传的图片大小超过了2M，请重新上传。');
+				else
+					$("#file_info").html(data.data);
 				return;
 			}
-			truewidth = data.split("***")[1];
-			trueheight = data.split("***")[2];
-			data = data.split("***")[0];
-			$("#hitype").val(data.split('_')[1]);
-			$("#fileinfo").html('上传成功，请截取你喜欢的部分并点击"保存"按钮。');
-			$img4cut = '<div class="con"><img class="img4cut" style="width: 292px;" id="jcrop_photo" alt="" src="http://xn--wmqr18c.cn/img/head/'
-					+ data + '" />';
-			$img4disp = '<div class="panel panel-default" style=" position: absolute; width: 200px; height: 200px; top: 340px; left: 400px; overflow: hidden;"><img class="img4cut" id="preview_photo" alt="" src="http://xn--wmqr18c.cn/img/head/'
-					+ data
-					+ '" /></div><div><button id="hiconfirm" type="button" class="btn btn-primary btn-lg" style="border-radius: 1px; margin-top: 30px;">保存</button><button id="hicancel" type="button" class="btn btn-default btn-lg" style="border-radius: 1px; margin-top: 30px; margin-left: 20px;">取消</button></div></div>';
-			$("#imgshow").html(
-					'<p class="con">头像截取（右侧预览）</p>' + $img4cut + $img4disp);
+			truewidth = data.data.image_width;
+			trueheight = data.data.image_height;
+			file = data.data.file_name;
+			$("#file_name").val(file);
+			$("#file_info").html('上传成功，请截取你喜欢的部分并点击"保存"按钮。');
+			$img4cut = '<div><img class="img4cut" style="width: 292px;" id="jcrop_photo" alt="" src="http://www.xn--wmqr18c.cn/img/head/'
+					+ file + '" />';
+			$img4disp = '<div class="panel panel-default" style=" position: absolute; width: 200px; height: 200px; top: 520px; left: 730px; overflow: hidden;"><img class="img4cut" id="preview_photo" alt="" src="http://www.xn--wmqr18c.cn/img/head/'
+					+ file
+					+ '" /></div><div><button id="btn_save_head" type="button" class="btn btn-primary btn-lg">保 存</button><button id="btn_cancel_head" type="button" class="btn btn-default btn-lg">取 消</button></div></div>';
+			$("#show_head").html(
+					'<p class="help-block">头像截取（右侧预览）</p>' + $img4cut + $img4disp);
 			// 现在开始准备
 			init_photo();// 初始化jcrop
 			$("html,body").animate({
-				scrollTop : 330
+				scrollTop : 395
 			}, 700);
-			$("#hiconfirm").click(function() {
-				$("#hiconfirm").parent().html('<i class="icon-spinner icon-spin"></i> 正在保存');
+			$("#btn_save_head").click(function() {
+				$("#btn_save_head").html('<i class="icon-spinner icon-spin"></i> 保存中');
+				$("#btn_save_head").attr('disabled', true);
 				var options = {
 					success : saveResponse,// 上传成功回调函数
+					dataType : 'json'
 				};
 
 				$("#save_photo").ajaxSubmit(options);
 			});
-			$("#hicancel").click(function() {
-				var url = 'http://xn--wmqr18c.cn/ajax/delete_file/'+data;
-				$.post(url,function(){
-					window.location.href = "http://xn--wmqr18c.cn/setup/headimg";
-				});
+			$("#btn_cancel_head").click(function() {
+				$.post(
+					'http://www.xn--wmqr18c.cn/user/delete_file/' + file,
+					function(){
+						window.location.href = "http://www.xn--wmqr18c.cn/user/setup/2";
+					}
+				);
 				window.onbeforeunload = function() { 
 				} 
 			});
-			window.onbeforeunload = function() { 
-				var url = 'http://xn--wmqr18c.cn/ajax/delete_file/'+data;
-				$.post(url);
+			window.onbeforeunload = function() {
+				$.post('http://www.xn--wmqr18c.cn/user/delete_file/' + file);
 			} 
 		}
 		function saveResponse(data) {
 			window.onbeforeunload = function() { 
 			}
-			window.location.href="http://xn--wmqr18c.cn/setup/headimg";
+			if (data.status == 1) {
+				$("#info_modal").find('.modal-title').text("设置成功");
+				$("#info_modal").find('.modal-cont').text("恭喜，头像设置成功！");
+				$("#info_modal").find('.btn-default').css('display','none');
+				$("#info_modal").find('.btn-primary').bind('click',function() {
+					window.location.href = window.location.href;
+				});
+				$("#info_modal").modal();
+			} else {
+				$("#info_modal").find('.modal-title').text("设置失败");
+				$("#info_modal").find('.modal-cont').text("对不起，操作失败，请重试！");
+				$("#info_modal").find('.btn-default').css('display','none');
+				$("#info_modal").find('.btn-primary').bind('click',function() {
+					window.location.href = window.location.href;
+				});
+				$("#info_modal").modal();
+			}
 		}
 		var photo_width = 292;// 设置显示预览图片的最大尺寸
 		var photo_height =  Math.round(292*trueheight/truewidth);
