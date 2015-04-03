@@ -199,6 +199,26 @@ class Account extends MY_Controller {
 		$this->session->unset_userdata ( 'login_user' );
 	}
 
+	public function docheckpw(){
+		$user = $this->session->userdata( 'login_user' );
+		if($user == null){
+			$this->ajaxReturn(null,'请先登录',0);
+		}
+		$pwd = $_POST['password'];
+		if( strlen( $pwd ) == 0 ){
+			$this->ajaxReturn(null,'请输入密码',0);
+		}
+		$account = $this->account_model->get_account($user['id'],null);
+		$rpwd = $this->encrypt->decode($account['password']);
+	
+		if($rpwd === $pwd){
+			$this->ajaxReturn(null,'',1);
+		}else{
+			$this->ajaxReturn(null,'密码错误',0);
+		}
+
+	}
+
 
 // +----------------------------------------------------------------------
 // | 私有函数
