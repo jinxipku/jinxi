@@ -216,9 +216,12 @@ class User extends MY_Controller {
 			$info['thumb'] = $t_image;
 			$this->user_model->update_info($user_id,$info);
 
-			//unlink ( './img/head/' . $source_image );
-			//unlink ( './img/head/' . $new_image );
-			$this->session->set_userdata('login_user',$this->user_model->get_info($user_id));
+			unlink ( $source_image );
+			unlink ( $new_image );
+			
+			$user['head'] = $h_image;
+			$user['thumb'] = $t_image;
+			$this->session->set_userdata("login_user",$user);
 			$this->ajaxReturn('',"裁剪成功",1);
 		}
 	}

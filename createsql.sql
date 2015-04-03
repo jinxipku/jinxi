@@ -39,6 +39,8 @@ create table jx_user(
 	is_weixin_public tinyint(1) unsigned not null default 0 comment '是否开放微信',
 	post_number int(11) not null default 0 comment '总帖子数量',
 	active_post_number int(11) not null default 0 comment '活跃帖子数量',
+
+	is_sign_public tinyint(1) unsigned not null default 0 comment '回复时是否带签名',
 	primary key(id)
 )DEFAULT CHARSET=utf8 COMMENT='用户profile表';
 
