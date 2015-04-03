@@ -392,6 +392,16 @@ div#show_head button#btn_cancel_head {
 	width: 110px;"
 }
 
+div.set_row>label {
+	margin-left: 20px;
+	margin-bottom: 20px;
+}
+div.set_row>div.form-group {
+	width: 250px;
+	margin-left: 20px;
+	margin-bottom: 10px;
+}
+
 
 
 
