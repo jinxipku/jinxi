@@ -322,12 +322,12 @@ div.sorry_box p{
 
 div#set_tabs{
 	float: left;
-	width: 115px !important;
+	width: 102px !important;
 	margin-right: 17px;
 }
 div#set_panels{
 	float: left;
-	width: 640px !important;
+	width: 653px !important;
 }
 div#set_panels>div>div {
 	margin: 30px 40px 30px 40px;
@@ -400,6 +400,39 @@ div.set_row>div.form-group {
 	width: 250px;
 	margin-left: 20px;
 	margin-bottom: 10px;
+}
+
+div.set_table_content div#nick_color_box {
+	height: 35px;
+}
+div.set_table_content>p.star_info {
+	font-size: 16px;
+	margin-top: 20px;
+	margin-bottom: 30px;
+}
+div.colordis {
+	float: left;
+	height: 35px;
+	width: 60px;
+	text-align: center;
+	color: #FFF;
+	margin-bottom: 15px;
+	margin-right: 15px;
+}
+div.colordis:nth-child(1) {
+	background-color: #1abc9c;
+}
+div.colordis:nth-child(2) {
+	background-color: #3498DB;
+}
+div.colordis:nth-child(3) {
+	background-color: #E74C3C;
+}
+div.colordis:nth-child(4) {
+	background-color: #F1C40F;
+}
+div.colordis:nth-child(5) {
+	background-color: #9B59B6;
 }
 
 
@@ -573,7 +606,6 @@ div.ujian-hook div{
 	border-radius: 1px !important;
 }
 div.colordis{
-	position: relative;
 	float: left;
 	height: 35px;
 	width: 60px;

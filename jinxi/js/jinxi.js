@@ -423,7 +423,7 @@ function save_info(){
 				$("#info_modal").find('.modal-cont').text("恭喜，设置成功！");
 				$("#info_modal").find('.btn-default').css('display','none');
 				$("#info_modal").find('.btn-primary').bind('click',function() {
-					window.location.href = window.location.href;
+					window.location.href = baseurl + "user/setup";
 				});
 				$("#info_modal").modal();
 			} else {
@@ -433,6 +433,7 @@ function save_info(){
 				$("#info_modal").find('.btn-primary').bind('click',function() {
 					$("#btn_saveinfo").html('保 存');
 					$("#btn_saveinfo").attr('disabled', false);
+					$("#info_modal").modal('hide');
 				});
 				$("#info_modal").modal();
 			}
@@ -466,7 +467,7 @@ function save_account(){
 				$("#info_modal").find('.modal-cont').text("恭喜，设置成功！");
 				$("#info_modal").find('.btn-default').css('display','none');
 				$("#info_modal").find('.btn-primary').bind('click',function() {
-					window.location.href = baseurl + "user/account/3";
+					window.location.href = baseurl + "user/setup/3";
 				});
 				$("#info_modal").modal();
 			} else {
@@ -476,6 +477,7 @@ function save_account(){
 				$("#info_modal").find('.btn-primary').bind('click',function() {
 					$("#btn_saveaccount").html('保 存');
 					$("#btn_saveaccount").attr('disabled', false);
+					$("#info_modal").modal('hide');
 				});
 				$("#info_modal").modal();
 			}
@@ -485,14 +487,37 @@ function save_account(){
 	$("#btn_saveaccount").html('<i class="icon-spinner icon-spin"></i> 保存中');
 	$("#btn_saveaccount").attr('disabled', true);
 }
-function savest(){
-	$("#savest").parent().html('<i class="icon-spinner icon-spin"></i> 正在保存');
-	var namecolor = $("#namecolor").val();
-	var autoon = $("#autoon").is(':checked')?1:0;
-	var url = baseurl + "ajax/savest";
-	$.post(url,{namecolor:namecolor,autoon:autoon},function(){ 
-    	window.location.href=baseurl + "setup/star";
-  	});
+function save_star(){
+	$.post(
+		baseurl + "user/save_info",
+		{
+			nick_color: $("#nick_color").val()
+		},
+		function(res) {
+			if (res.status == 1) {
+				$("#info_modal").find('.modal-title').text("设置成功");
+				$("#info_modal").find('.modal-cont').text("恭喜，设置成功！");
+				$("#info_modal").find('.btn-default').css('display','none');
+				$("#info_modal").find('.btn-primary').bind('click',function() {
+					window.location.href = baseurl + "user/setup/4";
+				});
+				$("#info_modal").modal();
+			} else {
+				$("#info_modal").find('.modal-title').text("设置失败");
+				$("#info_modal").find('.modal-cont').text("对不起，您还没有达到所需等级！");
+				$("#info_modal").find('.btn-default').css('display','none');
+				$("#info_modal").find('.btn-primary').bind('click',function() {
+					$("#btn_savestar").html('保 存');
+					$("#btn_savestar").attr('disabled', false);
+					$("#info_modal").modal('hide');
+				});
+				$("#info_modal").modal();
+			}
+    	},
+    	'json'
+  	);
+	$("#btn_savestar").html('<i class="icon-spinner icon-spin"></i> 保存中');
+	$("#btn_savestar").attr('disabled', true);
 }
 
 

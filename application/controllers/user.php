@@ -104,7 +104,7 @@ class User extends MY_Controller {
 		$this->output->enable_profiler(TRUE);
 		$login_user =  $this->session->userdata('login_user');	
 		if(empty($login_user)) {
-			$this->session->set_userdata('mem_url', base_url('setup'));
+			$this->session->set_userdata('mem_url', base_url('user/setup'));
 			redirect('account/loginfo/redirect');
 		}
 		$this->assign('login_user', $login_user);
@@ -112,6 +112,8 @@ class User extends MY_Controller {
 		$this->assign('baseurl', base_url());
 		$this->assign('tips', show_tips());
 		$this->assign('nav_tab', 6);
+		if ($set_tabs != 1 && $set_tabs != 2 && $set_tabs != 3 && $set_tabs != 4)
+			$set_tabs = 1;
 		$this->assign('set_tab', $set_tabs);
 		$this->assign('this', $this);
 		
