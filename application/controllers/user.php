@@ -154,10 +154,16 @@ class User extends MY_Controller {
 						//TODO:提示是否修改成功。。。。
 					}
 				}
-			}else $this->ajaxReturn(null,'密码为空',0);
+			}
 			unset($_POST['pwo']);
 			unset($_POST['pwn']);
 			unset($_POST['pwa']);
+		}
+
+		if(isset($_POST['nick_color'])){
+			if($user['level'] < 15){
+				$this->ajaxReturn(null,"未达到等级",0);
+			}
 		}
 		
 		$res = $this->user_model->update_info($user['id'],$_POST);
@@ -216,6 +222,8 @@ class User extends MY_Controller {
 			$this->ajaxReturn(null,"裁剪失败".$this->image_lib->display_errors (),0);
 		} else {
 			//分别生成一张200*200的图和一张60*60的图
+
+			//TODO:判断结果
 			$config2 ['image_library'] = 'gd2';
 			$config2 ['source_image'] = $new_image;
 
@@ -227,7 +235,7 @@ class User extends MY_Controller {
 			$config2 ['width'] = 200;
 			$config2 ['height'] = 200;
 			$this->image_lib->initialize($config2);
-			$this->image_lib->resize ();
+			$flag1 = $this->image_lib->resize ();  //resize结果
 			
 			$config3 ['image_library'] = 'gd2';
 			$config3 ['source_image'] = $new_image;
@@ -239,20 +247,29 @@ class User extends MY_Controller {
 			$config3 ['width'] = 60;
 			$config3 ['height'] = 60;
 			$this->image_lib->initialize($config3);
-			$this->image_lib->resize ();
-			
-
-			$info['head'] = $h_image;
-			$info['thumb'] = $t_image;
-			$this->user_model->update_info($user_id,$info);
+			$flag2 = $this->image_lib->resize ();  //resize结果
 
 			unlink ( $source_image );
 			unlink ( $new_image );
-			
-			$user['head'] = $h_image;
-			$user['thumb'] = $t_image;
-			$this->session->set_userdata("login_user",$user);
-			$this->ajaxReturn('',"裁剪成功",1);
+
+			if(!$flag1||!$flag2){
+				$this->ajaxReturn('',"裁剪失败",0);
+			}else{
+				$info['head'] = $h_image;
+				$info['thumb'] = $t_image;
+				$this->user_model->update_info($user_id,$info);
+
+				if($user['head'] != $this->config->item('default_head')){
+					unlink($this->head_dir . $user['head']);
+				}
+				if($user['thumb'] != $this->config->item('default_thumb')){
+					unlink($this->head_dir . $user['thumb']);
+				}
+				$user['head'] = $h_image;
+				$user['thumb'] = $t_image;
+				$this->session->set_userdata("login_user",$user);
+				$this->ajaxReturn('',"裁剪成功",1);
+			}
 		}
 	}
 
