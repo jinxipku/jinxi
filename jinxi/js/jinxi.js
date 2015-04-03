@@ -140,7 +140,7 @@ function logout() {
 	$.post(
 		baseurl + "account/dologout",
 		function() {
-			window.location.href = window.location.href;
+			window.location.href = window.location.href.replace("#", "");
 		}
 	);
 	return false;
