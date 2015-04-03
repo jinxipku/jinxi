@@ -101,7 +101,6 @@ class User extends MY_Controller {
 	}
 
 	public function setup($set_tabs = 1) {
-		$this->output->enable_profiler(TRUE);
 		$login_user =  $this->session->userdata('login_user');	
 		if(empty($login_user)) {
 			$this->session->set_userdata('mem_url', base_url('user/setup'));
