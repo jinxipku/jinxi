@@ -24,7 +24,7 @@
  * @author		ExpressionEngine Dev Team
  * @link		http://codeigniter.com/user_guide/libraries/exceptions.html
  */
-class CI_Exceptions {
+class CI_Exceptions{
 	var $action;
 	var $severity;
 	var $message;
@@ -103,7 +103,7 @@ class CI_Exceptions {
 	 */
 	function show_404($page = '', $log_error = TRUE)
 	{
-		$heading = "404 Page Not Found";
+		$heading = "404 Page Not Found1111";
 		$message = "The page you requested was not found.";
 
 		// By default we log this, but allow a dev to skip it
@@ -111,8 +111,8 @@ class CI_Exceptions {
 		{
 			log_message('error', '404 Page Not Found --> '.$page);
 		}
-
-		echo $this->show_error($heading, $message, 'error_404', 404);
+		header ( "Location: http://www.xn--wmqr18c.cn/error/nopage" );
+		//echo $this->show_error($heading, $message, 'error_404', 404);
 		exit;
 	}
 

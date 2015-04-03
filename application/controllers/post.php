@@ -17,7 +17,13 @@ class Post extends MY_Controller {
 // +----------------------------------------------------------------------
 // | 前台页面跳转
 // +----------------------------------------------------------------------
-
+	public function new() {
+		$login_user =  $this->session->userdata('login_user');	
+		if(empty($login_user)) {
+			$this->session->set_userdata('mem_url', base_url('post/new'));
+			redirect('account/loginfo/redirect');
+		}
+	}
 
 // +----------------------------------------------------------------------
 // | 普通函数
