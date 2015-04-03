@@ -458,11 +458,7 @@ function save_account(){
 			is_sign_public: $("#sign_check").is(':checked') ? 1 : 0,
 			pwo: $("#passwordo").val(),
 			pwn: $("#password").val(),
-<<<<<<< HEAD
-			pwa: $("#passworda").val(),
-=======
 			pwa: $("#passworda").val()
->>>>>>> 0db1ec3ab70310db2e3a9a0398fc45d191bddb1e
 		},
 		function(res) {
 			if (res.status == 1) {
@@ -470,7 +466,7 @@ function save_account(){
 				$("#info_modal").find('.modal-cont').text("恭喜，设置成功！");
 				$("#info_modal").find('.btn-default').css('display','none');
 				$("#info_modal").find('.btn-primary').bind('click',function() {
-					window.location.href = window.location.href;
+					window.location.href = baseurl + "user/account/3";
 				});
 				$("#info_modal").modal();
 			} else {

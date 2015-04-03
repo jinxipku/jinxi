@@ -1,5 +1,3 @@
-<?php if($login_user['is_star']):?>
-<script src="<?=$baseurl?>js/jquery.js"></script>
 <p class="title">
 	<i class="icon-star-empty"></i>星级用户
 </p>
@@ -29,18 +27,12 @@
 		<div class="colordis" style="background-color: #F1C40F">黄色</div>
 		<div class="colordis" style="background-color: #9B59B6">紫色</div>
 	</div>
-	<select id="namecolor">
-		<option value=0
-			<?php if($login_user['namecolor']==0)echo ' selected'?>
-			style="color: #000;">绿色</option>
-		<option value=1
-			<?php if($login_user['namecolor']==1)echo ' selected'?>>蓝色</option>
-		<option value=2
-			<?php if($login_user['namecolor']==2)echo ' selected'?>>红色</option>
-		<option value=3
-			<?php if($login_user['namecolor']==3)echo ' selected'?>>黄色</option>
-		<option value=4
-			<?php if($login_user['namecolor']==4)echo ' selected'?>>紫色</option>
+	<select id="nick_color">
+		<option value=0 {if $login_user.nick_color == 'text-primary'}selected{/if}>绿色</option>
+		<option value=1 {if $login_user.nick_color == 'text-info'}selected{/if}>蓝色</option>
+		<option value=2 {if $login_user.nick_color == 'text-danger'}selected{/if}>红色</option>
+		<option value=3 {if $login_user.nick_color == 'text-warning'}selected{/if}>黄色</option>
+		<option value=4 {if $login_user.nick_color == 'text-purple'}selected{/if}>紫色</option>
 	</select>
 </div>
 <hr />
@@ -55,8 +47,11 @@
 <div class="con">
 	<button id="savest" type="button" class="btn btn-lg btn-primary" onclick="savest()">保存</button>
 </div>
-<script src="<?=$baseurl?>js/bootstrap-select.js"></script>
-<script>
-	$("#namecolor").selectpicker({style: 'btn-default', menuStyle: 'dropdown'});
+<script type="text/javascript">
+	$("#nick_color").selectpicker(
+		{
+			style: 'btn-default',
+			menuStyle: 'dropdown'
+		}
+	);
 </script>
-<?php endif;?>
