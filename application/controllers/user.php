@@ -2,7 +2,7 @@
 // +----------------------------------------------------------------------
 // | User 用户Profile操作
 // +----------------------------------------------------------------------
-// | Author: cuida
+// | Author: JINXI
 // +----------------------------------------------------------------------
 // | date: 2015-2-9
 // +----------------------------------------------------------------------
@@ -12,6 +12,7 @@ class User extends MY_Controller {
 		parent::__construct ();
 		$this->load->model ( 'user_model' );
 		$this->load->model ( 'love_model' );
+		$this->load->model ( 'account_model' );
 		$this->load->helper('url');
 		$this->load->helper('array');
 	}
@@ -67,35 +68,35 @@ class User extends MY_Controller {
 		$this->assign('baseurl', base_url());
 		switch ($tab) {
 			case '#user_post' :
-				{
-					$this->display ( 'user/userpost.php' );
-					break;
-				}
-			case '#user_best' :
-				{
-					$this->display ( 'user/userbest.php' );
-					break;
-				}
-			case '#user_coll' :
-				{
-					$this->display ( 'user/usercoll.php' );
-					break;
-				}
-			case '#user_love' :
-				{
-					$this->assign('tuser', 0);
-					$this->assign('tpage', 0);
-					$this->assign('cpage', 0);
-					$this->display ( 'user/userlove.php' );
-					break;
-				}
-			case '#user_mess' :
-				{
-					$this->display ( 'user/usermess.php' );
-					break;
-				}
-			default :
+			{
+				$this->display ( 'user/userpost.php' );
 				break;
+			}
+			case '#user_best' :
+			{
+				$this->display ( 'user/userbest.php' );
+				break;
+			}
+			case '#user_coll' :
+			{
+				$this->display ( 'user/usercoll.php' );
+				break;
+			}
+			case '#user_love' :
+			{
+				$this->assign('tuser', 0);
+				$this->assign('tpage', 0);
+				$this->assign('cpage', 0);
+				$this->display ( 'user/userlove.php' );
+				break;
+			}
+			case '#user_mess' :
+			{
+				$this->display ( 'user/usermess.php' );
+				break;
+			}
+			default :
+			break;
 		}
 	}
 
@@ -129,7 +130,34 @@ class User extends MY_Controller {
 	//用户更新
 	//post参数  参考sql建表中的参数
 	public function save_info(){
+		
 		$user = $this->session->userdata ( 'login_user' );
+
+		//是否修改密码
+		
+		if(isset($_POST['pwo'])){
+			$pwo = $_POST['pwo'];
+			if(!empty($pwo)){
+				$account = $this->account_model->get_account($user['id'],null);
+				$rpwd = $this->encrypt->decode($account['password']);
+				if($pwo != $rpwd){
+					$this->ajaxReturn(null,'密码错误',0);
+				}else{
+					$pwn = $_POST['pwn'];
+					$pwa = $_POST['pwa'];
+					if(strlen($pwn)<6) $this->ajaxReturn(null,'新密码长度过短',0);
+					if($pwn != $pwa) $this->ajaxReturn(null,'两次输入的密码不一致',0);
+					else{
+						$this->account_model->changepwd($user['id'],$pwa);
+						//TODO:提示是否修改成功。。。。
+					}
+				}
+			}else $this->ajaxReturn(null,'密码为空',0);
+			unset($_POST['pwo']);
+			unset($_POST['pwn']);
+			unset($_POST['pwa']);
+		}
+		
 		$res = $this->user_model->update_info($user['id'],$_POST);
 		if(empty($res)){
 			$this->ajaxReturn(null,'',0);
@@ -211,7 +239,7 @@ class User extends MY_Controller {
 			$this->image_lib->initialize($config3);
 			$this->image_lib->resize ();
 			
-	
+
 			$info['head'] = $h_image;
 			$info['thumb'] = $t_image;
 			$this->user_model->update_info($user_id,$info);

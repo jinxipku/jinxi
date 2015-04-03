@@ -458,9 +458,9 @@ function save_account(){
 			is_weixin_public: $("#weixin_check").is(':checked') ? 1 : 0,
 			is_phone_public: $("#phone_check").is(':checked') ? 1 : 0,
 			is_sign_public: $("#sign_check").is(':checked') ? 1 : 0,
-			pwo: $("#passwordo").val();
-			pwn: $("#password").val();
-			pwa: $("#passworda").val();
+			pwo: $("#passwordo").val(),
+			pwn: $("#password").val(),
+			pwa: $("#passworda").val(),
 		},
 		function(res) {
 			if (res.status == 1) {

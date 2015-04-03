@@ -89,5 +89,13 @@ class account_model extends CI_Model{
 		$this->db->where( 'id', $id);
 		$this->db->update ( 'jx_account', $data );
 	}
+
+	public function changepwd($id,$newpwd){
+		$encryptPwd = $this->encrypt->encode($newpwd);//新密码
+		$data = array("password" => $encryptPwd);
+		$this->db->where( 'id', $id);
+		$this->db->update ( 'jx_account', $data );
+	}
+
 }
 ?>
