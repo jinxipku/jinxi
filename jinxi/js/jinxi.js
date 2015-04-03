@@ -222,6 +222,47 @@ function check_email(login) {
 	}
 	return false; 
 }
+function check_pwo() {
+	var passwordo = $("#passwordo").val();   
+	var len = passwordo.length; 
+	if (len == 0) {
+		$("#check_pwo").html("请输入旧密码！");
+		$("#check_pwo").removeClass("fui-check success");
+		$("#check_pwo").addClass("fui-cross danger");
+	}
+	else if(len < 6) {
+		$("#check_pwo").html("密码长度不能少于6位，请重新输入！");
+		$("#check_pwo").removeClass("fui-check success");
+		$("#check_pwo").addClass("fui-cross danger");
+	}
+	else if(len > 16) {
+		$("#check_pwo").html("密码长度不要超过16位，请重新输入！");
+		$("#check_pwo").removeClass("fui-check success");
+		$("#check_pwo").addClass("fui-cross danger");
+	}
+	else {
+		$.post(
+			baseurl + "account/docheckpw",
+			{
+				password: passwordo
+			},
+			function(res) {
+				if (res.status == 1) {   
+					$("#check_pwo").html("密码正确！");
+					$("#check_pwo").removeClass("fui-cross danger");
+					$("#check_pwo").addClass("fui-check success");
+					return true;
+				} else { 
+					$("#check_pwo").html("旧密码输入有误！请重新输入！");
+					$("#check_pwo").removeClass("fui-check success");
+					$("#check_pwo").addClass("fui-cross danger");  
+				}
+			},
+			'json'
+		);
+	}
+	return false; 
+}
 function check_pw() {
 	var password = $("#password").val();   
 	var len = password.length; 
@@ -401,8 +442,7 @@ function save_info(){
 	$("#btn_saveinfo").html('<i class="icon-spinner icon-spin"></i> 保存中');
 	$("#btn_saveinfo").attr('disabled', true);
 }
-function saveac(){
-	$("#saveac").parent().html('<i class="icon-spinner icon-spin"></i> 正在保存');
+function save_account(){
 	var mailcheck = $("#mailcheck").is(':checked')?1:0;
 	var qqcheck = $("#qqcheck").is(':checked')?1:0;
 	var phonecheck = $("#phonecheck").is(':checked')?1:0;
@@ -410,9 +450,42 @@ function saveac(){
 	var sign2 = $("#sign2").is(':checked')?1:0;
 	var righton = $("#righton").is(':checked')?1:0;
 	var url = baseurl + "ajax/saveac";
-	$.post(url,{mailcheck:mailcheck,qqcheck:qqcheck,phonecheck:phonecheck,sign1:sign1,sign2:sign2,righton:righton},function(){ 
-    	window.location.href=baseurl + "setup/account";
-  	});
+	$.post(
+		baseurl + "user/save_info",
+		{
+			is_email_public: $("#email_check").is(':checked') ? 1 : 0,
+			is_qq_public: $("#qq_check").is(':checked') ? 1 : 0,
+			is_weixin_public: $("#weixin_check").is(':checked') ? 1 : 0,
+			is_phone_public: $("#phone_check").is(':checked') ? 1 : 0,
+			is_sign_public: $("#sign_check").is(':checked') ? 1 : 0,
+			pwo: $("#passwordo").val();
+			pwn: $("#password").val();
+			pwa: $("#passworda").val();
+		},
+		function(res) {
+			if (res.status == 1) {
+				$("#info_modal").find('.modal-title').text("设置成功");
+				$("#info_modal").find('.modal-cont').text("恭喜，设置成功！");
+				$("#info_modal").find('.btn-default').css('display','none');
+				$("#info_modal").find('.btn-primary').bind('click',function() {
+					window.location.href = window.location.href;
+				});
+				$("#info_modal").modal();
+			} else {
+				$("#info_modal").find('.modal-title').text("设置失败");
+				$("#info_modal").find('.modal-cont').text("对不起，操作失败，请重试！");
+				$("#info_modal").find('.btn-default').css('display','none');
+				$("#info_modal").find('.btn-primary').bind('click',function() {
+					$("#btn_saveinfo").html('保 存');
+					$("#btn_saveinfo").attr('disabled', false);
+				});
+				$("#info_modal").modal();
+			}
+    	},
+    	'json'
+  	);
+	$("#btn_saveaccount").html('<i class="icon-spinner icon-spin"></i> 保存中');
+	$("#btn_saveaccount").attr('disabled', true);
 }
 function savest(){
 	$("#savest").parent().html('<i class="icon-spinner icon-spin"></i> 正在保存');
