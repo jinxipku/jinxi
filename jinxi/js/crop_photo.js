@@ -82,7 +82,7 @@
 				$("#info_modal").find('.modal-cont').text("恭喜，头像设置成功！");
 				$("#info_modal").find('.btn-default').css('display','none');
 				$("#info_modal").find('.btn-primary').bind('click',function() {
-					window.location.href = window.location.href;
+					window.location.href = "http://www.xn--wmqr18c.cn/user/setup/2";
 				});
 				$("#info_modal").modal();
 			} else {
@@ -90,7 +90,7 @@
 				$("#info_modal").find('.modal-cont').text("对不起，操作失败，请重试！");
 				$("#info_modal").find('.btn-default').css('display','none');
 				$("#info_modal").find('.btn-primary').bind('click',function() {
-					window.location.href = window.location.href;
+					window.location.href = "http://www.xn--wmqr18c.cn/user/setup/2";
 				});
 				$("#info_modal").modal();
 			}

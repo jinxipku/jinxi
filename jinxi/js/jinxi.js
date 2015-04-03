@@ -443,13 +443,11 @@ function save_info(){
 	$("#btn_saveinfo").attr('disabled', true);
 }
 function save_account(){
-	var mailcheck = $("#mailcheck").is(':checked')?1:0;
-	var qqcheck = $("#qqcheck").is(':checked')?1:0;
-	var phonecheck = $("#phonecheck").is(':checked')?1:0;
-	var sign1 = $("#sign1").is(':checked')?1:0;
-	var sign2 = $("#sign2").is(':checked')?1:0;
-	var righton = $("#righton").is(':checked')?1:0;
-	var url = baseurl + "ajax/saveac";
+	$("input[type='password']").blur();
+	if ($("#check_pwo").hasClass("fui-cross") || $("#check_pw").hasClass("fui-cross") || $("#check_pwa").hasClass("fui-cross")) {
+		if ($("#passwordo").val().length > 0 || $("#password").val().length > 0 || $("#passworda").val().length > 0)
+			return;
+	}
 	$.post(
 		baseurl + "user/save_info",
 		{
@@ -458,9 +456,9 @@ function save_account(){
 			is_weixin_public: $("#weixin_check").is(':checked') ? 1 : 0,
 			is_phone_public: $("#phone_check").is(':checked') ? 1 : 0,
 			is_sign_public: $("#sign_check").is(':checked') ? 1 : 0,
-			pwo: $("#passwordo").val();
-			pwn: $("#password").val();
-			pwa: $("#passworda").val();
+			pwo: $("#passwordo").val(),
+			pwn: $("#password").val(),
+			pwa: $("#passworda").val()
 		},
 		function(res) {
 			if (res.status == 1) {
@@ -476,8 +474,8 @@ function save_account(){
 				$("#info_modal").find('.modal-cont').text("对不起，操作失败，请重试！");
 				$("#info_modal").find('.btn-default').css('display','none');
 				$("#info_modal").find('.btn-primary').bind('click',function() {
-					$("#btn_saveinfo").html('保 存');
-					$("#btn_saveinfo").attr('disabled', false);
+					$("#btn_saveaccount").html('保 存');
+					$("#btn_saveaccount").attr('disabled', false);
 				});
 				$("#info_modal").modal();
 			}
