@@ -382,6 +382,17 @@ div.set_table_content button#btn_upload_head {
 div#show_head img {
 	width: 200px;
 }
+div#show_head div.jcrop-holder {
+	background-color: white !important;
+	float: left;
+}
+div#show_head div#view_img_box {
+	float: left;
+	width: 200px;
+	height: 200px;
+	margin-left: 50px;
+	overflow: hidden;
+}
 div#show_head button#btn_save_head {
 	margin-top: 30px;
 	width: 110px;

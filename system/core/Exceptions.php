@@ -111,7 +111,7 @@ class CI_Exceptions{
 		{
 			log_message('error', '404 Page Not Found --> '.$page);
 		}
-		header ( "Location: http://www.xn--wmqr18c.cn/error/nopage" );
+		header ( "Location: http://www.xn--wmqr18c.cn/info/nopage" );
 		//echo $this->show_error($heading, $message, 'error_404', 404);
 		exit;
 	}

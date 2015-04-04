@@ -28,7 +28,7 @@ class Info extends MY_Controller {
 		$this->assign('tips', show_tips());
 		
 		$this->display ( 'templates/header.php' );
-		$this->display ( 'error/show404.php' );
+		$this->display ( 'info/show404.php' );
 		$this->display ( 'templates/footer.php' );
 	}
 

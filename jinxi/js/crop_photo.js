@@ -40,7 +40,7 @@
 			$("#file_info").html('上传成功，请截取你喜欢的部分并点击"保存"按钮。');
 			$img4cut = '<div><img class="img4cut" style="width: 292px;" id="jcrop_photo" alt="" src="http://www.xn--wmqr18c.cn/img/head/'
 					+ file + '" />';
-			$img4disp = '<div class="panel panel-default" style=" position: absolute; width: 200px; height: 200px; top: 520px; left: 730px; overflow: hidden;"><img class="img4cut" id="preview_photo" alt="" src="http://www.xn--wmqr18c.cn/img/head/'
+			$img4disp = '<div id="view_img_box" class="panel panel-default"><img class="img4cut" id="preview_photo" alt="" src="http://www.xn--wmqr18c.cn/img/head/'
 					+ file
 					+ '" /></div><div><button id="btn_save_head" type="button" class="btn btn-primary btn-lg">保 存</button><button id="btn_cancel_head" type="button" class="btn btn-default btn-lg">取 消</button></div></div>';
 			$("#show_head").html(
