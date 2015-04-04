@@ -143,7 +143,7 @@ class Account extends MY_Controller {
 		$regres = $this->account_model->register( $email, $pwd, $school_id );//返回用户id
 		if( !empty($regres) ){
 			$user = $this->account_model->get_account(null, $email);
-			$this->_sendVerifyEmail( $user );//发送验证邮件
+			$this->_sendVerifyEmail( $user );//TODO:是否考虑使用线程已加速程序返回？
 			$this->ajaxReturn( null , '注册成功' , 1 );
 		}else
 		$this->ajaxReturn( null , '账号已被注册' , 0 );
@@ -164,6 +164,8 @@ class Account extends MY_Controller {
 			else $this->ajaxReturn(null , '账号已经被注册并且已经通过验证' , -1);
 		}
 	}
+
+	
 
 	//用户登录
 	//post参数 mail pwd

@@ -16,12 +16,8 @@ class love_model extends CI_Model {
 				'lovee' => $lovee 
 		);
 		$this->db->insert ( 'jx_love', $data );
-		$data = array (
-				'love' => $love + 1 
-		);
-		$this->db->where ( 'user_id', $lovee );
-		$this->db->update ( 'jx_user', $data );
 	}
+	
 	public function delete_love($lover, $lovee, $love) {
 		$data = array (
 				'lover' => $lover,

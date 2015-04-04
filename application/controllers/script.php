@@ -9,6 +9,7 @@
 class Script extends MY_Controller {
 	public function __construct() {
 		parent::__construct ();
+		$this->load->model("user_model");
 		$this->load->database();
 	}
 
@@ -52,6 +53,21 @@ class Script extends MY_Controller {
 		$this->load->model("user_model");
 		$user = $this->user_model->get_contact(1);
 		var_dump($user);
+	}
+
+	public function test(){
+	
+		echo time()-86400;
+		echo date('Y-m-d H:i:s',1428120085)."<br>";
+		echo date('Y-m-d H:i:s',1428120085-86400)."<br>";
+
+		$daysec = 86400;
+		$login =  1428120085-86400- (1428120085-86400-86400)% $daysec;
+		$delta = (time() - $login)/$daysec;
+		echo $delta;
+
+		if($this->user_model->addpoints(2,10000)) echo 's';
+		else echo 'x';
 	}
 
 	public function testPost(){
