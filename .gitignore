@@ -2,5 +2,5 @@ application/config/database.php
 application/config/config.php
 jinxi/templates_c/*
 jinxi/img/head/*
-jinxi/img/head/default_head.jpg
-jinxi/img/head/default_thumb.jpg
+!jinxi/img/head/default_head.jpg
+!jinxi/img/head/default_thumb.jpg
