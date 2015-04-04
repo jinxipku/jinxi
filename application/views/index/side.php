@@ -17,7 +17,7 @@
 			</div>
 
 			<a href="{$baseurl}display/hall" type="button" class="btn btn-primary btn-hg btn-block">商品大厅</a>
-			<a href="{$baseurl}item/newpost/type" type="button" class="btn btn-primary btn-hg btn-block">发布信息</a>
+			<a href="{$baseurl}post/newpost" type="button" class="btn btn-primary btn-hg btn-block">发布信息</a>
 
 			<div id="side_tips">
 				<blockquote>
@@ -51,24 +51,28 @@
 				<div class="panel panel-default">
 					<ul class="list-group">
 						<li class="list-group-item">
-							<p class="text-primary side_tag" data-toggle="collapse" data-target="#tag1">【转让】：适用于待售商品</p>
-							<p id="tag1" class="collapse side_tagcon">&nbsp;&nbsp;标明此商品为转让商品，有相关需求的用户可以关注并回复此帖。</p>
+							<p class="text-primary side_tag" data-toggle="collapse" data-target="#tag1">【转】：适用于待转物品</p>
+							<p id="tag1" class="collapse side_tagcon">&nbsp;&nbsp;标明此物品为转让物品，有相关需求的用户可以收藏并回复此帖。</p>
 						</li>
 						<li class="list-group-item">
-							<p class="text-primary side_tag" data-toggle="collapse" data-target="#tag2">【求购】：适用于欲求商品</p>
-							<p id="tag2" class="collapse side_tagcon">&nbsp;&nbsp;标明此商品为求购商品，有相关闲置的用户可以关注并回复此帖。</p>
+							<p class="text-primary side_tag" data-toggle="collapse" data-target="#tag2">【求】：适用于欲求物品</p>
+							<p id="tag2" class="collapse side_tagcon">&nbsp;&nbsp;标明此物品为求购物品，有相关闲置的用户可以收藏并回复此帖。</p>
 						</li>
 						<li class="list-group-item">
-							<p class="text-warning side_tag" data-toggle="collapse" data-target="#tag3">【自制】：适用于普通商品</p>
-							<p id="tag3" class="collapse side_tagcon">&nbsp;&nbsp;标明此商品为楼主手工自制品，商品品质为S级别。</p>
+							<p class="text-danger side_tag" data-toggle="collapse" data-target="#tag3">【自制】：适用于待转物品</p>
+							<p id="tag3" class="collapse side_tagcon">&nbsp;&nbsp;标明此物品为楼主手工自制品，物品品质为S级别。</p>
 						</li>
 						<li class="list-group-item">
-							<p class="text-warning side_tag" data-toggle="collapse" data-target="#tag4">【正品】：适用于普通商品</p>
-							<p id="tag4" class="collapse side_tagcon">&nbsp;&nbsp;标明此商品为低价未拆封正品，商品品质为S级别。</p>
+							<p class="text-warning side_tag" data-toggle="collapse" data-target="#tag4">【一元送】：适用于待转物品</p>
+							<p id="tag4" class="collapse side_tagcon">&nbsp;&nbsp;标明此物品为福利赠送，只收一元钱。</p>
 						</li>
 						<li class="list-group-item">
-							<p class="text-purple side_tag" data-toggle="collapse" data-target="#tag7">【图】：适用于待售商品</p>
-							<p id="tag7" class="collapse side_tagcon">&nbsp;&nbsp;标明此商品附带展示图片。</p>
+							<p class="text-warning side_tag" data-toggle="collapse" data-target="#tag4">【一口价】：适用于待转物品</p>
+							<p id="tag4" class="collapse side_tagcon">&nbsp;&nbsp;标明此物品不接受讲价。</p>
+						</li>
+						<li class="list-group-item">
+							<p class="text-purple side_tag" data-toggle="collapse" data-target="#tag7">【图】：适用于待转物品</p>
+							<p id="tag7" class="collapse side_tagcon">&nbsp;&nbsp;标明此物品附带展示图片。</p>
 						</li>
 					</ul>
 				</div>
