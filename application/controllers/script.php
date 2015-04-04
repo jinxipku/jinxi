@@ -56,9 +56,7 @@ class Script extends MY_Controller {
 	}
 
 	public function test(){
-		$this->load->library("encrypt");
-		$hash = $this->encrypt->sha1('Some string');
-		echo $hash;
+		echo genFileName(2,'',2222222);
 	}
 
 	public function testPost(){

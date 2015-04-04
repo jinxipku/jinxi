@@ -299,8 +299,8 @@ if (! function_exists ( 'get_title_full' )) {
     }
 }
 
-/* 生成文件名 其中uniquedata为区别符 ext为后缀 */
-function genFileName($uniquedata,$ext=''){
+/* 生成文件名 其中uniquedata为区别符 ext为后缀 time为指定一时间戳*/
+function genFileName($uniquedata,$ext='',$time=null){
     $rand = '';
     $char_array = 'ABCDEFGHIJKMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789';
     for($i = 0; $i < 8; $i ++) {
@@ -310,7 +310,11 @@ function genFileName($uniquedata,$ext=''){
     for($i = 0; $i < 8; $i ++) {
         $rand = $rand . $char_array[mt_rand(0,47)];
     }
-    $rand = $rand. time();
+    if($time == null){
+        $rand = $rand. time();
+    }
+    else $rand = $rand. $time;
+    
     if(!empty($ext)) $rand = $rand. '.' . $ext;
     return $rand;
 }
