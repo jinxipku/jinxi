@@ -1,6 +1,6 @@
 		<div id="side">
 			<a href="{$baseurl}display/hall" type="button" class="btn btn-primary btn-hg btn-block">商品大厅</a>
-			<a href="{$baseurl}item/newpost/type" type="button" class="btn btn-primary btn-hg btn-block">发布信息</a>
+			<a href="{$baseurl}post/newpost" type="button" class="btn btn-primary btn-hg btn-block">发布信息</a>
 
 			<div id="side_tips">
 				<blockquote>

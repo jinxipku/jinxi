@@ -446,6 +446,10 @@ div.colordis:nth-child(5) {
 	background-color: #9B59B6;
 }
 
+div#info_cont>form p{
+	font-size: 20px;
+}
+
 
 
 

@@ -11,18 +11,86 @@ class Post extends MY_Controller {
 		parent::__construct ();
 		$this->load->model ( 'account_model' );
 		$this->load->model ( 'user_model' );
-		$this->load->model ( 'post' );
+		$this->load->model ( 'post_model' );
+		$this->load->helper('url');
+		$this->load->helper('array');
 	}
 
 // +----------------------------------------------------------------------
 // | 前台页面跳转
 // +----------------------------------------------------------------------
-	public function new() {
+	public function newpost($step = 'type') {
 		$login_user =  $this->session->userdata('login_user');	
 		if(empty($login_user)) {
 			$this->session->set_userdata('mem_url', base_url('post/new'));
 			redirect('account/loginfo/redirect');
 		}
+		$this->assign('nav_tab', 0);
+		$this->assign('login_user', $login_user);
+		$this->assign('title', '今昔网-发帖');
+		$this->assign('baseurl', base_url());
+		$this->assign('tips', show_tips());
+
+		$this->display ( 'templates/header.php' );
+		if ($step == 'type') {
+			$new_post =  $this->session->userdata('new_post');	
+			if(empty($new_post)) {
+				$new_post['start'] = true;
+				$this->session->set_userdata ( 'new_post', $new_post );
+			}
+			$this->display ( 'post/type.php' );
+		} else if ($step == 'category') {
+			$new_post =  $this->session->userdata('new_post');	
+			if(empty($new_post)) {
+				$this->display ( 'post/fail.php' );
+			} else {
+				if (isset($_POST['post_type'])) {
+					$new_post['post_type'] = $_POST['post_type'];
+					$this->session->set_userdata ( 'new_post', $new_post );
+				}
+				if (!isset($new_post['post_type'])) {
+					$this->display ( 'post/fail.php' );
+				} else {
+					$this->assign('category1', 1);
+					$this->assign('category2', 0);
+					if (isset($new_post['category1']))
+						$this->assign('category1', $new_post['category1']);
+					if (isset($new_post['category2']))
+						$this->assign('category2', $new_post['category2']);
+					$this->display ( 'post/category.php' );
+				}
+			}
+			
+		} else if ($step == 'info') {
+			$new_post =  $this->session->userdata('new_post');	
+			if(empty($new_post)) {
+				$this->display ( 'post/fail.php' );
+			} else {
+				if (isset($_POST['category1'])) {
+					$new_post['category1'] = $_POST['category1'];
+					$new_post['category2'] = $_POST['category2'];
+					$this->session->set_userdata ( 'new_post', $new_post );
+				}
+				if (!isset($new_post['category1'])) {
+					$this->display ( 'post/fail.php' );
+				} else {
+					$this->assign('category1', $new_post['category1']);
+					$this->assign('category2', $new_post['category2']);
+					$this->assign('brand' , '');
+					$this->assign('model' , '');
+					$this->assign('class' , 0);
+					if (isset($new_post['brand']))
+						$this->assign('brand' , $new_post['brand']);
+					if (isset($new_post['model']))
+						$this->assign('model' , $new_post['model']);
+					if (isset($new_post['class']))
+						$this->assign('class' , $new_post['class']);
+					$this->display ( 'post/info.php' );
+				}
+			}
+			
+		}
+		$this->display ( 'templates/footer.php' );
 	}
 
 // +----------------------------------------------------------------------

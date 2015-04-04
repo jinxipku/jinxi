@@ -1,4 +1,4 @@
-function selectclass(classpre) {
+function selectclass(category1) {
 	var classstart = [ 0, 0, 11, 16, 21, 27, 41, 46, 51 ];
 	var classend = [ 0, 10, 15, 20, 26, 40, 45, 50, 51 ];
 	var allclass = [ "手机", // 0
@@ -14,15 +14,20 @@ function selectclass(classpre) {
 	"面部护理", "面部彩妆", "身体护理", "护肤工具", "其他",  // 50
 	"其他"
 	];
+	var c2 = $("#c2_input").val();
 	var ret = '';
-	for ( var i = classstart[classpre]; i <= classend[classpre]; i++)
-		ret += '<option value=' + i + '>' + allclass[i] + '</option>';
+	for ( var i = classstart[category1]; i <= classend[category1]; i++) {
+		ret += '<option value=' + i;
+		if (i == c2)
+			ret += ' selected';
+		ret += '>' + allclass[i] + '</option>';
+	}
 	return ret;
 }
-var str = selectclass($("#classpre").val());
-$("#class").html(str);
-$("#classpre").change(function(){
-	var chs = $("#classpre").val();
+var str = selectclass($("#category1").val());
+$("#category2").html(str);
+$("#category1").change(function(){
+	var chs = $("#category1").val();
 	var str2 = selectclass(chs);
-	$("#class").html(str2);
+	$("#category2").html(str2);
 });
