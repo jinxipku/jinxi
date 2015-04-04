@@ -47,6 +47,9 @@ class User extends MY_Controller {
 			}
 		}
 		$user = $this->user_model->get_info($id);
+		if ($user == null) {
+			redirect('info/nopage');
+		}
 		$this->assign('user', $user);
 		$this->assign('title', '今昔网-'.$user['nick']);
 		$this->assign('baseurl', base_url());
@@ -277,7 +280,7 @@ class User extends MY_Controller {
 		if(empty($login_user)) {
 			$this->ajaxReturn(null,"删除失败",0);
 		}
-		unlink ( './img/head/' . $url );
+		unlink ( $head_dir . $url );
 		$this->ajaxReturn(null,"删除成功",1);
 	}
 
