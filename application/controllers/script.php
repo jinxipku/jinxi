@@ -56,18 +56,9 @@ class Script extends MY_Controller {
 	}
 
 	public function test(){
-	
-		echo time()-86400;
-		echo date('Y-m-d H:i:s',1428120085)."<br>";
-		echo date('Y-m-d H:i:s',1428120085-86400)."<br>";
-
-		$daysec = 86400;
-		$login =  1428120085-86400- (1428120085-86400-86400)% $daysec;
-		$delta = (time() - $login)/$daysec;
-		echo $delta;
-
-		if($this->user_model->addpoints(2,10000)) echo 's';
-		else echo 'x';
+		$this->load->library("encrypt");
+		$hash = $this->encrypt->sha1('Some string');
+		echo $hash;
 	}
 
 	public function testPost(){

@@ -7,17 +7,20 @@
 // | date: 2015-4-1
 // +----------------------------------------------------------------------
 class Post extends MY_Controller {
+
+	protected $temp_imagepath = 'img/temp/';
 	public function __construct() {
 		parent::__construct ();
 		$this->load->model ( 'account_model' );
 		$this->load->model ( 'user_model' );
-		$this->load->model ( 'post' );
+		$this->load->model ( 'post_model' );
+		$this->load->helper('url');
 	}
 
 // +----------------------------------------------------------------------
 // | 前台页面跳转
 // +----------------------------------------------------------------------
-	public function new() {
+	public function newpost() {
 		$login_user =  $this->session->userdata('login_user');	
 		if(empty($login_user)) {
 			$this->session->set_userdata('mem_url', base_url('post/new'));
@@ -31,6 +34,57 @@ class Post extends MY_Controller {
 
 	public function getapost($post_id, $type){
 		return $this->post_model->get_post($post_id,$type);
+	}
+
+	public function makebuypost(){
+
+	}
+
+	public function makesellerpost(){
+
+	}
+
+	public function mobilepush(){
+		//$this->assign('baseurl', base_url());
+		$key = $this->config->item('verify_pkey');
+		$code = $_GET["code"];
+		$decode = $this->encrypt->decode($code,$key);
+
+		$this->assign("test",$decode);
+		$this->assign('baseurl', base_url());
+		$this->display ( 'mobile/upload.php' );
+	}
+
+	public function mobile_upload(){
+		echo 'c';
+	}
+
+	//点击生成二维码的操作
+	//生成二维码函数
+	//参数$post_id
+	//链接为http://今昔.cn//post//uploadpicture?code=XXXXX
+	public function getQRCode(){
+		$folder = "1@".time();
+
+		require_once APPPATH.'/libraries/phpqrcode/phpqrcode.php';
+
+		$key = $this->config->item('verify_pkey');
+		$code = $this->encrypt->encode( $folder, $key);
+
+		$value = 'http://192.168.6.230/jinxi/jinxi/post/mobilepush?code='.urlencode($code);
+		echo "<a href='$value' >lianjie</a>";
+		$errorCorrectionLevel = 'L';//容错级别 
+		$matrixPointSize = 6;//生成图片大小 
+		
+		$qrfile = 'img/qrcode/'.$folder.'.png';
+		QRcode::png($value, $qrfile, $errorCorrectionLevel, $matrixPointSize, 2);
+
+		//创建文件夹
+		if(!file_exists($this->temp_imagepath.$folder)){
+			mkdir($this->temp_imagepath.$folder);
+		}
+		//TODO:替换为ajax返回参数形式
+		echo '<img src="http://'.base_url($qrfile).'">';   
 	}
 
 // +----------------------------------------------------------------------
