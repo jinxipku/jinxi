@@ -54,6 +54,19 @@ class Script extends MY_Controller {
 		var_dump($user);
 	}
 
+	public function test(){
+		echo time();
+		echo "<br>";
+		echo 1428120085-86400;
+		echo date('Y-m-d H:i:s',1428120085)."<br>";
+		echo date('Y-m-d H:i:s',1428120085-86400)."<br>";
+
+		$daysec = 86400;
+		$login =  1428120085-86400- (1428120085-86400-86400)% $daysec;
+		$delta = (time() - $login)/$daysec;
+		echo $delta;
+	}
+
 	public function testPost(){
 		// for($i=0;$i<10;$i++){
 		// 	$data = array(

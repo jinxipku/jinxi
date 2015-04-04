@@ -149,8 +149,11 @@ class User extends MY_Controller {
 					if(strlen($pwn)<6) $this->ajaxReturn(null,'新密码长度过短',0);
 					if($pwn != $pwa) $this->ajaxReturn(null,'两次输入的密码不一致',0);
 					else{
-						$this->account_model->changepwd($user['id'],$pwa);
-						//TODO:提示是否修改成功。。。。
+						$res = $this->account_model->changepwd($user['id'],$pwa);
+						if(!$res){
+							$this->ajaxReturn(null,'修改密码出现错误',0);
+						}
+
 					}
 				}
 			}
@@ -159,7 +162,7 @@ class User extends MY_Controller {
 			unset($_POST['pwa']);
 		}
 
-		if(isset($_POST['nick_color'])){
+		if(isset($_POST['nick_color'])&&$_POST['nick_color']!=0){
 			if($user['level'] < 15){
 				$this->ajaxReturn(null,"未达到等级",0);
 			}
@@ -259,10 +262,10 @@ class User extends MY_Controller {
 				$this->user_model->update_info($user_id,$info);
 
 				if($user['head'] != $this->config->item('default_head')){
-					unlink($this->head_dir . $user['head']);
+					if(file_exists($this->head_dir . $user['head'])) unlink($this->head_dir . $user['head']);
 				}
 				if($user['thumb'] != $this->config->item('default_thumb')){
-					unlink($this->head_dir . $user['thumb']);
+					if(file_exists($this->head_dir . $user['thumb'])) unlink($this->head_dir . $user['thumb']);
 				}
 				$user['head'] = $h_image;
 				$user['thumb'] = $t_image;

@@ -33,7 +33,7 @@ class account_model extends CI_Model{
 				$login =  $account['last_login'] - $account['last_login'] % $daysec;
 				$delta = (time() - $login)/$daysec;
 				//累积登录天数
-				if($delta == 1){
+				if($delta >= 1 && $delta < 2 ){
 					$account['logins'] = $account['logins'] + 1;
 				}else{
 					$account['logins'] = 1;
@@ -87,14 +87,16 @@ class account_model extends CI_Model{
 	public function verify($id){
 		$data = array("is_verified" => 1);
 		$this->db->where( 'id', $id);
-		$this->db->update ( 'jx_account', $data );
+		$res = $this->db->update ( 'jx_account', $data );
+		return $res;
 	}
 
 	public function changepwd($id,$newpwd){
 		$encryptPwd = $this->encrypt->encode($newpwd);//新密码
 		$data = array("password" => $encryptPwd);
 		$this->db->where( 'id', $id);
-		$this->db->update ( 'jx_account', $data );
+		$res = $this->db->update ( 'jx_account', $data );
+		return $res;
 	}
 
 }
