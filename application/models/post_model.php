@@ -4,10 +4,22 @@ class post_model extends CI_Model {
 		$this->load->database ();
 	}
 
+	public function get_table($type){
+		return "jx_".$type."er_post";
+	}
+
+	public function insert_post($info, $type){
+		$table = $this->get_table($type);
+		$res = $this->db->insert($table, $info); 
+		if( $res ){
+			return $this->db->insert_id();//post id
+		}else return 0;
+		
+	}
 
 	//TODO:当两张表区别较大时，再区别处理.
 	public function get_post($post_id,$type){
-		$table = "jx_".$type."er_post";
+		$table = $this->get_table($type);
 		$query = $this->db->get_where($table, array('user_id' => $user_id));
 		$res = $query->row_array();
 		return $res;

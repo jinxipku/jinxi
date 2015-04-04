@@ -105,11 +105,21 @@ class Post extends MY_Controller {
 	}
 
 	public function makebuypost(){
-
+		$t = time();
+		$user =  $this->session->userdata('login_user');
+		$_POST['user_id'] = $user['id'];
+		$_POST['updateat'] = $t;
+		$_POST['createat'] = $t;
+		$res = $this->post_model->insert_post($info, "buy");
 	}
 
 	public function makesellerpost(){
-
+		$t = time();
+		$user =  $this->session->userdata('login_user');
+		$_POST['user_id'] = $user['id'];
+		$_POST['updateat'] = $t;
+		$_POST['createat'] = $t;
+		$res = $this->post_model->insert_post($info, "sell");
 	}
 
 	public function mobile_upload(){
