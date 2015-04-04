@@ -15,20 +15,14 @@ class Post extends MY_Controller {
 		$this->load->model ( 'user_model' );
 		$this->load->model ( 'post_model' );
 		$this->load->helper('url');
-<<<<<<< HEAD
-=======
 		$this->load->helper('array');
->>>>>>> 164c365b45a0d397fa7e73b7bae7683b6033694b
 	}
 
 // +----------------------------------------------------------------------
 // | 前台页面跳转
 // +----------------------------------------------------------------------
-<<<<<<< HEAD
-	public function newpost() {
-=======
+
 	public function newpost($step = 'type') {
->>>>>>> 164c365b45a0d397fa7e73b7bae7683b6033694b
 		$login_user =  $this->session->userdata('login_user');	
 		if(empty($login_user)) {
 			$this->session->set_userdata('mem_url', base_url('post/new'));
