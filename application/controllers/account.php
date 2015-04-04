@@ -165,6 +165,8 @@ class Account extends MY_Controller {
 		}
 	}
 
+	
+
 	//用户登录
 	//post参数 mail pwd
 	public function dologin() {
