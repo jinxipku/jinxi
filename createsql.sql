@@ -53,15 +53,17 @@ create table jx_love(
 create index lover_index on jx_love(lover);
 create index lovee_index on jx_love(lovee);
 
-drop table if exists jx_collect;
-create table jx_collect(
+drop table if exists jx_favorites;
+create table jx_favorites(
 	user_id int(11) not null comment '收藏者',
 	post_id int(11) not null comment '被收藏帖子id',
-	type tinyint(1) not null comment '被收藏帖子类别'
+	type tinyint(1) not null comment '被收藏帖子类别,1为卖家的，2为买家的',
+	addat int(11) not null comment '收藏时间'
 )DEFAULT CHARSET=utf8 COMMENT='收藏表';
-create index user_index on jx_collect(user_id);
-create index post_index on jx_collect(post_id);
-create index type_index on jx_collect(type);
+
+create index user_index on jx_favorites(user_id);
+create index post_index on jx_favorites(post_id);
+create index type_index on jx_favorites(type);
 
 drop table if exists jx_school_info;
 create table jx_school_info(

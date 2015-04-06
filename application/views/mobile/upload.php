@@ -7,6 +7,8 @@
 			<input type="file" id="picture" name="picture">
 			<p id="file_info" class="help-block">支持gif、jpg、png图片格式，大小不要超过2M</p>
 			<input type="hidden" name="timespec" id="timespec" value="{$timespec}">
+			<input type="hidden" name="user_id" id="user_id" value="{$user_id}">
+			<input type="hidden" name="from" value="mobile">
 		</div>
 		<button id="btn_upload" type="button" class="btn btn-primary btn-lg">上 传</button>
 	</form>

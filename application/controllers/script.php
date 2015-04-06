@@ -75,5 +75,15 @@ class Script extends MY_Controller {
 		$res = $this->post_model->get_buyer_post(1);
 		var_dump($res);
 	}
+
+	public function testfavorites(){
+		$this->load->model("favorites_model");
+		$res = $this->favorites_model->get_favorites(2,0);
+		var_dump($res);
+		$res = $this->favorites_model->delete_favorites(2,13,1);
+		var_dump($res);
+		$res = $this->favorites_model->favorites_count(15,1);
+		var_dump($res);
+	}
 }
 ?>

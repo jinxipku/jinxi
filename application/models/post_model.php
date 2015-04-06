@@ -17,6 +17,14 @@ class post_model extends CI_Model {
 		
 	}
 
+	public function update_post($info,$user_id,$post_id,$type){
+		$table = $this->get_table($type);
+		$map['user_id'] = $user_id;
+		$map['post_id'] = $post_id;
+		$this->db->where($map);
+		return $this->db->update($table,$info);
+	}
+
 	//TODO:当两张表区别较大时，再区别处理.
 	public function get_post($post_id,$type){
 		$table = $this->get_table($type);
