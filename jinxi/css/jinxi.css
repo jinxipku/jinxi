@@ -12,6 +12,9 @@ img.passive {
 h6 {
 	font-family: 微软雅黑,黑体,幼圆,宋体;
 }
+input,textarea {
+	font-family: 微软雅黑,黑体,幼圆,宋体 !important;
+}
 div.clear {
 	clear: both;
 }
@@ -186,6 +189,9 @@ p.side_tagcon{
 	color: #7F8C8D;
 }
 
+/*
+register
+*/
 div#register_form {
 	float: left;
 	width: 400px !important;
@@ -232,6 +238,9 @@ div#info_cont>p {
 	margin-bottom: 30px;
 }
 
+/*
+user
+*/
 div#user_header {
 	height: 200px;
 	margin-bottom: -22px;
@@ -320,6 +329,10 @@ div.sorry_box p{
 	margin: 20px;
 }
 
+
+/*
+set
+*/
 div#set_tabs{
 	float: left;
 	width: 102px !important;
@@ -449,6 +462,78 @@ div.colordis:nth-child(5) {
 div#info_cont>form p{
 	font-size: 20px;
 }
+
+/*
+post
+*/
+div#post_box>div:not(:nth-child(1)) {
+	display: none;
+}
+div#post_box>div {
+	height: 310px;
+}
+div#post_box>div>div.post_img {
+	float: left;
+	width: 250px;
+	margin-top: 50px;
+	margin-right: 100px;
+}
+div#post_box>div>div.post_cont {
+	float: left;
+	margin-left: 30px;
+	margin-top: 15px;
+	margin-right: 42px;
+	width: 350px;
+}
+div.post_cont>p {
+	font-size: 20px;
+	margin-bottom: 10px;
+}
+div.post_cont input {
+	background-color: #f4f4f4;
+	width: 220px;
+	margin-bottom: 10px;
+}
+div.post_cont div.input-group {
+	margin-bottom: 10px;
+	width: 220px;
+}
+div.post_cont div.input-group-addon {
+	font-family: "微软雅黑";
+	font-size: 16px;
+	background-color: #f4f4f4;
+ 	border: none;
+  	border-radius: 0px;
+}
+
+div#post_box>div#newpost_type>div.post_cont {
+	margin-top: 100px;
+	margin-left: 0px;
+	width: 380px;
+}
+div#post_box>div#newpost_type>div.post_cont>p {
+	margin-bottom: 10px;
+}
+
+div#post_box>div#newpost_info>div.post_cont>p {
+	margin-bottom: 10px;
+}
+
+div#post_box>div#newpost_price>div.post_cont {
+	margin-top: 50px;
+}
+input#price {
+	IME-MODE: disabled;
+}
+
+textarea#description {
+	background-color: #f4f4f4;
+	margin-bottom: 20px;
+	width: 350px;
+	resize: vertical;
+}
+
+
 
 
 

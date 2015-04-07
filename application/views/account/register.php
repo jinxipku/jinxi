@@ -16,11 +16,11 @@
 						<span class="danger" id="check_email"></span>
 					</div>
 					<div class="form-group">
-						<input id="password" name="password" type="password" placeholder="密码" class="form-control flat input-lg" onblur="check_pw()"/>
+						<input id="password" name="password" type="password" placeholder="密码" class="form-control flat input-lg" onblur="check_pw()" onpaste="return false"/>
 						<span class="danger" id="check_pw"></span>
 					</div>
 					<div class="form-group">
-						<input id="passworda" name="passworda" type="password" placeholder="确认密码" class="form-control flat input-lg" onblur="check_pwa()"/>
+						<input id="passworda" name="passworda" type="password" placeholder="确认密码" class="form-control flat input-lg" onblur="check_pwa()" onpaste="return false"/>
 						<span class="danger" id="check_pwa"></span>
 					</div>
 					<button id="btn_register" type="button" class="btn btn-primary btn-lg" onClick="register()">快速注册</button>

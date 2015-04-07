@@ -14,13 +14,9 @@ function selectclass(category1) {
 	"面部护理", "面部彩妆", "身体护理", "护肤工具", "其他",  // 50
 	"其他"
 	];
-	var c2 = $("#c2_input").val();
 	var ret = '';
 	for ( var i = classstart[category1]; i <= classend[category1]; i++) {
-		ret += '<option value=' + i;
-		if (i == c2)
-			ret += ' selected';
-		ret += '>' + allclass[i] + '</option>';
+		ret += '<option value=' + i + '>' + allclass[i] + '</option>';
 	}
 	return ret;
 }

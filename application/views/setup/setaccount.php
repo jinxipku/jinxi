@@ -29,6 +29,11 @@
 					回复附带签名
 				</label>
 			</div>
+			<div class="set_row">
+				<label class="checkbox" for="mars_check"> <input type="checkbox" value="" id="mars_check" data-toggle="checkbox" {if $login_user.is_mars == 1}checked{/if}>
+					开启手机号、QQ号自动转火星文
+				</label>
+			</div>
 		</div>
 	</div>
 
@@ -38,19 +43,19 @@
 		<div class="set_table_content">
 			<div class="set_row">
 				<div class="form-group">
-					<input id="passwordo" name="passwordo" type="password" placeholder="旧密码" class="form-control flat input-lg" onblur="check_pwo()"/>
+					<input id="passwordo" name="passwordo" type="password" placeholder="旧密码" class="form-control flat input-lg" onblur="check_pwo()" onpaste="return false"/>
 					<span class="danger" id="check_pwo"></span>
 				</div>
 			</div>
 			<div class="set_row">
 				<div class="form-group">
-					<input id="password" name="password" type="password" placeholder="新密码" class="form-control flat input-lg" onblur="check_pw()"/>
+					<input id="password" name="password" type="password" placeholder="新密码" class="form-control flat input-lg" onblur="check_pw()" onpaste="return false"/>
 					<span class="danger" id="check_pw"></span>
 				</div>
 			</div>
 			<div class="set_row">
 				<div class="form-group">
-					<input id="passworda" name="passworda" type="password" placeholder="确认新密码" class="form-control flat input-lg" onblur="check_pwa()"/>
+					<input id="passworda" name="passworda" type="password" placeholder="确认新密码" class="form-control flat input-lg" onblur="check_pwa()" onpaste="return false"/>
 					<span class="danger" id="check_pwa"></span>
 				</div>
 			</div>
