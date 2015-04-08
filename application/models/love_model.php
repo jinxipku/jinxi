@@ -10,25 +10,20 @@ class love_model extends CI_Model {
 		) );
 		return $query->num_rows ();
 	}
-	public function add_love($lover, $lovee, $love) {
+	public function add_love($lover, $lovee ) {
 		$data = array (
 				'lover' => $lover,
 				'lovee' => $lovee 
 		);
-		$this->db->insert ( 'jx_love', $data );
+		return $this->db->insert ( 'jx_love', $data );
 	}
 	
-	public function delete_love($lover, $lovee, $love) {
+	public function delete_love($lover, $lovee) {
 		$data = array (
 				'lover' => $lover,
 				'lovee' => $lovee 
 		);
-		$this->db->delete ( 'jx_love', $data );
-		$data = array (
-				'love' => $love - 1 
-		);
-		$this->db->where ( 'user_id', $lovee );
-		$this->db->update ( 'jx_user', $data );
+		return $this->db->delete ( 'jx_love', $data );
 	}
 	public function add_comment($user_id, $subject_id, $ctype, $cscore, $ccontent) {
 		if ($ctype == 0) {

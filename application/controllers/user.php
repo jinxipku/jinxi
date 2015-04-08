@@ -287,6 +287,26 @@ class User extends MY_Controller {
 		$this->ajaxReturn(null,"删除成功",1);
 	}
 
+	public function add_love(){
+		$login_user =  $this->session->userdata('login_user');	
+		$lover = $login_user['id'];
+		$lovee = $_POST['lovee'];
+		$res = $this->love_model->add_love($lover,$lovee);
+		if($res)
+			$this->ajaxReturn(null,"",1);
+		else $this->ajaxReturn(null,"",0);
+	}
+
+	public function delete_love(){
+		$login_user =  $this->session->userdata('login_user');	
+		$lover = $login_user['id'];
+		$lovee = $_POST['lovee'];
+		$res = $this->love_model->delete_love($lover,$lovee);
+		if($res)
+			$this->ajaxReturn(null,"",1);
+		else $this->ajaxReturn(null,"",0);
+	}
+
 
 
 // +----------------------------------------------------------------------

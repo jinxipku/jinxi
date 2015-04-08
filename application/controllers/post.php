@@ -97,17 +97,8 @@ class Post extends MY_Controller {
 		$this->display ( 'templates/footer.php' );
 	}
 
-// +----------------------------------------------------------------------
-// | 普通函数
-// +----------------------------------------------------------------------
-
-	public function get_post($post_id, $type){
-		return $this->post_model->get_post($post_id,$type);
-	}
-
-
+	
 	public function mobile_upload(){
-		//$this->assign('baseurl', base_url());
 		$key = $this->config->item('verify_pkey');
 		$code = $_GET["code"];
 		$decode = $this->encrypt->decode($code,$key);
@@ -118,6 +109,7 @@ class Post extends MY_Controller {
 		}else{
 			$user_id = $exp[0];
 			$timespec = $exp[1];
+			$this->assign("title","今昔网-拍照上传图片");
 			$this->assign("timespec",$timespec);
 			$this->assign("user_id",$user_id);
 			$this->assign('baseurl', base_url());
@@ -125,6 +117,16 @@ class Post extends MY_Controller {
 		}
 	
 	}
+
+// +----------------------------------------------------------------------
+// | 普通函数
+// +----------------------------------------------------------------------
+
+	public function get_post($post_id, $type){
+		return $this->post_model->get_post($post_id,$type);
+	}
+
+
 
 
 // +----------------------------------------------------------------------
@@ -218,7 +220,12 @@ class Post extends MY_Controller {
 	//链接为http://今昔.cn//post//uploadpicture?code=XXXXX
 	public function getQRCode(){
 		$login_user =  $this->session->userdata('login_user');
+		var_dump($login_user);
+		if(empty($login_user)){
+			$this->ajaxReturn(null,"未登录或session过期",0);
+		}
 		$userid = $login_user['id'];
+
 		$timespec = time();
 
 		require_once APPPATH.'/libraries/phpqrcode/phpqrcode.php';
@@ -226,7 +233,7 @@ class Post extends MY_Controller {
 		$key = $this->config->item('verify_pkey');
 		$code = $this->encrypt->encode( $userid.'_'.$timespec, $key);
 		$value = base_url('post/mobile_upload?code=').urlencode($code);
-
+		//echo $value;
 		$errorCorrectionLevel = 'L';//容错级别 
 		$matrixPointSize = 6;//生成图片大小 
 		$qrfile = 'img/qrcode/'.$userid.'_'.$timespec.'.png';
@@ -235,9 +242,9 @@ class Post extends MY_Controller {
 		//TODO:替换为ajax返回参数形式
 		//同时需要返回一个时间戳
 		$data['timespec'] = $timespec;
-		$data['qrvalue'] = $value; //TODO：删掉这句，仅调试用
 		$data['qrimg'] = $qrfile;        //qrfile形如   img/qrcode/.......
 		$this->ajaxReturn($data, "", 1); 
+		//echo '<img src="'.base_url($qrfile).'">';
 	}
 
 	//上传图片接口
@@ -278,7 +285,23 @@ class Post extends MY_Controller {
 			$res = $this->upload->data();
 			$data['file_name'] = $res['file_name'];  //返回上传后的文件名
 			$data['image_width'] = $res['image_width'];
-			$data['image_height'] = $res['image_height'];
+			//$data['image_height'] = $res['image_height'];
+
+			if($data['image_width']>800){
+				
+				$source = "./".$this->picture_path.$user_id.'/'.$res['file_name'];
+				$config2 ['image_library'] = 'gd2';
+				$config2 ['source_image'] = $source;
+				$config2 ['new_image'] = $source;
+				$config2 ['maintain_ratio'] = TRUE; 
+				$config2 ['width'] = 800;
+				$this->load->library ( 'image_lib', $config2 );
+				$flag1 = $this->image_lib->resize ();  //resize结果
+				if(!$flag1){
+					$this->ajaxReturn(null,"因图片太宽导致裁剪错误");
+				}
+				$data['image_width'] = 800;
+			}
 			$this->ajaxReturn($data,"上传成功",1);
 		}
 	}

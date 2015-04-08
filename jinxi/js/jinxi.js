@@ -307,9 +307,8 @@ function check_pwa(){
 }
 function add_love(lover, lovee){
 	$.post(
-		baseurl + "love/addlove",
+		baseurl + "user/add_love",
 		{
-			lover: lover,
 			lovee: lovee
 		},
 		function(res) {
@@ -343,9 +342,8 @@ function delete_love(lover,lovee,love){
 	$("#info_modal").find('.btn-primary').bind('click',function() {
 		$("#info_modal").modal('hide');
 		$.post(
-			baseurl + "account/deletelove",
+			baseurl + "user/delete_love",
 			{
-				lover: lover,
 				lovee: lovee
 			},
 			function(res) {
