@@ -16,15 +16,15 @@ $(document).ready( function() {
 		}
 	});
 });
-$(window).bind('scroll',function() {
+$(window).bind('scroll', function() {
 	$(this).scrollTop() > 600 ? $("#back_to_top").fadeIn(500) : $("#back_to_top").fadeOut(500);
 });
-$("input#qq,input#weixin,input#phone,textarea").bind('blur',function() {
+$("input#qq,input#weixin,input#phone,textarea#signature").bind('blur', function() {
 	if ($(this).val().length == 0) {
 		$(this).val("未填写");
 	}
 });
-$("input#qq,input#weixin,input#phone,textarea").bind('focus',function() {
+$("input#qq,input#weixin,input#phone,textarea#signature").bind('focus', function() {
 	if ($(this).val() == "未填写") {
 		$(this).val("");
 	}
@@ -32,7 +32,7 @@ $("input#qq,input#weixin,input#phone,textarea").bind('focus',function() {
 $('#choose_school').on('hidden.bs.modal', function () {
 	$('#school').attr('disabled', false);
 });
-$("input").bind('blur',function() {
+$("input").bind('blur', function() {
 	if ($(this).attr("id") == "school" || $(this).val().length > 0) {
 		$(this).removeClass("flat");
 	}
@@ -40,7 +40,7 @@ $("input").bind('blur',function() {
 		$(this).addClass("flat");
 	}
 });
-$("textarea").bind('blur',function() {
+$("textarea").bind('blur', function() {
 	if ($(this).val().length > 0) {
 		$(this).removeClass("flat");
 	}
@@ -173,7 +173,7 @@ function check_email(login) {
 		$("#check_email").removeClass("fui-check success");
 		$("#check_email").addClass("fui-cross danger");
 	} else if (email.length > 30) {
-		$("#check_email").html("邮箱长度不要超过30个字符，请重新输入！");
+		$("#check_email").html("邮箱长度不要超过30个字符！");
 		$("#check_email").removeClass("fui-check success");
 		$("#check_email").addClass("fui-cross danger");
 	} else if (email.indexOf("edu") < 0) {
@@ -199,7 +199,7 @@ function check_email(login) {
 						$("#check_email").removeClass("fui-check success");
 						$("#check_email").addClass("fui-cross danger");
 					} else {
-						$("#check_email").html("您的邮箱尚未激活，请立即前往邮箱激活！");
+						$("#check_email").html("您的邮箱尚未激活，请先激活！");
 						$("#check_email").removeClass("fui-check success");
 						$("#check_email").addClass("fui-cross danger");
 					}
@@ -231,12 +231,12 @@ function check_pwo() {
 		$("#check_pwo").addClass("fui-cross danger");
 	}
 	else if(len < 6) {
-		$("#check_pwo").html("密码长度不能少于6位，请重新输入！");
+		$("#check_pwo").html("密码长度不能少于6位！");
 		$("#check_pwo").removeClass("fui-check success");
 		$("#check_pwo").addClass("fui-cross danger");
 	}
 	else if(len > 16) {
-		$("#check_pwo").html("密码长度不要超过16位，请重新输入！");
+		$("#check_pwo").html("密码长度不要超过16位！");
 		$("#check_pwo").removeClass("fui-check success");
 		$("#check_pwo").addClass("fui-cross danger");
 	}
@@ -455,6 +455,7 @@ function save_account(){
 			is_weixin_public: $("#weixin_check").is(':checked') ? 1 : 0,
 			is_phone_public: $("#phone_check").is(':checked') ? 1 : 0,
 			is_sign_public: $("#sign_check").is(':checked') ? 1 : 0,
+			is_mars: $("#mars_check").is(':checked') ? 1 : 0,
 			pwo: $("#passwordo").val(),
 			pwn: $("#password").val(),
 			pwa: $("#passworda").val()
@@ -517,6 +518,72 @@ function save_star(){
 	$("#btn_savestar").html('<i class="icon-spinner icon-spin"></i> 保存中');
 	$("#btn_savestar").attr('disabled', true);
 }
+function type2category(type) {
+	$("#post_type").val(type);
+	$("#newpost_type").fadeOut(300, function(){
+		$("#newpost_category").fadeIn(300);
+	});
+}
+function category2type() {
+	$("#newpost_category").fadeOut(300, function(){
+		$("#newpost_type").fadeIn(300);
+	});
+}
+function category2info() {
+	if ($("#category1").val() == 5) {
+		$("#brand").attr("placeholder", "请输入图书书名");
+		$("#model").attr("placeholder", "请输入图书出版社和作者，空格隔开");
+	}
+	else {
+		$("#brand").attr("placeholder", "请输入物品品牌/名称");
+		$("#model").attr("placeholder", "请输入物品型号");
+	}
+	$("#newpost_category").fadeOut(300, function(){
+		$("#newpost_info").fadeIn(300);
+	});
+}
+function info2category() {
+	$("#newpost_info").fadeOut(300, function(){
+		$("#newpost_category").fadeIn(300);
+	});
+}
+function info2price() {
+	if ($("#post_type").val() == 0) {
+		$("#deal").html("<option value=1 selected>一口价</option><option value=2>接受砍价</option><option value=3>一元赠送</option><option value=4>面议</option>");
+	} else {
+		$("#deal").html("<option value=1 selected>心理价格</option><option value=2>面议</option>");
+	}
+	$("#deal").change();
+	$("#newpost_info").fadeOut(300, function(){
+		$("#newpost_price").fadeIn(300);
+	});
+}
+function price2info() {
+	$("#newpost_price").fadeOut(300, function(){
+		$("#newpost_info").fadeIn(300);
+	});
+}
+function price2detail() {
+	if ($("#post_type").val() == 0) {
+		$("#description").attr("placeholder", "请填写您对商品的详细描述：");
+	} else {
+		$("#description").attr("placeholder", "请填写您对商品的详细需求：");
+	}
+	$("#newpost_price").fadeOut(300, function(){
+		$("#newpost_detail").fadeIn(300);
+	});
+}
+function detail2price() {
+	$("#newpost_detail").fadeOut(300, function(){
+		$("#newpost_price").fadeIn(300);
+	});
+}
+
+
+
+
+
+
 
 
 function addfocus(focuser,focusee,focuss){

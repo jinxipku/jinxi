@@ -7,7 +7,7 @@
 						<span class="danger" id="check_email"> </span>
 					</div>
 					<div class="form-group">
-						<input id="password" name="password" type="password" placeholder="密码" class="form-control flat" onblur="check_pw()"> 
+						<input id="password" name="password" type="password" placeholder="密码" class="form-control flat" onblur="check_pw()" onpaste="return false"> 
 						<span class="danger" id="check_pw"> </span>
 					</div>
 					<button type="button" class="btn btn-primary btn-block" onClick="login(0)">登录</button>
@@ -67,12 +67,12 @@
 							<p id="tag4" class="collapse side_tagcon">&nbsp;&nbsp;标明此物品为福利赠送，只收一元钱。</p>
 						</li>
 						<li class="list-group-item">
-							<p class="text-warning side_tag" data-toggle="collapse" data-target="#tag4">【一口价】：适用于待转物品</p>
-							<p id="tag4" class="collapse side_tagcon">&nbsp;&nbsp;标明此物品不接受讲价。</p>
+							<p class="text-warning side_tag" data-toggle="collapse" data-target="#tag5">【一口价】：适用于待转物品</p>
+							<p id="tag5" class="collapse side_tagcon">&nbsp;&nbsp;标明此物品不接受讲价。</p>
 						</li>
 						<li class="list-group-item">
-							<p class="text-purple side_tag" data-toggle="collapse" data-target="#tag7">【图】：适用于待转物品</p>
-							<p id="tag7" class="collapse side_tagcon">&nbsp;&nbsp;标明此物品附带展示图片。</p>
+							<p class="text-purple side_tag" data-toggle="collapse" data-target="#tag6">【图】：适用于待转物品</p>
+							<p id="tag6" class="collapse side_tagcon">&nbsp;&nbsp;标明此物品附带展示图片。</p>
 						</li>
 					</ul>
 				</div>

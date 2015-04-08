@@ -9,7 +9,7 @@
 					<p>姓 名</p>
 				</div>
 				<div class="set_input">
-					<input id="nick" name="nick" type="text" value="{$login_user.nick}" class="form-control flat" maxlength=10/>
+					<input id="nick" name="nick" type="text" value="{$login_user.nick}" class="form-control flat" maxlength=10 />
 				</div>
 				<div class="clear"></div>
 			</div>

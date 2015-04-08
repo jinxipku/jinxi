@@ -8,7 +8,7 @@
 						<span class="danger" id="check_email"></span>
 					</div>
 					<div class="form-group">
-						<input id="password" name="password" type="password" placeholder="密码" class="form-control flat input-lg" onblur="check_pw()"/>
+						<input id="password" name="password" type="password" placeholder="密码" class="form-control flat input-lg" onblur="check_pw()" onpaste="return false"/>
 						<span class="danger" id="check_pw"></span>
 					</div>
 					<button id="btn_login" type="button" class="btn btn-primary btn-lg" onClick="login(1)">登录</button>
