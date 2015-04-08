@@ -283,7 +283,7 @@ class User extends MY_Controller {
 		if(empty($login_user)) {
 			$this->ajaxReturn(null,"删除失败",0);
 		}
-		unlink ( $head_dir . $url );
+		unlink ( $this->head_dir . $url );
 		$this->ajaxReturn(null,"删除成功",1);
 	}
 

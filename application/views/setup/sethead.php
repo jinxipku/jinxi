@@ -10,7 +10,6 @@
 					<input type="file" id="head_image" name="head_image">
 					<p id="file_info" class="help-block">支持gif、jpg、png图片格式，大小不要超过2M</p>
 				</div>
-				
 			</form>
 		</div>
 	</div>
