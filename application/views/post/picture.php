@@ -3,7 +3,7 @@
 						<img id="img_mobile_upload" class="passive" src="{$baseurl}img/info/picture.png" alt="上传图片">
 					</div>
 					<div class="post_cont">
-						<form id="form_picture_upload" action="{$baseurl}post/upload_picture" enctype="multipart/form-data" accept-charset="utf-8" method="post">
+						<form id="form_picture_upload" name="1" action="{$baseurl}post/upload_picture" enctype="multipart/form-data" accept-charset="utf-8" method="post">
 							<div id="display_area">
 								<div id="preview_boxes">
 									<!--

@@ -118,5 +118,22 @@
 			$("#picture").val("");
 		};
 		
+		window.onbeforeunload = function() {
+			$.post(
+				"http://www.xn--wmqr18c.cn/post/delete_picture",
+				{
+					picture_url: $("#preview_boxes>div img").attr("alt"),
+					timespec: $("#form_picture_upload").attr("name")
+				},
+				function(res) {
+					if(res.status == 0) {
+						alert("删除失败！");
+					}
+	  			},
+	  			'json'
+	  		);
+	  		alert($("#form_picture_upload").attr("name"));
+	  		alert($("#preview_boxes>div img").attr("alt"));
+		} 
 	});
 }(window.jQuery)
