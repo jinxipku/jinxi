@@ -520,12 +520,12 @@ function save_star(){
 }
 function type2category(type) {
 	$("#post_type").val(type);
-	$("#newpost_type").fadeOut(300, function(){
+	$("#newpost_type").fadeOut(300, function() {
 		$("#newpost_category").fadeIn(300);
 	});
 }
 function category2type() {
-	$("#newpost_category").fadeOut(300, function(){
+	$("#newpost_category").fadeOut(300, function() {
 		$("#newpost_type").fadeIn(300);
 	});
 }
@@ -538,12 +538,12 @@ function category2info() {
 		$("#brand").attr("placeholder", "请输入物品品牌/名称");
 		$("#model").attr("placeholder", "请输入物品型号");
 	}
-	$("#newpost_category").fadeOut(300, function(){
+	$("#newpost_category").fadeOut(300, function() {
 		$("#newpost_info").fadeIn(300);
 	});
 }
 function info2category() {
-	$("#newpost_info").fadeOut(300, function(){
+	$("#newpost_info").fadeOut(300, function() {
 		$("#newpost_category").fadeIn(300);
 	});
 }
@@ -554,30 +554,46 @@ function info2price() {
 		$("#deal").html("<option value=1 selected>心理价格</option><option value=2>面议</option>");
 	}
 	$("#deal").change();
-	$("#newpost_info").fadeOut(300, function(){
+	$("#newpost_info").fadeOut(300, function() {
 		$("#newpost_price").fadeIn(300);
 	});
 }
 function price2info() {
-	$("#newpost_price").fadeOut(300, function(){
+	$("#newpost_price").fadeOut(300, function() {
 		$("#newpost_info").fadeIn(300);
 	});
 }
 function price2detail() {
 	if ($("#post_type").val() == 0) {
 		$("#description").attr("placeholder", "请填写您对商品的详细描述：");
+		$("#p_confirm_post").text("确认请按下一步。");
+		$("#btn_confirm_post_buy").text("下一步");
 	} else {
 		$("#description").attr("placeholder", "请填写您对商品的详细需求：");
+		$("#p_confirm_post").text("确认请按完成发布。");
+		$("#btn_confirm_post_buy").text("完成发布");
 	}
-	$("#newpost_price").fadeOut(300, function(){
+	$("#newpost_price").fadeOut(300, function() {
 		$("#newpost_detail").fadeIn(300);
 	});
 }
 function detail2price() {
-	$("#newpost_detail").fadeOut(300, function(){
+	$("#newpost_detail").fadeOut(300, function() {
 		$("#newpost_price").fadeIn(300);
 	});
 }
+function detail2picture() {
+	$("#newpost_detail").fadeOut(300, function() {
+		$("#newpost_picture").fadeIn(300);
+	});
+}
+function picture2detail() {
+	$("#newpost_picture").fadeOut(300, function() {
+		$("#newpost_detail").fadeIn(300);
+	});
+}
+
+
 
 
 

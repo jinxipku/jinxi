@@ -6,10 +6,10 @@
 		<div class="set_table_content">
 			<form id="form_photo" name="form_photo" action="{$baseurl}user/upload_photo" enctype="multipart/form-data" accept-charset="utf-8" method="post">
 				<div class="form-group">
+					<button id="btn_upload_head" type="button" class="btn btn-primary btn-lg">上传图片</button>
 					<input type="file" id="head_image" name="head_image">
 					<p id="file_info" class="help-block">支持gif、jpg、png图片格式，大小不要超过2M</p>
 				</div>
-				<button id="btn_upload_head" type="button" class="btn btn-primary btn-lg">上 传</button>
 			</form>
 		</div>
 	</div>

@@ -5,11 +5,7 @@
 		var file;
 		$("#form_photo").ajaxForm();// ajaxForm()只是绑定表单事件，并不是提交表单。。。
 		$("#save_photo").ajaxForm();// ajaxForm()只是绑定表单事件，并不是提交表单。。。
-		$("#btn_upload_head").click(function() {
-			if ($("#head_image").val() == '') {
-				$("#file_info").html('请先选择一张图片！支持gif、jpg、png图片格式，大小不要超过2M');
-				return;
-			}
+		$("#head_image").bind('change', function() {
 			// 判断上传格式，判断图片大小好像只能在服务端检测，所以预览图片必须先传上去
 			var options = {
 				success : showResponse,// 上传成功回调函数
@@ -21,8 +17,18 @@
 			$("#btn_upload_head").html('<i class="icon-spinner icon-spin"></i> 上传中');
 			$("#btn_upload_head").attr('disabled', true);
 		});
+		$("#btn_upload_head").click(function() {
+			var ie=navigator.appName=="Microsoft Internet Explorer" ? true : false; 
+			if(ie){ 
+				document.getElementById("head_image").click(); 
+			}else{
+				var a=document.createEvent("MouseEvents");//FF的处理 
+				a.initEvent("click", true, true);  
+				document.getElementById("head_image").dispatchEvent(a); 
+			}
+		});
 		function showResponse(data) {
-			$("#btn_upload_head").html('上 传');
+			$("#btn_upload_head").html('上传图片');
 			$("#btn_upload_head").attr('disabled', false);
 			if (data.status == 0) {
 				if (data.data == 'The filetype you are attempting to upload is not allowed.')
@@ -64,7 +70,7 @@
 				$.post(
 					'http://www.xn--wmqr18c.cn/user/delete_file/' + file,
 					function(){
-						window.location.href = "http://www.xn--wmqr18c.cn/user/setup/2";
+						//window.location.href = "http://www.xn--wmqr18c.cn/user/setup/2";
 					}
 				);
 				window.onbeforeunload = function() { 

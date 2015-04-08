@@ -1,41 +1,49 @@
-				<div id="newpost_detail">
+				<div id="newpost_picture">
 					<div class="post_img">
-						<img class="passive" src="{$baseurl}img/info/picture.png" alt="上传图片">
+						<div>
+							<img id="img_mobile_upload" class="passive" src="{$baseurl}img/info/picture.png" alt="上传图片">
+						</div>
+						<div>
+							<p>扫它就可以用手机上传图片哦~</p>
+							<img id="img_erweima" class="passive" src="" alt="扫此二维码手机传图">
+						</div>
 					</div>
 					<div class="post_cont">
-						<form id="picform1" action="{$baseurl}ajax/picture/<?=$post_id?>/1"
-						enctype="multipart/form-data" accept-charset="utf-8" method="post">
-						<p style="font-size: 22px; margin-bottom: 15px;">信息已经保存，您现在可以上传最多三张商品照片，若不需要上传图片请直接点击完成发布。</p>
-						<div class="form-group">
-							<input type="file" id="image1" name="image1">
-						</div>
-						</form>
-						<form id="picform2" action="<?=$baseurl?>ajax/picture/<?=$post_id?>/2"
-							enctype="multipart/form-data" accept-charset="utf-8" method="post">
+						<form id="form_picture_upload" name="1" action="{$baseurl}post/upload_picture" enctype="multipart/form-data" accept-charset="utf-8" method="post">
+							<div id="display_area">
+								<div id="preview_boxes">
+									<!--
+									<div class="preview_box">
+										<div>
+											<img class="passive" src="{$baseurl}/img/jinxi.jpg" alt=""/>
+											<p>点击预览</p>
+										</div>
+										<div>
+											<textarea rows="4" class="form-control flat" placeholder="请填写图片描述" maxlength=30></textarea>
+											<label class="radio checked">
+												<input type="radio" name="first_picture" value="1" data-toggle="radio" checked/>设为首图
+											</label>
+											<button type="button" class="btn btn-default">删除<span class="fui-cross"></span></button>
+										</div>
+									</div>
+									-->
+								</div>
+								<div id="upload_box">
+									<button id="btn_upload_picture" type="button" class="btn btn-primary btn-block"><span>本地上传图片</span><br/>点击右侧相机可手机上传图片</button>
+									<button id="btn_mobile_picture" type="button" class="btn btn-primary btn-block"><span>显示手机所上传的图片</span></button>
+								</div>
+							</div>
+
 							<div class="form-group">
-								<input type="file" id="image2" name="image2">
+								<input type="file" id="picture" name="picture">
+								<p id="file_info" class="help-block">支持jpg和png图片格式，大小不要超过2M。</p>
 							</div>
 						</form>
-						<form id="picform3" action="<?=$baseurl?>ajax/picture/<?=$post_id?>/3"
-							enctype="multipart/form-data" accept-charset="utf-8" method="post">
-							<div class="form-group">
-								<input type="file" id="image3" name="image3">
-								<p id="fileinfo" class="help-block">注意仅支持上传jpg格式的图片，宽度建议800像素左右，大小不要超过2M</p>
-							</div>
-						</form>
-						<div id="pictureinfo0">
-							<button id="ulpicture" type="button"
-								class="btn btn-primary btn-hg btn-wide" onclick="ulpicture()">完成发布</button>
-						</div>
-						<div id="pictureinfo1"></div>
-						<div id="pictureinfo2"></div>
-						<div id="pictureinfo3"></div>
-						<p>确认请按下一步。</p>
-						<button type="button" class="btn btn-default" onclick="detail2price()">上一步</button>
-						<button type="button" class="btn btn-primary btn-hg" onclick="detail2picture()">下一步</button>
-						<script src="http://xn--wmqr18c.cn/js/jquery-1.8.3.min.js"></script>
-						<script src="http://xn--wmqr18c.cn/js/jquery.form.js"></script>
-						<script src="http://xn--wmqr18c.cn/js/picture.js"></script>
+						<p>确认请按完成发布。</p>
+						<button type="button" class="btn btn-default" onclick="picture2detail()">上一步</button>
+						<button id="btn_confirm_post_sell" type="button" class="btn btn-primary btn-hg" onclick="confirm_post()">完成发布</button>
+						<script src="{$baseurl}js/jquery.form.js"></script>
+						<script src="{$baseurl}js/picture.js"></script>
 					</div>
 				</div>
 			</div>
@@ -54,6 +62,20 @@
 						<span> | </span>
 						<a class="text-info btn-link">帮助中心</a>
 					</p>
+				</div>
+			</div>
+		</div>
+
+		<div id="picture_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+					<div class="modal-body">
+						<img id="big_picture_view" src="" alt="big picture view"/>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						<button type="button" class="btn btn-primary">确认</button>
+					</div>
 				</div>
 			</div>
 		</div>
