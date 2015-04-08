@@ -15,6 +15,9 @@ h6 {
 input,textarea {
 	font-family: 微软雅黑,黑体,幼圆,宋体 !important;
 }
+input[type="file"] {
+	display: none;
+}
 div.clear {
 	clear: both;
 }
