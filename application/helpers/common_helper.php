@@ -303,9 +303,18 @@ if (! function_exists ( 'get_title_full' )) {
 function genFileName($uniquedata,$ext='',$time=null){
     $rand = '';
     $char_array = 'ABCDEFGHIJKMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789';
-    for($i = 0; $i < 8; $i ++) {
-        $rand = $rand . $char_array[mt_rand(0,55)];
+    if($time!=null){
+        $tmp = time() - $time;
+        for($i = 0; $i < 8 - strlen($tmp+''); $i ++) {
+            $rand = $rand . $char_array[mt_rand(0,55)];
+        }
+        $rand = $rand . $tmp;
+    }else{
+        for($i = 0; $i < 8; $i ++) {
+            $rand = $rand . $char_array[mt_rand(0,55)];
+        }
     }
+   
     $rand = $rand.$uniquedata;    
     for($i = 0; $i < 8; $i ++) {
         $rand = $rand . $char_array[mt_rand(0,47)];

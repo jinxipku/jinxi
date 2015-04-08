@@ -167,7 +167,7 @@ class Post extends MY_Controller {
 	//链接为http://今昔.cn//post//uploadpicture?code=XXXXX
 	public function getQRCode(){
 		$login_user =  $this->session->userdata('login_user');
-		var_dump($login_user);
+
 		if(empty($login_user)){
 			$this->ajaxReturn(null,"未登录或session过期",0);
 		}
@@ -188,6 +188,7 @@ class Post extends MY_Controller {
 
 		//TODO:替换为ajax返回参数形式
 		//同时需要返回一个时间戳
+		$myfile = fopen($this->picture_path.$userid.'/'.$timespec.".tmp", "w");
 		$data['timespec'] = $timespec;
 		$data['qrimg'] = $qrfile;        //qrfile形如   img/qrcode/.......
 		$this->ajaxReturn($data, "", 1); 
@@ -219,6 +220,9 @@ class Post extends MY_Controller {
 		$config ['overwrite'] = true;
 
 		if(isset($_POST['timespec'])){
+			if(!file_exists($this->picture_path.$user_id."/".$_POST['timespec'].".tmp")){
+				$this->ajaxReturn(null,"帖子已关闭",0);
+			}
 			$config ['file_name'] = genFileName($user_id,'',$_POST['timespec']);
 		}
 		else $config ['file_name'] = genFileName($user_id,'');
@@ -230,25 +234,69 @@ class Post extends MY_Controller {
 			$this->ajaxReturn(null, $this->upload->display_errors ( '', '' ),0);
 		}else{			
 			$res = $this->upload->data();
-			$data['file_name'] = $res['file_name'];  //返回上传后的文件名
-			$data['image_width'] = $res['image_width'];
+			$this->load->library ( 'image_lib');
+			// $data['file_name'] = $res['file_name'];  //返回上传后的文件名
+			// $data['image_width'] = $res['image_width'];
 			//$data['image_height'] = $res['image_height'];
+			$data['file_name'] = $this->picture_path.$user_id.'/'.$res['file_name'];
 
-			if($data['image_width']>800){
+			$image_width = $res['image_width'];
+			$image_height = $res['image_height'];
+			if($res['image_width']>800){
 				
-				$source = "./".$this->picture_path.$user_id.'/'.$res['file_name'];
+				$source = $data['file_name'];  
 				$config2 ['image_library'] = 'gd2';
 				$config2 ['source_image'] = $source;
 				$config2 ['new_image'] = $source;
 				$config2 ['maintain_ratio'] = TRUE; 
 				$config2 ['width'] = 800;
-				$this->load->library ( 'image_lib', $config2 );
+				$this->image_lib->initialize($config2);
 				$flag1 = $this->image_lib->resize ();  //resize结果
 				if(!$flag1){
 					$this->ajaxReturn(null,"因图片太宽导致裁剪错误");
 				}
-				$data['image_width'] = 800;
+				$image_width = 800;
+				$image_height = $image_height*800/$image_width;
 			}
+
+			//crop
+			$source = $data['file_name'];  
+			$thumb = $this->picture_path.$user_id.'/thumb_'.$res['file_name'];
+			$config3 ['source_image'] = $source;
+			$config3 ['new_image'] = $thumb;
+			$config3 ['image_library'] = 'gd2';
+			$config3 ['maintain_ratio'] = FALSE; 
+			if($image_width>$image_height){	
+				$config3 ['x_axis'] =  ($image_width-$image_height)/2;
+				$config3 ['y_axis'] = 0;
+				$config3 ['width'] =  $image_height;
+				$config3 ['height'] = $image_height;
+			}
+			else if($image_width<=$image_height){
+				$config3 ['x_axis'] =  0;
+				$config3 ['y_axis'] = ($image_height-$image_width)/2;
+				$config3 ['width'] =  $image_width;
+				$config3 ['height'] = $image_width;
+			}
+			$this->image_lib->initialize($config3);
+			$flag1 = $this->image_lib->crop ();  //resize结果
+			if(!$flag1){
+				$this->ajaxReturn(null,"crop错误",0);
+			}
+
+	
+				$config4 ['image_library'] = 'gd2';
+				$config4 ['source_image'] = $thumb;
+				$config4 ['new_image'] = $thumb;
+				$config4 ['maintain_ratio'] = TRUE; // 保证设置的长宽有效
+				$config4 ['width'] =  200;
+				$this->image_lib->initialize($config4);
+				$flag1 = $this->image_lib->resize();  //resize结果
+				if(!$flag1){
+					$this->ajaxReturn(null,"resize错误",0);
+				}
+			
+			$data['file_name_thumb'] = $thumb;
 			$this->ajaxReturn($data,"上传成功",1);
 		}
 	}
@@ -267,6 +315,17 @@ class Post extends MY_Controller {
 			}
 		}
 		$this->ajaxReturn($return,'',1);
+	}
+
+	public function delete_picture(){
+		if(!isset($_POST['picture_url'])){
+			$this->ajaxReturn(null,'参数错误',0);
+		}
+		$array = explode(",",$_POST['picture_url']);
+		foreach ($array as $key => $value) {
+			unlink($value);
+		}
+		$this->ajaxReturn(null,'',1);
 	}
 
 

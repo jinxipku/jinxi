@@ -64,6 +64,7 @@
 			
 		});
 		function showResponse(data){
+			alert(data.info);
 			$("#upload_btn").attr('disabled',false);
 			$("#upload_btn").css('font-size','6em');
 			$("#upload_btn").html('上传完毕<br>您可以继续上传或回电脑预览');
