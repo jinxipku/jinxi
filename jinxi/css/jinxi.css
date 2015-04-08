@@ -537,13 +537,22 @@ textarea#description {
 }
 
 div#post_box>div#newpost_picture>div.post_img {
-	margin-right: 50px;
+	margin-right: 80px;
+}
+div#newpost_picture>div.post_img>div:nth-child(1) {
+	cursor: pointer;
+}
+div#newpost_picture>div.post_img>div:nth-child(2) {
+	display: none;
+}
+div#newpost_picture>div.post_img>div:nth-child(2)>p {
+	font-size: 18px;
 }
 div#post_box>div#newpost_picture>div.post_cont {
 	margin-top: 30px;
 	margin-left: 0px;
 	margin-right: 0px;
-	width: 472px;
+	width: 442px;
 }
 div#newpost_picture div#display_area {
 	width: 472px;
@@ -561,7 +570,7 @@ div.preview_box>div:nth-child(1) {
 }
 div.preview_box>div:nth-child(2) {
 	float: left;
-	width: 325px;
+	width: 270px;
 	height: 147px;
 }
 div.preview_box>div>p {
@@ -597,19 +606,24 @@ div.preview_box>div>button {
 }
 div#upload_box {
 	float: left;
-	margin-top: 7px;
-	margin-right: 7px;
+	margin-top: 10px;
+	height: 147px;
+	width: 314px;
+}
+button#btn_upload_picture, button#btn_mobile_picture {
+	float: left;
+	background-color: none;
 	width: 147px;
 	height: 147px;
-}
-button#btn_upload_picture {
-	background-color: none;
-	width: 150px;
-	height: 150px;
 	font-size: 14px;
+	margin-top: 0px;
+	margin-right: 10px;
 	color: #DDDDDD;
 }
-button#btn_upload_picture span {
+button#btn_mobile_picture {
+	display: none;
+}
+button#btn_upload_picture span, button#btn_mobile_picture span {
 	color: white;
 	font-size: 20px;
 }

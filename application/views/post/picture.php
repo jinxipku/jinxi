@@ -1,6 +1,12 @@
 				<div id="newpost_picture">
 					<div class="post_img">
-						<img id="img_mobile_upload" class="passive" src="{$baseurl}img/info/picture.png" alt="上传图片">
+						<div>
+							<img id="img_mobile_upload" class="passive" src="{$baseurl}img/info/picture.png" alt="上传图片">
+						</div>
+						<div>
+							<p>扫它就可以用手机上传图片哦~</p>
+							<img id="img_erweima" class="passive" src="" alt="扫此二维码手机传图">
+						</div>
 					</div>
 					<div class="post_cont">
 						<form id="form_picture_upload" name="1" action="{$baseurl}post/upload_picture" enctype="multipart/form-data" accept-charset="utf-8" method="post">
@@ -24,6 +30,7 @@
 								</div>
 								<div id="upload_box">
 									<button id="btn_upload_picture" type="button" class="btn btn-primary btn-block"><span>本地上传图片</span><br/>点击右侧相机可手机上传图片</button>
+									<button id="btn_mobile_picture" type="button" class="btn btn-primary btn-block"><span>显示手机所上传的图片</span></button>
 								</div>
 							</div>
 

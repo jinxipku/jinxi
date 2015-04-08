@@ -1,8 +1,10 @@
 !function($) {
 	$(function() {
-		var truewidth;
-		var trueheight;
 		var file;
+		var file_thumb;
+		var erweima = "";
+		var baseurl = "http://www.xn--wmqr18c.cn/";
+
 		$("#form_picture_upload").ajaxForm();// ajaxForm()只是绑定表单事件，并不是提交表单。。。
 		$("#picture").bind('change', function() {
 			// 判断上传格式，判断图片大小好像只能在服务端检测，所以预览图片必须先传上去
@@ -117,10 +119,24 @@
 			preview_box.slideDown(500);
 			$("#picture").val("");
 		};
-		
+		$("div#newpost_picture>div.post_img>div:nth-child(1)").bind('click', function() {
+			//获取二维码
+			$("#img_erweima").attr("src", baseurl + "img/info/success.png");
+			$("div#newpost_picture>div.post_img>div:nth-child(1)").fadeOut(500, function() {
+				$("div#newpost_picture>div.post_img>div:nth-child(2)").fadeIn(500, function() {
+					$("#btn_mobile_picture").fadeIn(500);
+					$("#btn_upload_picture").html('<span>本地上传图片</span>');
+				});
+
+			});
+
+		});
+		$("#btn_mobile_picture").bind('click', function() {
+			//展示手机图片
+		});
 		window.onbeforeunload = function() {
 			$.post(
-				"http://www.xn--wmqr18c.cn/post/delete_picture",
+				baseurl + "post/delete_picture",
 				{
 					picture_url: $("#preview_boxes>div img").attr("alt"),
 					timespec: $("#form_picture_upload").attr("name")
