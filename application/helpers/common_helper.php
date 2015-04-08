@@ -325,5 +325,23 @@ function getFileExt($file_name){
     return $extend[$va]; 
 }
 
+function turnToMars($str){
+    $dict = array(
+        "0123456789",
+        "零壹贰叁肆伍陆柒捌玖",
+        "〇①②③④⑤⑥⑦⑧⑨",
+    );
+
+    $array = str_split($str,1);
+    foreach ($array as $key => $value) {
+        $r = rand(0,2);
+        $n = 1;
+        if($r != 0) $n = 3;
+        $array[$key] = is_numeric($value)? substr($dict[$r],$n*$value,$n) : $value;
+    }
+ 
+    return implode($array,'');
+}
+
 
 ?>

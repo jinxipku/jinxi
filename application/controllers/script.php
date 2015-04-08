@@ -85,5 +85,10 @@ class Script extends MY_Controller {
 		$res = $this->favorites_model->favorites_count(15,1);
 		var_dump($res);
 	}
+
+	public function testMars(){
+		$c = turnToMars("0123456789");
+		var_dump($c);
+	}
 }
 ?>

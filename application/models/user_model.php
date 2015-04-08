@@ -6,7 +6,7 @@ class user_model extends CI_Model {
 		$this->load->helper('date');
 	}
 
-	public function get_info($user_id){
+	public function get_info($user_id,$isself=true){
 		$sql = "select jx_user.*,jx_account.email as register_email,jx_account.logins,jx_account.is_verified,jx_school_info.school_name,jx_school_info.school_region from jx_user left join jx_account on jx_account.id=jx_user.id left join jx_school_info on jx_school_info.school_id=jx_user.school_id where jx_user.id=".$user_id;
 		$query = $this->db->query($sql);
 		$user = $query->row_array ();	
