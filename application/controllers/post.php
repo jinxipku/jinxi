@@ -181,7 +181,7 @@ class Post extends MY_Controller {
 		$key = $this->config->item('verify_pkey');
 		$code = $this->encrypt->encode( $userid.'_'.$timespec, $key);
 		$value = base_url('post/mobile_upload?code=').urlencode($code);
-		//echo $value;
+		
 		$errorCorrectionLevel = 'L';//容错级别 
 		$matrixPointSize = 6;//生成图片大小 
 		$qrfile = 'img/qrcode/'.$userid.'_'.$timespec.'.png';
@@ -194,7 +194,8 @@ class Post extends MY_Controller {
 		$data['qrimg'] = $qrfile;        //qrfile形如   img/qrcode/.......
 		$data['qrimg'] = base_url($data['qrimg']);
 		$this->ajaxReturn($data, "", 1); 
-		//echo '<img src="'.base_url($qrfile).'">';
+		// echo $value;
+		// echo '<img src="'.base_url($qrfile).'">';
 	}
 
 	//上传图片接口
@@ -319,9 +320,15 @@ class Post extends MY_Controller {
 		$files = directory_map($this->picture_path.$user_id.'/');
 		$return = array();
 		foreach ($files as $key => $filename) {
-			if( strpos($filename, $timespec. ".") !=false ){
-				$return[] = base_url($this->picture_path.$user_id.'/'.$filename);
+			if( strpos($filename, $timespec. ".") !=false && strpos($filename,"thumb_")===false ){
+				$k = filemtime($this->picture_path.$user_id.'/'.$filename);
+				$return[$k]['file_name'] = base_url($this->picture_path.$user_id.'/'.$filename);
+				$return[$k]['file_name_thumb'] = base_url($this->picture_path.$user_id.'/thumb_'.$filename);
 			}
+		}
+		ksort($return);
+		if(count($return)==0){
+			$this->ajaxReturn(null,"并没有数据",0);
 		}
 		$this->ajaxReturn($return,'',1);
 	}
