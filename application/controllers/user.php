@@ -171,6 +171,8 @@ class User extends MY_Controller {
 			}
 		}
 		
+		//$_POST['signature'] = parse_tag($_POST['signature']);
+
 		$res = $this->user_model->update_info($user['id'],$_POST);
 		if(empty($res)){
 			$this->ajaxReturn(null,'',0);

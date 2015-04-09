@@ -361,5 +361,10 @@ function get_post_table($type){
 
 }
 
+function parse_tag($text){
+    //return strip_tags($text);
+    return htmlentities($text);
+}
+
 
 ?>

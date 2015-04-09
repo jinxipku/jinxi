@@ -100,9 +100,9 @@ class Post extends MY_Controller {
 		// 	$_POST['picture'] = $picture;
 		// }
 
-		// if(isset($_POST['timespec'])){
-
-		// }
+		if(isset($_POST['timespec'])){
+			
+		}
 		
 
 		$type = $_POST['post_type'];

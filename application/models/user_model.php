@@ -14,6 +14,7 @@ class user_model extends CI_Model {
 		$user['level'] = get_level($user['points']);
 		$user['sex'] = get_sex($user['sex']);
 		$user['nick_color'] = get_namecolor($user['nick_color']);
+		$user['signature'] = parse_tag($user['signature']);
 		$user['type'] = get_user_type($user['type']);
 		$user['year'] = empty($user['year'])? 0:$user['year'];
 		$this->db->where('lovee', $user['id']);
