@@ -17,6 +17,7 @@ class Post extends MY_Controller {
 		$this->load->model ( 'favorites_model');
 		$this->load->helper('url');
 		$this->load->helper('array');
+		$this->load->helper('directory');
 	}
 
 // +----------------------------------------------------------------------
@@ -86,15 +87,28 @@ class Post extends MY_Controller {
 	public function make_post(){
 		$now = time();
 		$user =  $this->session->userdata('login_user');
+		if(empty($user)) $this->ajaxReturn(null,'未登录',0);
+
 		$_POST['user_id'] = $user['id'];
 		$_POST['updateat'] = $now;
 		$_POST['createat'] = $now;
+
+		if(isset($_POST['picture'])){
+			$picture = $_POST['picture'];
+			$picture = json_decode($picture);
+			$picture= serialize($picture);     //序列化
+			$_POST['picture'] = $picture;
+		}
+		
+
 		$type = $_POST['type'];
 		if(isset($_POST['type']))       //过滤掉POST中的无关项
 			unset($_POST['type']);
-		if($type == 'buy'){
+
+		//删除掉手机相关图片
+		if($type == 0){
 			$res = $this->post_model->insert_post($_POST, "buy");
-		}else if($type == 'sell'){
+		}else if($type == 1){
 			$res = $this->post_model->insert_post($_POST, "sell");
 		}else $this->ajaxReturn(null,'参数错误',0);
 		if($res)
@@ -105,6 +119,7 @@ class Post extends MY_Controller {
 
 	public function update_post(){
 		$user =  $this->session->userdata('login_user');
+		if(empty($user)) $this->ajaxReturn(null,'未登录',0);
 		$_POST['updateat'] = time();
 
 		$type = $_POST['type'];
@@ -148,7 +163,7 @@ class Post extends MY_Controller {
 
 	//返回收藏贴
 	//post  type 0同时返回  1卖2买
-	public function get_collection(){
+	public function get_favorites(){
 		$type = $_POST['type'];
 		$login_user =  $this->session->userdata('login_user');
 		$user_id = $login_user['id'];
@@ -193,9 +208,8 @@ class Post extends MY_Controller {
 		$data['timespec'] = $timespec;
 		$data['qrimg'] = $qrfile;        //qrfile形如   img/qrcode/.......
 		$data['qrimg'] = base_url($data['qrimg']);
+		$data['value'] = $value;
 		$this->ajaxReturn($data, "", 1); 
-		// echo $value;
-		// echo '<img src="'.base_url($qrfile).'">';
 	}
 
 	//上传图片接口
@@ -314,9 +328,10 @@ class Post extends MY_Controller {
 	//PC端获取移动端上传的数据
 	public function get_mobile_picture(){
 		$user = $this->session->userdata ( 'login_user' );
-		$user_id = !empty($user) ? $user['id'] : 0; 
+		if(empty($user)) $this->ajaxReturn(null,"未登录",0);
+		$user_id = $user['id'];
 		$timespec = $_POST['timespec'];           //之前拿到的时间戳
-		$this->load->helper('directory');
+		
 		$files = directory_map($this->picture_path.$user_id.'/');
 		$return = array();
 		foreach ($files as $key => $filename) {
@@ -334,16 +349,33 @@ class Post extends MY_Controller {
 	}
 
 	public function delete_picture(){
+		$user = $this->session->userdata ( 'login_user' );
+		if(empty($user)) $this->ajaxReturn(null,"未登录",0);
+		$userid = $user['id'];
 		if(!isset($_POST['picture_url'])){
 			$this->ajaxReturn(null,'参数错误',0);
 		}
-		$array = explode(",",$_POST['picture_url']);
-		foreach ($array as $key => $value) {
-			unlink(substr($value, strpos($value,"img/")));
+
+		if(isset($_POST['timespec'])){   //非正常退出时，删除手机上传的照片
+			$timespec = $_POST['timespec'];
+			if(file_exists($this->picture_path.$userid.'/'.$timespec."$.tmp")){
+				unlink($this->picture_path.$userid.'/'.$timespec."$.tmp");
+				$files = directory_map($this->picture_path.$userid.'/');
+				foreach ($files as $key => $filename) {
+						if( strpos($filename, $timespec. ".") !=false ){
+							unlink($this->picture_path.$userid.'/'.$filename);
+						}
+				}
+			}
 		}
-		if(file_exists($_POST['timespec'])){
-			//$this->picture_path.$userid.'/'.$timespec."$.tmp";
+		if(!empty($_POST['picture_url'])){
+			$array = explode(",",$_POST['picture_url']);
+			foreach ($array as $key => $value) {
+				unlink(substr($value, strpos($value,"img/")));
+			}
 		}
+		
+		
 		$this->ajaxReturn(null,'',1);
 	}
 
