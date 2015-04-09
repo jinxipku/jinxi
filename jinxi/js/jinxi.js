@@ -24,7 +24,17 @@ $("input#qq,input#weixin,input#phone,textarea#signature").bind('blur', function(
 		$(this).val("未填写");
 	}
 });
-$("input#qq,input#weixin,input#phone,textarea#signature").bind('focus', function() {
+$("textarea#signature").bind('blur', function() {
+	if ($(this).val().length == 0) {
+		$(this).val("我是一只快乐的今昔兔~");
+	}
+});
+$("input#nick").bind('blur', function() {
+	if ($(this).val().length == 0) {
+		$(this).val("今昔兔");
+	}
+});
+$("input#qq,input#weixin,input#phone").bind('focus', function() {
 	if ($(this).val() == "未填写") {
 		$(this).val("");
 	}

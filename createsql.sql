@@ -20,7 +20,7 @@ create table jx_user(
 	head varchar(200) null comment '用户头像',
 	thumb varchar(200) null comment '用户头像缩略图',
 
-	signature varchar(140) null default '未填写' comment '用户个性签名',
+	signature varchar(140) null default '我是一只快乐的今昔兔~' comment '用户个性签名',
 	visits int(11) not null default 0 comment '访问量',
 	nick_color tinyint(1) not null default 0 comment '昵称颜色',
 	
