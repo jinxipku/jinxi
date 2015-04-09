@@ -19,7 +19,7 @@ $(document).ready( function() {
 $(window).bind('scroll', function() {
 	$(this).scrollTop() > 600 ? $("#back_to_top").fadeIn(500) : $("#back_to_top").fadeOut(500);
 });
-$("input#qq,input#weixin,input#phone,textarea#signature").bind('blur', function() {
+$("input#qq,input#weixin,input#phone").bind('blur', function() {
 	if ($(this).val().length == 0) {
 		$(this).val("未填写");
 	}
