@@ -249,15 +249,17 @@ class Post extends MY_Controller {
 				$config2 ['image_library'] = 'gd2';
 				$config2 ['source_image'] = $source;
 				$config2 ['new_image'] = $source;
-				$config2 ['maintain_ratio'] = TRUE; 
+				//$config2 ['maintain_ratio'] = TRUE; 
 				$config2 ['width'] = 800;
+				$config2 ['height'] = $image_height*800/$image_width;
 				$this->image_lib->initialize($config2);
 				$flag1 = $this->image_lib->resize ();  //resize结果
 				if(!$flag1){
 					$this->ajaxReturn(null,"因图片太宽导致裁剪错误");
 				}
-				$image_width = 800;
+				
 				$image_height = $image_height*800/$image_width;
+				$image_width = 800;
 			}
 
 			//crop
@@ -285,12 +287,14 @@ class Post extends MY_Controller {
 				$this->ajaxReturn(null,"crop错误",0);
 			}
 
+
 	
 				$config4 ['image_library'] = 'gd2';
 				$config4 ['source_image'] = $thumb;
 				$config4 ['new_image'] = $thumb;
-				$config4 ['maintain_ratio'] = TRUE; // 保证设置的长宽有效
+				//$config4 ['maintain_ratio'] = TRUE; // 保证设置的长宽有效
 				$config4 ['width'] =  200;
+				$config4 ['height'] = 200;
 				$this->image_lib->initialize($config4);
 				$flag1 = $this->image_lib->resize();  //resize结果
 				if(!$flag1){
@@ -327,7 +331,7 @@ class Post extends MY_Controller {
 		}
 		$array = explode(",",$_POST['picture_url']);
 		foreach ($array as $key => $value) {
-			unlink(substr($value, strpos("img/",$value)));
+			unlink(substr($value, strpos($value,"img/")));
 		}
 		$this->ajaxReturn(null,'',1);
 	}
