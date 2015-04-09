@@ -9,7 +9,7 @@
 						</div>
 					</div>
 					<div class="post_cont">
-						<form id="form_picture_upload" name="1" action="{$baseurl}post/upload_picture" enctype="multipart/form-data" accept-charset="utf-8" method="post">
+						<form id="form_picture_upload" name="0" action="{$baseurl}post/upload_picture" enctype="multipart/form-data" accept-charset="utf-8" method="post">
 							<div id="display_area">
 								<div id="preview_boxes">
 									<!--
@@ -71,10 +71,6 @@
 				<div class="modal-content">
 					<div class="modal-body">
 						<img id="big_picture_view" src="" alt="big picture view"/>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-						<button type="button" class="btn btn-primary">确认</button>
 					</div>
 				</div>
 			</div>
