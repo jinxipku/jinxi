@@ -43,7 +43,22 @@
 			}
 			file = data.data.file_name;
 			file_thumb = data.data.file_name_thumb;
+			addView(file, file_thumb);
+			
+		};
+		$("div#newpost_picture>div.post_img>div:nth-child(1)").bind('click', function() {
+			//获取二维码
+			$("#img_erweima").attr("src", baseurl + "img/info/success.png");
+			$("div#newpost_picture>div.post_img>div:nth-child(1)").fadeOut(500, function() {
+				$("div#newpost_picture>div.post_img>div:nth-child(2)").fadeIn(500, function() {
+					$("#btn_mobile_picture").fadeIn(500);
+					$("#btn_upload_picture").html('<span>本地上传图片</span>');
+				});
 
+			});
+
+		});
+		function addView(file, file_thumb) {
 			var index = $("div#preview_boxes>div").length;
 
 			var preview_box = $("<div></div>");
@@ -94,7 +109,7 @@
 				$.post(
 					"http://www.xn--wmqr18c.cn/post/delete_picture",
 					{
-						picture_url: file,
+						picture_url: file + "," + file_thumb,
 					},
 					function(res) {
 						if(res.status == 0) {
@@ -118,19 +133,7 @@
 			$(':radio').radio();
 			preview_box.slideDown(500);
 			$("#picture").val("");
-		};
-		$("div#newpost_picture>div.post_img>div:nth-child(1)").bind('click', function() {
-			//获取二维码
-			$("#img_erweima").attr("src", baseurl + "img/info/success.png");
-			$("div#newpost_picture>div.post_img>div:nth-child(1)").fadeOut(500, function() {
-				$("div#newpost_picture>div.post_img>div:nth-child(2)").fadeIn(500, function() {
-					$("#btn_mobile_picture").fadeIn(500);
-					$("#btn_upload_picture").html('<span>本地上传图片</span>');
-				});
-
-			});
-
-		});
+		}
 		$("#btn_mobile_picture").bind('click', function() {
 			//展示手机图片
 		});
