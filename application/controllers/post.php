@@ -189,7 +189,7 @@ class Post extends MY_Controller {
 
 		//TODO:替换为ajax返回参数形式
 		//同时需要返回一个时间戳
-		$myfile = fopen($this->picture_path.$userid.'/'.$timespec.".tmp", "w");
+		$myfile = fopen($this->picture_path.$userid.'/'.$timespec."$.tmp", "w");
 		$data['timespec'] = $timespec;
 		$data['qrimg'] = $qrfile;        //qrfile形如   img/qrcode/.......
 		$this->ajaxReturn($data, "", 1); 
@@ -221,7 +221,7 @@ class Post extends MY_Controller {
 		$config ['overwrite'] = true;
 
 		if(isset($_POST['timespec'])){
-			if(!file_exists($this->picture_path.$user_id."/".$_POST['timespec'].".tmp")){
+			if(!file_exists($this->picture_path.$user_id."/".$_POST['timespec']."$.tmp")){
 				$this->ajaxReturn(null,"帖子已关闭",0);
 			}
 			$config ['file_name'] = genFileName($user_id,'',$_POST['timespec']);
@@ -298,6 +298,9 @@ class Post extends MY_Controller {
 				}
 			
 			$data['file_name_thumb'] = $thumb;
+			$data['file_name'] = base_url($data['file_name']);
+			$data['file_name_thumb'] = base_url($data['file_name_thumb']);
+
 			$this->ajaxReturn($data,"上传成功",1);
 		}
 	}
@@ -312,7 +315,7 @@ class Post extends MY_Controller {
 		$return = array();
 		foreach ($files as $key => $filename) {
 			if( strpos($filename, $timespec. ".") !=false ){
-				$return[] = $user['id']."/".$filename;
+				$return[] = base_url($this->picture_path.$user_id.'/'.$filename);
 			}
 		}
 		$this->ajaxReturn($return,'',1);
@@ -324,7 +327,7 @@ class Post extends MY_Controller {
 		}
 		$array = explode(",",$_POST['picture_url']);
 		foreach ($array as $key => $value) {
-			unlink($value);
+			unlink(substr($value, strpos("img/",$value);));
 		}
 		$this->ajaxReturn(null,'',1);
 	}
