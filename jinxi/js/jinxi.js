@@ -19,12 +19,22 @@ $(document).ready( function() {
 $(window).bind('scroll', function() {
 	$(this).scrollTop() > 600 ? $("#back_to_top").fadeIn(500) : $("#back_to_top").fadeOut(500);
 });
-$("input#qq,input#weixin,input#phone,textarea#signature").bind('blur', function() {
+$("input#qq,input#weixin,input#phone").bind('blur', function() {
 	if ($(this).val().length == 0) {
 		$(this).val("未填写");
 	}
 });
-$("input#qq,input#weixin,input#phone,textarea#signature").bind('focus', function() {
+$("textarea#signature").bind('blur', function() {
+	if ($(this).val().length == 0) {
+		$(this).val("我是一只快乐的今昔兔~");
+	}
+});
+$("input#nick").bind('blur', function() {
+	if ($(this).val().length == 0) {
+		$(this).val("今昔兔");
+	}
+});
+$("input#qq,input#weixin,input#phone").bind('focus', function() {
 	if ($(this).val() == "未填写") {
 		$(this).val("");
 	}
@@ -588,9 +598,7 @@ function detail2picture() {
 			$("#newpost_picture").fadeIn(300);
 		});
 	} else {
-		$("#newpost_detail").fadeOut(300, function() {
-			$("#newpost_success").fadeIn(300);
-		});
+		confirm_post(1);
 	}
 }
 function picture2detail() {
@@ -605,9 +613,12 @@ function confirm_post(type) {
 		last = $("#newpost_picture");
 		cbtn = $("#btn_confirm_post_sell");
 	}
-	var picture_url = "";
-	$("#preview_boxes>div img").each(function() {
-		picture_url += $(this).attr("alt") + ","
+	var picture = new Array();
+	$("#preview_boxes").each(function() {
+		var tp = new Object();
+		tp.picture_url = $(this).find("img").attr("alt");
+		tp.picture_des = $(this).find("textarea").val();
+		picture.push(tp);
 	});
 	var timespec = "0";
 	if ($("#form_picture_upload").attr("name") != undefined)
@@ -624,8 +635,7 @@ function confirm_post(type) {
 			deal: $("#deal").val(),
 			price: $("#price").val(),
 			description: $("#description").val(),
-			category2: $("#category1").val(),
-			picture_url: picture_url,
+			picture: picture,
 			timespec: timespec
 		},
 		function(res) {
@@ -641,7 +651,7 @@ function confirm_post(type) {
 				cbtn.html('完成发布');
 			} else {
 				cbtn.html('发布成功！');
-				$("a#a_gotopost").attr('href', $("a#a_gotopost").attr('href') + res.data;
+				$("a#a_gotopost").attr('href', $("a#a_gotopost").attr('href') + res.data);
 				last.fadeOut(300, function() {
 					$("#newpost_success").fadeIn(300);
 				});

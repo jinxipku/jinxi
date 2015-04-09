@@ -43,6 +43,7 @@ class Post extends MY_Controller {
 		$this->display ( 'post/price.php' );
 		$this->display ( 'post/detail.php' );
 		$this->display ( 'post/picture.php' );
+		$this->display ( 'post/success.php' );
 		$this->display ( 'templates/footer.php' );
 	}
 
