@@ -347,6 +347,10 @@ class Post extends MY_Controller {
 			}
 		}
 		ksort($return);
+		if(isset($_POST['number'])){
+			$number = $_POST['number'];
+			$return = array_slice($return,$number);
+		}
 		if(count($return)==0){
 			$this->ajaxReturn(null,"并没有数据",0);
 		}

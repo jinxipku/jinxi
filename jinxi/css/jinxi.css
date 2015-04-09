@@ -683,6 +683,15 @@ div#info_modal>div {
 	width: 400px;
 }
 
+div#picture_modal>div {
+	margin-top: 50px;
+}
+div#picture_modal div {
+	width: auto;
+	max-width: 800px;
+	padding: 0px;
+}
+
 
 /*
 others
