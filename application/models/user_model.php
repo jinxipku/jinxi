@@ -38,7 +38,6 @@ class user_model extends CI_Model {
 	}
 
 	public function addpoints($user_id,$points){
-		//TODO:是否sql可以执行加法
 		$sql = "update jx_user set points=points+".$points." where id=".$user_id ;
 		$query = $this->db->query($sql);
 		return !empty($query);

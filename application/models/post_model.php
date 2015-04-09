@@ -4,12 +4,9 @@ class post_model extends CI_Model {
 		$this->load->database ();
 	}
 
-	public function get_table($type){
-		return "jx_".$type."er_post";
-	}
 
 	public function insert_post($info, $type){
-		$table = $this->get_table($type);
+		$table = get_post_table($type);
 		$res = $this->db->insert($table, $info); 
 		if( $res ){
 			return $this->db->insert_id();//post id
@@ -18,7 +15,7 @@ class post_model extends CI_Model {
 	}
 
 	public function update_post($info,$user_id,$post_id,$type){
-		$table = $this->get_table($type);
+		$table = get_post_table($type);
 		$map['user_id'] = $user_id;
 		$map['post_id'] = $post_id;
 		$this->db->where($map);
@@ -27,7 +24,7 @@ class post_model extends CI_Model {
 
 	//TODO:当两张表区别较大时，再区别处理.
 	public function get_post($post_id,$type){
-		$table = $this->get_table($type);
+		$table = get_post_table($type);
 		$query = $this->db->get_where($table, array('user_id' => $user_id));
 		$res = $query->row_array();
 		return $res;

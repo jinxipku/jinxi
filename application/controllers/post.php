@@ -92,18 +92,23 @@ class Post extends MY_Controller {
 		$_POST['user_id'] = $user['id'];
 		$_POST['updateat'] = $now;
 		$_POST['createat'] = $now;
+		//图片处理相关
+		// if(isset($_POST['picture'])){
+		// 	$picture = $_POST['picture'];
+		// 	$picture = json_decode($picture);
+		// 	$picture= serialize($picture);     //序列化
+		// 	$_POST['picture'] = $picture;
+		// }
 
-		if(isset($_POST['picture'])){
-			$picture = $_POST['picture'];
-			$picture = json_decode($picture);
-			$picture= serialize($picture);     //序列化
-			$_POST['picture'] = $picture;
-		}
+		// if(isset($_POST['timespec'])){
+
+		// }
 		
 
-		$type = $_POST['type'];
-		if(isset($_POST['type']))       //过滤掉POST中的无关项
-			unset($_POST['type']);
+		$type = $_POST['post_type'];
+		if(isset($_POST['post_type']))       //过滤掉POST中的无关项
+			unset($_POST['post_type']);
+		else $this->ajaxReturn(null,"未指定类型",0);
 
 		//删除掉手机相关图片
 		if($type == 0){
@@ -167,7 +172,7 @@ class Post extends MY_Controller {
 		$type = $_POST['type'];
 		$login_user =  $this->session->userdata('login_user');
 		$user_id = $login_user['id'];
-		return $this->favorites_model->get_favorites($user_id,$user_id);
+		return $this->favorites_model->get_favorites($user_id,$type);
 	}
 
 

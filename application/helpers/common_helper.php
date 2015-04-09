@@ -352,5 +352,14 @@ function turnToMars($str){
     return implode($array,'');
 }
 
+function get_post_table($type){
+    if($type==0){
+        return "jx_seller_post";
+    }elseif($type==1){
+        return "jx_buyer_post";
+    }
+
+}
+
 
 ?>

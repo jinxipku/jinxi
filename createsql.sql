@@ -89,7 +89,7 @@ create table jx_seller_post(
 	description text null comment '商品描述',
 	images text null comment '图片列表(json序列化对象)',
 	price int(11) null comment '预期出售价格(1赠送，0面议)',
-	deal int(11) null comment '成交方式(0......)',
+	deal int(11) not null default 0 comment '成交方式(1一口价，2接受砍价，3一元赠送，4面议)',
 	contactby varchar(20) null comment '期望的联系方式（0邮箱，1手机，2qq，3微信，4站内），可多选，以逗号分隔',
 	primary key(post_id)
 )DEFAULT CHARSET=utf8 COMMENT='卖家帖子';
@@ -108,6 +108,7 @@ create table jx_buyer_post(
 	updateat int(11) not null comment '最后更新时间',
 	description text null comment '描述',
 	price int(11) null comment '预期买入价格(1赠送，0面议)',
+	deal int(11) not null default 0 comment '成交方式(1心理价位，2,面议)',
 	contactby varchar(20) null comment '期望的联系方式（0邮箱，1手机，2qq，3微信，4站内），可多选，以逗号分隔',
 	primary key(post_id)
 )DEFAULT CHARSET=utf8 COMMENT='卖家帖子';

@@ -4,7 +4,8 @@ class favorites_model extends CI_Model {
 		$this->load->database ();
 	}
 
-	//type  0 全部返回   1返回卖家  2返回买家
+
+	//type  0返回卖家  1返回买家
 	//TODO: join post表
 	public function get_favorites($user_id,$type){
 		$this->db->order_by("addat", "desc"); 
@@ -13,7 +14,10 @@ class favorites_model extends CI_Model {
 		if($type!=0){
 			$map['type'] = $type;
 		}
+		$table = get_post_table($type);
+		$this->db->join($table,'post.id');
 		$query = $this->db->get_where('jx_favorites', $map);
+
 		$res = $query->result_array();
 		return $res;
 	}
