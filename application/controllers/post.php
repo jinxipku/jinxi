@@ -327,7 +327,7 @@ class Post extends MY_Controller {
 		}
 		$array = explode(",",$_POST['picture_url']);
 		foreach ($array as $key => $value) {
-			unlink(substr($value, strpos("img/",$value);));
+			unlink(substr($value, strpos("img/",$value)));
 		}
 		$this->ajaxReturn(null,'',1);
 	}
