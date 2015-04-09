@@ -185,7 +185,7 @@
 			$.post(
 				baseurl + "post/delete_picture",
 				{
-					picture_url: $("#preview_boxes>div img").attr("alt"),
+					picture_url: picture_url,
 					timespec: $("#form_picture_upload").attr("name")
 				},
 				function(res) {

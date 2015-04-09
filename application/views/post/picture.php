@@ -26,7 +26,7 @@
 						</form>
 						<p>确认请按完成发布。</p>
 						<button type="button" class="btn btn-default" onclick="picture2detail()">上一步</button>
-						<button id="btn_confirm_post_sell" type="button" class="btn btn-primary btn-hg" onclick="confirm_post()">完成发布</button>
+						<button id="btn_confirm_post_sell" type="button" class="btn btn-primary btn-hg" onclick="confirm_post(0)">完成发布</button>
 						<script src="{$baseurl}js/jquery.form.js"></script>
 						<script src="{$baseurl}js/picture.js"></script>
 					</div>

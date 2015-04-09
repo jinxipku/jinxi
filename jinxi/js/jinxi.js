@@ -588,9 +588,7 @@ function detail2picture() {
 			$("#newpost_picture").fadeIn(300);
 		});
 	} else {
-		$("#newpost_detail").fadeOut(300, function() {
-			$("#newpost_success").fadeIn(300);
-		});
+		confirm_post(1);
 	}
 }
 function picture2detail() {
@@ -605,9 +603,12 @@ function confirm_post(type) {
 		last = $("#newpost_picture");
 		cbtn = $("#btn_confirm_post_sell");
 	}
-	var picture_url = "";
-	$("#preview_boxes>div img").each(function() {
-		picture_url += $(this).attr("alt") + ","
+	var picture = new Array();
+	$("#preview_boxes").each(function() {
+		var tp = new Object();
+		tp.picture_url = $(this).find("img").attr("alt");
+		tp.picture_des = $(this).find("textarea").val();
+		picture.push(tp);
 	});
 	var timespec = "0";
 	if ($("#form_picture_upload").attr("name") != undefined)
@@ -624,8 +625,7 @@ function confirm_post(type) {
 			deal: $("#deal").val(),
 			price: $("#price").val(),
 			description: $("#description").val(),
-			category2: $("#category1").val(),
-			picture_url: picture_url,
+			picture: picture,
 			timespec: timespec
 		},
 		function(res) {
@@ -641,7 +641,7 @@ function confirm_post(type) {
 				cbtn.html('完成发布');
 			} else {
 				cbtn.html('发布成功！');
-				$("a#a_gotopost").attr('href', $("a#a_gotopost").attr('href') + res.data;
+				$("a#a_gotopost").attr('href', $("a#a_gotopost").attr('href') + res.data);
 				last.fadeOut(300, function() {
 					$("#newpost_success").fadeIn(300);
 				});
