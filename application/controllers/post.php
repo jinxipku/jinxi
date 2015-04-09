@@ -192,6 +192,7 @@ class Post extends MY_Controller {
 		$myfile = fopen($this->picture_path.$userid.'/'.$timespec."$.tmp", "w");
 		$data['timespec'] = $timespec;
 		$data['qrimg'] = $qrfile;        //qrfile形如   img/qrcode/.......
+		$data['qrimg'] = base_url($data['qrimg']);
 		$this->ajaxReturn($data, "", 1); 
 		//echo '<img src="'.base_url($qrfile).'">';
 	}
@@ -332,6 +333,9 @@ class Post extends MY_Controller {
 		$array = explode(",",$_POST['picture_url']);
 		foreach ($array as $key => $value) {
 			unlink(substr($value, strpos($value,"img/")));
+		}
+		if(file_exists($_POST['timespec'])){
+			//$this->picture_path.$userid.'/'.$timespec."$.tmp";
 		}
 		$this->ajaxReturn(null,'',1);
 	}
