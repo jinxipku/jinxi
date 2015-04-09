@@ -178,7 +178,10 @@
 	  		);
 		});
 		window.onbeforeunload = function() {
-			alert($("#preview_boxes>div img").attr("alt"));
+			var picture_url = "";
+			$("#preview_boxes>div img").each(function() {
+				picture_url += $(this).attr("alt") + "," + $(this).attr("src") + ","
+			});
 			$.post(
 				baseurl + "post/delete_picture",
 				{
