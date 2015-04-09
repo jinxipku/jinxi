@@ -583,14 +583,74 @@ function detail2price() {
 	});
 }
 function detail2picture() {
-	$("#newpost_detail").fadeOut(300, function() {
-		$("#newpost_picture").fadeIn(300);
-	});
+	if ($("#post_type").val() == 0) {
+		$("#newpost_detail").fadeOut(300, function() {
+			$("#newpost_picture").fadeIn(300);
+		});
+	} else {
+		$("#newpost_detail").fadeOut(300, function() {
+			$("#newpost_success").fadeIn(300);
+		});
+	}
 }
 function picture2detail() {
 	$("#newpost_picture").fadeOut(300, function() {
 		$("#newpost_detail").fadeIn(300);
 	});
+}
+function confirm_post(type) {
+	var last = $("#newpost_detail");
+	var cbtn = $("#btn_confirm_post_buy");
+	if (type == 0) {
+		last = $("#newpost_picture");
+		cbtn = $("#btn_confirm_post_sell");
+	}
+	var picture_url = "";
+	$("#preview_boxes>div img").each(function() {
+		picture_url += $(this).attr("alt") + ","
+	});
+	var timespec = "0";
+	if ($("#form_picture_upload").attr("name") != undefined)
+		timespec = $("#form_picture_upload").attr("name");
+	$.post(
+		baseurl + "post/make_post",
+		{
+			post_type: $("#post_type").val(),
+			category1: $("#category1").val(),
+			category2: $("#category2").val(),
+			brand: $("#brand").val(),
+			model: $("#model").val(),
+			post_class: $("#class").val(),
+			deal: $("#deal").val(),
+			price: $("#price").val(),
+			description: $("#description").val(),
+			category2: $("#category1").val(),
+			picture_url: picture_url,
+			timespec: timespec
+		},
+		function(res) {
+			if(res.status == 0) {
+				$("#info_modal").find('.modal-title').text("发布失败");
+				$("#info_modal").find('.modal-cont').text("对不起，操作失败，请重试！");
+				$("#info_modal").find('.btn-default').css('display','none');
+				$("#info_modal").find('.btn-primary').bind('click',function() {
+					$("#btn_saveaccount").html('保 存');
+				});
+				$("#info_modal").modal();
+				cbtn.attr("disabled", false);
+				cbtn.html('完成发布');
+			} else {
+				cbtn.html('发布成功！');
+				$("a#a_gotopost").attr('href', $("a#a_gotopost").attr('href') + res.data;
+				last.fadeOut(300, function() {
+					$("#newpost_success").fadeIn(300);
+				});
+			}
+		},
+		'json'
+	);
+	cbtn.attr("disabled", true);
+	cbtn.html('<i class="icon-spinner icon-spin"></i><span>发布中</span>');
 }
 
 
