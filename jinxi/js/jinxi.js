@@ -631,7 +631,7 @@ function confirm_post(type) {
 			category2: $("#category2").val(),
 			brand: $("#brand").val(),
 			model: $("#model").val(),
-			post_class: $("#class").val(),
+			class: $("#class").val(),
 			deal: $("#deal").val(),
 			price: $("#price").val(),
 			description: $("#description").val(),

@@ -89,21 +89,53 @@ class Post extends MY_Controller {
 		$now = time();
 		$user =  $this->session->userdata('login_user');
 		if(empty($user)) $this->ajaxReturn(null,'未登录',0);
-
+		$user_id = $user['id'];
 		$_POST['user_id'] = $user['id'];
 		$_POST['updateat'] = $now;
 		$_POST['createat'] = $now;
 		//图片处理相关
-		// if(isset($_POST['picture'])){
-		// 	$picture = $_POST['picture'];
-		// 	$picture = json_decode($picture);
-		// 	$picture= serialize($picture);     //序列化
-		// 	$_POST['picture'] = $picture;
-		// }
-
-		if(isset($_POST['timespec'])){
+		if(isset($_POST['picture'])){
+			$picture = $_POST['picture'];
+			//$picture = json_decode($picture);
+			$pic_array = array();
+			foreach ($picture as $key => $value) {
+				$pic_array[] = $value['picture_url'];
+			}
+			if(count($pic_array)==0){
+				$picture = array();
+			}
 			
 		}
+
+		if(isset($_POST['timespec'])){         //合并手机端数据
+			if(!empty($_POST['timespec'])){
+				$tf_path = $this->picture_path.$user_id."/".$_POST['timespec'].'$.tmp';
+				if(file_exists($tf_path)){
+					unset( $tf_path );
+					$files = directory_map($this->picture_path.$user_id.'/');
+					foreach ($files as $key => $filename) {
+						if( strpos($filename, $_POST['timespec']. ".") !=false && strpos($filename,"thumb_")===false){
+							$temp = base_url($this->picture_path.$user_id."/".$filename);
+							//if(isset($picture)&&$pic)
+							$new_ele['picture_url'] = $temp;
+							$new_ele['picture_des'] = '';
+							if(isset($pic_array)){
+								if(!in_array($temp,$pic_array)){  //如果电脑端未处理
+									array_push($picture,$new_ele); 
+								}
+							}else{//如果电脑端未上传任何图片
+								array_push($picture,$new_ele); 
+							}
+						}
+					}
+				}
+			}
+			unset($_POST['timespec']);
+		}
+		if(!isset($picture)) $picture='';
+		$picture = serialize($picture);     //序列化
+		$_POST['picture'] = $picture;
+
 		
 
 		$type = $_POST['post_type'];
