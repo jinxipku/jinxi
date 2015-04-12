@@ -105,7 +105,7 @@ class Post extends MY_Controller {
 // +----------------------------------------------------------------------
 
 	//返回特定的一篇帖子
-	public function get_post($post_id=2, $type=0){
+	public function get_post($post_id, $type){
 		$post = $this->post_model->get_post($post_id,$type);
 		$post['createat'] = format_time($post['createat']);
 		$post['updateat'] = format_time($post['updateat']);
@@ -121,7 +121,7 @@ class Post extends MY_Controller {
 		}
 		$post['title'] = get_title($type,$post['deal'],$hasimg,$post['category1'],$post['category2'],$post['brand'],$post['model']);
 
-		var_dump($post);
+		//var_dump($post);
 		return $post;
 	}
 
