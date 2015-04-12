@@ -24,9 +24,9 @@
 								<p id="file_info" class="help-block">支持jpg和png图片格式，大小不要超过2M。</p>
 							</div>
 						</form>
-						<p>确认请按完成发布。</p>
+						<p>确认请按下一步。</p>
 						<button type="button" class="btn btn-default" onclick="picture2detail()">上一步</button>
-						<button id="btn_confirm_post_sell" type="button" class="btn btn-primary btn-hg" onclick="confirm_post(0)">完成发布</button>
+						<button type="button" class="btn btn-primary btn-hg" onclick="picture2contact()">下一步</button>
 						<script src="{$baseurl}js/jquery.form.js"></script>
 						<script src="{$baseurl}js/picture.js"></script>
 					</div>

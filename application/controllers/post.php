@@ -43,6 +43,7 @@ class Post extends MY_Controller {
 		$this->display ( 'post/price.php' );
 		$this->display ( 'post/detail.php' );
 		$this->display ( 'post/picture.php' );
+		$this->display ( 'post/contact.php' );
 		$this->display ( 'post/success.php' );
 		$this->display ( 'templates/footer.php' );
 	}
@@ -58,7 +59,7 @@ class Post extends MY_Controller {
 		else {
 			redirect('info/nopage');
 		}
-		$thispost = $this->post_model->get_post($post_id);
+		$thispost = $this->post_model->get_post($post_id, $ptype);
 		if (empty($thispost)) {
 			redirect('info/nopage');
 		}
