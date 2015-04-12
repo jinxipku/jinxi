@@ -614,7 +614,7 @@ function confirm_post(type) {
 		cbtn = $("#btn_confirm_post_sell");
 	}
 	var picture = new Array();
-	$("#preview_boxes").each(function() {
+	$("div#preview_boxes div.preview_box").each(function() {
 		var tp = new Object();
 		tp.picture_url = $(this).find("img").attr("alt");
 		tp.picture_des = $(this).find("textarea").val();
@@ -636,6 +636,7 @@ function confirm_post(type) {
 			price: $("#price").val(),
 			description: $("#description").val(),
 			picture: picture,
+			fisrt_picture: $("input[name='fisrt_picture']:checked").val(),
 			timespec: timespec
 		},
 		function(res) {

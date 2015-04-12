@@ -69,8 +69,6 @@
 	  			},
 	  			'json'
 	  		);
-			
-
 		});
 		function addView(file, file_thumb, ismobile) {
 			var index = $("div#preview_boxes>div").length;
@@ -195,6 +193,6 @@
 	  			},
 	  			'json'
 	  		);
-		} 
+		}; 
 	});
 }(window.jQuery)

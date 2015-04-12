@@ -5,8 +5,6 @@
 					<div class="post_cont">
 						<p>恭喜，信息发布成功，请点击以下按钮前往该帖界面。</p>
 						<a id="a_gotopost" href="{$baseurl}post/viewpost/" type="button" class="btn btn-primary btn-hg">前往该贴</a>
-						<script src="{$baseurl}js/jquery.form.js"></script>
-						<script src="{$baseurl}js/picture.js"></script>
 					</div>
 				</div>
 			</div>

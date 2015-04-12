@@ -57,7 +57,7 @@ class User extends MY_Controller {
 		
 		$this->display ( 'templates/header.php' );
 		$this->display ( 'user/main.php' );
-		$this->display ( 'user/side.php' );
+		$this->display ( 'templates/side.php' );
 		$this->display ( 'templates/footer.php' );
 	}
 
@@ -121,7 +121,7 @@ class User extends MY_Controller {
 		
 		$this->display ( 'templates/header.php' );
 		$this->display ( 'setup/main.php' );
-		$this->display ( 'setup/side.php' );
+		$this->display ( 'templates/side.php' );
 		$this->display ( 'templates/footer.php' );
 	}
 
