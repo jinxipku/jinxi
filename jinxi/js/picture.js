@@ -109,7 +109,7 @@
 			input.attr("data-toggle", "radio");
 			if (index == 0)
 				input.attr("checked", true);
-			input.val(index + 1);
+			input.val(index);
 			label.append(input);
 			label.append("设为首图");
 			div2.append(label);
