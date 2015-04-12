@@ -22,6 +22,7 @@ class post_model extends CI_Model {
 		return $this->db->update($table,$info);
 	}
 
+
 	//TODO:当两张表区别较大时，再区别处理.
 	public function get_post($post_id,$type){
 		$table = get_post_table($type);
@@ -30,27 +31,27 @@ class post_model extends CI_Model {
 		return $res;
 	}
 
-	public function get_buyer_post($user_id){
+	//返回某个用户发的所有帖子，不需要联立其他表，只需要返回对应post表中信息
+	public function get_user_posts($user_id,$type){
+		$table = get_post_table($type);
 		$this->db->order_by("createat", "desc"); 
-		$query = $this->db->get_where('jx_buyer_post', array('user_id' => $user_id));
+		$query = $this->db->get_where($table, array('user_id' => $user_id));
 		$res = $query->result_array();
+
 		foreach ($res as $key => &$v) {
 			$v['createat'] = date('Y-m-d H:i:s',$v['createat']);
 			$v['updateat'] = date('Y-m-d H:i:s',$v['updateat']);
+			$temp = unserialize($v['picture']);
+			if(is_array($temp)&&count($temp)!=0){
+				foreach ($temp as $ke => $value) {
+					$temp[$ke]['thumb_picture_url'] = get_thumb($value['picture_url']);
+				}
+			}else $temp = null;
+			$v['picture'] = $temp;
 		}
 		return $res;
 	}
 
-	public function get_seller_post($user_id){
-		$this->db->order_by("createat", "desc"); 
-		$query = $this->db->get_where('jx_seller_post', array('user_id' => $user_id));
-		$res = $query->result_array();
-		foreach ($res as $key => &$v) {
-			$v['createat'] = date('Y-m-d H:i:s',$v['createat']);
-			$v['updateat'] = date('Y-m-d H:i:s',$v['updateat']);
-		}
-		return $res;
-	}
 
 
 //************************************以下是旧的*****************//
@@ -77,7 +78,7 @@ class post_model extends CI_Model {
 	// 		'ptime' => $ptime 
 	// 		) );
 	// 	$post_id = $query->row_array ()['post_id'];
-		
+
 	// 	$query = $this->db->get_where ( 'jx_user', array (
 	// 		'user_id' => $user_id 
 	// 		) );
@@ -97,7 +98,7 @@ class post_model extends CI_Model {
 	// 		);
 	// 	$this->db->where ( 'user_id', $user_id );
 	// 	$this->db->update ( 'jx_user', $data );
-		
+
 	// 	return $post_id;
 	// }
 	// public function upload_picture($post_id, $pimage) {

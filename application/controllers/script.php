@@ -10,6 +10,7 @@ class Script extends MY_Controller {
 	public function __construct() {
 		parent::__construct ();
 		$this->load->model("user_model");
+		$this->load->model("post_model");
 		$this->load->database();
 	}
 
@@ -67,17 +68,6 @@ class Script extends MY_Controller {
 	}
 
 	public function testPost(){
-		// for($i=0;$i<10;$i++){
-		// 	$data = array(
-		// 		"user_id"=>1,
-		// 		"category1"=>1,
-		// 		"category2"=>1,
-		// 		"class"=>1,
-		// 		"createat"=>time(),
-		// 		"updateat"=>time(),
-		// 		);
-		// 	$this->db->insert ( 'jx_buyer_post', $data );
-		// }
 		$this->load->model("post_model");
 		$res = $this->post_model->get_buyer_post(1);
 		var_dump($res);
@@ -96,6 +86,22 @@ class Script extends MY_Controller {
 	public function testMars(){
 		$c = turnToMars("0123456789");
 		var_dump($c);
+	}
+
+	public function testHelper(){
+		$picture = "http://wwww.baidu.com/picture/2/123142132.jpg";
+		echo get_thumb($picture);
+	}
+
+	public function testUserpost(){
+		$user_id = 2;
+		$type = 0;
+		$res = $this->post_model->get_user_posts($user_id,$type);
+		var_dump($res);
+		foreach ($res as $key => $value) {
+			print_r($value['picture']);
+			echo '<br>';
+		}
 	}
 }
 ?>

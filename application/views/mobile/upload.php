@@ -64,20 +64,19 @@
 			
 		});
 		function showResponse(data){
-			alert(data.info);
 			$("#upload_btn").attr('disabled',false);
 			$("#upload_btn").css('font-size','6em');
-			$("#upload_btn").html('上传完毕<br>您可以继续上传或回电脑预览');
+			$("#upload_btn").html('上传成功<br>继续上传或回电脑预览');
 		}
 		function showError(data){
+			$("#upload_btn").attr('disabled',false);
+			$("#upload_btn").css('font-size','6em');
+			$("#upload_btn").html('上传失败<br>继续上传或回电脑预览');
 		}
 		function openBrowse(){ 
-			$("#upload_btn").css('font-size','9em');
 			var ie=navigator.appName=="Microsoft Internet Explorer" ? true : false; 
 			if(ie){ 
 				document.getElementById("picture").click(); 
-
-				//document.getElementById("filename").value=document.getElementById("file").value;
 			}else{
 				var a=document.createEvent("MouseEvents");//FF的处理 
 				a.initEvent("click", true, true);  

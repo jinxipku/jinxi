@@ -87,6 +87,7 @@ create table jx_seller_post(
 	createat int(11) not null comment '创建时间',
 	updateat int(11) not null comment '最后更新时间',
 	description text null comment '商品描述',
+	first_picture tinyint not null default 0 comment '首图位置',
 	picture text null comment '图片列表(json序列化对象)',
 	price int(11) null comment '预期出售价格(1赠送，0面议)',
 	deal int(11) not null default 0 comment '成交方式(1一口价，2接受砍价，3一元赠送，4面议)',
