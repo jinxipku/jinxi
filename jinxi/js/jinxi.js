@@ -652,7 +652,11 @@ function confirm_post(type) {
 				cbtn.html('完成发布');
 			} else {
 				cbtn.html('发布成功！');
-				$("a#a_gotopost").attr('href', $("a#a_gotopost").attr('href') + res.data);
+				var post_type = "buy/";
+				if (type == 0) {
+					post_type = "sell/";
+				}
+				$("a#a_gotopost").attr('href', $("a#a_gotopost").attr('href') + post_type + res.data);
 				last.fadeOut(300, function() {
 					$("#newpost_success").fadeIn(300);
 				});

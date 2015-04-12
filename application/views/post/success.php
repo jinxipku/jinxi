@@ -1,4 +1,4 @@
-				<div id="newpost_psuccess">
+				<div id="newpost_success">
 					<div class="post_img">
 						<img class="passive" src="{$baseurl}img/info/success.png" alt="发布成功">
 					</div>
