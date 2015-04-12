@@ -13,7 +13,6 @@
 	<link href="{$baseurl}css/school.css" rel="stylesheet"/>
 	<link href="{$baseurl}css/jinxi.css" rel="stylesheet"/>
 	<link href="{$baseurl}css/Jcrop.css" rel="stylesheet"/>
-	<link href="{$baseurl}css/sticky-footer-navbar.css" rel="stylesheet"/>
 	<script src="{$baseurl}js/jquery.js"></script>
 
 </head>

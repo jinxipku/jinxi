@@ -614,7 +614,7 @@ function confirm_post(type) {
 		cbtn = $("#btn_confirm_post_sell");
 	}
 	var picture = new Array();
-	$("#preview_boxes").each(function() {
+	$("div#preview_boxes div.preview_box").each(function() {
 		var tp = new Object();
 		tp.picture_url = $(this).find("img").attr("alt");
 		tp.picture_des = $(this).find("textarea").val();
@@ -636,6 +636,7 @@ function confirm_post(type) {
 			price: $("#price").val(),
 			description: $("#description").val(),
 			picture: picture,
+			fisrt_picture: $("input[name='fisrt_picture']:checked").val(),
 			timespec: timespec
 		},
 		function(res) {
@@ -651,7 +652,11 @@ function confirm_post(type) {
 				cbtn.html('完成发布');
 			} else {
 				cbtn.html('发布成功！');
-				$("a#a_gotopost").attr('href', $("a#a_gotopost").attr('href') + res.data);
+				var post_type = "buy/";
+				if (type == 0) {
+					post_type = "sell/";
+				}
+				$("a#a_gotopost").attr('href', $("a#a_gotopost").attr('href') + post_type + res.data);
 				last.fadeOut(300, function() {
 					$("#newpost_success").fadeIn(300);
 				});
