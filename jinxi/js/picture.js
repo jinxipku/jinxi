@@ -93,7 +93,7 @@
 			});
 			preview_box.append(div1);
 
-			var textarea = $("<textarea></textarea");
+			var textarea = $("<textarea></textarea>");
 			textarea.addClass("form-control flat");
 			textarea.attr("rows", "4");
 			textarea.attr("placeholder", "请填写图片描述");
