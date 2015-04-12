@@ -75,7 +75,7 @@ if(!function_exists('get_user_type')){
             "教职工",
             "校友",
             "校外合作者"
-        );
+            );
         return $types[$type];
     }
 }
@@ -161,9 +161,8 @@ if (! function_exists ( 'get_level' )) {
     }
 }
 
-if (! function_exists ( 'get_class_name' )) {
-    function get_class_name($class) {
-        $allclass = array (
+function get_category_name($class) {
+    $allclass = array (
                 "手机", // 0
                 "数码相机",
                 "电子词典",
@@ -219,37 +218,36 @@ if (! function_exists ( 'get_class_name' )) {
                 );
 return $allclass [$class];
 }
+
+
+
+function get_category1_name($class) {
+    if ($class <= 10)
+        return get_category_name ( 10 );
+    else if ($class <= 15)
+        return get_category_name ( 15 );
+    else if ($class <= 20)
+        return get_category_name ( 20 );
+    else if ($class <= 26)
+        return get_category_name ( 26 );
+    else if ($class <= 40)
+        return get_category_name ( 40 );
+    else if ($class <= 45)
+        return get_category_name ( 45 );
+    else if ($class <= 50)
+        return get_category_name ( 50 );
+    else
+        return get_category_name ( 51 );
 }
 
-if (! function_exists ( 'get_class1' )) {
-    function get_class1($class) {
-        if ($class <= 10)
-            return get_class_name ( 10 );
-        else if ($class <= 15)
-            return get_class_name ( 15 );
-        else if ($class <= 20)
-            return get_class_name ( 20 );
-        else if ($class <= 26)
-            return get_class_name ( 26 );
-        else if ($class <= 40)
-            return get_class_name ( 40 );
-        else if ($class <= 45)
-            return get_class_name ( 45 );
-        else if ($class <= 50)
-            return get_class_name ( 50 );
-        else
-            return get_class_name ( 51 );
-    }
+
+function get_category2_name($class) {
+    if ($class == 10 || $class == 15 || $class == 20 || $class == 26 || $class == 40 || $class == 45 || $class == 50 || $class == 51)
+        return get_category_name ( 51 );
+    else
+        return get_category_name ( $class );
 }
 
-if (! function_exists ( 'get_class2' )) {
-    function get_class2($class) {
-        if ($class == 10 || $class == 15 || $class == 20 || $class == 26 || $class == 40 || $class == 45 || $class == 50 || $class == 51)
-            return get_class_name ( 51 );
-        else
-            return get_class_name ( $class );
-    }
-}
 
 if (! function_exists ( 'get_title_str' )) {
     function get_title_str($ptype, $pgtype, $pstype, $class, $brand, $modal, $pimage) {
@@ -314,7 +312,7 @@ function genFileName($uniquedata,$ext='',$time=null){
             $rand = $rand . $char_array[mt_rand(0,55)];
         }
     }
-   
+
     $rand = $rand.$uniquedata;    
     for($i = 0; $i < 8; $i ++) {
         $rand = $rand . $char_array[mt_rand(0,47)];
@@ -339,7 +337,7 @@ function turnToMars($str){
         "0123456789",
         "零壹贰叁肆伍陆柒捌玖",
         "〇①②③④⑤⑥⑦⑧⑨",
-    );
+        );
 
     $array = str_split($str,1);
     foreach ($array as $key => $value) {
@@ -348,7 +346,7 @@ function turnToMars($str){
         if($r != 0) $n = 3;
         $array[$key] = is_numeric($value)? substr($dict[$r],$n*$value,$n) : $value;
     }
- 
+
     return implode($array,'');
 }
 
@@ -374,6 +372,42 @@ function get_thumb($picture){
         return implode($array, "/");
     }
 }
+
+function format_time($time){
+    return date('Y-m-d H:i:s',$time);
+
+}
+
+function get_deal_name($type){//1一口价，2接受砍价，3一元赠送，4面议
+    if($type==1) return "一口价";
+    if($type==2) return "接受砍价";
+    if($type==3) return "一元赠送";
+    if($type==4) return "面议";
+}
+
+function get_class_name($type){
+    if($type==1) return "S(正品)";
+    if($type==2) return "S(自制)";
+    if($type==3) return "A";
+    if($type==4) return "B";
+    if($type==5) return "C";
+}
+
+function get_title($type,$deal,$hasimg,$cat1,$cat2,$brand,$model){
+    $title = "";
+    $t1 = $type==0? "[卖]":"[买]";
+    $t2 = "[".$deal."]";
+    $t3 = $hasimg ? "[图]":"";
+    $t4 = $cat1;
+    $t5 = " > ";
+    $t6 = $cat2;
+    $t7 = " : ";
+    $t8 = $brand." ";
+    $t9 = $model;
+    return $title.$t1.$t2.$t3.$t4.$t5.$t6.$t7.$t8.$t9;
+}
+
+
 
 
 ?>

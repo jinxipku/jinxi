@@ -29,7 +29,10 @@ class post_model extends CI_Model {
 		$query = $this->db->get_where($table, array('post_id' => $post_id));
 		$res = $query->row_array();
 		if(empty($res)) return null;
-		$user = $this->db->get_where("jx_user",array("user_id"=>$res['user_id']));
+		$res['picture'] = unserialize($res['picture']);
+		$this->db->select('school_id, nick, head,nick_color');
+		$query = $this->db->get_where("jx_user",array("id"=>$res['user_id']));
+		$user = $query->row_array();
 		if(empty($user)) return null;
 		$res['user'] = $user;
 		return $res;

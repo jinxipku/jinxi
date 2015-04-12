@@ -104,8 +104,23 @@ class Post extends MY_Controller {
 // +----------------------------------------------------------------------
 
 	//返回特定的一篇帖子
-	public function get_post($post_id, $type){
+	public function get_post($post_id=2, $type=0){
 		$post = $this->post_model->get_post($post_id,$type);
+		$post['createat'] = format_time($post['createat']);
+		$post['updateat'] = format_time($post['updateat']);
+
+		$post['category1'] = get_category1_name($post['category1']);
+		$post['category2'] = get_category2_name($post['category2']);
+		$post['deal'] = get_deal_name($post['deal']);
+		$post['class'] = get_class_name($post['class']);
+
+		$hasimg = false;
+		if(!empty($post['picture'])){
+			$hasimg = true;
+		}
+		$post['title'] = get_title($type,$post['deal'],$hasimg,$post['category1'],$post['category2'],$post['brand'],$post['model']);
+
+		var_dump($post);
 		return $post;
 	}
 

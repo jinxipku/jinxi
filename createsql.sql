@@ -83,7 +83,7 @@ create table jx_seller_post(
 	category2 smallint not null comment '二级分类',
 	brand varchar(20) null comment '品牌',
 	model varchar(40) null comment '型号',
-	class smallint not null comment '商品级别',
+	class smallint not null comment '商品级别(0-S正品  1-S自制 2-A 3-B 4-C',
 	createat int(11) not null comment '创建时间',
 	updateat int(11) not null comment '最后更新时间',
 	description text null comment '商品描述',
