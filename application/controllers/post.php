@@ -103,8 +103,18 @@ class Post extends MY_Controller {
 // | 普通函数
 // +----------------------------------------------------------------------
 
+	//返回特定的一篇帖子
 	public function get_post($post_id, $type){
 		return $this->post_model->get_post($post_id,$type);
+	}
+
+	//返回某用户发表的帖子（卖，买，买卖） 
+	//param type 0卖  1买  2都返回
+	//param user_id 不写则使用当前用户 写则使用提供的id
+	public function get_user_posts($user_id,$type){
+		$res = $this->post_model->get_user_post($user_id,$type);
+		if(empty($res)) return null;
+		else return $res;
 	}
 
 
@@ -206,29 +216,7 @@ class Post extends MY_Controller {
 			$this->ajaxReturn(null,'更新失败',0);
 	}
 
-	//返回某用户发表的帖子（卖，买，买卖） 
-	//param mode 0同时返回  1返回卖东西的帖子  2返回买东西的帖子
-	//param user_id 不写则使用当前用户 写则使用提供的id
-	public function getuserposts(){
-		$mode = $_POST['mode'];
-		$login_user =  $this->session->userdata('login_user');
-		$user_id = isset($_POST['user_id'])? $_POST['user_id']: $login_user['id'];
-		switch ($mode) {
-			case '0':
-				$data['buy'] = $this->post_model->get_buyer_post($user_id);
-				$data['sell'] = $this->post_model->get_seller_post($user_id);
-				break;
-			case '1':
-				$data['sell'] = $this->post_model->get_seller_post($user_id);
-				break;
-			case '2':
-				$data['buy'] =$this->post_model->get_buyer_post($user_id);
-			default:
-				$this->ajaxReturn(null,'参数错误',0);
-				break;
-		}
-		$this->ajaxReturn($data,'',1);
-	}
+
 
 	//返回收藏贴
 	//post  type 0同时返回  1卖2买

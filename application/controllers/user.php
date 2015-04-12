@@ -187,6 +187,7 @@ class User extends MY_Controller {
 	//前端表单name为head_image
 	public function upload_photo() { // ajax上传图片
 		$user = $this->session->userdata ( 'login_user' );
+		if(empty($user)) $this->ajaxReturn(null,'未登录',0);
 		$user_id = !empty($user) ? $user['id'] : 0; 
 		$field = 'head_image';
 		$config ['upload_path'] = $this->head_dir;

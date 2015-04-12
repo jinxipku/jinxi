@@ -366,5 +366,14 @@ function parse_tag($text){
     return htmlentities($text);
 }
 
+function get_thumb($picture){
+    $array = explode("/",$picture);
+    if(count($array)==0) return $picture;
+    else{
+        $array[count($array)-1] = "thumb_".$array[count($array)-1];
+        return implode($array, "/");
+    }
+}
+
 
 ?>
