@@ -93,7 +93,7 @@
 			});
 			preview_box.append(div1);
 
-			var textarea = $("<textarea></textarea");
+			var textarea = $("<textarea></textarea>");
 			textarea.addClass("form-control flat");
 			textarea.attr("rows", "4");
 			textarea.attr("placeholder", "请填写图片描述");
@@ -109,7 +109,7 @@
 			input.attr("data-toggle", "radio");
 			if (index == 0)
 				input.attr("checked", true);
-			input.val(index + 1);
+			input.val(index);
 			label.append(input);
 			label.append("设为首图");
 			div2.append(label);

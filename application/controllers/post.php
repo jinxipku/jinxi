@@ -47,6 +47,37 @@ class Post extends MY_Controller {
 		$this->display ( 'templates/footer.php' );
 	}
 
+	public function viewpost($post_type = 'none', $post_id = 0) {
+		$ptype = 0;
+		if ($post_type == 'buy') {
+			$ptype = 1;
+		}
+		else if ($post_type == 'sell') {
+			$ptype = 0;
+		}
+		else {
+			redirect('info/nopage');
+		}
+		$thispost = $this->post_model->get_post($post_id);
+		if (empty($thispost)) {
+			redirect('info/nopage');
+		}
+		$login_user =  $this->session->userdata('login_user');
+		if (!empty($login_user)) {
+			$this->assign('login_user', $login_user);
+		}
+		$this->assign('thispost', $thispost);
+		$this->assign('nav_tab', 3);
+		$this->assign('title', '今昔网-帖子内容');
+		$this->assign('baseurl', base_url());
+		$this->assign('tips', show_tips());
+
+		$this->display ( 'templates/header.php' );
+		$this->display ( 'post/main.php' );
+		$this->display ( 'templates/side.php' );
+		$this->display ( 'templates/footer.php' );
+	}
+
 	
 	public function mobile_upload(){
 		$key = $this->config->item('verify_pkey');

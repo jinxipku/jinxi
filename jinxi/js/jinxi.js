@@ -636,7 +636,7 @@ function confirm_post(type) {
 			price: $("#price").val(),
 			description: $("#description").val(),
 			picture: picture,
-			fisrt_picture: $("input[name='fisrt_picture']:checked").val(),
+			first_picture: $("input[name='first_picture']:checked").val(),
 			timespec: timespec
 		},
 		function(res) {
