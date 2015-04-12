@@ -103,5 +103,11 @@ class Script extends MY_Controller {
 			echo '<br>';
 		}
 	}
+	public function getpost(){
+		$post_id = 1;
+		$type = 0;
+		$res = $this->post_model->get_post($post_id,$type);
+		var_dump($res);
+	}
 }
 ?>

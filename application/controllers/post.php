@@ -74,7 +74,8 @@ class Post extends MY_Controller {
 
 	//返回特定的一篇帖子
 	public function get_post($post_id, $type){
-		return $this->post_model->get_post($post_id,$type);
+		$post = $this->post_model->get_post($post_id,$type);
+		return $post;
 	}
 
 	//返回某用户发表的帖子（卖，买，买卖） 
@@ -146,8 +147,6 @@ class Post extends MY_Controller {
 		$picture = serialize($picture);     //序列化
 		$_POST['picture'] = $picture;
 
-		
-
 		$type = $_POST['post_type'];
 		if(isset($_POST['post_type']))       //过滤掉POST中的无关项
 			unset($_POST['post_type']);
@@ -160,7 +159,8 @@ class Post extends MY_Controller {
 			$res = $this->post_model->insert_post($_POST, "sell");
 		}else $this->ajaxReturn(null,'参数错误',0);
 		if($res)
-			$this->ajaxReturn(null,'发表成功',1);
+			$data['post_id'] = $res;
+			$this->ajaxReturn($data,'发表成功',1);
 		else
 			$this->ajaxReturn(null,'发表出现数据库错误',0);
 	}

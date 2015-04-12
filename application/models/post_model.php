@@ -26,8 +26,12 @@ class post_model extends CI_Model {
 	//TODO:当两张表区别较大时，再区别处理.
 	public function get_post($post_id,$type){
 		$table = get_post_table($type);
-		$query = $this->db->get_where($table, array('user_id' => $user_id));
+		$query = $this->db->get_where($table, array('post_id' => $post_id));
 		$res = $query->row_array();
+		if(empty($res)) return null;
+		$user = $this->db->get_where("jx_user",array("user_id"=>$res['user_id']));
+		if(empty($user)) return null;
+		$res['user'] = $user;
 		return $res;
 	}
 
