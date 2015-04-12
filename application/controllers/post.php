@@ -189,9 +189,10 @@ class Post extends MY_Controller {
 		}else if($type == 1){
 			$res = $this->post_model->insert_post($_POST, "sell");
 		}else $this->ajaxReturn(null,'参数错误',0);
-		if($res)
+		if($res){
 			$data['post_id'] = $res;
 			$this->ajaxReturn($data,'发表成功',1);
+		}
 		else
 			$this->ajaxReturn(null,'发表出现数据库错误',0);
 	}
