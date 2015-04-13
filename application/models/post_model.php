@@ -30,9 +30,13 @@ class post_model extends CI_Model {
 		$res = $query->row_array();
 		if(empty($res)) return null;
 		$res['picture'] = unserialize($res['picture']);
-		$this->db->select('school_id, nick, head,nick_color');
-		$query = $this->db->get_where("jx_user",array("id"=>$res['user_id']));
-		$user = $query->row_array();
+
+		$this->db->from("jx_user");
+		$this->db->select('jx_school_info.school_name, nick, thumb,nick_color');
+		$this->db->join('jx_school_info',"jx_school_info.school_id=jx_user.school_id");
+		$this->db->where(array("id"=>$res['user_id']));
+	
+		$user = $this->db->get()->row_array();
 		if(empty($user)) return null;
 		$res['user'] = $user;
 		return $res;
