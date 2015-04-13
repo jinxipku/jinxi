@@ -105,7 +105,7 @@ class Script extends MY_Controller {
 		}
 	}
 	public function getpost(){
-		$post_id = 1;
+		$post_id = 2;
 		$type = 0;
 		$res = $this->post_model->get_post($post_id,$type);
 		var_dump($res);

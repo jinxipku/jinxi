@@ -107,6 +107,7 @@ class Post extends MY_Controller {
 	//返回特定的一篇帖子
 	public function get_post($post_id, $type){
 		$post = $this->post_model->get_post($post_id,$type);
+		if(empty($post)) return null;
 		$post['createat'] = format_time($post['createat']);
 		$post['updateat'] = format_time($post['updateat']);
 
@@ -119,8 +120,7 @@ class Post extends MY_Controller {
 		if(!empty($post['picture'])){
 			$hasimg = true;
 		}
-		$post['title'] = get_title($type,$post['deal'],$post['class'],$hasimg,$post['category1'],$post['category2'],$post['brand'],$post['model']);
-
+		$post['title'] = get_title($type,$post['deal'],$post['class'],$hasimg,$post['category1_name'],$post['category2_name'],$post['brand'],$post['model']);
 		return $post;
 	}
 
