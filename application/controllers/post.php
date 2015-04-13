@@ -534,6 +534,20 @@ class Post extends MY_Controller {
 		$this->ajaxReturn(null,'',1);
 	}
 
+	public function add_favorite(){
+		$user = $this->session->userdata ( 'login_user' );
+		if(empty($user)) $this->ajaxReturn(null,"未登录",0);
+		$post_id = $_POST['post_id'];
+		$post_type = $_POST['post_type'];
+
+		$res = $this->favorites_model->add_favorite($user['id'],$post_id,$post_type);
+		if(empty($res)){
+			$this->ajaxReturn(null,'操作失败',0);
+		}else{
+			$this->ajaxReturn(null,'操作成功',1);
+		}
+	}
+
 
 // +----------------------------------------------------------------------
 // | 私有函数
