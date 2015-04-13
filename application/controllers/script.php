@@ -11,6 +11,7 @@ class Script extends MY_Controller {
 		parent::__construct ();
 		$this->load->model("user_model");
 		$this->load->model("post_model");
+		$this->load->model("reply_model");
 		$this->load->database();
 	}
 
@@ -108,6 +109,18 @@ class Script extends MY_Controller {
 		$type = 0;
 		$res = $this->post_model->get_post($post_id,$type);
 		var_dump($res);
+	}
+
+	public function testreply(){
+		$post_id = 2;
+		$type = 0;
+		$res = $this->reply_model->get_reply($post_id,$type);
+		$floor = array();
+		foreach ($res as $key => $value) {
+			$floor[$value['floor']][] = $value;
+		}
+		var_dump($floor);
+		//var_dump($res);
 	}
 }
 ?>

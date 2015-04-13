@@ -110,8 +110,8 @@ class Post extends MY_Controller {
 		$post['createat'] = format_time($post['createat']);
 		$post['updateat'] = format_time($post['updateat']);
 
-		$post['category1'] = get_category1_name($post['category1']);
-		$post['category2'] = get_category2_name($post['category2']);
+		$post['category1_name'] = get_category1_name($post['category1']);
+		$post['category2_name'] = get_category2_name($post['category2']);
 		$post['deal'] = get_deal_name($post['deal']);
 		$post['class'] = get_class_name($post['class']);
 
@@ -119,9 +119,8 @@ class Post extends MY_Controller {
 		if(!empty($post['picture'])){
 			$hasimg = true;
 		}
-		$post['title'] = get_title($type,$post['deal'],$hasimg,$post['category1'],$post['category2'],$post['brand'],$post['model']);
+		$post['title'] = get_title($type,$post['deal'],$post['class'],$hasimg,$post['category1'],$post['category2'],$post['brand'],$post['model']);
 
-		//var_dump($post);
 		return $post;
 	}
 

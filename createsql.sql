@@ -112,5 +112,15 @@ create table jx_buyer_post(
 	deal int(11) not null default 0 comment '成交方式(1心理价位，2,面议)',
 	contactby varchar(20) null comment '期望的联系方式（0邮箱，1手机，2qq，3微信，4站内），可多选，以逗号分隔',
 	primary key(post_id)
-)DEFAULT CHARSET=utf8 COMMENT='卖家帖子';
+)DEFAULT CHARSET=utf8 COMMENT='买家帖子';
 create index user_index on jx_buyer_post(user_id);
+
+drop table if exists jx_reply;
+create table jx_reply(
+	post_id int(11) not null comment '帖子id',
+	type tinyint not null comment '帖子类型',
+	reply_from int(11) not null comment '回复者id',
+	reply_to int(11) not null comment '回复谁,0代表楼主,非0代表回复他人的id',
+	floor int(11) not null comment '楼层',
+	content text null comment '回复内容'
+)DEFAULT CHARSET=utf8 COMMENT='帖子回复';
