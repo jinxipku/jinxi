@@ -91,10 +91,12 @@ create table jx_seller_post(
 	picture text null comment '图片列表(json序列化对象)',
 	price int(11) null comment '预期出售价格(1赠送，0面议)',
 	deal int(11) not null default 0 comment '成交方式(1一口价，2接受砍价，3一元赠送，4面议)',
-	contactby varchar(20) null comment '期望的联系方式（0邮箱，1手机，2qq，3微信，4站内），可多选，以逗号分隔',
+	contactby varchar(20) null comment '期望的联系方式（1邮箱，4手机，2qq，3微信，0站内），可多选，以逗号分隔',
+	active tinyint not null default 1 comment '帖子状态(1,正常，2，关闭）',
 	primary key(post_id)
 )DEFAULT CHARSET=utf8 COMMENT='卖家帖子';
 create index user_index on jx_seller_post(user_id);
+create index active_index on jx_seller_post(active);
 
 drop table if exists jx_buyer_post;
 create table jx_buyer_post(
@@ -110,10 +112,12 @@ create table jx_buyer_post(
 	description text null comment '描述',
 	price int(11) null comment '预期买入价格(1赠送，0面议)',
 	deal int(11) not null default 0 comment '成交方式(1心理价位，2,面议)',
-	contactby varchar(20) null comment '期望的联系方式（0邮箱，1手机，2qq，3微信，4站内），可多选，以逗号分隔',
+	contactby varchar(20) null comment '期望的联系方式（1邮箱，4手机，2qq，3微信，0站内），可多选，以逗号分隔',
+	active tinyint not null default 1 comment '帖子状态(1,正常，2，关闭）',
 	primary key(post_id)
 )DEFAULT CHARSET=utf8 COMMENT='买家帖子';
 create index user_index on jx_buyer_post(user_id);
+create index active_index on jx_buyer_post(active);
 
 drop table if exists jx_reply;
 create table jx_reply(

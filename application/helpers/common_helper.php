@@ -286,7 +286,8 @@ function getFileExt($file_name){
     return $extend[$va]; 
 }
 
-function turnToMars($str){
+function turnToMars($str,$flag){
+    if(!$flag) return $str;
     $dict = array(
         "0123456789",
         "零壹贰叁肆伍陆柒捌玖",
@@ -367,7 +368,7 @@ function get_plain_title($type,$deal,$class,$hasimg,$cat1,$cat2,$brand,$model){
     $title = "";
     $t1 = $type==0? "[卖]":"[买]";    
     $t2 = '['.$deal.']';                     // warning
-    $t10 = $class=="S(自制)"? "[自制]":"";
+    $t10 = $class=="1"? "[自制]":"";
     $t3 = $hasimg ? "[图]":"";    //purple
     $t4 = " ".$cat1;
     $t5 = " > ";

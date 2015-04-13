@@ -67,6 +67,10 @@ class Post extends MY_Controller {
 		if (!empty($login_user)) {
 			$this->assign('login_user', $login_user);
 		}
+		if ($login_user['id'] == $thispost['user']['id'])
+			$this->assign('mypost',true);
+		if ($this->favorites_model->is_favorite($login_user['id'],$thispost['post_id'],$thispost['type'])>0)
+			$this->assign('has_collect',true);
 		$this->assign('thispost', $thispost);
 		$this->assign('nav_tab', 3);
 		$this->assign('title', '今昔网-帖子内容');
@@ -106,15 +110,17 @@ class Post extends MY_Controller {
 
 	//返回特定的一篇帖子
 	public function get_post($post_id, $type){
+
 		$post = $this->post_model->get_post($post_id,$type);
 		if(empty($post)) return null;
+		$post['type'] = $type;
 		$post['createat'] = format_time($post['createat']);
 		$post['updateat'] = format_time($post['updateat']);
 
 		$post['category1_name'] = get_category1_name($post['category1']);
 		$post['category2_name'] = get_category2_name($post['category2']);
 		$post['deal'] = get_deal_name($post['deal']);
-		$post['class'] = get_class_name($post['class']);
+
 
 		$hasimg = false;
 		if(!empty($post['picture'])){
@@ -122,6 +128,29 @@ class Post extends MY_Controller {
 		}
 		$post['title'] = get_title($type,$post['deal'],$post['class'],$hasimg,$post['category1_name'],$post['category2_name'],$post['brand'],$post['model']);
 		$post['plain_title'] = get_plain_title($type,$post['deal'],$post['class'],$hasimg,$post['category1_name'],$post['category2_name'],$post['brand'],$post['model']);
+		
+		$contactby = explode(",",$post['contactby']);
+
+		$flag = $post['user']['is_mars'] == '1' ? true:false;
+		
+		if(!empty($contactby)&&count($contactby)>0){
+			foreach ($contactby as $key => $value) {
+				if($key==0){
+					$contact[] = "站内：回复本帖";
+				}elseif($key==1){
+					$contact[] = "邮箱：". $post['user']['email'];
+				}elseif($key==2){
+					$contact[] = "qq：".turnToMars($post['user']['qq'],$flag);
+				}elseif($key==3){
+					$contact[] = "微信：".$post['user']['weixin'];
+				}elseif($key==4){
+					$contact[] = "手机：".turnToMars($post['user']['phone'],$flag);
+				}
+			}
+			$post['contactby'] = $contact;
+		}else $post['contactby'] = null;
+		//TODO:当前用户是否关注帖子
+		
 		return $post;
 	}
 
@@ -132,6 +161,12 @@ class Post extends MY_Controller {
 		$res = $this->post_model->get_user_post($user_id,$type);
 		if(empty($res)) return null;
 		else return $res;
+	}
+
+	//返回若干帖子
+	//商品大厅
+	public function get_posts($type,$category1,$category2,$class,$page_num,$records=10){
+		
 	}
 
 

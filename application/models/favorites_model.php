@@ -47,5 +47,14 @@ class favorites_model extends CI_Model {
 		$res = $this->db->count_all_results();
 		return $res;
 	}
+
+	public function is_favorite($user_id, $post_id,$type) {
+		$query = $this->db->get_where ( 'jx_favorites', array (
+				'user_id' => $user_id,
+				'post_id' => $post_id,
+				'type' => $type 
+		) );
+		return $query->num_rows ();
+	}
 	
 }

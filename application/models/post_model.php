@@ -32,7 +32,7 @@ class post_model extends CI_Model {
 		$res['picture'] = unserialize($res['picture']);
 
 		$this->db->from("jx_user");
-		$this->db->select('jx_school_info.school_name, nick, thumb,nick_color');
+		$this->db->select('jx_school_info.school_name, nick,id, thumb,nick_color,email,qq,phone,weixin,is_mars');
 		$this->db->join('jx_school_info',"jx_school_info.school_id=jx_user.school_id");
 		$this->db->where(array("id"=>$res['user_id']));
 	
