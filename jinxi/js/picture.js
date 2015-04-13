@@ -5,6 +5,7 @@
 		var erweima = "";
 		var baseurl = "http://www.xn--wmqr18c.cn/";
 		var number = 0;
+		var confirm = false;
 
 		$("#form_picture_upload").ajaxForm();// ajaxForm()只是绑定表单事件，并不是提交表单。。。
 		$("#picture").bind('change', function() {
@@ -180,6 +181,8 @@
 			$("#preview_boxes>div img").each(function() {
 				picture_url += $(this).attr("alt") + "," + $(this).attr("src") + ","
 			});
+			if ($("#form_picture_upload").attr("name") == 0 && picture_url == "")
+				return;
 			$.post(
 				baseurl + "post/delete_picture",
 				{
@@ -187,8 +190,8 @@
 					timespec: $("#form_picture_upload").attr("name")
 				},
 				function(res) {
-					if(res.status == 0) {
-						alert("删除失败！");
+					if(res.status == 1) {
+						alert("临时数据已删除！");
 					}
 	  			},
 	  			'json'

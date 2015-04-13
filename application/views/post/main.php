@@ -57,20 +57,32 @@
 			</div>
 
 			<hr/>
-			<p class="p_post_section">基本信息</p>
-			<p class="p_post_content">帖子类型： {$post_type}</p>
-			<p class="p_post_content">一级分类： {$thispost.category1_name}</p>
-			<p class="p_post_content">二级分类： {$thispost.category2_name}</p>
-			<p class="p_post_content">品牌型号： {$thispost.brand} {$thispost.model}</p>
-			<p class="p_post_content">商品状态：
-			{if $thispost.class == 0}S级别（正品）
-			{elseif $thispost.class == 1}S级别（自制）
-			{elseif $thispost.class == 2}A级别（九成新）
-			{elseif $thispost.class == 3}B级别（七成新）
-			{elseif $thispost.class == 4}C级别（五成新）
-			{/if}
-			<p class="p_post_content">成交方式：{$thispost.deal}</p>
-			<p class="p_post_content">心理价位：{$thispost.price} 元</p>
+			<div id="post_content">
+				<div id="post_content_left">
+					<p class="p_post_section">基本信息</p>
+					<p class="p_post_content">帖子类型： {$post_type}</p>
+					<p class="p_post_content">一级分类： {$thispost.category1_name}</p>
+					<p class="p_post_content">二级分类： {$thispost.category2_name}</p>
+					<p class="p_post_content">品牌型号： {$thispost.brand} {$thispost.model}</p>
+					<p class="p_post_content">物品状态： 
+					{if $thispost.class == 0}S级别（正品）
+					{elseif $thispost.class == 1}S级别（自制）
+					{elseif $thispost.class == 2}A级别（九成新）
+					{elseif $thispost.class == 3}B级别（七成新）
+					{elseif $thispost.class == 4}C级别（五成新）
+					{/if}
+					</p>
+					<p class="p_post_content">成交方式：{$thispost.deal}</p>
+					<p class="p_post_content">心理价位：{$thispost.price} 元</p>
+				</div>
+				<div id="post_content_left">
+					<div>
+						<img src="{$baseurl}img/class/{$thispost.class}.png" alt="物品状态">
+					</div>
+					<div>
+					</div>
+				</div>
+			</div>
 
 
 			<hr style="border-top: 1px solid #e0e0e0;" />
