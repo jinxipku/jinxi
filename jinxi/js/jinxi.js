@@ -351,33 +351,36 @@ function delete_love(lover,lovee,love){
 	$("#info_modal").find('.modal-cont').text("您确定要取消关注此用户吗？");
 	$("#info_modal").find('.btn-primary').bind('click',function() {
 		$("#info_modal").modal('hide');
-		$.post(
-			baseurl + "user/delete_love",
-			{
-				lovee: lovee
-			},
-			function(res) {
-				if (res.status == 1) {
-					$("#info_modal").find('.modal-title').text("取消关注成功");
-					$("#info_modal").find('.modal-cont').text("恭喜，取消关注成功！");
-					$("#info_modal").find('.btn-default').css('display','none');
-					$("#info_modal").find('.btn-primary').bind('click',function() {
-						window.location.href = window.location.href;
-					});
-					$("#info_modal").modal();
-				} else {
-					$("#info_modal").find('.modal-title').text("关注失败");
-					$("#info_modal").find('.modal-cont').text("对不起，操作失败，请重试！");
-					$("#info_modal").find('.btn-default').css('display','none');
-					$("#info_modal").find('.btn-primary').bind('click',function() {
-						$("#btn_love").html(' 已关注');
-						$("#btn_love").attr('disabled', false);
-					});
-					$("#info_modal").modal();
-				}
-			},
-			'json'
-		);
+		setTimeout(function() {
+			$.post(
+				baseurl + "user/delete_love",
+				{
+					lovee: lovee
+				},
+				function(res) {
+					if (res.status == 1) {
+						$("#info_modal").find('.modal-title').text("取消关注成功");
+						$("#info_modal").find('.modal-cont').text("恭喜，取消关注成功！");
+						$("#info_modal").find('.btn-default').css('display','none');
+						$("#info_modal").find('.btn-primary').bind('click',function() {
+							$("#info_modal").modal('hide');
+							window.location.href = window.location.href;
+						});
+						$("#info_modal").modal();
+					} else {
+						$("#info_modal").find('.modal-title').text("关注失败");
+						$("#info_modal").find('.modal-cont').text("对不起，操作失败，请重试！");
+						$("#info_modal").find('.btn-default').css('display','none');
+						$("#info_modal").find('.btn-primary').bind('click',function() {
+							$("#btn_love").html(' 已关注');
+							$("#btn_love").attr('disabled', false);
+						});
+						$("#info_modal").modal();
+					}
+				},
+				'json'
+			);
+		}, 1000);
 		$("#btn_love").html('<i class="icon-spinner icon-spin"></i> 处理中');
 		$("#btn_love").attr('disabled', true);
 	});
@@ -695,7 +698,162 @@ function confirm_post() {
 	$("#btn_confirm_post").attr("disabled", true);
 	$("#btn_confirm_post").html('<i class="icon-spinner icon-spin"></i><span>发布中</span>');
 }
-
+function close_post(pid, ptype){
+	$("#info_modal").find('.modal-title').text("操作提醒");
+	$("#info_modal").find('.modal-cont').text("关闭此帖后，此贴将不会出现在商品大厅中，确定要关闭它么？");
+	$("#info_modal").find('.btn-primary').bind('click',function() {
+		$("#info_modal").modal("hide");
+		setTimeout(function() {
+			$.post(
+				baseurl + "post/set_active",
+				{
+					post_id: pid,
+					post_type: ptype,
+					operation: 0
+				},
+				function(res) {
+					if (res.status == 1) {
+						$("#info_modal").find('.modal-title').text("操作成功");
+						$("#info_modal").find('.modal-cont').text("关闭帖子成功！");
+						$("#info_modal").find('.btn-default').css('display','none');
+						$("#info_modal").find('.btn-primary').bind('click',function() {
+							$("#info_modal").modal("hide");
+							window.location.href = window.location.href;
+						});
+						$("#info_modal").modal();
+					} else {
+						$("#info_modal").find('.modal-title').text("操作失败");
+						$("#info_modal").find('.modal-cont').text(res.status.info);
+						$("#info_modal").find('.btn-default').css('display','none');
+						$("#info_modal").find('.btn-primary').bind('click',function() {
+							$("#info_modal").modal("hide");
+							window.location.href = window.location.href;
+						});
+						$("#info_modal").modal();
+					}
+				},
+				'json'
+			);
+		}, 1000);
+		$("#btn_close_post").html('<i class="icon-spinner icon-spin"></i> 处理中');
+		$("#btn_close_post").attr('disabled', true);
+	});
+	$("#info_modal").modal();
+}
+function open_post(pid, ptype){
+	$.post(
+		baseurl + "post/set_active",
+		{
+			post_id: pid,
+			post_type: ptype,
+			operation: 1
+		},
+		function(res) {
+			if (res.status == 1) {
+				$("#info_modal").find('.modal-title').text("操作成功");
+				$("#info_modal").find('.modal-cont').text("恭喜，打开帖子成功！");
+				$("#info_modal").find('.btn-default').css('display','none');
+				$("#info_modal").find('.btn-primary').bind('click',function() {
+					$("#info_modal").modal("hide");
+					window.location.href = window.location.href;
+				});
+				$("#info_modal").modal();
+			} else {
+				$("#info_modal").find('.modal-title').text("操作失败");
+				$("#info_modal").find('.modal-cont').text(res.status.info);
+				$("#info_modal").find('.btn-default').css('display','none');
+				$("#info_modal").find('.btn-primary').bind('click',function() {
+					$("#info_modal").modal("hide");
+					window.location.href = window.location.href;
+				});
+				$("#info_modal").modal();
+			}
+		},
+		'json'
+	);
+	$("#btn_open_post").html('<i class="icon-spinner icon-spin"></i> 处理中');
+	$("#btn_open_post").attr('disabled', true);
+}
+function add_collect(pid, ptype){
+	$.post(
+		baseurl + "favorite/add_favorite",
+		{
+			user_id: uid
+			post_id: pid,
+			post_type: ptype
+		},
+		function(res) {
+			if (res.status == 1) {
+				$("#info_modal").find('.modal-title').text("收藏成功");
+				$("#info_modal").find('.modal-cont').text("恭喜，收藏成功！");
+				$("#info_modal").find('.btn-default').css('display','none');
+				$("#info_modal").find('.btn-primary').bind('click',function() {
+					$("#info_modal").modal("hide");
+					window.location.href = window.location.href;
+				});
+				$("#info_modal").modal();
+			} else {
+				$("#info_modal").find('.modal-title').text("收藏失败");
+				$("#info_modal").find('.modal-cont').text("对不起，操作失败，请重试！");
+				$("#info_modal").find('.btn-default').css('display','none');
+				$("#info_modal").find('.btn-primary').bind('click',function() {
+					$("#btn_collcet").html('<span class="fui-plus"></span>收藏');
+					$("#btn_collcet").attr('disabled', false);
+				});
+				$("#info_modal").modal();
+			}
+		},
+		'json'
+	);
+	$("#btn_collcet").html('<i class="icon-spinner icon-spin"></i> 处理中');
+	$("#btn_collcet").attr('disabled', true);
+}
+function delete_collect(pid, ptype){
+	$("#info_modal").find('.modal-title').text("取消收藏");
+	$("#info_modal").find('.modal-cont').text("您确定要取消收藏此帖吗？");
+	$("#info_modal").find('.btn-primary').bind('click',function() {
+		$("#info_modal").modal('hide');
+		setTimeout(function() {
+			$.post(
+				baseurl + "favorite/delete_favorite",
+				{
+					lovee: lovee
+				},
+				function(res) {
+					if (res.status == 1) {
+						$("#info_modal").find('.modal-title').text("取消收藏成功");
+						$("#info_modal").find('.modal-cont').text("恭喜，取消收藏成功！");
+						$("#info_modal").find('.btn-default').css('display','none');
+						$("#info_modal").find('.btn-primary').bind('click',function() {
+							$("#info_modal").modal("hide");
+							window.location.href = window.location.href;
+						});
+						$("#info_modal").modal();
+					} else {
+						$("#info_modal").find('.modal-title').text("收藏失败");
+						$("#info_modal").find('.modal-cont').text("对不起，操作失败，请重试！");
+						$("#info_modal").find('.btn-default').css('display','none');
+						$("#info_modal").find('.btn-primary').bind('click',function() {
+							$("#btn_collcet").html(' 已收藏');
+							$("#btn_collcet").attr('disabled', false);
+						});
+						$("#info_modal").modal();
+					}
+				},
+				'json'
+			);
+		}, 1000);
+		$("#btn_collcet").html('<i class="icon-spinner icon-spin"></i> 处理中');
+		$("#btn_collcet").attr('disabled', true);
+	});
+	$("#info_modal").modal();	
+}
+function change2dc(){
+	$("#btn_collcet").html('&nbsp;- 取消');
+}
+function change2ac(){
+	$("#btn_collcet").html(' 已收藏');
+}
 
 
 
