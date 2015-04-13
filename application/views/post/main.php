@@ -15,9 +15,9 @@
 			</div>
 
 			<hr/>
-			<h6>
+			<h5>
 				{$thispost.title}
-			</h6>
+			</h5>
 			<div id="post_author">
 				<div>
 					<a href="{$baseurl}user/profile/{$thispost.user_id}">
@@ -60,9 +60,9 @@
 			</div>
 
 			<hr/>
+			<p class="p_post_section">基本信息</p>
 			<div id="post_content">
 				<div id="post_content_left">
-					<p class="p_post_section">基本信息</p>
 					<p class="p_post_content">帖子类型： {$post_type}</p>
 					<p class="p_post_content">一级分类： {$thispost.category1_name}</p>
 					<p class="p_post_content">二级分类： {$thispost.category2_name}</p>
@@ -89,40 +89,39 @@
 			</div>
 
 
-			<hr style="border-top: 1px solid #e0e0e0;" />
-			<p style="color: #7F8C8D;">详细描述</p>
-			<p class="postcontent">&nbsp;&nbsp;&nbsp;&nbsp;<?=$thispost['pcontent']?></p>
+			<hr/>
+			<p class="p_post_section">详细描述</p>
+			<div id="post_description" onmouseover="$('#btn_edit_description').show();" onmouseout="$('#btn_edit_description').hide();">
+				<button id="btn_edit_description" type="button" class="btn btn-info btn-sm"><span class="fui-gear"></span>编辑</button>
+				<pre>{$thispost.description}</pre>
+			</div>
 			
-			<?php if($thispost['pimage']>0):?>
-			<hr style="border-top: 1px solid #e0e0e0;" />
-			<p style="color: #7F8C8D;">图片展示</p>
-			<?php if($thispost['pimage']==1||$thispost['pimage']==3||$thispost['pimage']==5||$thispost['pimage']==7):?>
-			<img src="{$baseurl}img/post/<?=$thispost['post_id'].'_1.jpg'?>"
-				alt="" style="width: 772px;" />
-			<?php endif;?>
-			<?php if($thispost['pimage']==2||$thispost['pimage']==3||$thispost['pimage']==6||$thispost['pimage']==7):?>
-			<img src="{$baseurl}img/post/<?=$thispost['post_id'].'_2.jpg'?>"
-				alt="" style="width: 772px;" />
-			<?php endif;?>
-			<?php if($thispost['pimage']==4||$thispost['pimage']==5||$thispost['pimage']==6||$thispost['pimage']==7):?>
-			<img src="{$baseurl}img/post/<?=$thispost['post_id'].'_3.jpg'?>"
-				alt="" style="width: 772px;" />
-			<?php endif;?>
-			<?php endif?>
+			{if isset($thispost.picture)}
+			<hr/>
+			<p class="p_post_section">图片展示</p>
+			<div id="post_picture">
+				{foreach from = $thispost.picture item = pic} 
+				<img class="passive" src="{$pic.picture_url}" alt="图片展示"/>
+				<pre class="p_picture_des">{$pic.picture_des}</pre>
+				{/foreach}
+			</div>
+			{/if}
 			
-			<hr style="border-top: 1px solid #e0e0e0;" />
-			<p style="color: #7F8C8D;">联系方式</p>
-			<p class="postcontent">站内：回复本贴</p>
-			<?php if($thispost['mail_on']==1):?>
-			<p class="postcontent">邮箱：<?=$thispost['mail']?></p>
-			<?php endif;?>
-			<?php if($thispost['qq_on']==1):?>
-			<p class="postcontent">QQ：<?=$thispost['qq']?></p>
-			<?php endif;?>
-			<?php if($thispost['phone_on']==1):?>
-			<p class="postcontent">手机：<?=$thispost['phone']?></p>
-			<?php endif;?>
+			<hr/>
+			<p class="p_post_section">联系方式</p>
+			<div id="post_contact">
+				<p class="postcontent">站内：回复本贴</p>
+				<?php if($thispost['mail_on']==1):?>
+				<p class="postcontent">邮箱：<?=$thispost['mail']?></p>
+				<?php endif;?>
+				<?php if($thispost['qq_on']==1):?>
+				<p class="postcontent">QQ：<?=$thispost['qq']?></p>
+				<?php endif;?>
+				<?php if($thispost['phone_on']==1):?>
+				<p class="postcontent">手机：<?=$thispost['phone']?></p>
+				<?php endif;?>
+			</div>
 			
-			<hr style="border-top: 1px solid #e0e0e0;" />
+			<hr/>
 
 		</div>

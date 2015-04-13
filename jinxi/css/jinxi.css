@@ -9,7 +9,7 @@ body {
 img.passive {
 	width: 100%;
 }
-h6 {
+h5, h6 {
 	font-family: 微软雅黑,黑体,幼圆,宋体;
 }
 input,textarea {
@@ -58,9 +58,10 @@ span.success {
 }
 span.tag {
 	margin-right: 3px;
-	padding: 0px 5px 1px 5px;
+	padding: 2px 8px 3px 8px;
 	border-radius: 0px;
-	font-size: 20px;
+	font-size: 22px;
+	font-weight: 500;
 	color: #fff;
 	cursor: default;
 }
@@ -723,18 +724,18 @@ p.p_post_content {
 	font-size: 18px;
 }
 div#post_content {
-	height: 350px;
+	height: 312px;
 	width: 772px;
-	margin-bottom: 10px;
+	margin-bottom: 30px;
 }
 div#post_content_left {
 	float: left;
-	height: 350px;
+	height: 312px;
 	width: 600px;
 }
 div#post_content_right {
 	float: left;
-	height: 350px;
+	height: 312px;
 	width: 172px;
 }
 div#post_content_right>div:nth-child(1) {
@@ -742,7 +743,7 @@ div#post_content_right>div:nth-child(1) {
 	width: 172px;
 }
 div#post_content_right>div:nth-child(2) {
-	margin-top: 128px;
+	margin-top: 90px;
 	height: 50px;
 	width: 172px;
 }
@@ -750,6 +751,31 @@ div#post_content_right>div:nth-child(2) p#p_post_deal {
 	text-align: center;
 	font-size: 30px;
 	color: red;
+}
+div#post_description {
+	width: 772px;
+	margin-bottom: 30px;
+}
+button#btn_edit_description {
+	display: none;
+	float: right;
+}
+div#post_description pre{
+	color: #333;
+	font-size: 18px;
+	font-family: 微软雅黑,黑体,幼圆,宋体;
+	line-height: 2.5;
+}
+div#post_picture {
+	width: 772px;
+	margin-bottom: 30px;
+}
+div#post_picture pre.p_picture_des{
+	color: #444;
+	font-size: 17px;
+	font-family: 微软雅黑,黑体,幼圆,宋体;
+	margin-top: 0px;
+	margin-bottom: 15px;
 }
 
 
