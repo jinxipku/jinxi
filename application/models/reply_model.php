@@ -7,7 +7,14 @@ class reply_model extends CI_Model {
 	//add_reply时要确保每层楼只有一个0
 	public function add_reply($entity){
 		$res = $this->db->insert("jx_reply",$entity);
+		if($entity['reply_to'] == 0){
+			$entity['floor'] = get_max_floor()+1;
+		}
 		return $res;
+	}
+
+	public function get_max_floor($post_id,$type){
+		
 	}
 
 	public function get_reply($post_id,$type){

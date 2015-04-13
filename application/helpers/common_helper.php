@@ -249,53 +249,7 @@ function get_category2_name($class) {
 }
 
 
-if (! function_exists ( 'get_title_str' )) {
-    function get_title_str($ptype, $pgtype, $pstype, $class, $brand, $modal, $pimage) {
-        $titlestr = '';
-        if ($ptype == 0)
-            $titlestr .= '[转让]';
-        else if ($ptype == 1)
-            $titlestr .= '[求购]';
-        if ($pgtype == 1)
-            $titlestr .= '[自制]';
-        else if ($pgtype == 2)
-            $titlestr .= '[正品]';
-        if ($pstype == 1)
-            $titlestr .= '[多]';
-        else if ($pstype == 2)
-            $titlestr .= '[特]';
-        if ($pimage > 0)
-            $titlestr .= '[图]';
-        $titlestr .= get_class_name ( $class );
-        $titlestr .= '：';
-        $titlestr .= $brand . $modal;
-        return $titlestr;
-    }
-}
 
-if (! function_exists ( 'get_title_full' )) {
-    function get_title_full($ptype, $pgtype, $pstype, $class, $brand, $modal, $pimage) {
-        $titlestr = '';
-        if ($ptype == 0)
-            $titlestr .= '<span class="text-primary">[转让]</span>';
-        else if ($ptype == 1)
-            $titlestr .= '<span class="text-primary">[求购]</span>';
-        if ($pgtype == 1)
-            $titlestr .= '<span class="text-warning">[自制]</span>';
-        else if ($pgtype == 2)
-            $titlestr .= '<span class="text-warning">[正品]</span>';
-        if ($pstype == 1)
-            $titlestr .= '<span class="text-warning">[多]</span>';
-        else if ($pstype == 2)
-            $titlestr .= '<span class="text-warning">[特]</span>';
-        if ($pimage > 0)
-            $titlestr .= '<span class="text-purple">[图]</span>';
-        $titlestr .= get_class_name ( $class );
-        $titlestr .= '：';
-        $titlestr .= $brand . $modal;
-        return $titlestr;
-    }
-}
 
 /* 生成文件名 其中uniquedata为区别符 ext为后缀 time为指定一时间戳*/
 function genFileName($uniquedata,$ext='',$time=null){
@@ -397,14 +351,10 @@ function get_title($type,$deal,$class,$hasimg,$cat1,$cat2,$brand,$model){
     $title = "";
     $t1 = $type==0? "卖":"买";  
     $t1 = '<span class="tag bg-primary">'.$t1.'</span>';   
-    $t2 = $deal;                     // warning
-    if($class=="S(自制)"){              //    danger
-        $t10 = "[自制]";
-    }
-    $t10 = $class=="S(自制)"? "[自制]":"";
-
-    $t3 = $hasimg ? "[图]":"";    //purple
-    $t4 = $cat1;
+    $t2 = '<span class="tag bg-warning>'.$deal.'</span>';                     // warning
+    $t10 = $class=="S(自制)"? "<span class='tag bg-danger'>自制</span>":"";
+    $t3 = $hasimg ? "<span class='tag bg-purple'>图</span>":"";    //purple
+    $t4 = " ".$cat1;
     $t5 = " > ";
     $t6 = $cat2;
     $t7 = " : ";
@@ -413,6 +363,20 @@ function get_title($type,$deal,$class,$hasimg,$cat1,$cat2,$brand,$model){
     return $title.$t1.$t2.$t10.$t3.$t4.$t5.$t6.$t7.$t8.$t9;
 }
 
+function get_plain_title($type,$deal,$class,$hasimg,$cat1,$cat2,$brand,$model){
+    $title = "";
+    $t1 = $type==0? "[卖]":"[买]";    
+    $t2 = '['.$deal.']';                     // warning
+    $t10 = $class=="S(自制)"? "[自制]":"";
+    $t3 = $hasimg ? "[图]":"";    //purple
+    $t4 = " ".$cat1;
+    $t5 = " > ";
+    $t6 = $cat2;
+    $t7 = " : ";
+    $t8 = $brand." ";
+    $t9 = $model." ";
+    return $title.$t1.$t2.$t10.$t3.$t4.$t5.$t6.$t7.$t8.$t9;
+}
 
 
 
