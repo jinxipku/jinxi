@@ -695,7 +695,158 @@ function confirm_post() {
 	$("#btn_confirm_post").attr("disabled", true);
 	$("#btn_confirm_post").html('<i class="icon-spinner icon-spin"></i><span>发布中</span>');
 }
-
+function close_post(pid, ptype){
+	$("#info_modal").find('.modal-title').text("操作提醒");
+	$("#info_modal").find('.modal-cont').text("关闭此帖后，此贴将不会出现在商品大厅中，确定要关闭它么？");
+	$("#info_modal").find('.btn-primary').bind('click',function() {
+		$("#info_modal").modal("hide");
+		setTimeout(function(){
+			$.post(
+				baseurl + "post/set_active",
+				{
+					post_id: pid,
+					post_type: ptype,
+					operation: 0
+				},
+				function(res) {
+					if (res.status == 1) {
+						$("#info_modal").find('.modal-title').text("操作成功");
+						$("#info_modal").find('.modal-cont').text("关闭帖子成功！");
+						$("#info_modal").find('.btn-default').css('display','none');
+						$("#info_modal").find('.btn-primary').bind('click',function() {
+							$("#info_modal").modal("hide");
+							window.location.href = window.location.href;
+						});
+						$("#info_modal").modal();
+					} else {
+						$("#info_modal").find('.modal-title').text("操作失败");
+						$("#info_modal").find('.modal-cont').text(res.status.info);
+						$("#info_modal").find('.btn-default').css('display','none');
+						$("#info_modal").find('.btn-primary').bind('click',function() {
+							$("#info_modal").modal("hide");
+							window.location.href = window.location.href;
+						});
+						$("#info_modal").modal();
+					}
+				},
+				'json'
+			);
+		},1000);
+		$("#btn_close_post").html('<i class="icon-spinner icon-spin"></i> 处理中');
+		$("#btn_close_post").attr('disabled', true);
+	});
+	$("#info_modal").modal();
+}
+function open_post(pid, ptype){
+	$.post(
+		baseurl + "post/set_active",
+		{
+			post_id: pid,
+			post_type: ptype,
+			operation: 1
+		},
+		function(res) {
+			if (res.status == 1) {
+				$("#info_modal").find('.modal-title').text("操作成功");
+				$("#info_modal").find('.modal-cont').text("恭喜，打开帖子成功！");
+				$("#info_modal").find('.btn-default').css('display','none');
+				$("#info_modal").find('.btn-primary').bind('click',function() {
+					$("#info_modal").modal("hide");
+					window.location.href = window.location.href;
+				});
+				$("#info_modal").modal();
+			} else {
+				$("#info_modal").find('.modal-title').text("操作失败");
+				$("#info_modal").find('.modal-cont').text(res.status.info);
+				$("#info_modal").find('.btn-default').css('display','none');
+				$("#info_modal").find('.btn-primary').bind('click',function() {
+					$("#info_modal").modal("hide");
+					window.location.href = window.location.href;
+				});
+				$("#info_modal").modal();
+			}
+		},
+		'json'
+	);
+	$("#btn_open_post").html('<i class="icon-spinner icon-spin"></i> 处理中');
+	$("#btn_open_post").attr('disabled', true);
+}
+function add_collect(uid, pid, ptype){
+	$.post(
+		baseurl + "favorate/add_favorate",
+		{
+			user_id: uid
+			post_id: pid,
+			post_type: ptype
+		},
+		function(res) {
+			if (res.status == 1) {
+				$("#info_modal").find('.modal-title').text("关注成功");
+				$("#info_modal").find('.modal-cont').text("恭喜，关注成功！");
+				$("#info_modal").find('.btn-default').css('display','none');
+				$("#info_modal").find('.btn-primary').bind('click',function() {
+					window.location.href = window.location.href;
+				});
+				$("#info_modal").modal();
+			} else {
+				$("#info_modal").find('.modal-title').text("关注失败");
+				$("#info_modal").find('.modal-cont').text("对不起，操作失败，请重试！");
+				$("#info_modal").find('.btn-default').css('display','none');
+				$("#info_modal").find('.btn-primary').bind('click',function() {
+					$("#btn_love").html('<span class="fui-plus"></span>关注');
+					$("#btn_love").attr('disabled', false);
+				});
+				$("#info_modal").modal();
+			}
+		},
+		'json'
+	);
+	$("#btn_love").html('<i class="icon-spinner icon-spin"></i> 处理中');
+	$("#btn_love").attr('disabled', true);
+}
+function delete_collect(user, pid, ptype){
+	$("#info_modal").find('.modal-title').text("取消关注");
+	$("#info_modal").find('.modal-cont').text("您确定要取消关注此用户吗？");
+	$("#info_modal").find('.btn-primary').bind('click',function() {
+		$("#info_modal").modal('hide');
+		$.post(
+			baseurl + "user/delete_love",
+			{
+				lovee: lovee
+			},
+			function(res) {
+				if (res.status == 1) {
+					$("#info_modal").find('.modal-title').text("取消关注成功");
+					$("#info_modal").find('.modal-cont').text("恭喜，取消关注成功！");
+					$("#info_modal").find('.btn-default').css('display','none');
+					$("#info_modal").find('.btn-primary').bind('click',function() {
+						window.location.href = window.location.href;
+					});
+					$("#info_modal").modal();
+				} else {
+					$("#info_modal").find('.modal-title').text("关注失败");
+					$("#info_modal").find('.modal-cont').text("对不起，操作失败，请重试！");
+					$("#info_modal").find('.btn-default').css('display','none');
+					$("#info_modal").find('.btn-primary').bind('click',function() {
+						$("#btn_love").html(' 已关注');
+						$("#btn_love").attr('disabled', false);
+					});
+					$("#info_modal").modal();
+				}
+			},
+			'json'
+		);
+		$("#btn_love").html('<i class="icon-spinner icon-spin"></i> 处理中');
+		$("#btn_love").attr('disabled', true);
+	});
+	$("#info_modal").modal();	
+}
+function change2dl(){
+	$("#btn_love").html('&nbsp;- 取消');
+}
+function change2al(){
+	$("#btn_love").html(' 已关注');
+}
 
 
 
