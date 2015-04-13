@@ -65,6 +65,12 @@ class post_model extends CI_Model {
 		return $res;
 	}
 
+	public function set_active($post_id,$type,$active){
+		$table = get_post_table($type);
+		$this->db->where("post_id",$post_id);
+		return $this->db->update($table,array("active"=>$active));
+	}
+
 
 
 //************************************以下是旧的*****************//

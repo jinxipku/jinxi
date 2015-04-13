@@ -178,6 +178,15 @@ class Post extends MY_Controller {
 		
 	}
 
+	//返回收藏贴
+	//post  type 0同时返回  1卖2买
+	public function get_favorites(){
+		$type = $_POST['type'];
+		$login_user =  $this->session->userdata('login_user');
+		$user_id = $login_user['id'];
+		return $this->favorites_model->get_favorites($user_id,$type);
+	}
+
 
 
 
@@ -277,16 +286,40 @@ class Post extends MY_Controller {
 			$this->ajaxReturn(null,'更新失败',0);
 	}
 
+	public function set_active(){
+		$user =  $this->session->userdata('login_user');
+		if(empty($user)) $this->ajaxReturn(null,'未登录',0);
 
+		$post_id = $_POST['post_id'];
+		$post_type = $_POST['post_type'];
+		$operation = $_POST['operation'];
 
-	//返回收藏贴
-	//post  type 0同时返回  1卖2买
-	public function get_favorites(){
-		$type = $_POST['type'];
-		$login_user =  $this->session->userdata('login_user');
-		$user_id = $login_user['id'];
-		return $this->favorites_model->get_favorites($user_id,$type);
+		$post = $this->post_model->get_post($post_id,$post_type);
+		if(empty($post)) $this->ajaxReturn(null,'帖子不存在',0);
+		else{
+			if($post['user']['id']!=$user['id']){
+				$this->ajaxReturn(null,'您不是这篇帖子的主人',0);
+			}else{
+				if($operation==$post['active']){
+					if($operation==0){
+						$this->ajaxReturn(null,'帖子已经关闭',0);
+					}else{
+						$this->ajaxReturn(null,'帖子已经开放',0);
+					}
+				}else{
+					if($this->post_model->set_active($post_id,$post_type,$operation)){
+						$this->ajaxReturn(null,'操作成功',1);
+					}
+					else $this->ajaxReturn(null,'操作失败',0);
+				}
+			}
+		}
+
 	}
+
+
+
+
 
 
 	/*移动客户端上传流程
