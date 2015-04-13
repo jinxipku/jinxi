@@ -14,7 +14,7 @@
 								<div id="preview_boxes">
 								</div>
 								<div id="upload_box">
-									<button id="btn_upload_picture" type="button" class="btn btn-primary btn-block"><span>本地上传图片</span><br/>点击右侧相机可手机上传图片</button>
+									<button id="btn_upload_picture" type="button" class="btn btn-primary btn-block"><span>本地上传图片</span><br/>点击左侧相机可手机上传图片</button>
 									<button id="btn_mobile_picture" type="button" class="btn btn-primary btn-block"><span>显示手机所上传的图片</span></button>
 								</div>
 							</div>

@@ -352,7 +352,7 @@ function get_title($type,$deal,$class,$hasimg,$cat1,$cat2,$brand,$model){
     $title = "";
     $t1 = $type==0? "卖":"买";  
     $t1 = '<span class="tag bg-primary">'.$t1.'</span>';   
-    $t2 = '<span class="tag bg-warning>'.$deal.'</span>';                     // warning
+    $t2 = '<span class="tag bg-warning">'.$deal.'</span>';                     // warning
     $t10 = $class=="S(自制)"? "<span class='tag bg-danger'>自制</span>":"";
     $t3 = $hasimg ? "<span class='tag bg-purple'>图</span>":"";    //purple
     $t4 = " ".$cat1;

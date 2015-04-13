@@ -30,7 +30,7 @@
 			}
 		});
 		function showResponse(data) {
-			$("#btn_upload_picture").html('<span>本地上传图片</span><br/>点击右侧相机可手机上传图片');
+			$("#btn_upload_picture").html('<span>本地上传图片</span><br/>点击左侧相机可手机上传图片');
 			$("#btn_upload_picture").attr('disabled', false);
 			$("#file_info").text("支持jpg和png图片格式，大小不要超过2M。");
 			if (data.status == 0) {
