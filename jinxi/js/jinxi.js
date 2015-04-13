@@ -576,12 +576,12 @@ function price2info() {
 function price2detail() {
 	if ($("#post_type").val() == 0) {
 		$("#description").attr("placeholder", "请填写您对商品的详细描述：");
-		$("#p_confirm_post").text("确认请按下一步。");
-		$("#btn_confirm_post_buy").text("下一步");
+		$("#btn_detail_next").unbind('click');
+		$("#btn_detail_next").bind('click', detail2picture);
 	} else {
 		$("#description").attr("placeholder", "请填写您对商品的详细需求：");
-		$("#p_confirm_post").text("确认请按完成发布。");
-		$("#btn_confirm_post_buy").text("完成发布");
+		$("#btn_detail_next").unbind('click');
+		$("#btn_detail_next").bind('click', detail2contact);
 	}
 	$("#newpost_price").fadeOut(300, function() {
 		$("#newpost_detail").fadeIn(300);
@@ -593,26 +593,40 @@ function detail2price() {
 	});
 }
 function detail2picture() {
-	if ($("#post_type").val() == 0) {
-		$("#newpost_detail").fadeOut(300, function() {
-			$("#newpost_picture").fadeIn(300);
-		});
-	} else {
-		confirm_post(1);
-	}
+	$("#newpost_detail").fadeOut(300, function() {
+		$("#newpost_picture").fadeIn(300);
+	});
 }
 function picture2detail() {
 	$("#newpost_picture").fadeOut(300, function() {
 		$("#newpost_detail").fadeIn(300);
 	});
 }
-function confirm_post(type) {
-	var last = $("#newpost_detail");
-	var cbtn = $("#btn_confirm_post_buy");
-	if (type == 0) {
-		last = $("#newpost_picture");
-		cbtn = $("#btn_confirm_post_sell");
-	}
+function detail2contact() {
+	$("#newpost_detail").fadeOut(300, function() {
+		$("#btn_contact_pre").unbind('click');
+		$("#btn_contact_pre").bind('click', contact2detail);
+		$("#newpost_contact").fadeIn(300);
+	});
+}
+function contact2detail() {
+	$("#newpost_contact").fadeOut(300, function() {
+		$("#newpost_detail").fadeIn(300);
+	});
+}
+function picture2contact() {
+	$("#newpost_picture").fadeOut(300, function() {
+		$("#btn_contact_pre").unbind('click');
+		$("#btn_contact_pre").bind('click', contact2picture);
+		$("#newpost_contact").fadeIn(300);
+	});
+}
+function contact2picture() {
+	$("#newpost_contact").fadeOut(300, function() {
+		$("#newpost_picture").fadeIn(300);
+	});
+}
+function confirm_post() {
 	var picture = new Array();
 	$("div#preview_boxes div.preview_box").each(function() {
 		var tp = new Object();
@@ -623,6 +637,17 @@ function confirm_post(type) {
 	var timespec = "0";
 	if ($("#form_picture_upload").attr("name") != undefined)
 		timespec = $("#form_picture_upload").attr("name");
+	var contactby = "";
+	if ($("#jinxi_check").is(':checked'))
+		contactby += "0";
+	if ($("#email_check").is(':checked'))
+		contactby += ",1";
+	if ($("#qq_check").is(':checked'))
+		contactby += ",2";
+	if ($("#weixin_check").is(':checked'))
+		contactby += ",3";
+	if ($("#phone_check").is(':checked'))
+		contactby += ",4";
 	$.post(
 		baseurl + "post/make_post",
 		{
@@ -637,7 +662,8 @@ function confirm_post(type) {
 			description: $("#description").val(),
 			picture: picture,
 			first_picture: $("input[name='first_picture']:checked").val(),
-			timespec: timespec
+			timespec: timespec,
+			contactby: contactby
 		},
 		function(res) {
 			if(res.status == 0) {
@@ -648,24 +674,26 @@ function confirm_post(type) {
 					$("#btn_saveaccount").html('保 存');
 				});
 				$("#info_modal").modal();
-				cbtn.attr("disabled", false);
-				cbtn.html('完成发布');
+				$("#btn_confirm_post").attr("disabled", false);
+				$("#btn_confirm_post").html('完成发布');
 			} else {
-				cbtn.html('发布成功！');
+				$("#btn_confirm_post").html('发布成功！');
 				var post_type = "buy/";
-				if (type == 0) {
+				if ($("#post_type").val() == 0) {
 					post_type = "sell/";
 				}
-				$("a#a_gotopost").attr('href', $("a#a_gotopost").attr('href') + post_type + res.data);
-				last.fadeOut(300, function() {
+				$("#form_picture_upload").attr("name", 0);
+				$("#preview_boxes").html("");
+				$("a#a_gotopost").attr('href', $("a#a_gotopost").attr('href') + post_type + res.data.post_id);
+				$("#newpost_contact").fadeOut(300, function() {
 					$("#newpost_success").fadeIn(300);
 				});
 			}
 		},
 		'json'
 	);
-	cbtn.attr("disabled", true);
-	cbtn.html('<i class="icon-spinner icon-spin"></i><span>发布中</span>');
+	$("#btn_confirm_post").attr("disabled", true);
+	$("#btn_confirm_post").html('<i class="icon-spinner icon-spin"></i><span>发布中</span>');
 }
 
 

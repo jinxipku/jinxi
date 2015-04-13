@@ -1,26 +1,23 @@
 	<div id="body" class="row">
         <div id="main">
-			<div style="width: 772px; height: 50px;">
-				<div
-					style="position: relative; float: left; height: 50px; width: 600px;">
-					<ol class="breadcrumb"
-						style="font-size: 13px; position: relative; float: left; padding-right: 0px; padding-left: 0px;">
-						<li><a href="#">商品大厅</a></li>
-						<li><a href="#">运动户外</a></li>
-						<li><a href="#">其他</a></li>
-					</ol>
-					<ol class="breadcrumb"
-						style="font-size: 13px; position: relative; float: left; padding-left: 0px;">
-						<li></li>
-						<li class="active breadwraper">
-							<norb title="【图】【转让】数码产品>手机：诺基亚C6">【图】【转让】数码产品>手机：诺基亚C6</norb>
-						</li>
-					</ol>
-				</div>
+			<div id="post_directory">
+				<ol class="breadcrumb">
+					<li><a href="{$baseurl}display/hall">商品大厅</a></li>
+					<li><a href="{$baseurl}display/hall/{$thispost.category1}">{$thispost.category1_name}</a></li>
+					<li><a href="{$baseurl}display/hall/{$thispost.category2}">{$thispost.category2_name}</a></li>
+				</ol>
+				<ol class="breadcrumb">
+					<li></li>
+					<li class="active breadwraper">
+						<norb title="{$thispost.plain_title}">{$thispost.plain_title}</norb>
+					</li>
+				</ol>
 			</div>
 
-			<hr style="margin-top: 8px; border-top: 1px solid #e0e0e0;" />
-			<h6 style="font-family: 微软雅黑">【图】【转让】数码产品>手机：诺基亚C6</h6>
+			<hr  />
+			<h6 style="font-family: 微软雅黑; line-height: 100%; vertical-align: center;">
+				{$thispost.title}
+			</h6>
 			<div style="width: 772px; height: 65px;">
 				<div
 					style="position: relative; float: left; height: 65px; width: 65px;">

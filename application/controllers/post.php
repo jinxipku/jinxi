@@ -59,7 +59,7 @@ class Post extends MY_Controller {
 		else {
 			redirect('info/nopage');
 		}
-		$thispost = $this->post_model->get_post($post_id, $ptype);
+		$thispost = $this->get_post($post_id, $ptype);
 		if (empty($thispost)) {
 			redirect('info/nopage');
 		}
