@@ -25,13 +25,33 @@
 					</a>
 				</div>
 				<div>
-					<button></button>
+					<div id="post_collect_box">
+						{if $thispost.active == 0}
+						<p class="p_post_close">贴子已关闭</p>
+						{elseif !isset($login_user)}
+						<a type="button" class="btn btn-sm btn-info" href="{$baseurl}account/loginfo">
+							<span class="fui-plus"></span>收藏
+						</a>
+						{elseif isset($mypost)}
+						<button type="button" class="btn btn-sm btn-info" onclick="close_post({$thispost.post_id}, {$thispost.type})">
+							<span class="fui-cross"></span>关闭
+						</button>
+						{elseif isset($has_collect)}
+						<button id="btn_collcet" type="button" class="btn btn-sm btn-info" onclick="delete_collect({$login_user.id}, {$thispost.post_id}, {$thispost.type})" onmouseover="change2dc()" onmouseout="change2ac()">
+							已收藏
+						</button>
+						{else}
+						<button id="btn_collcet" type="button" class="btn btn-sm btn-info" onclick="delete_collect({$login_user.id}, {$thispost.post_id}, {$thispost.type})">
+							<span class="fui-plus"></span>收藏
+						</button>
+						{/if}
+					</div>
 					<a class="{$thispost.user.nick_color}" href="{$baseurl}user/profile/{$thispost.user_id}">
 						<p id="post_user_nick">{$thispost.user.nick}</p>
 					</a>
 					<p>
-						<small id="post_user_school">{$thispost.user.school_name}</small>
-						<small id="post_user_date">{$thispost.createat}</small>
+					<small id="post_user_school">{$thispost.user.school_name}</small>
+					<small id="post_user_date">{$thispost.createat}</small>
 					</p>
 				</div>
 			</div>

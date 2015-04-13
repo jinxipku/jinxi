@@ -67,6 +67,13 @@ class Post extends MY_Controller {
 		if (!empty($login_user)) {
 			$this->assign('login_user', $login_user);
 		}
+		if ($ptype == 0) {
+			$ptype = "转让";
+		}
+		else {
+			$ptype = "求购";
+		}
+		$this->assign('post_type', $ptype);
 		$this->assign('thispost', $thispost);
 		$this->assign('nav_tab', 3);
 		$this->assign('title', '今昔网-帖子内容');
