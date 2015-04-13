@@ -91,8 +91,12 @@
 
 			<hr/>
 			<p class="p_post_section">详细描述</p>
+			{if isset($mypost)}
 			<div id="post_description" onmouseover="$('#btn_edit_description').show();" onmouseout="$('#btn_edit_description').hide();">
 				<button id="btn_edit_description" type="button" class="btn btn-info btn-sm"><span class="fui-gear"></span>编辑</button>
+			{else}
+			<div id="post_description">
+			{/if}
 				<pre>{$thispost.description}</pre>
 			</div>
 			
