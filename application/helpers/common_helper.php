@@ -350,9 +350,13 @@ function get_class_name($type){
 
 function get_title($type,$deal,$class,$hasimg,$cat1,$cat2,$brand,$model){
     $title = "";
-    $t1 = $type==0? "卖":"买";  
-    $t1 = '<span class="tag bg-primary">'.$t1.'</span>';   
+    $t1 = $type==0? "转让":"求购";  
+    $t1 = '<span class="tag bg-primary">'.$t1.'</span>';
+    if ($deal == "一元赠送")
+        $deal = "一元送";
     $t2 = '<span class="tag bg-warning">'.$deal.'</span>';                     // warning
+    if ($deal != "一元送" && $deal != "一口价")
+        $t2 = "";
     $t10 = $class=="S(自制)"? "<span class='tag bg-danger'>自制</span>":"";
     $t3 = $hasimg ? "<span class='tag bg-purple'>图</span>":"";    //purple
     $t4 = " ".$cat1;
@@ -366,8 +370,12 @@ function get_title($type,$deal,$class,$hasimg,$cat1,$cat2,$brand,$model){
 
 function get_plain_title($type,$deal,$class,$hasimg,$cat1,$cat2,$brand,$model){
     $title = "";
-    $t1 = $type==0? "[卖]":"[买]";    
+    $t1 = $type==0? "[转让]":"[求购]";    
+    if ($deal == "一元赠送")
+        $deal = "一元送";
     $t2 = '['.$deal.']';                     // warning
+    if ($deal != "一元送" && $deal != "一口价")
+        $t2 = "";
     $t10 = $class=="1"? "[自制]":"";
     $t3 = $hasimg ? "[图]":"";    //purple
     $t4 = " ".$cat1;

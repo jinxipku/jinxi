@@ -776,9 +776,8 @@ function open_post(pid, ptype){
 }
 function add_collect(pid, ptype){
 	$.post(
-		baseurl + "favorite/add_favorite",
+		baseurl + "post/add_favorite",
 		{
-			user_id: uid
 			post_id: pid,
 			post_type: ptype
 		},
@@ -815,9 +814,10 @@ function delete_collect(pid, ptype){
 		$("#info_modal").modal('hide');
 		setTimeout(function() {
 			$.post(
-				baseurl + "favorite/delete_favorite",
+				baseurl + "post/delete_favorite",
 				{
-					lovee: lovee
+					post_id: pid,
+					post_type: ptype
 				},
 				function(res) {
 					if (res.status == 1) {

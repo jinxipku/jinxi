@@ -28,27 +28,30 @@
 					<div id="post_collect_box">
 						{if $thispost.active == 0}
 						<p class="p_post_close">贴子已关闭</p>
+						{if isset($mypost)}
+						<button id="btn_open_post" type="button" class="btn btn-sm btn-info" onclick="open_post({$thispost.post_id}, {$thispost.type})">
+							<span class="fui-check"></span>打开
+						</button>
+						{/if}
 						{elseif !isset($login_user)}
 						<a type="button" class="btn btn-sm btn-info" href="{$baseurl}account/loginfo">
 							<span class="fui-plus"></span>收藏
 						</a>
 						{elseif isset($mypost)}
-						<button type="button" class="btn btn-sm btn-info" onclick="close_post({$thispost.post_id}, {$thispost.type})">
+						<button id="btn_close_post" type="button" class="btn btn-sm btn-info" onclick="close_post({$thispost.post_id}, {$thispost.type})">
 							<span class="fui-cross"></span>关闭
 						</button>
 						{elseif isset($has_collect)}
-						<button id="btn_collcet" type="button" class="btn btn-sm btn-info" onclick="delete_collect({$login_user.id}, {$thispost.post_id}, {$thispost.type})" onmouseover="change2dc()" onmouseout="change2ac()">
+						<button id="btn_collcet" type="button" class="btn btn-sm btn-info" onclick="delete_collect({$thispost.post_id}, {$thispost.type})" onmouseover="change2dc()" onmouseout="change2ac()">
 							已收藏
 						</button>
 						{else}
-						<button id="btn_collcet" type="button" class="btn btn-sm btn-info" onclick="delete_collect({$login_user.id}, {$thispost.post_id}, {$thispost.type})">
+						<button id="btn_collcet" type="button" class="btn btn-sm btn-info" onclick="add_collect({$thispost.post_id}, {$thispost.type})">
 							<span class="fui-plus"></span>收藏
 						</button>
 						{/if}
 					</div>
-					<a class="{$thispost.user.nick_color}" href="{$baseurl}user/profile/{$thispost.user_id}">
-						<p id="post_user_nick">{$thispost.user.nick}</p>
-					</a>
+					<p id="post_user_nick"><a class="{$thispost.user.nick_color}" href="{$baseurl}user/profile/{$thispost.user_id}">{$thispost.user.nick}</a></p>
 					<p>
 					<small id="post_user_school">{$thispost.user.school_name}</small>
 					<small id="post_user_date">{$thispost.createat}</small>
@@ -73,13 +76,14 @@
 					{/if}
 					</p>
 					<p class="p_post_content">成交方式：{$thispost.deal}</p>
-					<p class="p_post_content">心理价位：{$thispost.price} 元</p>
+					<p class="p_post_content">心理价位：{if $thispost.price == 0}面议{else}{$thispost.price} 元{/if}</p>
 				</div>
-				<div id="post_content_left">
+				<div id="post_content_right">
 					<div>
-						<img src="{$baseurl}img/class/{$thispost.class}.png" alt="物品状态">
+						<img class="passive" src="{$baseurl}img/class/{$thispost.class}.png" alt="物品状态">
 					</div>
 					<div>
+						<p id="p_post_deal">{if $thispost.price == 0}面议{else}￥ {$thispost.price}{/if}</p>
 					</div>
 				</div>
 			</div>
