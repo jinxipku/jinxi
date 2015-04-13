@@ -37,7 +37,9 @@ class post_model extends CI_Model {
 		$this->db->where(array("id"=>$res['user_id']));
 	
 		$user = $this->db->get()->row_array();
+
 		if(empty($user)) return null;
+		$user['thumb'] = base_url("img/head/".$user['thumb']);
 		$res['user'] = $user;
 		return $res;
 	}
