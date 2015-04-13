@@ -409,6 +409,20 @@ function get_title($type,$deal,$class,$hasimg,$cat1,$cat2,$brand,$model){
     return $title.$t1.$t2.$t10.$t3.$t4.$t5.$t6.$t7.$t8.$t9;
 }
 
+function get_plain_title($type,$deal,$class,$hasimg,$cat1,$cat2,$brand,$model){
+    $title = "";
+    $t1 = $type==0? "[卖]":"[买]";    
+    $t2 = '['.$deal.']';                     // warning
+    $t10 = $class=="S(自制)"? "[自制]":"";
+    $t3 = $hasimg ? "[图]":"";    //purple
+    $t4 = " ".$cat1;
+    $t5 = " > ";
+    $t6 = $cat2;
+    $t7 = " : ";
+    $t8 = $brand." ";
+    $t9 = $model." ";
+    return $title.$t1.$t2.$t10.$t3.$t4.$t5.$t6.$t7.$t8.$t9;
+}
 
 
 

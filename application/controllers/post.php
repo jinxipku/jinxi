@@ -121,6 +121,8 @@ class Post extends MY_Controller {
 			$hasimg = true;
 		}
 		$post['title'] = get_title($type,$post['deal'],$post['class'],$hasimg,$post['category1_name'],$post['category2_name'],$post['brand'],$post['model']);
+		$post['plain_title'] = get_plain_title($type,$post['deal'],$post['class'],$hasimg,$post['category1_name'],$post['category2_name'],$post['brand'],$post['model']);
+		var_dump($post);
 		return $post;
 	}
 
