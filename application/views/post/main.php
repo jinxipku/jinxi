@@ -14,53 +14,43 @@
 				</ol>
 			</div>
 
-			<hr  />
-			<h6 style="font-family: 微软雅黑; line-height: 100%; vertical-align: center;">
+			<hr/>
+			<h6>
 				{$thispost.title}
 			</h6>
-			<div style="width: 772px; height: 65px;">
-				<div
-					style="position: relative; float: left; height: 65px; width: 65px;">
-					<a href="{$baseurl}user/profile/1"><img src="{$baseurl}img/head/JhdIR6yg1HJzxSYcE1428120756.jpg"
-						style="height: 65px; width: 65px;" alt="" /></a>
+			<div id="post_author">
+				<div>
+					<a href="{$baseurl}user/profile/{$thispost.user_id}">
+						<img src="{$thispost.user.thumb}" alt="{$thispost.user.nick}" />
+					</a>
 				</div>
-				<div
-					style="position: relative; float: left; height: 65px; width: 707px; padding-left: 15px;">
-					<a class="<?=get_namecolor($thispost['namecolor'])?>"
-						href="{$baseurl}user/<?=$thispost['user_id']?>"><?=$thispost['user_name']?></a>
-					<h6>
-						<small style="color: #7F8C8D; font-family: 微软雅黑, 黑体, 宋体;"><?=$thispost['school'].' '?></small><small
-							style="color: #7F8C8D"><?=$thispost['ptime']?></small>
-					</h6>
+				<div>
+					<button></button>
+					<a class="{$thispost.user.nick_color}" href="{$baseurl}user/profile/{$thispost.user_id}">
+						<p id="post_user_nick">{$thispost.user.nick}</p>
+					</a>
+					<p>
+						<small id="post_user_school">{$thispost.user.school_name}</small>
+						<small id="post_user_date">{$thispost.createat}</small>
+					</p>
 				</div>
 			</div>
 
-			<hr style="border-top: 1px solid #e0e0e0;" />
-			<p style="color: #7F8C8D;">基本信息</p>
-			<p class="postcontent">帖子类型：<?php
-			if ($thispost ['ptype'] == 0)
-				echo '商品转让';
-			else
-				echo '商品求购'?></p>
-			<p class="postcontent">一级分类：<?=get_class1($thispost['class'])?></p>
-			<p class="postcontent">二级分类：<?=get_class2($thispost['class'])?></p>
-			<p class="postcontent">品牌型号：<?=$thispost['brand'].$thispost['modal']?></p>
-			<p class="postcontent">商品状态：<?php
-			if ($thispost ['status'] == 1)
-				echo '全新S级别';
-			else if ($thispost ['status'] == 2)
-				echo '九成新A级别';
-			else if ($thispost ['status'] == 3)
-				echo '七成新B级别';
-			else if ($thispost ['status'] == 4)
-				echo '五成新C级别';
-			?></p>
-			<p class="postcontent">心理价位：<?php
-			if ($thispost ['price'] == 0 || $thispost ['price'] == 99999999)
-				echo '价格面议';
-			else
-				echo '￥' . $thispost ['price'];
-			?></p>
+			<hr/>
+			<p class="p_post_section">基本信息</p>
+			<p class="p_post_content">帖子类型： {$post_type}</p>
+			<p class="p_post_content">一级分类： {$thispost.category1_name}</p>
+			<p class="p_post_content">二级分类： {$thispost.category2_name}</p>
+			<p class="p_post_content">品牌型号： {$thispost.brand} {$thispost.model}</p>
+			<p class="p_post_content">商品状态：
+			{if $thispost.class == 0}S级别（正品）
+			{elseif $thispost.class == 1}S级别（自制）
+			{elseif $thispost.class == 2}A级别（九成新）
+			{elseif $thispost.class == 3}B级别（七成新）
+			{elseif $thispost.class == 4}C级别（五成新）
+			{/if}
+			<p class="p_post_content">成交方式：{$thispost.deal}</p>
+			<p class="p_post_content">心理价位：{$thispost.price} 元</p>
 
 
 			<hr style="border-top: 1px solid #e0e0e0;" />

@@ -58,9 +58,9 @@ span.success {
 }
 span.tag {
 	margin-right: 3px;
-	padding: 4px 8px 4px 8px;
+	padding: 0px 5px 1px 5px;
 	border-radius: 0px;
-	font-size: 17px;
+	font-size: 20px;
 	color: #fff;
 	cursor: default;
 }
@@ -664,7 +664,8 @@ viewpost
 */
 div#post_directory {
 	height: 35px;
-	font-size: 13px;
+	width: 772px;
+	font-size: 15px;
 }
 div#post_directory>ol {
 	float: left;
@@ -672,6 +673,47 @@ div#post_directory>ol {
 	padding: 0px;
 }
 
+div#post_author {
+	height: 65px;
+	width: 772px;
+	margin-bottom: 15px;
+}
+div#post_author>div:nth-child(1) {
+	float: left;
+	height: 65px;
+	width: 65px;
+}
+div#post_author>div:nth-child(2) {
+	float: left;
+	height: 65px;
+	width: 707px;
+	padding-left: 10px;
+}
+div#post_author img {
+	height: 65px;
+	width: 65px;
+}
+div#post_author p#post_user_nick {
+	font-size: 20px;
+	margin-bottom: 0px;
+}
+div#post_author small#post_user_school {
+	font-size: 17px;
+	color: #7F8C8D;
+}
+div#post_author small#post_user_date {
+	float: right;
+	font-size: 15px;
+	color: #7F8C8D;
+}
+p.p_post_section {
+	color: #7F8C8D;
+}
+
+p.p_post_content{
+	color: #333;
+	font-size: 18px;
+}
 
 
 
@@ -923,11 +965,7 @@ p.userstat{
 	font-size: 15px;
 	margin-bottom: 0;
 }
-p.postcontent{
-	font-family: 微软雅黑,黑体,幼圆,宋体;
-	color: #333;
-	font-size: 18px;
-}
+
 norb.userlatest{
 	font-family: 宋体;
 	font-size: 13px;
