@@ -185,7 +185,7 @@ class Account extends MY_Controller {
 			}else{
 				$this->session->set_userdata ( 'login_user', $user );
 				$mem_url = $this->session->userdata('mem_url');
-				if ($mem_url != '' && strpos($mem_url, "account") == false) {
+				if ($mem_url != '' && !empty($mem_url) && strpos($mem_url, "account") == false) {
 					$this->ajaxReturn($mem_url,"登录成功",1);
 				} else {
 					$this->ajaxReturn(null,"登录成功",1);

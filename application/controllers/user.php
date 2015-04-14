@@ -292,6 +292,7 @@ class User extends MY_Controller {
 
 	public function add_love(){
 		$login_user =  $this->session->userdata('login_user');	
+		if(empty($login_user)) $this->ajaxReturn(null,"未登录",0);
 		$lover = $login_user['id'];
 		$lovee = $_POST['lovee'];
 		$res = $this->love_model->add_love($lover,$lovee);
@@ -302,6 +303,7 @@ class User extends MY_Controller {
 
 	public function delete_love(){
 		$login_user =  $this->session->userdata('login_user');	
+		if(empty($login_user)) $this->ajaxReturn(null,"未登录",0);
 		$lover = $login_user['id'];
 		$lovee = $_POST['lovee'];
 		$res = $this->love_model->delete_love($lover,$lovee);

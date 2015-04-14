@@ -34,6 +34,7 @@ class favorites_model extends CI_Model {
 		$map['user_id'] = $user_id;
 		$map['post_id'] = $post_id;
 		$map['type'] = $type;
+		$map['addat'] = time();
 		$res = $this->db->insert("jx_favorites",$map);
 		return $res;
 	}

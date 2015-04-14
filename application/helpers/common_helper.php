@@ -315,8 +315,8 @@ function get_post_table($type){
 }
 
 function parse_tag($text){
-    //return strip_tags($text);
-    return htmlentities($text);
+    return strip_tags($text);
+    //return htmlentities($text);
 }
 
 function get_thumb($picture){
@@ -341,11 +341,11 @@ function get_deal_name($type){//1一口价，2接受砍价，3一元赠送，4�
 }
 
 function get_class_name($type){
-    if($type==1) return "S(正品)";
-    if($type==2) return "S(自制)";
-    if($type==3) return "A";
-    if($type==4) return "B";
-    if($type==5) return "C";
+    if($type==0) return "S(正品)";
+    if($type==1) return "S(自制)";
+    if($type==2) return "A";
+    if($type==3) return "B";
+    if($type==4) return "C";
 }
 
 function get_title($type,$deal,$class,$hasimg,$cat1,$cat2,$brand,$model){
@@ -353,7 +353,7 @@ function get_title($type,$deal,$class,$hasimg,$cat1,$cat2,$brand,$model){
     $t1 = $type==0? "卖":"买";  
     $t1 = '<span class="tag bg-primary">'.$t1.'</span>';   
     $t2 = '<span class="tag bg-warning">'.$deal.'</span>';                     // warning
-    $t10 = $class=="S(自制)"? "<span class='tag bg-danger'>自制</span>":"";
+    $t10 = $class=="1"? "<span class='tag bg-danger'>自制</span>":"";
     $t3 = $hasimg ? "<span class='tag bg-purple'>图</span>":"";    //purple
     $t4 = " ".$cat1;
     $t5 = " > ";

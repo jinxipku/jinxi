@@ -50,6 +50,9 @@ class Script extends MY_Controller {
 	public function testSession(){
 		$c=$this->session->userdata('login_user');
 		var_dump($c);
+
+		$d = $this->session->all_userdata();
+		var_dump($d);
 	}
 	public function testContact(){
 		$this->load->model("user_model");
@@ -59,13 +62,9 @@ class Script extends MY_Controller {
 
 	public function test(){
 		//echo genFileName(2,'',2222222);
-		//unlink(substr($value, strpos("img/",$value)));
-		$value = "http://www.xn--wmqr18c.cn/img/picture/2/WQhVExwS2eTnZdMUh1428557031.jpg";
-		$c = strpos($value,"img/");
-		echo $c."<br>";
-		echo substr($value, $c);
-		//echo replaceall
-		
+		$user = $this->user_model->get_info(1);
+		$this->session->set_userdata('login_user',$user);
+		var_dump($user);	
 	}
 
 	public function testPost(){
