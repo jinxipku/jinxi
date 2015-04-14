@@ -355,13 +355,11 @@ function get_title($type,$deal,$class,$hasimg,$cat1,$cat2,$brand,$model){
     if ($deal == "一元赠送")
         $deal = "一元送";
     $t2 = '<span class="tag bg-warning">'.$deal.'</span>';                     // warning
-<<<<<<< HEAD
+
     $t10 = $class=="1"? "<span class='tag bg-danger'>自制</span>":"";
-=======
     if ($deal != "一元送" && $deal != "一口价")
         $t2 = "";
     $t10 = $class=="S(自制)"? "<span class='tag bg-danger'>自制</span>":"";
->>>>>>> 1671ef90ef55016b40f59772eaae36d6312a5f28
     $t3 = $hasimg ? "<span class='tag bg-purple'>图</span>":"";    //purple
     $t4 = " ".$cat1;
     $t5 = " > ";
