@@ -267,6 +267,21 @@ class Post extends MY_Controller {
 			$this->ajaxReturn(null,'发表出现数据库错误',0);
 	}
 
+	public function edit_description(){
+		$user =  $this->session->userdata('login_user');
+		if(empty($user)) $this->ajaxReturn(null,'未登录',0);
+		$post_id = $_POST['post_id'];
+		$post_type = $_POST['post_type'];
+		$desc = $_POST['description'];
+		$post = $this->get_post($post_id,$post_type);
+		if($post['user']['id'] == $user['id']){
+			$res = $this->post_model->edit_description($post_id,$post_type,$desc);
+			if($res){
+				$this->ajaxReturn(null,'操作成功',1);
+			}else $this->ajaxReturn(null,'操作失败',0);
+		}else $this->ajaxReturn(null,'非帖子主人',0);
+	}
+
 	public function update_post(){
 		$user =  $this->session->userdata('login_user');
 		if(empty($user)) $this->ajaxReturn(null,'未登录',0);

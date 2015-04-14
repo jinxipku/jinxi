@@ -22,6 +22,13 @@ class post_model extends CI_Model {
 		return $this->db->update($table,$info);
 	}
 
+	public function edit_description($post_id,$type,$desc){
+		$table = get_post_table($type);
+		$map['post_id'] = $post_id;
+		$this->db->where($map);
+		return $this->db->update($table,array("description"=>$desc));
+	}
+
 
 	//TODO:当两张表区别较大时，再区别处理.
 	public function get_post($post_id,$type){
