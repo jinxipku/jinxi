@@ -46,6 +46,7 @@ class post_model extends CI_Model {
 		$user = $this->db->get()->row_array();
 
 		if(empty($user)) return null;
+		$user['nick_color'] = get_namecolor($user['nick_color']);
 		$user['thumb'] = base_url("img/head/".$user['thumb']);
 		$res['user'] = $user;
 		return $res;

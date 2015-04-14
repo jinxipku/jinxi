@@ -40,7 +40,7 @@ class favorites_model extends CI_Model {
 	}
 
 	//商品的收藏数
-	public function favorites_count($post_id,$type){
+	public function get_favorites_num($post_id,$type){
 		$map['post_id'] = $post_id;
 		$map['type'] = $type;
 		$this->db->where($map);

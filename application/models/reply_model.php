@@ -17,6 +17,15 @@ class reply_model extends CI_Model {
 		
 	}
 
+	public function get_reply_num($post_id,$type){
+		$map['post_id'] = $post_id;
+		$map['type'] = $type;
+		$this->db->where($map);
+		$this->db->from('jx_reply');
+		$res = $this->db->count_all_results();
+		return $res;
+	}
+
 	public function get_reply($post_id,$type){
 		$sql = "select jx_reply.*,a.nick as replyer, b.nick as replyee from jx_reply left join jx_user as a on a.id=jx_reply.reply_from left join jx_user as b on b.id=jx_reply.reply_to where post_id=".$post_id. " and jx_reply.type=" .$type;
 		$query = $this->db->query($sql);

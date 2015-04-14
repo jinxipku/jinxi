@@ -123,8 +123,10 @@ drop table if exists jx_reply;
 create table jx_reply(
 	post_id int(11) not null comment '帖子id',
 	type tinyint not null comment '帖子类型',
-	reply_from int(11) not null comment '回复者id',
-	reply_to int(11) not null comment '回复谁,0代表楼主,非0代表回复他人的id',
 	floor int(11) not null comment '楼层',
-	content text null comment '回复内容'
+	reply_from int(11) not null comment '回复者id',
+	reply_to int(11) not null comment '被回复者id',
+	reply_to_floor int(11) not null comment '回复楼层',
+	content text null comment '回复内容',
+	primary key(post_id,type,floor)
 )DEFAULT CHARSET=utf8 COMMENT='帖子回复';

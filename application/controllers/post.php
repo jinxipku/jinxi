@@ -15,6 +15,7 @@ class Post extends MY_Controller {
 		$this->load->model ( 'user_model' );
 		$this->load->model ( 'post_model' );
 		$this->load->model ( 'favorites_model');
+		$this->load->model ( 'reply_model');
 		$this->load->helper('url');
 		$this->load->helper('array');
 		$this->load->helper('directory');
@@ -146,7 +147,7 @@ class Post extends MY_Controller {
 		if(!empty($contactby)&&count($contactby)>0){
 			foreach ($contactby as $key => $value) {
 				if($key==0){
-					$contact[] = "站内：回复本帖";
+					$contact[] = "站内： 回复本帖";
 				}elseif($key==1){
 					$contact[] = "邮箱： ". $post['user']['email'];
 				}elseif($key==2){
@@ -159,25 +160,13 @@ class Post extends MY_Controller {
 			}
 			$post['contactby'] = $contact;
 		}else $post['contactby'] = null;
+
+		$post['favorite'] = $this->favorites_model->get_favorites_num($post_id,$type);
+		$post['reply'] = $this->reply_model->get_reply_num($post_id,$type);
 		//TODO:当前用户是否关注帖子
-		
 		return $post;
 	}
 
-	//返回某用户发表的帖子（卖，买，买卖） 
-	//param type 0卖  1买  2都返回
-	//param user_id 不写则使用当前用户 写则使用提供的id
-	public function get_user_posts($user_id,$type){
-		$res = $this->post_model->get_user_post($user_id,$type);
-		if(empty($res)) return null;
-		else return $res;
-	}
-
-	//返回若干帖子
-	//商品大厅
-	public function get_posts($type,$category1,$category2,$class,$page_num,$records=10){
-		
-	}
 
 	//返回收藏贴
 	//post  type 0同时返回  1卖2买
@@ -331,6 +320,21 @@ class Post extends MY_Controller {
 			}
 		}
 
+	}
+
+	//_get_user_posts($user_id,$type,$page_num=1){
+	public function do_get_user_posts(){
+		$user =  $this->session->userdata('login_user');
+		$user_id = $_POST['user_id'];
+		//$isself = $_POST['isself'];//是否是自己
+		$type = $_POST['type'];
+		$page_num = $_POST['page_num'];
+		$posts = $this->_get_user_posts($user_id,$type,$page_num);
+		
+	}
+
+	public function do_get_user_favorites(){
+		
 	}
 
 
@@ -583,4 +587,18 @@ class Post extends MY_Controller {
 // | 私有函数
 // +----------------------------------------------------------------------
 
+	//返回某用户发表的帖子（卖，买，买卖） 
+	//param type 0卖  1买  2都返回
+	//param user_id 不写则使用当前用户 写则使用提供的id
+	private function _get_user_posts($user_id,$type,$page_num=1){
+		$res = $this->post_model->get_user_post($user_id,$type);
+		if(empty($res)) return null;
+		else return $res;
+	}
+
+	//返回若干帖子
+	//商品大厅
+	private function _get_posts($type,$category1,$category2,$class,$page_num,$records=10){
+		
+	}
 }
