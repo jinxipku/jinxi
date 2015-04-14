@@ -5,11 +5,19 @@ class reply_model extends CI_Model {
 	}
 
 	//add_reply时要确保每层楼只有一个0
-	public function add_reply($entity){
-		$res = $this->db->insert("jx_reply",$entity);
-		if($entity['reply_to'] == 0){
-			$entity['floor'] = get_max_floor()+1;
+	public function add_reply($reply){
+		$map['post_id'] = $reply['post_id'];
+		$map['type'] = $reply['type'];
+		$this->db->where($map);
+		$this->db->select_max('floor');
+		$query = $this->db->get("jx_reply");
+		$res = $query->row_array();
+		$max_floor = $res['floor'];
+		if(empty($max_floor)){
+			$max_floor = 1;
 		}
+		$reply['floor'] = $max_floor + 1; //最高楼上加1
+		$res = $this->db->insert("jx_reply",$reply);  //插入回复表
 		return $res;
 	}
 

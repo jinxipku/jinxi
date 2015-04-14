@@ -123,5 +123,16 @@ class Script extends MY_Controller {
 		var_dump($floor);
 		//var_dump($res);
 	}
+
+	public function test_add_reply(){
+		$reply = array();
+		$reply['post_id'] = 8;
+		$reply['type'] = 0;
+		$reply['reply_to_floor'] = 2;
+		$reply['content'] = '这个东西真好wa！';
+		$reply['reply_from'] = 1;
+		$res = $this->reply_model->add_reply($reply);
+		var_dump($res);
+	}
 }
 ?>
