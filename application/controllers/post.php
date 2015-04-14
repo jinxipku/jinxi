@@ -148,13 +148,13 @@ class Post extends MY_Controller {
 				if($key==0){
 					$contact[] = "站内：回复本帖";
 				}elseif($key==1){
-					$contact[] = "邮箱：". $post['user']['email'];
+					$contact[] = "邮箱： ". $post['user']['email'];
 				}elseif($key==2){
-					$contact[] = "qq：".turnToMars($post['user']['qq'],$flag);
+					$contact[] = "Q  Q： ".turnToMars($post['user']['qq'],$flag);
 				}elseif($key==3){
-					$contact[] = "微信：".$post['user']['weixin'];
+					$contact[] = "微信： ".$post['user']['weixin'];
 				}elseif($key==4){
-					$contact[] = "手机：".turnToMars($post['user']['phone'],$flag);
+					$contact[] = "手机： ".turnToMars($post['user']['phone'],$flag);
 				}
 			}
 			$post['contactby'] = $contact;
