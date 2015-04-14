@@ -694,16 +694,16 @@ div#post_author img {
 	height: 60px;
 	width: 60px;
 }
-div#post_author p#post_user_nick {
+p.post_user_nick {
 	font-size: 18px;
 	margin-bottom: 0px;
 }
-div#post_author small#post_user_school {
+small.post_user_school {
 	margin-right: 10px;
 	font-size: 15px;
 	color: #7F8C8D;
 }
-div#post_author small#post_user_date {
+small.post_user_date {
 	font-size: 14px;
 	color: #7F8C8D;
 }
@@ -718,6 +718,7 @@ div#post_author p.p_post_close {
 }
 p.p_post_section {
 	color: #7F8C8D;
+	margin-bottom: 30px;
 }
 p.p_post_content {
 	color: #333;
@@ -777,12 +778,19 @@ div#post_editor textarea {
 	width: 772px;
 	resize: vertical;
 }
-div#post_editor button {
-
+div#post_editor button#btn_confirm_edit_des {
+	margin-top: 10px;
+}
+div#post_editor button#btn_cancel_edit_des {
+	margin-top: 10px;
+	margin-right: 10px;
 }
 div#post_picture {
 	width: 772px;
 	margin-bottom: 30px;
+}
+div#post_picture img {
+	max-width: 772px;
 }
 div#post_picture pre.p_picture_des{
 	color: #444;
@@ -790,6 +798,74 @@ div#post_picture pre.p_picture_des{
 	font-family: 微软雅黑,黑体,幼圆,宋体;
 	margin-top: 0px;
 	margin-bottom: 15px;
+}
+div#post_contact {
+	width: 772px;
+	margin-bottom: 30px;
+}
+div#post_share {
+	width: 772px;
+	height: 42px;
+	margin-bottom: 30px;
+}
+div#post_share>div:nth-child(1) {
+	float: left;
+	height: 42px;
+	margin-top: 5px;
+}
+div#post_share>div:nth-child(2) {
+	float: right;
+	height: 42px;
+}
+div#post_share>div:nth-child(2)>p {
+	display: inline;
+	font-family: 微软雅黑,黑体,幼圆,宋体;
+	font-size: 25px;
+	color: #444;
+}
+div#post_share>div:nth-child(2)>button {
+	margin-top: -12px;
+}
+div#post_reply {
+	width: 772px;
+	margin-bottom: 30px;
+}
+div.reply_box {
+	width: 772px;
+}
+div.reply_header {
+	width: 772px;
+	height: 60px;
+}
+div.reply_header>div:nth-child(1) {
+	float: left;
+	height: 60px;
+	width: 60px;
+}
+div.reply_header>div:nth-child(2) {
+	float: left;
+	height: 60px;
+	width: 562px;
+	padding-left: 10px;
+}
+div.reply_header>div:nth-child(3) {
+	float: left;
+	height: 60px;
+	width: 150px;
+}
+div.reply_header>div:nth-child(3)>p{
+	font-size: 18px;
+	text-align: right;
+	padding-right: 10px; 
+}
+div.reply_content {
+	width: 772px;
+	padding-top: 10px;
+}
+div.reply_content pre {
+	font-family: 微软雅黑,黑体,幼圆,宋体;
+	padding-left: 15px;
+	font-size: 16px;
 }
 
 

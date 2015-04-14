@@ -13,7 +13,7 @@
 					</li>
 				</ol>
 			</div>
-
+<!--
 			<hr/>
 			<h5>
 				{$thispost.title}
@@ -51,16 +51,18 @@
 						</button>
 						{/if}
 					</div>
-					<p id="post_user_nick"><a class="{$thispost.user.nick_color}" href="{$baseurl}user/profile/{$thispost.user_id}">{$thispost.user.nick}</a></p>
+					<p class="post_user_nick">
+						<a class="{$thispost.user.nick_color}" href="{$baseurl}user/profile/{$thispost.user_id}">{$thispost.user.nick}</a>
+					</p>
 					<p>
-					<small id="post_user_school">{$thispost.user.school_name}</small>
-					<small id="post_user_date">{$thispost.createat}</small>
+						<small class="post_user_school">{$thispost.user.school_name}</small>
+						<small class="post_user_date">{$thispost.createat}</small>
 					</p>
 				</div>
 			</div>
 
 			<hr/>
-			<p class="p_post_section">基本信息</p>
+			<p class="p_post_section affix-top">基本信息</p>
 			<div id="post_content">
 				<div id="post_content_left">
 					<p class="p_post_content">帖子类型： {$post_type}</p>
@@ -103,6 +105,7 @@
 			<div id="post_editor" class="clearfix">
 				<textarea rows="8" id="edit_description" name="edit_description" class="form-control flat" placeholder="修改描述" maxlength=300>{$thispost.description}</textarea>
 				<button id="btn_confirm_edit_des" type="button" class="btn btn-primary pull-right" onclick="confirm_edit_des({$thispost.post_id}, {$thispost.type})">确认修改</button>
+				<button id="btn_cancel_edit_des" type="button" class="btn btn-default pull-right" onclick="cancel_edit_des()">取消</button>
 			</div>
 			{/if}
 			
@@ -111,7 +114,7 @@
 			<p class="p_post_section">图片展示</p>
 			<div id="post_picture">
 				{foreach from = $thispost.picture item = pic} 
-				<img class="passive" src="{$pic.picture_url}" alt="图片展示"/>
+				<img class="lazy" data-original="{$pic.picture_url}" alt="图片展示"/>
 				<pre class="p_picture_des">{$pic.picture_des}</pre>
 				{/foreach}
 			</div>
@@ -120,18 +123,144 @@
 			<hr/>
 			<p class="p_post_section">联系方式</p>
 			<div id="post_contact">
-				<p class="postcontent">站内：回复本贴</p>
-				<?php if($thispost['mail_on']==1):?>
-				<p class="postcontent">邮箱：<?=$thispost['mail']?></p>
-				<?php endif;?>
-				<?php if($thispost['qq_on']==1):?>
-				<p class="postcontent">QQ：<?=$thispost['qq']?></p>
-				<?php endif;?>
-				<?php if($thispost['phone_on']==1):?>
-				<p class="postcontent">手机：<?=$thispost['phone']?></p>
-				<?php endif;?>
+				{foreach from = $thispost.contactby item = cont}
+				<p class="p_post_content">{$cont}</p>
+				{/foreach}
 			</div>
 			
 			<hr/>
+			<p class="p_post_section">分享页面</p>
+			<div id="post_share">
+				<div class="jiathis_style_32x32">
+					<a class="jiathis_button_weixin"></a>
+					<a class="jiathis_button_tsina"></a>
+					<a class="jiathis_button_renren"></a>
+					<a class="jiathis_button_qzone"></a>
+					<a class="jiathis_button_douban"></a>
+					<a class="jiathis_button_cqq"></a>
+				</div>
+				<div>
+			    	<p><span class=" fui-new"></span> 0 <span class=" fui-heart"></span> 0 </p>
+			    	<button type="button" class="btn btn-primary" onclick="doreply(0,'fabkxd')">回复楼主</button>
+			    </div>
+				<script type="text/javascript" >
+					var jiathis_config={
+						url:"http://www.xn--wmqr18c.cn",
+						summary:"这是来自今昔网的大学生二手商品信息，快加入今昔，加入大学生二手交易世界^-^",
+						title:"今昔网 #今昔二手#",
+						pic:"http://www.xn--wmqr18c.cn/img/jinxi.jpg",
+						ralateuid:{
+							"tsina":"3894185518"
+						},
+						shortUrl:false,
+						hideMore:true
+					}
+				</script>
+				<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>   
+			</div>
+-->
+			<hr/>
+			<p class="p_post_section">帖子回复</p>
+			<div id="post_reply">
+
+				<div class="reply_box">
+					<div class="reply_header">
+						<div>
+							<a href="{$baseurl}user/profile/1">
+								<img src="{$baseurl}img/head/default_thumb.jpg" alt="fabkxd" />
+							</a>
+						</div>
+						<div>
+							<p class="post_user_nick">
+								<a class="text_purple" href="{$baseurl}user/profile/1">fabkxd</a>
+							</p>
+							<p>
+								<small class="post_user_school">北京大学</small>
+								<small class="post_user_date">2015-04-14 00:38:15</small>
+							</p>
+						</div>
+						<div>
+							<p>
+								#1楼 | <a href="" onclick="return false;">回复</a>
+							</p>
+						</div>
+					</div>
+					<div class="reply_content">
+						<blockquote>
+							<strong>回复 楼主： 今昔兔</strong>
+						</blockquote>
+						<pre>楼主你的手机不错，我想要，我加你QQ私信你吧~</pre>
+					</div>
+					<div class="reply_footer">
+						
+					</div>
+				</div>
+
+				<div class="reply_box">
+					<div class="reply_header">
+						<div>
+							<a href="{$baseurl}user/profile/1">
+								<img src="{$baseurl}img/head/default_thumb.jpg" alt="fabkxd" />
+							</a>
+						</div>
+						<div>
+							<p class="post_user_nick">
+								<a class="text_purple" href="{$baseurl}user/profile/1">fabkxd</a>
+							</p>
+							<p>
+								<small class="post_user_school">北京大学</small>
+								<small class="post_user_date">2015-04-14 00:38:15</small>
+							</p>
+						</div>
+						<div>
+							<p>
+								#1楼 | <a href="" onclick="return false;">回复</a>
+							</p>
+						</div>
+					</div>
+					<div class="reply_content">
+						<blockquote>
+							<strong>回复 楼主： 今昔兔</strong>
+						</blockquote>
+						<pre>楼主你的手机不错，我想要，我加你QQ私信你吧~</pre>
+					</div>
+					<div class="reply_footer">
+						
+					</div>
+				</div>
+
+				<div class="reply_box">
+					<div class="reply_header">
+						<div>
+							<a href="{$baseurl}user/profile/1">
+								<img src="{$baseurl}img/head/default_thumb.jpg" alt="fabkxd" />
+							</a>
+						</div>
+						<div>
+							<p class="post_user_nick">
+								<a class="text_purple" href="{$baseurl}user/profile/1">fabkxd</a>
+							</p>
+							<p>
+								<small class="post_user_school">北京大学</small>
+								<small class="post_user_date">2015-04-14 00:38:15</small>
+							</p>
+						</div>
+						<div>
+							<p>
+								#1楼 | <a href="" onclick="return false;">回复</a>
+							</p>
+						</div>
+					</div>
+					<div class="reply_content">
+						<blockquote>
+							<strong>回复 楼主： 今昔兔</strong>
+						</blockquote>
+						<pre>楼主你的手机不错，我想要，我加你QQ私信你吧~</pre>
+					</div>
+					<div class="reply_footer">
+						
+					</div>
+				</div>
+			</div>
 
 		</div>

@@ -15,6 +15,7 @@ $(document).ready( function() {
 			}
 		}
 	});
+	$("img.lazy").lazyload({effect: "fadeIn"});
 });
 $(window).bind('scroll', function() {
 	$(this).scrollTop() > 600 ? $("#back_to_top").fadeIn(500) : $("#back_to_top").fadeOut(500);
@@ -875,6 +876,8 @@ function confirm_edit_des(pid, ptype) {
 				$("#post_editor").slideUp(800, function() {
 					$('#post_description').slideDown(800);
 				});
+				$("#btn_confirm_edit_des").html('确认修改');
+				$("#btn_confirm_edit_des").attr('disabled', false);
 			} else {
 				$("#info_modal").find('.modal-title').text("修改失败");
 				$("#info_modal").find('.modal-cont').text("对不起，操作失败，请重试！");
@@ -891,6 +894,11 @@ function confirm_edit_des(pid, ptype) {
 	);
 	$("#btn_confirm_edit_des").html('<i class="icon-spinner icon-spin"></i> 处理中');
 	$("#btn_confirm_edit_des").attr('disabled', true);
+}
+function cancel_edit_des() {
+	$("#post_editor").slideUp(800, function() {
+		$('#post_description').slideDown(800);
+	});
 }
 
 
