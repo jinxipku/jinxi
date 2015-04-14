@@ -754,7 +754,7 @@ div#post_content_right>div:nth-child(2) p#p_post_deal {
 }
 div#post_description {
 	width: 772px;
-	margin-bottom: 30px;
+	padding-bottom: 30px;
 }
 button#btn_edit_description {
 	display: none;
@@ -765,6 +765,20 @@ div#post_description pre{
 	font-size: 18px;
 	font-family: 微软雅黑,黑体,幼圆,宋体;
 	line-height: 2.5;
+	margin: 0px;
+}
+div#post_editor {
+	width: 772px;
+	margin-bottom: 30px;
+	display: none;
+}
+div#post_editor textarea {
+	background-color: #f4f4f4;
+	width: 772px;
+	resize: vertical;
+}
+div#post_editor button {
+
 }
 div#post_picture {
 	width: 772px;

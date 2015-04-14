@@ -796,10 +796,11 @@ function add_collect(pid, ptype){
 				$("#info_modal").find('.modal-cont').text("对不起，操作失败，请重试！");
 				$("#info_modal").find('.btn-default').css('display','none');
 				$("#info_modal").find('.btn-primary').bind('click',function() {
-					$("#btn_collcet").html('<span class="fui-plus"></span>收藏');
-					$("#btn_collcet").attr('disabled', false);
+					$("#info_modal").modal('hide');
 				});
 				$("#info_modal").modal();
+				$("#btn_collcet").html('<span class="fui-plus"></span>收藏');
+				$("#btn_collcet").attr('disabled', false);
 			}
 		},
 		'json'
@@ -834,9 +835,10 @@ function delete_collect(pid, ptype){
 						$("#info_modal").find('.modal-cont').text("对不起，操作失败，请重试！");
 						$("#info_modal").find('.btn-default').css('display','none');
 						$("#info_modal").find('.btn-primary').bind('click',function() {
-							$("#btn_collcet").html(' 已收藏');
-							$("#btn_collcet").attr('disabled', false);
+							$("#info_modal").modal('hide');
 						});
+						$("#btn_collcet").html(' 已收藏');
+						$("#btn_collcet").attr('disabled', false);
 						$("#info_modal").modal();
 					}
 				},
@@ -848,11 +850,47 @@ function delete_collect(pid, ptype){
 	});
 	$("#info_modal").modal();	
 }
-function change2dc(){
+function change2dc() {
 	$("#btn_collcet").html('&nbsp;- 取消');
 }
-function change2ac(){
+function change2ac() {
 	$("#btn_collcet").html(' 已收藏');
+}
+function edit_description() {
+	$("#post_description").slideUp(800, function() {
+		$('#post_editor').slideDown(800);
+	});
+}
+function confirm_edit_des(pid, ptype) {
+	$.post(
+		baseurl + "post/edit_description",
+		{
+			post_id: pid,
+			post_type: ptype,
+			description: $("#edit_description").val()
+		},
+		function(res) {
+			if (res.status == 1) {
+				$("div#post_description>pre").text($("#edit_description").val());
+				$("#post_editor").slideUp(800, function() {
+					$('#post_description').slideDown(800);
+				});
+			} else {
+				$("#info_modal").find('.modal-title').text("修改失败");
+				$("#info_modal").find('.modal-cont').text("对不起，操作失败，请重试！");
+				$("#info_modal").find('.btn-default').css('display','none');
+				$("#info_modal").find('.btn-primary').bind('click',function() {
+					$("#info_modal").modal("hide");
+				});
+				$("#info_modal").modal();
+				$("#btn_confirm_edit_des").html('确认修改');
+				$("#btn_confirm_edit_des").attr('disabled', false);
+			}
+		},
+		'json'
+	);
+	$("#btn_confirm_edit_des").html('<i class="icon-spinner icon-spin"></i> 处理中');
+	$("#btn_confirm_edit_des").attr('disabled', true);
 }
 
 

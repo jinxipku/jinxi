@@ -7,11 +7,11 @@
 						<input id="model" name="model" type="text" class="form-control flat" placeholder="请输入物品型号" maxlength=15 />
 						<p>请选择物品状态：</p>
 						<select id="class" name="class">
-							<option value=1 selected>S级别（正品）</option>
-							<option value=2>S级别（自制）</option>
-							<option value=3>A级别</option>
-							<option value=4>B级别</option>
-							<option value=5>C级别</option>
+							<option value=0 selected>S级别（正品）</option>
+							<option value=1>S级别（自制）</option>
+							<option value=2>A级别</option>
+							<option value=3>B级别</option>
+							<option value=4>C级别</option>
 						</select>
 						<p>确认请按下一步。</p>
 						<button type="button" class="btn btn-default" onclick="info2category()">上一步</button>

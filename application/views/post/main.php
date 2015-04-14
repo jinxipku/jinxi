@@ -93,12 +93,18 @@
 			<p class="p_post_section">详细描述</p>
 			{if isset($mypost)}
 			<div id="post_description" onmouseover="$('#btn_edit_description').show();" onmouseout="$('#btn_edit_description').hide();">
-				<button id="btn_edit_description" type="button" class="btn btn-info btn-sm"><span class="fui-gear"></span>编辑</button>
+				<button id="btn_edit_description" type="button" class="btn btn-info btn-sm" onclick="edit_description()"><span class="fui-gear"></span>编辑</button>
 			{else}
 			<div id="post_description">
 			{/if}
 				<pre>{$thispost.description}</pre>
 			</div>
+			{if isset($mypost)}
+			<div id="post_editor" class="clearfix">
+				<textarea rows="8" id="edit_description" name="edit_description" class="form-control flat" placeholder="修改描述" maxlength=300>{$thispost.description}</textarea>
+				<button id="btn_confirm_edit_des" type="button" class="btn btn-primary pull-right" onclick="confirm_edit_des({$thispost.post_id}, {$thispost.type})">确认修改</button>
+			</div>
+			{/if}
 			
 			{if isset($thispost.picture)}
 			<hr/>
