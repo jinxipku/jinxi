@@ -46,6 +46,49 @@
 			</div>
 
 			<img class="passive" id="side_icon" src="{$baseurl}img/jinxismall.jpg" alt="http://www.xn--wmqr18c.cn"/>
+
+
+			<div id="side_view_box" class="side_content panel panel-default">
+				<div id="side_view_header" class="clearfix">
+					<h6>{$thispost.plain_title}</h6>
+					<div>
+						<a href="{$baseurl}user/profile/{$thispost.user_id}">
+							<img class="side_view_head" src="{$thispost.user.thumb}" alt="{$thispost.user.nick}" />
+						</a>
+					</div>
+					<div>
+						<div>
+							<a class="{$thispost.user.nick_color}" href="{$baseurl}user/profile/{$thispost.user_id}">{$thispost.user.nick}</a>
+							<small class="post_user_school"> {$thispost.user.school_name}</small>
+						</div>
+						<div>
+							<small class="post_user_date">{$thispost.createat}</small>
+						</div>
+					</div>
+				</div>
+				<hr/>
+				<div id="side_view_content">
+					<p class="p_post_content"><strong>帖子类型</strong>： {$post_type}</p>
+					<p class="p_post_content"><strong>一级分类</strong>： {$thispost.category1_name}</p>
+					<p class="p_post_content"><strong>二级分类</strong>： {$thispost.category2_name}</p>
+					<p class="p_post_content"><strong>品牌型号</strong>： {$thispost.brand} {$thispost.model}</p>
+					<p class="p_post_content"><strong>物品状态</strong>： 
+					{if $thispost.class == 0}S级别（正品）
+					{elseif $thispost.class == 1}S级别（自制）
+					{elseif $thispost.class == 2}A级别（九成新）
+					{elseif $thispost.class == 3}B级别（七成新）
+					{elseif $thispost.class == 4}C级别（五成新）
+					{/if}
+					</p>
+					<p class="p_post_content"><strong>成交方式</strong>： {$thispost.deal}</p>
+					<p class="p_post_content"><strong>心理价位</strong>： {if $thispost.price == 0}面议{else}{$thispost.price} 元{/if}</p>
+					<p class="p_post_content"><strong>详细描述</strong>： {$thispost.description}</p>
+				</div>
+				<hr/>
+				<div id="side_view_footer">
+			    	<button type="button" class="btn btn-primary btn-sm" onclick="doreply(0,'fabkxd')">回复楼主</button>
+				</div>
+			</div>
 		</div>
 	</div>
 

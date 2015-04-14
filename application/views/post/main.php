@@ -77,8 +77,8 @@
 					{elseif $thispost.class == 4}C级别（五成新）
 					{/if}
 					</p>
-					<p class="p_post_content">成交方式：{$thispost.deal}</p>
-					<p class="p_post_content">心理价位：{if $thispost.price == 0}面议{else}{$thispost.price} 元{/if}</p>
+					<p class="p_post_content">成交方式： {$thispost.deal}</p>
+					<p class="p_post_content">心理价位： {if $thispost.price == 0}面议{else}{$thispost.price} 元{/if}</p>
 				</div>
 				<div id="post_content_right">
 					<div>
@@ -167,7 +167,7 @@
 					<div class="reply_header">
 						<div>
 							<a href="{$baseurl}user/profile/1">
-								<img src="{$baseurl}img/head/default_thumb.jpg" alt="fabkxd"/>
+								<img class="lazy" data-original="{$baseurl}img/head/default_thumb.jpg" alt="fabkxd"/>
 							</a>
 						</div>
 						<div>
@@ -202,7 +202,7 @@
 					<div class="reply_header">
 						<div>
 							<a href="{$baseurl}user/profile/1">
-								<img src="{$baseurl}img/head/default_thumb.jpg" alt="fabkxd"/>
+								<img class="lazy" data-original="{$baseurl}img/head/default_thumb.jpg" alt="fabkxd"/>
 							</a>
 						</div>
 						<div>
@@ -233,5 +233,4 @@
 					</div>
 				</div>
 			</div>
-
 		</div>
