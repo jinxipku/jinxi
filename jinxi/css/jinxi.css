@@ -718,6 +718,7 @@ div#post_author p.p_post_close {
 }
 p.p_post_section {
 	color: #7F8C8D;
+	margin-bottom: 30px;
 }
 p.p_post_content {
 	color: #333;
@@ -777,8 +778,12 @@ div#post_editor textarea {
 	width: 772px;
 	resize: vertical;
 }
-div#post_editor button {
-
+div#post_editor button#btn_confirm_edit_des {
+	margin-top: 10px;
+}
+div#post_editor button#btn_cancel_edit_des {
+	margin-top: 10px;
+	margin-right: 10px;
 }
 div#post_picture {
 	width: 772px;
@@ -790,6 +795,10 @@ div#post_picture pre.p_picture_des{
 	font-family: 微软雅黑,黑体,幼圆,宋体;
 	margin-top: 0px;
 	margin-bottom: 15px;
+}
+div#post_contact {
+	width: 772px;
+	margin-bottom: 30px;
 }
 
 

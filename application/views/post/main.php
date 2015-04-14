@@ -103,6 +103,7 @@
 			<div id="post_editor" class="clearfix">
 				<textarea rows="8" id="edit_description" name="edit_description" class="form-control flat" placeholder="修改描述" maxlength=300>{$thispost.description}</textarea>
 				<button id="btn_confirm_edit_des" type="button" class="btn btn-primary pull-right" onclick="confirm_edit_des({$thispost.post_id}, {$thispost.type})">确认修改</button>
+				<button id="btn_cancel_edit_des" type="button" class="btn btn-default pull-right" onclick="cancel_edit_des()">取消</button>
 			</div>
 			{/if}
 			
@@ -120,16 +121,9 @@
 			<hr/>
 			<p class="p_post_section">联系方式</p>
 			<div id="post_contact">
-				<p class="postcontent">站内：回复本贴</p>
-				<?php if($thispost['mail_on']==1):?>
-				<p class="postcontent">邮箱：<?=$thispost['mail']?></p>
-				<?php endif;?>
-				<?php if($thispost['qq_on']==1):?>
-				<p class="postcontent">QQ：<?=$thispost['qq']?></p>
-				<?php endif;?>
-				<?php if($thispost['phone_on']==1):?>
-				<p class="postcontent">手机：<?=$thispost['phone']?></p>
-				<?php endif;?>
+				{foreach from = $thispost.contactby item = cont}
+				<p class="p_post_content">{$cont}</p>
+				{/foreach}
 			</div>
 			
 			<hr/>
