@@ -161,8 +161,9 @@ class Post extends MY_Controller {
 			$post['contactby'] = $contact;
 		}else $post['contactby'] = null;
 
-		$post['favorite'] = $this->favorites_model->get_favorites_num($post_id,$type);
-		$post['reply'] = $this->reply_model->get_reply_num($post_id,$type);
+		$post['favorite_num'] = $this->favorites_model->get_favorites_num($post_id,$type);
+		$post['reply_num'] = $this->reply_model->get_reply_num($post_id,$type);
+		$post['reply'] = $this->reply_model->get_reply($post_id,$type);
 		//TODO:当前用户是否关注帖子
 		return $post;
 	}
