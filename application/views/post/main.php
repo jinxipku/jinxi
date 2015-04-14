@@ -112,7 +112,7 @@
 			<p class="p_post_section">图片展示</p>
 			<div id="post_picture">
 				{foreach from = $thispost.picture item = pic} 
-				<img class="passive" src="{$pic.picture_url}" alt="图片展示"/>
+				<img src="{$pic.picture_url}" alt="图片展示"/>
 				<pre class="p_picture_des">{$pic.picture_des}</pre>
 				{/foreach}
 			</div>

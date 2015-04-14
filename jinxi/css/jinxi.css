@@ -789,6 +789,9 @@ div#post_picture {
 	width: 772px;
 	margin-bottom: 30px;
 }
+div#post_picture img {
+	max-width: 772px;
+}
 div#post_picture pre.p_picture_des{
 	color: #444;
 	font-size: 17px;
