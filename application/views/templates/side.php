@@ -86,7 +86,7 @@
 				</div>
 				<hr/>
 				<div id="side_view_footer">
-			    	<button type="button" class="btn btn-primary btn-sm" onclick="doreply(0,'fabkxd')">回复楼主</button>
+			    	<button type="button" class="btn btn-primary" onclick="doreply(0,'fabkxd')">回复楼主</button>
 				</div>
 			</div>
 		</div>
