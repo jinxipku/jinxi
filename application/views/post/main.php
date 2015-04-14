@@ -13,7 +13,7 @@
 					</li>
 				</ol>
 			</div>
-<!--
+
 			<hr/>
 			<h5>
 				{$thispost.title}
@@ -30,7 +30,7 @@
 						<p class="p_post_close">贴子已关闭</p>
 						{if isset($mypost)}
 						<button id="btn_open_post" type="button" class="btn btn-sm btn-info" onclick="open_post({$thispost.post_id}, {$thispost.type})">
-							<span class="fui-check"></span>打开
+							<span class="fui-play"></span>打开
 						</button>
 						{/if}
 						{elseif !isset($login_user)}
@@ -39,7 +39,7 @@
 						</a>
 						{elseif isset($mypost)}
 						<button id="btn_close_post" type="button" class="btn btn-sm btn-info" onclick="close_post({$thispost.post_id}, {$thispost.type})">
-							<span class="fui-cross"></span>关闭
+							<span class="fui-lock"></span>关闭
 						</button>
 						{elseif isset($has_collect)}
 						<button id="btn_collcet" type="button" class="btn btn-sm btn-info" onclick="delete_collect({$thispost.post_id}, {$thispost.type})" onmouseover="change2dc()" onmouseout="change2ac()">
@@ -140,7 +140,7 @@
 					<a class="jiathis_button_cqq"></a>
 				</div>
 				<div>
-			    	<p><span class=" fui-new"></span> 0 <span class=" fui-heart"></span> 0 </p>
+			    	<p><span class=" fui-new"></span> {$thispost.reply_num} <span class=" fui-heart"></span> {$thispost.favorite_num} </p>
 			    	<button type="button" class="btn btn-primary" onclick="doreply(0,'fabkxd')">回复楼主</button>
 			    </div>
 				<script type="text/javascript" >
@@ -158,16 +158,16 @@
 				</script>
 				<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>   
 			</div>
--->
+
 			<hr/>
 			<p class="p_post_section">帖子回复</p>
 			<div id="post_reply">
 
-				<div class="reply_box">
+				<div class="reply_box well">
 					<div class="reply_header">
 						<div>
 							<a href="{$baseurl}user/profile/1">
-								<img src="{$baseurl}img/head/default_thumb.jpg" alt="fabkxd" />
+								<img src="{$baseurl}img/head/default_thumb.jpg" alt="fabkxd"/>
 							</a>
 						</div>
 						<div>
@@ -185,22 +185,24 @@
 							</p>
 						</div>
 					</div>
-					<div class="reply_content">
+					<div class="reply_content" onmouseover="$(this).find('button.btn_report').show();" onmouseout="$(this).find('button.btn_report').hide();">
+						<button  type="button" class="btn btn-warning btn-sm btn_report" onclick="report()"><span class="fui-eye"></span>举报</button>
 						<blockquote>
 							<strong>回复 楼主： 今昔兔</strong>
 						</blockquote>
 						<pre>楼主你的手机不错，我想要，我加你QQ私信你吧~</pre>
 					</div>
 					<div class="reply_footer">
-						
+						<hr/>
+						<p>山穷水绝处，回眸一遍你。</p>
 					</div>
 				</div>
 
-				<div class="reply_box">
+				<div class="reply_box well">
 					<div class="reply_header">
 						<div>
 							<a href="{$baseurl}user/profile/1">
-								<img src="{$baseurl}img/head/default_thumb.jpg" alt="fabkxd" />
+								<img src="{$baseurl}img/head/default_thumb.jpg" alt="fabkxd"/>
 							</a>
 						</div>
 						<div>
@@ -218,47 +220,16 @@
 							</p>
 						</div>
 					</div>
-					<div class="reply_content">
+					<div class="reply_content" onmouseover="$(this).find('button.btn_report').show();" onmouseout="$(this).find('button.btn_report').hide();">
+						<button  type="button" class="btn btn-warning btn-sm btn_report" onclick="report()"><span class="fui-eye"></span>举报</button>
 						<blockquote>
 							<strong>回复 楼主： 今昔兔</strong>
 						</blockquote>
 						<pre>楼主你的手机不错，我想要，我加你QQ私信你吧~</pre>
 					</div>
 					<div class="reply_footer">
-						
-					</div>
-				</div>
-
-				<div class="reply_box">
-					<div class="reply_header">
-						<div>
-							<a href="{$baseurl}user/profile/1">
-								<img src="{$baseurl}img/head/default_thumb.jpg" alt="fabkxd" />
-							</a>
-						</div>
-						<div>
-							<p class="post_user_nick">
-								<a class="text_purple" href="{$baseurl}user/profile/1">fabkxd</a>
-							</p>
-							<p>
-								<small class="post_user_school">北京大学</small>
-								<small class="post_user_date">2015-04-14 00:38:15</small>
-							</p>
-						</div>
-						<div>
-							<p>
-								#1楼 | <a href="" onclick="return false;">回复</a>
-							</p>
-						</div>
-					</div>
-					<div class="reply_content">
-						<blockquote>
-							<strong>回复 楼主： 今昔兔</strong>
-						</blockquote>
-						<pre>楼主你的手机不错，我想要，我加你QQ私信你吧~</pre>
-					</div>
-					<div class="reply_footer">
-						
+						<hr/>
+						<p>山穷水绝处，回眸一遍你。</p>
 					</div>
 				</div>
 			</div>

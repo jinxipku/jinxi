@@ -411,6 +411,7 @@ div.set_row>div.set_input input{
 }
 div.set_row>div.set_input textarea{
 	width: 300px;
+	resize: none;
 }
 
 div.set_table_content button#btn_upload_head {
@@ -832,40 +833,65 @@ div#post_reply {
 }
 div.reply_box {
 	width: 772px;
+	margin-bottom: 20px;
 }
 div.reply_header {
-	width: 772px;
+	width: 752px;
 	height: 60px;
 }
-div.reply_header>div:nth-child(1) {
+div.reply_header hr{
+	width: 50%;
+	margin: 0px;
+	border-top: 1px solid #a0a0a0;
+}
+div.reply_header>div:nth-of-type(1) {
 	float: left;
 	height: 60px;
 	width: 60px;
 }
-div.reply_header>div:nth-child(2) {
+div.reply_header>div:nth-of-type(2) {
 	float: left;
 	height: 60px;
-	width: 562px;
+	width: 542px;
 	padding-left: 10px;
 }
-div.reply_header>div:nth-child(3) {
+div.reply_header>div:nth-of-type(3) {
 	float: left;
 	height: 60px;
 	width: 150px;
 }
-div.reply_header>div:nth-child(3)>p{
+div.reply_header>div:nth-of-type(3)>p{
 	font-size: 18px;
 	text-align: right;
 	padding-right: 10px; 
 }
 div.reply_content {
-	width: 772px;
+	width: 752px;
 	padding-top: 10px;
 }
 div.reply_content pre {
 	font-family: 微软雅黑,黑体,幼圆,宋体;
 	padding-left: 15px;
 	font-size: 16px;
+}
+div.reply_content blockquote {
+	border-left: 3px solid #16A085;
+}
+div.reply_content button.btn_report {
+	float: right;
+	display: none;
+
+}
+div.reply_footer p {
+	text-align: right;
+	font-family: 宋体;
+	font-size: 15px;
+	margin-top: 15px;
+}
+div.reply_footer hr{
+	width: 50%;
+	margin: 0px;
+	margin-left: 50%;
 }
 
 
