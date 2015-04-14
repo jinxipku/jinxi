@@ -101,11 +101,12 @@
 	<!-- JiaThis Button BEGIN -->
 <!-- JiaThis Button END -->
 
-	<script src="{$baseurl}js/bootstrap.js"></script>
-	<script src="{$baseurl}js/stickup.js"></script>
-	<script src="{$baseurl}js/jquery.ellipsis.js"></script>
-	<script src="{$baseurl}js/flatui-checkbox.js"></script>
-	<script src="{$baseurl}js/flatui-radio.js"></script>
-	<script src="{$baseurl}js/jinxi.js"></script>
+	<script type="text/javascript" src="{$baseurl}js/bootstrap.js"></script>
+	<script type="text/javascript" src="{$baseurl}js/stickup.js"></script>
+	<script type="text/javascript" src="{$baseurl}js/jquery.ellipsis.js"></script>
+	<script type="text/javascript" src="{$baseurl}js/flatui-checkbox.js"></script>
+	<script type="text/javascript" src="{$baseurl}js/flatui-radio.js"></script>
+	<script type="text/javascript" src="{$baseurl}js/jquery.lazyload.min.js"></script>
+	<script type="text/javascript" src="{$baseurl}js/jinxi.js"></script>
 </body>
 </html>

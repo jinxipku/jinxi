@@ -78,6 +78,6 @@
 				</div>
 			</div>
 			
-			<img class="passive" id="side_icon" src="{$baseurl}img/jinxibig.jpg" alt="http://www.xn--wmqr18c.cn"/>
+			<img class="passive" id="side_icon" src="{$baseurl}img/jinxismall.jpg" alt="http://www.xn--wmqr18c.cn"/>
 		</div>
 	</div>

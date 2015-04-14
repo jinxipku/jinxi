@@ -15,6 +15,7 @@ $(document).ready( function() {
 			}
 		}
 	});
+	$("img.lazy").lazyload({effect: "fadeIn"});
 });
 $(window).bind('scroll', function() {
 	$(this).scrollTop() > 600 ? $("#back_to_top").fadeIn(500) : $("#back_to_top").fadeOut(500);
