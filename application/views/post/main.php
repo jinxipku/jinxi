@@ -15,9 +15,9 @@
 			</div>
 
 			<hr/>
-			<h6>
+			<h5>
 				{$thispost.title}
-			</h6>
+			</h5>
 			<div id="post_author">
 				<div>
 					<a href="{$baseurl}user/profile/{$thispost.user_id}">
@@ -28,27 +28,30 @@
 					<div id="post_collect_box">
 						{if $thispost.active == 0}
 						<p class="p_post_close">贴子已关闭</p>
+						{if isset($mypost)}
+						<button id="btn_open_post" type="button" class="btn btn-sm btn-info" onclick="open_post({$thispost.post_id}, {$thispost.type})">
+							<span class="fui-check"></span>打开
+						</button>
+						{/if}
 						{elseif !isset($login_user)}
 						<a type="button" class="btn btn-sm btn-info" href="{$baseurl}account/loginfo">
 							<span class="fui-plus"></span>收藏
 						</a>
 						{elseif isset($mypost)}
-						<button type="button" class="btn btn-sm btn-info" onclick="close_post({$thispost.post_id}, {$thispost.type})">
+						<button id="btn_close_post" type="button" class="btn btn-sm btn-info" onclick="close_post({$thispost.post_id}, {$thispost.type})">
 							<span class="fui-cross"></span>关闭
 						</button>
 						{elseif isset($has_collect)}
-						<button id="btn_collcet" type="button" class="btn btn-sm btn-info" onclick="delete_collect({$login_user.id}, {$thispost.post_id}, {$thispost.type})" onmouseover="change2dc()" onmouseout="change2ac()">
+						<button id="btn_collcet" type="button" class="btn btn-sm btn-info" onclick="delete_collect({$thispost.post_id}, {$thispost.type})" onmouseover="change2dc()" onmouseout="change2ac()">
 							已收藏
 						</button>
 						{else}
-						<button id="btn_collcet" type="button" class="btn btn-sm btn-info" onclick="delete_collect({$login_user.id}, {$thispost.post_id}, {$thispost.type})">
+						<button id="btn_collcet" type="button" class="btn btn-sm btn-info" onclick="add_collect({$thispost.post_id}, {$thispost.type})">
 							<span class="fui-plus"></span>收藏
 						</button>
 						{/if}
 					</div>
-					<a class="{$thispost.user.nick_color}" href="{$baseurl}user/profile/{$thispost.user_id}">
-						<p id="post_user_nick">{$thispost.user.nick}</p>
-					</a>
+					<p id="post_user_nick"><a class="{$thispost.user.nick_color}" href="{$baseurl}user/profile/{$thispost.user_id}">{$thispost.user.nick}</a></p>
 					<p>
 					<small id="post_user_school">{$thispost.user.school_name}</small>
 					<small id="post_user_date">{$thispost.createat}</small>
@@ -57,9 +60,9 @@
 			</div>
 
 			<hr/>
+			<p class="p_post_section">基本信息</p>
 			<div id="post_content">
 				<div id="post_content_left">
-					<p class="p_post_section">基本信息</p>
 					<p class="p_post_content">帖子类型： {$post_type}</p>
 					<p class="p_post_content">一级分类： {$thispost.category1_name}</p>
 					<p class="p_post_content">二级分类： {$thispost.category2_name}</p>
@@ -73,52 +76,62 @@
 					{/if}
 					</p>
 					<p class="p_post_content">成交方式：{$thispost.deal}</p>
-					<p class="p_post_content">心理价位：{$thispost.price} 元</p>
+					<p class="p_post_content">心理价位：{if $thispost.price == 0}面议{else}{$thispost.price} 元{/if}</p>
 				</div>
-				<div id="post_content_left">
+				<div id="post_content_right">
 					<div>
-						<img src="{$baseurl}img/class/{$thispost.class}.png" alt="物品状态">
+						<img class="passive" src="{$baseurl}img/class/{$thispost.class}.png" alt="物品状态">
 					</div>
 					<div>
+						<p id="p_post_deal">{if $thispost.price == 0}面议{else}￥ {$thispost.price}{/if}</p>
 					</div>
 				</div>
 			</div>
 
 
-			<hr style="border-top: 1px solid #e0e0e0;" />
-			<p style="color: #7F8C8D;">详细描述</p>
-			<p class="postcontent">&nbsp;&nbsp;&nbsp;&nbsp;<?=$thispost['pcontent']?></p>
+			<hr/>
+			<p class="p_post_section">详细描述</p>
+			{if isset($mypost)}
+			<div id="post_description" onmouseover="$('#btn_edit_description').show();" onmouseout="$('#btn_edit_description').hide();">
+				<button id="btn_edit_description" type="button" class="btn btn-info btn-sm" onclick="edit_description()"><span class="fui-gear"></span>编辑</button>
+			{else}
+			<div id="post_description">
+			{/if}
+				<pre>{$thispost.description}</pre>
+			</div>
+			{if isset($mypost)}
+			<div id="post_editor" class="clearfix">
+				<textarea rows="8" id="edit_description" name="edit_description" class="form-control flat" placeholder="修改描述" maxlength=300>{$thispost.description}</textarea>
+				<button id="btn_confirm_edit_des" type="button" class="btn btn-primary pull-right" onclick="confirm_edit_des({$thispost.post_id}, {$thispost.type})">确认修改</button>
+			</div>
+			{/if}
 			
-			<?php if($thispost['pimage']>0):?>
-			<hr style="border-top: 1px solid #e0e0e0;" />
-			<p style="color: #7F8C8D;">图片展示</p>
-			<?php if($thispost['pimage']==1||$thispost['pimage']==3||$thispost['pimage']==5||$thispost['pimage']==7):?>
-			<img src="{$baseurl}img/post/<?=$thispost['post_id'].'_1.jpg'?>"
-				alt="" style="width: 772px;" />
-			<?php endif;?>
-			<?php if($thispost['pimage']==2||$thispost['pimage']==3||$thispost['pimage']==6||$thispost['pimage']==7):?>
-			<img src="{$baseurl}img/post/<?=$thispost['post_id'].'_2.jpg'?>"
-				alt="" style="width: 772px;" />
-			<?php endif;?>
-			<?php if($thispost['pimage']==4||$thispost['pimage']==5||$thispost['pimage']==6||$thispost['pimage']==7):?>
-			<img src="{$baseurl}img/post/<?=$thispost['post_id'].'_3.jpg'?>"
-				alt="" style="width: 772px;" />
-			<?php endif;?>
-			<?php endif?>
+			{if isset($thispost.picture)}
+			<hr/>
+			<p class="p_post_section">图片展示</p>
+			<div id="post_picture">
+				{foreach from = $thispost.picture item = pic} 
+				<img class="passive" src="{$pic.picture_url}" alt="图片展示"/>
+				<pre class="p_picture_des">{$pic.picture_des}</pre>
+				{/foreach}
+			</div>
+			{/if}
 			
-			<hr style="border-top: 1px solid #e0e0e0;" />
-			<p style="color: #7F8C8D;">联系方式</p>
-			<p class="postcontent">站内：回复本贴</p>
-			<?php if($thispost['mail_on']==1):?>
-			<p class="postcontent">邮箱：<?=$thispost['mail']?></p>
-			<?php endif;?>
-			<?php if($thispost['qq_on']==1):?>
-			<p class="postcontent">QQ：<?=$thispost['qq']?></p>
-			<?php endif;?>
-			<?php if($thispost['phone_on']==1):?>
-			<p class="postcontent">手机：<?=$thispost['phone']?></p>
-			<?php endif;?>
+			<hr/>
+			<p class="p_post_section">联系方式</p>
+			<div id="post_contact">
+				<p class="postcontent">站内：回复本贴</p>
+				<?php if($thispost['mail_on']==1):?>
+				<p class="postcontent">邮箱：<?=$thispost['mail']?></p>
+				<?php endif;?>
+				<?php if($thispost['qq_on']==1):?>
+				<p class="postcontent">QQ：<?=$thispost['qq']?></p>
+				<?php endif;?>
+				<?php if($thispost['phone_on']==1):?>
+				<p class="postcontent">手机：<?=$thispost['phone']?></p>
+				<?php endif;?>
+			</div>
 			
-			<hr style="border-top: 1px solid #e0e0e0;" />
+			<hr/>
 
 		</div>

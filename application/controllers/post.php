@@ -79,6 +79,7 @@ class Post extends MY_Controller {
 		else {
 			$ptype = "求购";
 		}
+		$thispost['description'] = str_replace("\r\n", "<br/>", $thispost['description']);
 		$this->assign('post_type', $ptype);
 		$this->assign('thispost', $thispost);
 		$this->assign('nav_tab', 3);
