@@ -14,7 +14,7 @@ class reply_model extends CI_Model {
 		$res = $query->row_array();
 		$max_floor = $res['floor'];
 		if(empty($max_floor)){
-			$max_floor = 1;
+			$max_floor = 0;
 		}
 		$reply['floor'] = $max_floor + 1; //最高楼上加1
 		$res = $this->db->insert("jx_reply",$reply);  //插入回复表
@@ -34,11 +34,32 @@ class reply_model extends CI_Model {
 		return $res;
 	}
 
+	public function get_single_reply($post_id,$type,$floor){
+		$map['post_id'] = $post_id;
+		$map['type'] = $type;
+		$map['floor'] = $floor;
+		$this->db->where($map);
+		$query = $this->db->get("jx_reply");
+		return $query->row_array();
+	}
+
 	public function get_reply($post_id,$type){
 		$sql = "select jx_reply.*,a.nick as replyer, b.nick as replyee from jx_reply left join jx_user as a on a.id=jx_reply.reply_from left join jx_user as b on b.id=jx_reply.reply_to where post_id=".$post_id. " and jx_reply.type=" .$type;
 		$query = $this->db->query($sql);
 		$res = $query->result_array();
 		return $res;
+	}
+
+	public function delete_reply($reply_id){
+		$map['id'] = $reply_id;
+		return $this->db->delete('jx_reply',$map);
+	}
+
+	public function make_report($reply_id,$reason,$other_reason){
+		$map['reply_id'] = $reply_id;
+		$map['reason'] = $reason;
+		$map['other_reason'] = $other_reason;
+		return $this->db->insert('jx_report',$map);
 	}
 }
 ?>

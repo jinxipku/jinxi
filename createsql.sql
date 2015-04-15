@@ -121,6 +121,7 @@ create index active_index on jx_buyer_post(active);
 
 drop table if exists jx_reply;
 create table jx_reply(
+	id int(11) not null AUTO_INCREMENT comment 'id',
 	post_id int(11) not null comment '帖子id',
 	type tinyint not null comment '帖子类型',
 	floor int(11) not null comment '楼层',
@@ -128,5 +129,15 @@ create table jx_reply(
 	reply_to int(11) not null comment '被回复者id',
 	reply_to_floor int(11) not null comment '回复楼层',
 	content text null comment '回复内容',
-	primary key(post_id,type,floor)
+	primary key(id),
+	unique(post_id,type,floor)
 )DEFAULT CHARSET=utf8 COMMENT='帖子回复';
+
+drop table if exists jx_report;
+create table jx_report(
+	report_id int(11) not null AUTO_INCREMENT comment 'id',
+	reason varchar(30) not null default 0 comment '举报原因',
+	other_reason text null comment '举报的其他原因',
+	reply_id int(11) comment '被举报回复的id',
+	primary key(report_id)
+)DEFAULT CHARSET=utf8 COMMENT='举报表';

@@ -134,5 +134,26 @@ class Script extends MY_Controller {
 		$res = $this->reply_model->add_reply($reply);
 		var_dump($res);
 	}
+
+	public function test_sphinx(){
+		$this->load->library('sphinx_client', NULL, 'sphinx');
+		$this->sphinx->SetServer ( '127.0.0.1', 9312);
+
+//以下设置用于返回数组形式的结果
+
+$this->sphinx->SetArrayResult ( true );
+//$this->sphinx->SetIDRange(3,4);
+//$this->sphinx->setFilter('group_id',array(2));
+$this->sphinx->SetLimits(0,20);
+$res = $this->sphinx->Query("普通","*");
+echo '<pre>';
+
+
+print_r($res);
+
+
+echo '</pre>';
+
+	}
 }
 ?>
