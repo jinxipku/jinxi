@@ -18,6 +18,10 @@
 			<h5>
 				{$thispost.title}
 			</h5>
+			<div id="post_info">
+				<input type="hidden" id="post_id" name="post_id" value="{$thispost.post_id}" />
+				<input type="hidden" id="post_type" name="post_type" value="{$thispost.type}" />
+			</div>
 			<div id="post_author">
 				<div>
 					<a href="{$baseurl}user/profile/{$thispost.user_id}">

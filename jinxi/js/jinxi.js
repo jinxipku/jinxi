@@ -932,9 +932,11 @@ function confirm_reply() {
 		return;
 	}
 	$.post(
-		baseurl + "reply/make_reply",
+		baseurl + "reply/add_reply",
 		{
-			reply_to_id: $("#reply_to_id").val(),
+			post_id: $("#post_id").val(),
+			type: $("#post_type").val();
+			reply_to: $("#reply_to_id").val(),
 			reply_to_floor: $("#reply_to_floor").val(),
 			reply_content: $("#reply_content").val()
 		},
