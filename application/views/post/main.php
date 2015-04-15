@@ -145,7 +145,11 @@
 				</div>
 				<div>
 			    	<p><span class=" fui-new"></span> {$thispost.reply_num} <span class=" fui-heart"></span> {$thispost.favorite_num} </p>
-			    	<button type="button" class="btn btn-primary" onclick="go_to_reply(0, {$thispost.user_id}, '{$thispost.user.nick}')">回复楼主</button>
+			    	{if isset($login_user)}
+		      		<button type="button" class="btn btn-primary" onclick="go_to_reply(0, {$thispost.user_id}, '{$thispost.user.nick}')">回复楼主</button>
+		      		{else}
+		      		<a href="{$baseurl}account/loginfo" type="button" class="btn btn-primary">回复楼主</a>
+		      		{/if}
 			    </div>
 				<script type="text/javascript" >
 					var jiathis_config={
@@ -166,78 +170,56 @@
 			<hr/>
 			<p class="p_post_section">帖子回复</p>
 			<div id="post_reply">
-
+				{foreach from = $thispost.reply item = reply_item}
 				<div class="reply_box well">
 					<div class="reply_header">
 						<div>
-							<a href="{$baseurl}user/profile/1">
-								<img class="lazy" data-original="{$baseurl}img/head/default_thumb.jpg" alt="fabkxd"/>
+							<a href="{$baseurl}user/profile/{$reply_item.reply_from}">
+								<img class="lazy" data-original="{$reply_item.reply_thumb}" alt="{$reply_item.replyer}"/>
 							</a>
 						</div>
 						<div>
 							<p class="post_user_nick">
-								<a class="text_purple" href="{$baseurl}user/profile/1">fabkxd1</a>
+								<a class="text_purple" href="{$baseurl}user/profile/{$reply_item.reply_from}">{$reply_item.replyer}</a>
 							</p>
 							<p>
-								<small class="post_user_school">北京大学</small>
-								<small class="post_user_date">2015-04-14 00:38:15</small>
+								<small class="post_user_school">{$reply_item.reply_school}</small>
+								<small class="post_user_date">{$reply_item.reply_date}</small>
 							</p>
 						</div>
 						<div>
 							<p>
-								#1楼 | <a href="" onclick="go_to_reply(1, 2, 'fabkxd1');return false;">回复</a>
+								#{$reply_item.floor}楼 | 
+								{if isset($login_user)}
+								<a href="" onclick="go_to_reply({$reply_item.floor}, {$reply_item.reply_from}, '{$reply_item.replyer}');return false;">回复</a>
+								{else}
+								<a href="{$baseurl}account/loginfo">回复</a>
+								{/if}
 							</p>
 						</div>
 					</div>
+					{if isset($login_user)}
 					<div class="reply_content" onmouseover="$(this).find('button.btn_report').show();" onmouseout="$(this).find('button.btn_report').hide();">
-						<button  type="button" class="btn btn-warning btn-sm btn_report" onclick="go_to_report(1,2)"><span class="fui-eye"></span>举报</button>
+						<button  type="button" class="btn btn-warning btn-sm btn_report" onclick="go_to_report({$reply_item.id},{$reply_item.floor})"><span class="fui-eye"></span>举报</button>
+					{else}
+					<div class="reply_content">
+					{/if}
 						<blockquote>
-							<strong>回复 楼主： 今昔兔</strong>
+							<strong>回复 {if $reply_item.reply_to_floor == 0}楼主{else}#{$reply_item.reply_to_floor}楼{/if}： {$reply_item.replyee}</strong>
 						</blockquote>
-						<pre>楼主你的手机不错，我想要，我加你QQ私信你吧~</pre>
+						<pre>{$reply_item.content}</pre>
 					</div>
+					{if $reply_item.reply_is_sign_public == 1}
 					<div class="reply_footer">
 						<hr/>
-						<p>山穷水绝处，回眸一遍你。</p>
+						<p>{$reply_item.reply_sign}</p>
 					</div>
+					{/if}
 				</div>
-
-				<div class="reply_box well">
-					<div class="reply_header">
-						<div>
-							<a href="{$baseurl}user/profile/1">
-								<img class="lazy" data-original="{$baseurl}img/head/default_thumb.jpg" alt="fabkxd"/>
-							</a>
-						</div>
-						<div>
-							<p class="post_user_nick">
-								<a class="text_purple" href="{$baseurl}user/profile/1">fabkxd</a>
-							</p>
-							<p>
-								<small class="post_user_school">北京大学</small>
-								<small class="post_user_date">2015-04-14 00:38:15</small>
-							</p>
-						</div>
-						<div>
-							<p>
-								#2楼 | <a href="" onclick="go_to_reply(2, 3, 'fabkxd2');return false;">回复</a>
-							</p>
-						</div>
-					</div>
-					<div class="reply_content" onmouseover="$(this).find('button.btn_report').show();" onmouseout="$(this).find('button.btn_report').hide();">
-						<button  type="button" class="btn btn-warning btn-sm btn_report" onclick="go_to_report(2,3)"><span class="fui-eye"></span>举报</button>
-						<blockquote>
-							<strong>回复 楼主： 今昔兔</strong>
-						</blockquote>
-						<pre>楼主你的手机不错，我想要，我加你QQ私信你吧~</pre>
-					</div>
-					<div class="reply_footer">
-						<hr/>
-						<p>山穷水绝处，回眸一遍你。</p>
-					</div>
-				</div>
+				{/foreach}
 			</div>
 
+			{if $thispost.active == 1}
 			<div id="post_doreply">
 				<form>
 		      		<textarea rows="6" id="reply_content" name="reply_content" class="form-control flat" placeholder="发表回复" maxlength=140></textarea>
@@ -247,9 +229,14 @@
 					    </blockquote>
 					    <input type="hidden" id="reply_to_id" name="reply_to_id" value="{$thispost.user_id}" />
 					    <input type="hidden" id="reply_to_floor" name="reply_to_floor" value=0 />
-		      			<button id="btn_confirm_reply" type="button" class=" pull-right btn btn-primary" onclick="confirm_reply()">发布</button>
+					    {if isset($login_user)}
+		      			<button id="btn_confirm_reply" type="button" class="pull-right btn btn-primary" onclick="confirm_reply()">发布</button>
+		      			{else}
+		      			<a id="btn_confirm_reply" href="{$baseurl}account/loginfo" type="button" class="pull-right btn btn-primary">发布</a>
+		      			{/if}
 					    <input type="reset" class=" pull-right btn btn-default" value="清空" />
 					</div>
 				</form>
 			</div>
+			{/if}
 		</div>

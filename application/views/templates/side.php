@@ -86,7 +86,11 @@
 				</div>
 				<hr/>
 				<div id="side_view_footer">
-			    	<button type="button" class="btn btn-primary" onclick="go_to_reply(0, {$thispost.user_id}, '{$thispost.user.nick}')">回复楼主</button>
+			    	{if isset($login_user)}
+		      		<button type="button" class="btn btn-primary" onclick="go_to_reply(0, {$thispost.user_id}, '{$thispost.user.nick}')">回复楼主</button>
+		      		{else}
+		      		<a href="{$baseurl}account/loginfo" type="button" class="btn btn-primary">回复楼主</a>
+		      		{/if}
 				</div>
 			</div>
 			{/if}

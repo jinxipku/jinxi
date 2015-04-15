@@ -938,7 +938,7 @@ function confirm_reply() {
 			type: $("#post_type").val(),
 			reply_to: $("#reply_to_id").val(),
 			reply_to_floor: $("#reply_to_floor").val(),
-			reply_content: $("#reply_content").val()
+			content: $("#reply_content").val()
 		},
 		function(res) {
 			if (res.status == 1) {
