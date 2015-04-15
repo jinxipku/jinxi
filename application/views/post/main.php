@@ -141,7 +141,7 @@
 				</div>
 				<div>
 			    	<p><span class=" fui-new"></span> {$thispost.reply_num} <span class=" fui-heart"></span> {$thispost.favorite_num} </p>
-			    	<button type="button" class="btn btn-primary" onclick="doreply(0,'fabkxd')">回复楼主</button>
+			    	<button type="button" class="btn btn-primary" onclick="go_to_reply(0, {$thispost.user_id}, '{$thispost.user.nick}')">回复楼主</button>
 			    </div>
 				<script type="text/javascript" >
 					var jiathis_config={
@@ -172,7 +172,7 @@
 						</div>
 						<div>
 							<p class="post_user_nick">
-								<a class="text_purple" href="{$baseurl}user/profile/1">fabkxd</a>
+								<a class="text_purple" href="{$baseurl}user/profile/1">fabkxd1</a>
 							</p>
 							<p>
 								<small class="post_user_school">北京大学</small>
@@ -181,12 +181,12 @@
 						</div>
 						<div>
 							<p>
-								#1楼 | <a href="" onclick="return false;">回复</a>
+								#1楼 | <a href="" onclick="go_to_reply(1, 2, 'fabkxd1');return false;">回复</a>
 							</p>
 						</div>
 					</div>
 					<div class="reply_content" onmouseover="$(this).find('button.btn_report').show();" onmouseout="$(this).find('button.btn_report').hide();">
-						<button  type="button" class="btn btn-warning btn-sm btn_report" onclick="report()"><span class="fui-eye"></span>举报</button>
+						<button  type="button" class="btn btn-warning btn-sm btn_report" onclick="go_to_report(1,2)"><span class="fui-eye"></span>举报</button>
 						<blockquote>
 							<strong>回复 楼主： 今昔兔</strong>
 						</blockquote>
@@ -216,12 +216,12 @@
 						</div>
 						<div>
 							<p>
-								#1楼 | <a href="" onclick="return false;">回复</a>
+								#2楼 | <a href="" onclick="go_to_reply(2, 3, 'fabkxd2');return false;">回复</a>
 							</p>
 						</div>
 					</div>
 					<div class="reply_content" onmouseover="$(this).find('button.btn_report').show();" onmouseout="$(this).find('button.btn_report').hide();">
-						<button  type="button" class="btn btn-warning btn-sm btn_report" onclick="report()"><span class="fui-eye"></span>举报</button>
+						<button  type="button" class="btn btn-warning btn-sm btn_report" onclick="go_to_report(2,3)"><span class="fui-eye"></span>举报</button>
 						<blockquote>
 							<strong>回复 楼主： 今昔兔</strong>
 						</blockquote>
@@ -232,5 +232,20 @@
 						<p>山穷水绝处，回眸一遍你。</p>
 					</div>
 				</div>
+			</div>
+
+			<div id="post_doreply">
+				<form>
+		      		<textarea rows="6" id="reply_content" name="reply_content" class="form-control flat" placeholder="发表回复......" maxlength=140></textarea>
+		      		<div>
+					    <blockquote class="pull-left">
+					    	<strong>回复 楼主： {$thispost.user.nick}</strong>
+					    </blockquote>
+					    <input type="hidden" id="reply_to_id" name="reply_to_id" value="{$thispost.user_id}" />
+					    <input type="hidden" id="reply_to_floor" name="reply_to_floor" value=0 />
+		      			<button id="btn_confirm_reply" type="button" class=" pull-right btn btn-primary" onclick="confirm_reply()">发布</button>
+					    <input type="reset" class=" pull-right btn btn-default" value="清空" />
+					</div>
+				</form>
 			</div>
 		</div>

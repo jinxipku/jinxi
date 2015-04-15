@@ -47,7 +47,7 @@
 
 			<img class="passive" id="side_icon" src="{$baseurl}img/jinxismall.jpg" alt="http://www.xn--wmqr18c.cn"/>
 
-
+			{if isset($thispost)}
 			<div id="side_view_box" class="side_content panel panel-default">
 				<div id="side_view_header" class="clearfix">
 					<h6>{$thispost.plain_title}</h6>
@@ -86,9 +86,10 @@
 				</div>
 				<hr/>
 				<div id="side_view_footer">
-			    	<button type="button" class="btn btn-primary" onclick="doreply(0,'fabkxd')">回复楼主</button>
+			    	<button type="button" class="btn btn-primary" onclick="go_to_reply(0, {$thispost.user_id}, '{$thispost.user.nick}')">回复楼主</button>
 				</div>
 			</div>
+			{/if}
 		</div>
 	</div>
 

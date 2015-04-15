@@ -831,6 +831,17 @@ div#post_reply {
 	width: 772px;
 	margin-bottom: 30px;
 }
+div#post_doreply {
+	width: 772px;
+	margin-bottom: 60px;
+}
+div#post_doreply textarea {
+	background-color: #f4f4f4;
+	resize: vertical;
+}
+div#post_doreply blockquote {
+	width: 300px;
+}
 div.reply_box {
 	width: 772px;
 	margin-bottom: 20px;
@@ -838,11 +849,6 @@ div.reply_box {
 div.reply_header {
 	width: 752px;
 	height: 60px;
-}
-div.reply_header hr{
-	width: 50%;
-	margin: 0px;
-	border-top: 1px solid #a0a0a0;
 }
 div.reply_header>div:nth-of-type(1) {
 	float: left;
@@ -954,6 +960,7 @@ div#side_view_footer button {
 	float: right;
 	margin-top: 5px;
 }
+
 
 
 

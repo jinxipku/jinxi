@@ -18,14 +18,13 @@
 	</div>
 
 	<img id="back_to_top" onmouseover="back_to_top1()" onmouseout="back_to_top2()" onclick="go_to_top()" src="{$baseurl}img/top.png" alt="回到顶部" />
-
-<!--
+	{if isset($thispost)}
 	<div id="report_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h6 class="modal-title" id="myModalLabel">举报评论/回复</h6>
+					<h6 class="modal-title" id="myModalLabel">举报回复</h6>
 				</div>
 				<div class="modal-body">
 					<p>请选择举报理由：</p>
@@ -53,18 +52,18 @@
 						<input type="radio" name="report_reason"
 						value="其他" data-toggle="radio"/>其他
 					</label>
-					<input id="report_or" type="text" class="form-control" maxlength=30 />
-					<input id="report_oid" type="hidden" class="form-control"/>
-					<input id="report_rtype" type="hidden" class="form-control"/>
+					<input id="report_other_reason" type="text" placeholder="其他" class="form-control flat" maxlength=30 />
+					<input id="report_reply_id" type="hidden" class="form-control"/>
+					<input id="report_user_id" type="hidden" class="form-control"/>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" onclick="reportconfirm()" data-dismiss="modal">提交</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" onclick="confirm_report()" data-dismiss="modal">提交</button>
 				</div>
 			</div>
 		</div>
 	</div>
--->
+	{/if}
 
 	{if isset($is_index)}
 	<script type="text/javascript">

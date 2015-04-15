@@ -19,7 +19,7 @@ $(document).ready( function() {
 });
 $(window).bind('scroll', function() {
 	$(this).scrollTop() > 600 ? $("#back_to_top").fadeIn(500) : $("#back_to_top").fadeOut(500);
-	if ($(this).scrollTop() > 1000) {
+	if ($(this).scrollTop() > $("#post_picture").offset().top) {
 		$("#side_view_box").fadeIn(500);
 		$("#side_view_box").css("position", "fixed");
 	} else {
@@ -905,6 +905,97 @@ function cancel_edit_des() {
 	$("#post_editor").slideUp(800, function() {
 		$('#post_description').slideDown(800);
 	});
+}
+function go_to_reply(floor, user_id, user_nick) {
+	var sflr = "楼主";
+	if (floor > 0)
+		sflr = "#" + floor + "楼";
+	$("#reply_to_floor").val(floor);
+	$("#reply_to_id").val(user_id);
+	$("#post_doreply strong").text("回复 " + sflr + "： " + user_nick);
+	$("html,body").animate(
+		{
+			scrollTop: $("#post_doreply").offset().top 
+		},
+		700
+	);
+}
+function confirm_reply() {
+	if ($("#reply_content").val().length == 0) {
+		$("#info_modal").find('.modal-title').text("回复失败");
+		$("#info_modal").find('.modal-cont').text("对不起，您没有填写任何内容，请先填写~");
+		$("#info_modal").find('.btn-default').css('display','none');
+		$("#info_modal").find('.btn-primary').bind('click',function() {
+			$("#info_modal").modal("hide");
+		});
+		$("#info_modal").modal();
+		return;
+	}
+	$.post(
+		baseurl + "post/make_reply",
+		{
+			reply_to_id: $("#reply_to_id").val(),
+			reply_to_floor: $("#reply_to_floor").val(),
+			reply_content: $("#reply_content").val()
+		},
+		function(res) {
+			if (res.status == 1) {
+				window.location.href = window.location.href;
+			} else {
+				$("#info_modal").find('.modal-title').text("回复失败");
+				$("#info_modal").find('.modal-cont').text("对不起，操作失败，请重试！");
+				$("#info_modal").find('.btn-default').css('display','none');
+				$("#info_modal").find('.btn-primary').bind('click',function() {
+					$("#info_modal").modal("hide");
+				});
+				$("#info_modal").modal();
+				$("#btn_confirm_reply").html('发布');
+				$("#btn_confirm_reply").attr('disabled', false);
+			}
+		},
+		'json'
+	);
+	$("#btn_confirm_reply").html('<i class="icon-spinner icon-spin"></i> 处理中');
+	$("#btn_confirm_reply").attr('disabled', true);
+}
+function go_to_report(reply_id, user_id) {
+	$("#report_reply_id").val(reply_id);
+	$("#report_user_id").val(user_id);
+	$("#report_modal").modal();
+}
+function confirm_report() {
+	$("#report_modal").modal('hide');
+	setTimeout(function() {
+		$.post(
+			baseurl + "post/make_report",
+			{
+				report_reply_id: $("#report_reply_id").val(),
+				report_user_id: $("#report_user_id").val(),
+				report_reason: $("#report_reason").val(),
+				report_other_reason: $("#report_other_reason").val()
+			},
+			function(res) {
+				if (res.status == 1) {
+					$("#info_modal").find('.modal-title').text("举报成功");
+					$("#info_modal").find('.modal-cont').text("恭喜，举报成功，请等待审核~");
+					$("#info_modal").find('.btn-default').css('display','none');
+					$("#info_modal").find('.btn-primary').bind('click',function() {
+						$("#info_modal").modal("hide");
+					});
+					$("#info_modal").modal();
+				} else {
+					$("#info_modal").find('.modal-title').text("举报失败");
+					$("#info_modal").find('.modal-cont').text("对不起，操作失败，请重试！");
+					$("#info_modal").find('.btn-default').css('display','none');
+					$("#info_modal").find('.btn-primary').bind('click',function() {
+						$("#info_modal").modal("hide");
+					});
+					$("#info_modal").modal();
+				}
+			},
+			'json'
+		);
+	}, 1000);
 }
 
 
