@@ -163,8 +163,18 @@ class Post extends MY_Controller {
 
 		$post['favorite_num'] = $this->favorites_model->get_favorites_num($post_id,$type);
 		$post['reply_num'] = $this->reply_model->get_reply_num($post_id,$type);
-		$post['reply'] = $this->reply_model->get_reply($post_id,$type);
+		$reply = $this->reply_model->get_reply($post_id,$type);
+		if(empty($reply)) $post['reply'] = null;
+		else{
+			foreach ($reply as $key => $value) {
+				$reply[$key]['reply_thumb'] = base_url("img/head/".$reply[$key]['reply_thumb']);
+				$reply[$key]['reply_date'] = format_time($reply[$key]['reply_date']);
+			}
+			$post['reply'] = $reply;
+		}
+		
 		//TODO:当前用户是否关注帖子
+		//var_dump($post);
 		return $post;
 	}
 

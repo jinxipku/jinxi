@@ -129,6 +129,7 @@ create table jx_reply(
 	reply_to int(11) not null comment '被回复者id',
 	reply_to_floor int(11) not null comment '回复楼层',
 	content text null comment '回复内容',
+	createat int(11) comment '创建时间',
 	primary key(id),
 	unique(post_id,type,floor)
 )DEFAULT CHARSET=utf8 COMMENT='帖子回复';

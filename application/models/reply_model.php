@@ -17,6 +17,7 @@ class reply_model extends CI_Model {
 			$max_floor = 0;
 		}
 		$reply['floor'] = $max_floor + 1; //最高楼上加1
+		$reply['createat'] = time();
 		$res = $this->db->insert("jx_reply",$reply);  //插入回复表
 		return $res;
 	}
@@ -44,7 +45,7 @@ class reply_model extends CI_Model {
 	}
 
 	public function get_reply($post_id,$type){
-		$sql = "select jx_reply.*,a.nick as replyer, b.nick as replyee from jx_reply left join jx_user as a on a.id=jx_reply.reply_from left join jx_user as b on b.id=jx_reply.reply_to where post_id=".$post_id. " and jx_reply.type=" .$type;
+		$sql = "select jx_reply.id,jx_reply.floor,jx_reply.reply_from,jx_reply.reply_to,jx_reply.reply_to_floor,jx_reply.content,jx_reply.createat as reply_date,school_name as reply_school,a.thumb as reply_thumb,a.nick as replyer,a.is_sign_public as reply_is_sign_public, a.signature as reply_sign, b.nick as replyee from jx_reply left join jx_user as a on a.id=jx_reply.reply_from left join jx_user as b on b.id=jx_reply.reply_to left join jx_school_info on jx_school_info.school_id=a.school_id where post_id=".$post_id. " and jx_reply.type=" .$type;
 		$query = $this->db->query($sql);
 		$res = $query->result_array();
 		return $res;

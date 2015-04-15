@@ -50,7 +50,7 @@ class Reply extends MY_Controller {
 			else $this->ajaxReturn(null,'操作失败',0);
 		}
 	}
-
+	
 	public function make_report(){
 		$user =  $this->session->userdata('login_user');
 		if(empty($user)) $this->ajaxReturn(null,'未登录',0);
