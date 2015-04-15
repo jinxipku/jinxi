@@ -935,7 +935,7 @@ function confirm_reply() {
 		baseurl + "reply/add_reply",
 		{
 			post_id: $("#post_id").val(),
-			type: $("#post_type").val();
+			type: $("#post_type").val(),
 			reply_to: $("#reply_to_id").val(),
 			reply_to_floor: $("#reply_to_floor").val(),
 			reply_content: $("#reply_content").val()
