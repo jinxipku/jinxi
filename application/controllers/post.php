@@ -49,7 +49,7 @@ class Post extends MY_Controller {
 		$this->display ( 'templates/footer.php' );
 	}
 
-	public function viewpost($post_type = 'none', $post_id = 0) {
+	public function viewpost($post_type = 'none', $post_id = 0, $reply = 'none') {
 		$ptype = 0;
 		if ($post_type == 'buy') {
 			$ptype = 1;
@@ -58,6 +58,12 @@ class Post extends MY_Controller {
 			$ptype = 0;
 		}
 		else {
+			redirect('info/nopage');
+		}
+		if ($reply == 'reply') {
+			$this->assign('replyto', true);
+		}
+		else if ($reply != 'none') {
 			redirect('info/nopage');
 		}
 		$thispost = $this->get_post($post_id, $ptype);

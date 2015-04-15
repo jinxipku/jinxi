@@ -107,5 +107,15 @@
 	<script type="text/javascript" src="{$baseurl}js/flatui-radio.js"></script>
 	<script type="text/javascript" src="{$baseurl}js/jquery.lazyload.min.js"></script>
 	<script type="text/javascript" src="{$baseurl}js/jinxi.js"></script>
+	{if isset($replyto)}
+	<script type="text/javascript">
+		$("html,body").animate(
+			{
+				scrollTop: $("#post_doreply").offset().top 
+			},
+			700
+		);
+	</script>
+	{/if}
 </body>
 </html>
