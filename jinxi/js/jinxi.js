@@ -932,7 +932,7 @@ function confirm_reply() {
 		return;
 	}
 	$.post(
-		baseurl + "post/make_reply",
+		baseurl + "reply/make_reply",
 		{
 			reply_to_id: $("#reply_to_id").val(),
 			reply_to_floor: $("#reply_to_floor").val(),
@@ -967,7 +967,7 @@ function confirm_report() {
 	$("#report_modal").modal('hide');
 	setTimeout(function() {
 		$.post(
-			baseurl + "post/make_report",
+			baseurl + "reply/make_report",
 			{
 				report_reply_id: $("#report_reply_id").val(),
 				report_user_id: $("#report_user_id").val(),

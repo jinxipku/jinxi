@@ -236,7 +236,7 @@
 
 			<div id="post_doreply">
 				<form>
-		      		<textarea rows="6" id="reply_content" name="reply_content" class="form-control flat" placeholder="发表回复......" maxlength=140></textarea>
+		      		<textarea rows="6" id="reply_content" name="reply_content" class="form-control flat" placeholder="发表回复" maxlength=140></textarea>
 		      		<div>
 					    <blockquote class="pull-left">
 					    	<strong>回复 楼主： {$thispost.user.nick}</strong>
