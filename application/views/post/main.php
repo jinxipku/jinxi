@@ -145,7 +145,11 @@
 				</div>
 				<div>
 			    	<p><span class=" fui-new"></span> {$thispost.reply_num} <span class=" fui-heart"></span> {$thispost.favorite_num} </p>
-			    	<button type="button" class="btn btn-primary" onclick="go_to_reply(0, {$thispost.user_id}, '{$thispost.user.nick}')">回复楼主</button>
+			    	{if isset($login_user)}
+		      		<button type="button" class="btn btn-primary" onclick="go_to_reply(0, {$thispost.user_id}, '{$thispost.user.nick}')">回复楼主</button>
+		      		{else}
+		      		<a href="{$baseurl}account/loginfo" type="button" class="btn btn-primary">回复楼主</a>
+		      		{/if}
 			    </div>
 				<script type="text/javascript" >
 					var jiathis_config={
@@ -185,7 +189,12 @@
 						</div>
 						<div>
 							<p>
-								#{$reply_item.floor}楼 | <a href="" onclick="go_to_reply({$reply_item.floor}, {$reply_item.reply_from}, '{$reply_item.replyer}');return false;">回复</a>
+								#{$reply_item.floor}楼 | 
+								{if isset($login_user)}
+								<a href="" onclick="go_to_reply({$reply_item.floor}, {$reply_item.reply_from}, '{$reply_item.replyer}');return false;">回复</a>
+								{else}
+								<a href="{$baseurl}account/loginfo">回复</a>
+								{/if}
 							</p>
 						</div>
 					</div>
