@@ -976,7 +976,7 @@ function confirm_report() {
 			{
 				report_reply_id: $("#report_reply_id").val(),
 				report_user_id: $("#report_user_id").val(),
-				report_reason: $("#report_reason").val(),
+				report_reason: $('input[name="report_reason"]:checked').val(),
 				report_other_reason: $("#report_other_reason").val()
 			},
 			function(res) {
@@ -1060,7 +1060,7 @@ function commreport(oid){
 function reportconfirm(){
 	var object_id = $("#report_oid").val();
 	var rtype = $("#report_rtype").val();
-	var rcontent = $('input[name="reportreason"]:checked').val();
+	var rcontent = $('input[name="report_reason"]:checked').val();
 	if(rcontent == '其他')
 		rcontent = $("#report_or").val();
 	$.post(baseurl + "ajax/addreport",{object_id:object_id,rtype:rtype,rcontent:rcontent});
