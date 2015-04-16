@@ -31,20 +31,27 @@ class post_model extends CI_Model {
 
 
 	//TODO:当两张表区别较大时，再区别处理.
-	public function get_post($post_id,$type){
+	public function get_post($post_id,$type,$hall=false){
 		$table = get_post_table($type);
 		$query = $this->db->get_where($table, array('post_id' => $post_id));
 		$res = $query->row_array();
 		if(empty($res)) return null;
-		$res['picture'] = unserialize($res['picture']);
+		$picture = unserialize($res['picture']);
+		if(is_array($picture)){
+			foreach ($picture as $key => $value) {
+				$picture[$key]['thumb_picture_url'] = get_thumb($value['picture_url']);
+			}
+		}
+		
+		$res['picture'] = $picture;
 
 		$this->db->from("jx_user");
-		$this->db->select('jx_school_info.school_name, nick,id, thumb,nick_color,email,qq,phone,weixin,is_mars');
+		if(!$hall)
+			$this->db->select('jx_school_info.school_name, nick,id, thumb,nick_color,email,qq,phone,weixin,is_mars');
+		else $this->db->select('jx_school_info.school_name, nick,id, thumb,nick_color');
 		$this->db->join('jx_school_info',"jx_school_info.school_id=jx_user.school_id");
 		$this->db->where(array("id"=>$res['user_id']));
-	
 		$user = $this->db->get()->row_array();
-
 		if(empty($user)) return null;
 		$user['nick_color'] = get_namecolor($user['nick_color']);
 		$user['thumb'] = base_url("img/head/".$user['thumb']);
@@ -77,6 +84,24 @@ class post_model extends CI_Model {
 		$table = get_post_table($type);
 		$this->db->where("post_id",$post_id);
 		return $this->db->update($table,array("active"=>$active));
+	}
+
+	public function get_post_ids($type,$category1,$category2,$page){
+		$table = get_post_table($type);
+		$map = array();
+		if(isset($category1)) $map['category1'] = $category1;
+		if(isset($category2)) $map['category2'] = $category2;
+		$num = $this->config->item('num_per_page');
+		$this->db->select("post_id");
+		$this->db->limit($num,($page-1)*$num);
+		$this->db->where($map);
+		$this->db->order_by("createat", "desc"); 
+		$post_ids = $this->db->get($table)->result_array();
+		$res = array();
+		foreach ($post_ids as $key => $value) {
+			$res[] = $value['post_id'];
+		}
+		return $res;
 	}
 
 
