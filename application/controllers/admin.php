@@ -28,6 +28,7 @@ class Admin extends MY_Controller {
 		}else{
 			$this->display("admin/index.php");
 		}
+		$this->display();
 	}
 
 // +----------------------------------------------------------------------

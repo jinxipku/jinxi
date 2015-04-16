@@ -126,10 +126,11 @@ class Post extends MY_Controller {
 // +----------------------------------------------------------------------
 
 	//返回特定的一篇帖子
-	public function get_post($post_id, $type){
+	public function get_post($post_id, $type, $is_thumb=false){
 
 		$post = $this->post_model->get_post($post_id,$type);
 		if(empty($post)) return null;
+
 		$post['type'] = $type;
 		$post['createat'] = format_time($post['createat']);
 		$post['updateat'] = format_time($post['updateat']);
@@ -169,23 +170,24 @@ class Post extends MY_Controller {
 
 		$post['favorite_num'] = $this->favorites_model->get_favorites_num($post_id,$type);
 		$post['reply_num'] = $this->reply_model->get_reply_num($post_id,$type);
-		$reply = $this->reply_model->get_reply($post_id,$type);
-		if(empty($reply)) $post['reply'] = null;
-		else{
-			foreach ($reply as $key => $value) {
-				$reply[$key]['reply_thumb'] = base_url("img/head/".$reply[$key]['reply_thumb']);
-				$reply[$key]['reply_date'] = format_time($reply[$key]['reply_date']);
+		if(!$is_thumb){  //非缩略信息不生成reply
+			$reply = $this->reply_model->get_reply($post_id,$type);
+			if(empty($reply)) $post['reply'] = null;
+			else{
+				foreach ($reply as $key => $value) {
+					$reply[$key]['reply_thumb'] = base_url("img/head/".$reply[$key]['reply_thumb']);
+					$reply[$key]['reply_date'] = format_time($reply[$key]['reply_date']);
+				}
+				$post['reply'] = $reply;
 			}
-			$post['reply'] = $reply;
 		}
-		
 		//TODO:当前用户是否关注帖子
 		//var_dump($post);
 		return $post;
 	}
 
 
-	//返回收藏贴
+	//返回用户收藏贴
 	//post  type 0同时返回  1卖2买
 	public function get_favorites(){
 		$type = $_POST['type'];
@@ -195,8 +197,8 @@ class Post extends MY_Controller {
 	}
 
 	//sphinx调用，用于搜索关键词（关键词的搜索范围为brand,model,description)
-	//可以提供参数过滤，参数为type category1 category2
-	public function get_sphinx_result($keyword='',$type=null,$category1=null,$category2=null){
+	//可以提供参数过滤，参数为type category1 category2 page为第几页的数据
+	public function get_sphinx_result($keyword='',$type=null,$category1=null,$category2=null,$page=1){
 		$this->load->library('sphinx_client', NULL, 'sphinx');
 		$this->sphinx->SetServer ( '127.0.0.1', 9312);
 
@@ -213,11 +215,17 @@ class Post extends MY_Controller {
 			$this->sphinx->setFilter('category2',array($category2));
 		}
 		$this->sphinx->SetSortMode(SPH_SORT_ATTR_DESC, "createat"); //按创建时间降序排列
-
+		$num_per_page = $this->config->item("num_per_page");
+		$this->sphinx->SetLimits($num_per_page*($page-1),$num_per_page);
 		$res = $this->sphinx->Query($keyword,"*");
-		echo '<pre>';
-		print_r($res);
-		echo '</pre>';
+		$posts = array();
+		foreach ($res['matches'] as $key => $value) {
+			$post_id = $value['id'];
+			$type = $value['attrs']['type'];
+			$temp_post = $this->get_post($post_id,$type,true);
+			$posts[] = $temp_post;
+		}
+		var_dump($posts);
 	}
 
 
