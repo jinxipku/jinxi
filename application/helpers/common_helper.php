@@ -389,6 +389,11 @@ function get_plain_title($type,$deal,$class,$hasimg,$cat1,$cat2,$brand,$model){
     return $title.$t1.$t2.$t10.$t3.$t4.$t5.$t6.$t7.$t8.$t9;
 }
 
+//从sphinx中读取数据
+function get_sphinx_result($keyword,$brand='',$model=''){
+
+}
+
 
 
 ?>

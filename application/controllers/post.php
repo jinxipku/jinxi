@@ -194,6 +194,32 @@ class Post extends MY_Controller {
 		return $this->favorites_model->get_favorites($user_id,$type);
 	}
 
+	//sphinx调用，用于搜索关键词（关键词的搜索范围为brand,model,description)
+	//可以提供参数过滤，参数为type category1 category2
+	public function get_sphinx_result($keyword='',$type=null,$category1=null,$category2=null){
+		$this->load->library('sphinx_client', NULL, 'sphinx');
+		$this->sphinx->SetServer ( '127.0.0.1', 9312);
+
+		//以下设置用于返回数组形式的结果
+		$this->sphinx->SetArrayResult ( true );
+		if(isset($type)){  
+			$this->sphinx->setFilter('type',array($type));
+		}
+
+		if(isset($category1)){
+			$this->sphinx->setFilter('category1',array($category1));
+		}
+		if(isset($category2)){
+			$this->sphinx->setFilter('category2',array($category2));
+		}
+		$this->sphinx->SetSortMode(SPH_SORT_ATTR_DESC, "createat"); //按创建时间降序排列
+
+		$res = $this->sphinx->Query($keyword,"*");
+		echo '<pre>';
+		print_r($res);
+		echo '</pre>';
+	}
+
 
 
 
@@ -260,10 +286,9 @@ class Post extends MY_Controller {
 		else $this->ajaxReturn(null,"未指定类型",0);
 
 		//删除掉手机相关图片
-		if($type == 0){
-			$res = $this->post_model->insert_post($_POST, "buy");
-		}else if($type == 1){
-			$res = $this->post_model->insert_post($_POST, "sell");
+		if($type ==0 || $type==1 ){
+			if($type==1) unset($_POST['picture']);
+			$res = $this->post_model->insert_post($_POST, $type);
 		}else $this->ajaxReturn(null,'参数错误',0);
 		if($res){
 			$data['post_id'] = $res;

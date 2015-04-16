@@ -144,8 +144,7 @@ class Script extends MY_Controller {
 $this->sphinx->SetArrayResult ( true );
 //$this->sphinx->SetIDRange(3,4);
 //$this->sphinx->setFilter('group_id',array(2));
-$this->sphinx->SetLimits(0,20);
-$res = $this->sphinx->Query("普通","*");
+$res = $this->sphinx->Query("iphone","*");
 echo '<pre>';
 
 
