@@ -25,7 +25,7 @@
 					{/if}
 				</ol>
 				{if isset($login_user)}
-				<a class="pull-right" href="{$baseurl}display/{$type}/{$another_area}{if $category1 > 0}/{$category1}{if $category2 > -1}/{$category2}{/if}{/if}">
+				<a class="pull-right" href="{$baseurl}display/{$type}/{$another_area}{if $category1 > 0}/{$category1}{if $category2 > -1}/{$category2}{/if}{/if}" title="点击切换到{if $area == 'school'}全站{else}本校{/if}">
 					切换到{if $area == 'school'}全站{else}本校{/if}
 				</a>
 				{/if}
@@ -51,6 +51,64 @@
 				</div>
 				<script type="text/javascript" src="{$baseurl}js/bootstrap.js"></script>
 				<script type="text/javascript" src="{$baseurl}js/show_category2.js"></script>
+			</div>
+
+
+			<div id="post_items_box" class="panel">
+				<div class="post_item_box">
+					<div class="post_item_img">
+						<a href="{$baseurl}post/viewpost/sell/3">
+							<img class="lazy" data-original="http://www.xn--wmqr18c.cn/img/picture/1/thumb_nm4QQNuu1RUjsEyjp1428943080.jpg" alt="tiezibiaoti" />
+						</a>
+					</div>
+					<div class="post_item_content">
+						<div>
+							<a href="{$baseurl}post/viewpost/sell/3" title='[转让][图]电脑数码>手机:苹果 iphone5s手机'>
+								<span class="tag bg-primary">转让</span>
+								<span class="tag bg-purple">图</span>
+								电脑数码 > 手机 : 苹果 iphone5s手机 : 苹果 iphone5s
+							</a>
+						</div>
+						<div>
+							大神的三大大神的三大大神的三大大神的三大大神的三大大神的三大大神的三大大神的三大大神的三大大神的三大...
+						</div>
+						<div>
+							<div>
+								<a href="{$baseurl}user/profile/1">
+									<img class="lazy" data-original="http://www.xn--wmqr18c.cn/img/head/svxvkeeS1xmvThxME1429093424.jpg" alt="一剑轻安"/>
+								</a>
+							</div>
+							<div>
+								<div onmouseover="$(this).find('button').show();" onmouseout="$(this).find('button').hide();">
+									<a href="{$baseurl}user/profile/1" class="text-primary">一剑轻安</a>
+									<button type="button" class="btn btn-info pull-right">我有类似需求</button>
+								</div>
+								<div>
+									<span class="fui-location">
+										北京航天航空大学空
+									</span>
+									<span class="fui-time">
+										2015-04-14 00:38:15
+									</span>
+									<span class="fui-new">
+										12
+									</span>
+									<span class="fui-heart">
+										3
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="post_item_price">
+						<div>
+							<img class="lazy" data-original="http://www.xn--wmqr18c.cn/img/class/3.png" alt="物品状态" />
+						</div>
+						<div>
+							￥3500.00
+						</div>
+					</div>
+				</div>
 			</div>
 			
 		</div>

@@ -5,7 +5,10 @@
 					<li><a href="{$baseurl}display/hall">商品大厅[{$post_type}]</a></li>
 					<li><a href="{$baseurl}display/hall/{$thispost.category1}">{$thispost.category1_name}</a></li>
 					<li><a href="{$baseurl}display/hall/{$thispost.category2}">{$thispost.category2_name}</a></li>
-					<li class="active">
+				</ol>
+				<ol class="breadcrumb">
+					<li></li>
+					<li class="active breadwraper">
 						<norb title="{$thispost.plain_title}">{$thispost.plain_title}</norb>
 					</li>
 				</ol>
