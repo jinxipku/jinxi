@@ -12,6 +12,7 @@ class Admin extends MY_Controller {
 		$this->load->model ( 'account_model' );
 		$this->load->model ( 'user_model' );
 		$this->load->model ( 'post_model');
+		$this->load->model ( 'admin_model');
 		$this->load->helper('url');
 		$this->load->helper('array');
 	}
@@ -22,13 +23,25 @@ class Admin extends MY_Controller {
 
 	public function index(){
 		$admin =  $this->session->userdata('admin');
-		$admin = 1;
+		$this->assign('title', '今昔网-后台');
+		$this->assign('baseurl', base_url());
 		if(empty($admin)){
 			$this->display("admin/login.php");
 		}else{
 			$this->display("admin/index.php");
 		}
-		$this->display();
+		
+	}
+
+	public function dologin(){
+		$admin_name = $_POST['admin_name'];
+		$password = $_POST['password'];
+
+		$res = $this->admin_model->login($admin_name,$password);
+		if($res){
+			$this->session->set_userdata('admin','admin');
+			redirect('admin/index');
+		}else echo '密码错误';
 	}
 
 // +----------------------------------------------------------------------

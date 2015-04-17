@@ -142,3 +142,13 @@ create table jx_report(
 	reply_id int(11) comment '被举报回复的id',
 	primary key(report_id)
 )DEFAULT CHARSET=utf8 COMMENT='举报表';
+
+drop table if exists jx_admin;
+create table jx_admin(
+	id int(11) not null AUTO_INCREMENT comment 'id',
+	admin_name text not null,
+	password varchar(128) not null,
+	primary key(id)
+)DEFAULT CHARSET=utf8 COMMENT='后台admin表';
+insert into jx_admin values(1,'jx_admin','H6eBqhiZJyg2KESRqKwuh3BY8qGeSkMW1YDO54KzR67wNSOmWgszWuzuV/dr1lOHSa8aE0yxSYDBcEI0or347w==');
+

@@ -78,7 +78,7 @@ class Display extends MY_Controller {
 	//给参数，$type,$category1,$category2分别表示对帖子进行筛选
 	//$page分页
 	//$keyword为关键词搜索
-	public function get_posts($type=0,$category1=null,$category2=null,$page=1,$keyword=null){
+	public function get_posts($type=0,$category1=null,$category2=null,$page=3,$keyword=null){
 		$data = array();
 		if($type!=0&&$type!=1) return null;
 		if(isset($keyword)){       //有关键词使用关键词进行搜索
@@ -92,6 +92,10 @@ class Display extends MY_Controller {
 				$data['posts'][] = $this->get_post_info($value,$type);
 			}
 		}
+		foreach ($data['posts'] as $key => $value) {
+			$data['posts'][$key]['description'] = cutString($data['posts'][$key]['description']);
+		}
+		//var_dump($data);
 		return $data;
 	}
 

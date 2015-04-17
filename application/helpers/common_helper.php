@@ -400,5 +400,12 @@ function checkCategory($cat1,$cat2){
     return true;
 }
 
+function cutString($str,$num=50){
+    if(strlen($str)<=50) return $str;
+    else{
+        return mb_substr($str, 0, 50).'......';
+    }
+}
+
 
 ?>

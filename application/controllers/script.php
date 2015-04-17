@@ -12,6 +12,7 @@ class Script extends MY_Controller {
 		$this->load->model("user_model");
 		$this->load->model("post_model");
 		$this->load->model("reply_model");
+		$this->load->model("admin_model");
 		$this->load->database();
 	}
 
@@ -155,7 +156,10 @@ echo '</pre>';
 
 	}
 	public function test_checkcat(){
-		var_dump( checkCategory(0,54) );
+		var_dump( checkCategory(45,44) );
+	}
+	public function test_admin(){
+
 	}
 }
 ?>
