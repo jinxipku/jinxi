@@ -83,17 +83,20 @@ class Display extends MY_Controller {
 	//$page分页
 	//$keyword为关键词搜索
 	public function get_posts($type=0,$category1=null,$category2=null,$page=1,$keyword=null){
-		$result = array();
+		$data = array();
 		if($type!=0&&$type!=1) return null;
 		if(isset($keyword)){       //有关键词使用关键词进行搜索
-			$result = $this->get_sphinx_result($keyword,$type,$category1,$category2,$page);
+			$data = $this->get_sphinx_result($keyword,$type,$category1,$category2,$page);
 		}else{
 			$res = $this->post_model->get_post_ids($type,$category1,$category2,$page);
+			$total = $this->post_model->get_post_ids_total($type,$category1,$category2);
+			$data['posts'] = array();
+			$data['total'] = $total;
 			foreach ($res as $key => $value) {
-				$result[] = $this->get_post_info($value,$type);
+				$data['posts'][] = $this->get_post_info($value,$type);
 			}
 		}
-		return $result;
+		return $data;
 	}
 
 	//sphinx调用，用于搜索关键词（关键词的搜索范围为brand,model,description)
@@ -119,12 +122,20 @@ class Display extends MY_Controller {
 		$this->sphinx->SetLimits($num_per_page*($page-1),$num_per_page);
 		$res = $this->sphinx->Query($keyword,"*");
 		$posts = array();
-		foreach ($res['matches'] as $key => $value) {
+		$matches = $res['matches'];
+		if(empty($matches)){
+			$data['total'] = 0;
+			$data['posts'] = null;
+			return $data;
+		}
+		foreach ($matches as $key => $value) {
 			$post_id = $value['id'];
 			$type = $value['attrs']['type'];
 			$temp_post = $this->get_post_info($post_id,$type,true);
 			$posts[] = $temp_post;
 		}
-		return $posts;
+		$data['total'] = $res['total'];
+		$data['posts'] = $posts;
+		return $data;
 	}
 }
