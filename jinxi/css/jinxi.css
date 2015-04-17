@@ -978,11 +978,20 @@ div#btng_category1 {
 	margin-bottom: 10px;
 }
 div#btng_category2 {
-	min-height: 51px;
-	margin-bottom: 10px;
+	height: 74px;
 }
 div#category_selection_box ul.nav-pills > li + li {
   	margin-left: 0px;
+}
+div#post_directory span {
+	margin-right: 3px;
+  	padding: 0px 6px 1px 6px;
+  	border-radius: 0px;
+  	font-size: 16px;
+	font-weight: 500;
+	color: #fff;
+	background-color: #1abc9c;
+	cursor: default;
 }
 
 

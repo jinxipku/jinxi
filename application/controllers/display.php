@@ -26,9 +26,15 @@ class Display extends MY_Controller {
 		}
 
 		$this->assign('type', 'sell');
+		$this->assign('another_type', 'buy');
 		$this->assign('area', $area);
+		if ($area == 'school') {
+			$this->assign('another_area', 'global');
+		} else {
+			$this->assign('another_area', 'school');
+		}
 		$this->assign('category1', $category1);
-		$this->assign('category1_name', get_category1_name($category1));
+		$this->assign('category1_name', get_category1_name2($category1));
 		$this->assign('category2', $category2);
 		$this->assign('category2_name', get_category2_name($category2));
 		$this->assign('page', $page);

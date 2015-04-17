@@ -216,14 +216,12 @@ function get_category_name($class) {
                 "美容化妆", // 50
                 "其他" 
                 );
-return $allclass [$class];
+    return $allclass [$class];
 }
 
 
 
 function get_category1_name($class) {
-    if ($class == 0)
-        return "全部";
     if ($class <= 10)
         return get_category_name ( 10 );
     else if ($class <= 15)
@@ -239,6 +237,27 @@ function get_category1_name($class) {
     else if ($class <= 50)
         return get_category_name ( 50 );
     else if ($class <= 51)
+        return get_category_name ( 51 );
+}
+
+function get_category1_name2($class) {
+    if ($class == -1)
+        return "全部";
+    if ($class <= 1)
+        return get_category_name ( 10 );
+    else if ($class <= 2)
+        return get_category_name ( 15 );
+    else if ($class <= 3)
+        return get_category_name ( 20 );
+    else if ($class <= 4)
+        return get_category_name ( 26 );
+    else if ($class <= 5)
+        return get_category_name ( 40 );
+    else if ($class <= 6)
+        return get_category_name ( 45 );
+    else if ($class <= 7)
+        return get_category_name ( 50 );
+    else if ($class <= 8)
         return get_category_name ( 51 );
 }
 

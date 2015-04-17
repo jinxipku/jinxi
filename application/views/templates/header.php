@@ -54,7 +54,7 @@
 							<a href="{$baseurl}user/profile/0">个人中心</a>
 						</li>
 						<li {if $nav_tab == 3}class=" active"{/if}>
-							<a href="{$baseurl}display/hall">商品大厅</a>
+							<a href="{$baseurl}display/sell{if isset($area)}/{$area}{/if}">商品大厅</a>
 						</li>
 					</ul>
 					<ul class="nav pull-right">

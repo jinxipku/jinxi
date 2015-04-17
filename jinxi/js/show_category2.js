@@ -1,7 +1,7 @@
-function show_category2(category1, first) {
+function show_category2(category1) {
 	var baseurl = "http://www.xn--wmqr18c.cn/";
 	var classstart = [ 0, 0, 11, 16, 21, 27, 41, 46, 51 ];
-	var classend = [ 0, 10, 15, 20, 26, 40, 45, 50, 51 ];
+	var classend = [ -1, 10, 15, 20, 26, 40, 45, 50, 50 ];
 	var allclass = [ "手机", // 0
 	"数码相机", "电子词典", "数码录音笔", "电子书", "耳机", // 5
 	"移动硬盘", "笔记本", "平板", "电脑配件", "其他", // 10
@@ -12,14 +12,14 @@ function show_category2(category1, first) {
 	"语言学习", "教育考试", "人文社科", "艺术生活", "文学小说", // 35
 	"法律政治", "医学卫生", "原版小说", "工具书", "其他", // 40
 	"大陆", "港台", "欧美", "日韩", "其他", // 45
-	"面部护理", "面部彩妆", "身体护理", "护肤工具", "其他",  // 50
-	"其他"
+	"面部护理", "面部彩妆", "身体护理", "护肤工具", "其他"  // 50
 	];
-	$("#btng_category1 li:eq(" + category1 + ") a").tab('show');
+	$("#btng_category1 li").removeClass('active');
+	$("#btng_category1 li:eq(" + category1 + ")").addClass('active');
 	var ul = $("<ul></ul>");
 	ul.addClass("nav nav-pills");
 	var li = $("<li></li>");
-	if ($("#category2").val() == -1)
+	if ($("#btng_category1 li:eq(" + $("#category1").val() + ")").hasClass('active') && $("#category2").val() == -1)
 		li.addClass("active");
 	var a = $("<a></a>");
 	a.attr('href', baseurl + 'display/' + $("#type").val() + "/" + $("#area").val() + "/" + category1);
@@ -36,15 +36,20 @@ function show_category2(category1, first) {
 		li.append(a);
 		ul.append(li);
 	}
-	if (first == 1) {
-		$("#btng_category2").html("<p>二级分类</p>");
-		$("#btng_category2").append(ul);
-	} else {
-		$("#btng_category2").fadeOut(300, function() {
-			$("#btng_category2").html("<p>二级分类</p>");
-			$("#btng_category2").append(ul);
-			$("#btng_category2").fadeIn(300);
-		});	
-	}
+	$("#btng_category2").html(ul);
 };
-show_category2($("#category1").val(), 1);
+$("#category_selection_box").bind("mouseout", function(e) {
+	e = window.event || e;
+	var s = e.toElement || e.relatedTarget;
+	if(document.all) {
+		if (!this.contains(s)) {
+			show_category2($("#category1").val(), 1);
+		}
+	} else {
+        var reg = this.compareDocumentPosition(s);
+        if (!(reg == 20 || reg == 0)) {
+			show_category2($("#category1").val());
+		}
+	}
+});
+show_category2($("#category1").val());
