@@ -154,5 +154,8 @@ print_r($res);
 echo '</pre>';
 
 	}
+	public function test_checkcat(){
+		var_dump( checkCategory(0,54) );
+	}
 }
 ?>

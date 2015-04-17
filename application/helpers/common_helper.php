@@ -389,5 +389,14 @@ function get_plain_title($type,$deal,$class,$hasimg,$cat1,$cat2,$brand,$model){
     return $title.$t1.$t2.$t10.$t3.$t4.$t5.$t6.$t7.$t8.$t9;
 }
 
+function checkCategory($cat1,$cat2){
+    if(!(is_numeric($cat1)&&is_int($cat1+0)) || !(is_numeric($cat2)&&is_int($cat2+0))){
+        return false;
+    }elseif($cat1<0||$cat1>8||$cat2<-1||$cat2>51){
+        return false;
+    }
+    return true;
+}
+
 
 ?>
