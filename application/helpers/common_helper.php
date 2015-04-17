@@ -222,6 +222,8 @@ return $allclass [$class];
 
 
 function get_category1_name($class) {
+    if ($class == 0)
+        return "全部";
     if ($class <= 10)
         return get_category_name ( 10 );
     else if ($class <= 15)
@@ -238,16 +240,16 @@ function get_category1_name($class) {
         return get_category_name ( 50 );
     else if ($class <= 51)
         return get_category_name ( 51 );
-    return "null";
 }
 
 
 function get_category2_name($class) {
+    if ($class == -1)
+        return "全部";
     if ($class == 10 || $class == 15 || $class == 20 || $class == 26 || $class == 40 || $class == 45 || $class == 50 || $class == 51)
         return get_category_name ( 51 );
     else if ($class >= 0 && $class < 52)
         return get_category_name ( $class );
-    return "null";
 }
 
 

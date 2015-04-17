@@ -19,11 +19,13 @@ $(document).ready( function() {
 });
 $(window).bind('scroll', function() {
 	$(this).scrollTop() > 600 ? $("#back_to_top").fadeIn(500) : $("#back_to_top").fadeOut(500);
-	if ($(this).scrollTop() > $("#post_picture").offset().top) {
-		$("#side_view_box").fadeIn(500);
-		$("#side_view_box").css("position", "fixed");
-	} else {
-		$("#side_view_box").fadeOut(500);
+	if ($("#post_picture").val() != undefined) {
+		if ($(this).scrollTop() > $("#post_picture").offset().top) {
+			$("#side_view_box").fadeIn(500);
+			$("#side_view_box").css("position", "fixed");
+		} else {
+			$("#side_view_box").fadeOut(500);
+		}
 	}
 });
 $("input#qq,input#weixin,input#phone").bind('blur', function() {
