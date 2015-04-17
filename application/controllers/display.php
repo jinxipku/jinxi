@@ -9,11 +9,14 @@ class Display extends MY_Controller {
 		$this->load->model('favorites_model');
 		$this->load->model('reply_model');
 	}
-	public function sell($area = 'global', $category1 = 0, $category2 = -1) {
+	public function sell($area = 'school', $category1 = 0, $category2 = -1, $page = 1) {
 		if ($area != 'global' && $area != 'school') {
 			redirect('info/nopage');
 		}
 		if (!checkCategory($category1, $category2)) {
+			redirect('info/nopage');
+		}
+		if (!(is_numeric($page) && is_int($page + 0)) || $page < 1) {
 			redirect('info/nopage');
 		}
 
@@ -21,13 +24,20 @@ class Display extends MY_Controller {
 		if (!empty($login_user)) {
 			$this->assign('login_user', $login_user);
 		}
-		
+
 		$this->assign('type', 'sell');
+		$this->assign('another_type', 'buy');
 		$this->assign('area', $area);
+		if ($area == 'school') {
+			$this->assign('another_area', 'global');
+		} else {
+			$this->assign('another_area', 'school');
+		}
 		$this->assign('category1', $category1);
-		$this->assign('category1_name', '全部');
+		$this->assign('category1_name', get_category1_name2($category1));
 		$this->assign('category2', $category2);
-		$this->assign('category2_name', '全部');
+		$this->assign('category2_name', get_category2_name($category2));
+		$this->assign('page', $page);
 
 		$this->assign('nav_tab', 3);
 		$this->assign('title', '今昔网-商品大厅');
