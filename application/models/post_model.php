@@ -104,6 +104,17 @@ class post_model extends CI_Model {
 		return $res;
 	}
 
+	public function get_post_ids_total($type,$category1,$category2){
+		$map = array();
+		if(isset($category1)) $map['category1'] = $category1;
+		if(isset($category2)) $map['category2'] = $category2;
+		$this->db->where($map);
+		$table = get_post_table($type);
+		$this->db->from($table);
+		$res = $this->db->count_all_results();
+		return $res;
+	}
+
 
 
 //************************************以下是旧的*****************//
