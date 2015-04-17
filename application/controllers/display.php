@@ -9,20 +9,34 @@ class Display extends MY_Controller {
 		$this->load->model('favorites_model');
 		$this->load->model('reply_model');
 	}
-	public function hall() {
-		$user_id =  $this->session->userdata('login_user');
-		if($user_id != ''){
-			$login_user = $this->user_model->get_user($user_id);
-			$data ['login_user'] = $login_user;
+	public function sell($area = 'global', $category1 = 0, $category2 = -1) {
+		if ($area != 'global' && $area != 'school') {
+			redirect('info/nopage');
 		}
+		if (!checkCategory($category1, $category2)) {
+			redirect('info/nopage');
+		}
+
+		$login_user =  $this->session->userdata('login_user');
+		if (!empty($login_user)) {
+			$this->assign('login_user', $login_user);
+		}
+		
+		$this->assign('type', 'sell');
+		$this->assign('area', $area);
+		$this->assign('category1', $category1);
+		$this->assign('category1_name', '全部');
+		$this->assign('category2', $category2);
+		$this->assign('category2_name', '全部');
+
 		$this->assign('nav_tab', 3);
 		$this->assign('title', '今昔网-商品大厅');
 		$this->assign('baseurl', base_url());
 		$this->assign('tips', show_tips());
 		
 		$this->display ( 'templates/header.php' );
-		//$this->load->view ( 'display/hall' );
-		//$this->load->view ( 'index/right' );
+		$this->display ( 'display/main.php' );
+		$this->display ( 'templates/side.php' );
 		$this->display ( 'templates/footer.php' );
 	}
 	public function textbook(){

@@ -2,15 +2,13 @@
         <div id="main">
 			<div id="post_directory">
 				<ol class="breadcrumb">
-					<li><a href="{$baseurl}display/hall">商品大厅[{$post_type}]</a></li>
-					<li><a href="{$baseurl}display/hall/{$thispost.category1}">{$thispost.category1_name}</a></li>
-					<li><a href="{$baseurl}display/hall/{$thispost.category2}">{$thispost.category2_name}</a></li>
-				</ol>
-				<ol class="breadcrumb">
-					<li></li>
-					<li class="active breadwraper">
-						<norb title="{$thispost.plain_title}">{$thispost.plain_title}</norb>
-					</li>
+					<li><a href="{$baseurl}display/{$type}">商品大厅[{if $type == 'sell'}转让{else}求购{/if}]</a></li>
+					{if $category1 > 0}
+					<li><a href="{$baseurl}display/{$type}/{$category1}">{$category1_name}</a></li>
+					{/if}
+					{if $category2 > -1}
+					<li><a href="{$baseurl}display/{$type}/{$category2}">{$category2_name}</a></li>
+					{/if}
 				</ol>
 			</div>
 
