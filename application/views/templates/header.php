@@ -35,7 +35,7 @@
 		</div>
 		<div>
 			{if isset($login_user)}
-			<a type="button" class="btn btn-primary" href="#" onclick="add_favorite('今昔网', '{$baseurl}')">收藏本站</a>
+			<a type="button" class="btn btn-primary" href="" onclick="add_favorite('今昔网', '{$baseurl}');return false;">收藏本站</a>
 			{else}
 			<a type="button" class="btn btn-primary" href="{$baseurl}account/register">立即注册</a>
 			{/if}
