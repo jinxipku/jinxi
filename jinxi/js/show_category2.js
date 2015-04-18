@@ -23,9 +23,9 @@ function show_category2(category1) {
 		li.addClass("active");
 	var a = $("<a></a>");
 	if (category1 > 0)
-		a.attr('href', baseurl + 'display/' + $("#type").val() + "/" + $("#area").val() + "/" + category1);
+		a.attr('href', baseurl + 'display/' + $("#type").val() + "/" + $("#area").val() + "/" + $("#sort").val() + "/" + category1);
 	else
-		a.attr('href', baseurl + 'display/' + $("#type").val() + "/" + $("#area").val());
+		a.attr('href', baseurl + 'display/' + $("#type").val() + "/" + $("#area").val() + "/" + $("#sort").val());
 	a.text("全部");
 	li.append(a);
 	ul.append(li);
@@ -34,7 +34,7 @@ function show_category2(category1) {
 		if (i == $("#category2").val())
 			li.addClass("active");
 		var a = $("<a></a>");
-		a.attr('href', baseurl + 'display/' + $("#type").val() + "/" + $("#area").val() + "/" + category1 + "/" + i);
+		a.attr('href', baseurl + 'display/' + $("#type").val() + "/" + $("#area").val() + "/" + $("#sort").val() + "/" + category1 + "/" + i);
 		a.text(allclass[i]);
 		li.append(a);
 		ul.append(li);

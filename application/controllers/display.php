@@ -54,6 +54,14 @@ class Display extends MY_Controller {
 		$this->assign('category2_name', get_category2_name($category2));
 		$this->assign('page', $page);
 
+		$data = get_posts($type, $area, $sort, $category1, $category2, $page);
+		$this->assign('total', $data['total']);
+		$this->assign('page_num', $data['page_num']);
+		$this->assign('post_num', $data['post_num']);
+		$this->assign('posts', $data['posts']);
+
+
+
 		$this->assign('nav_tab', 3);
 		$this->assign('title', '今昔网-商品大厅');
 		$this->assign('baseurl', base_url());
