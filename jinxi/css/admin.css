@@ -1,0 +1,36 @@
+body {
+	background-image:url('../img/bg/stripes.png');  
+	background-repeat: repeat;
+	background-color: #CCCCCC;
+	color:#303030;
+	font-family: 'Microsoft YaHei',Helvetica, sans-serif;
+}
+#main{
+	margin-top: 30px;
+}
+#left_block .panel{
+	background: white;
+}
+#center_block{
+	background: white;
+}
+.admin_panel{
+	display: none;
+}
+.active{
+	color:red !important;
+}
+th,td{
+	text-align: center;
+}
+td button{
+	margin-left: 10px;
+}
+a{
+	cursor:pointer;
+	color:blue;
+	text-decoration: none;
+}
+a:focus,a:hover{
+	text-decoration: none;
+}

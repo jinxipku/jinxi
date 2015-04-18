@@ -28,6 +28,10 @@ class Admin extends MY_Controller {
 		if(empty($admin)){
 			$this->display("admin/login.php");
 		}else{
+			$user_info = $this->admin_model->get_user_info();
+			$this->assign("user_info",$user_info);
+			$post_info = $this->admin_model->get_post_info();
+			$this->assign("post_info",$post_info);
 			$this->display("admin/index.php");
 		}
 		
@@ -48,7 +52,12 @@ class Admin extends MY_Controller {
 // | 以下为ajax接口
 // +----------------------------------------------------------------------
 
-
+	public function get_report_info(){
+		$page = $_POST['page'];
+		$res = $this->admin_model->get_report_info();
+		//var_dump($res);
+		$this->ajaxReturn($res,'',1);
+	}
 
 
 // +----------------------------------------------------------------------
