@@ -665,6 +665,7 @@ div#post_box>div#newpost_success>div.post_cont {
 viewpost
 */
 div#post_directory {
+	margin-top: -15px;
 	height: 35px;
 	width: 772px;
 	font-size: 15px;
@@ -966,6 +967,7 @@ display
 */
 div#category_selection_box {
 	padding: 20px;
+	border-color: #1abc9c;
 }
 div#category_selection_box ul li {
 	margin-right: 10px;
@@ -999,6 +1001,41 @@ div#post_directory li.breadwraper{
 	text-overflow: ellipsis;
 	-o-text-overflow: ellipsis;
 	white-space: nowrap;
+}
+
+div#post_type_box {
+	height: 47px;
+}
+div#post_type_box>div#ul_post_type {
+	float: left;
+}
+div#post_type_box>div#btng_post_sorting {
+	float: right;
+	margin-right: 50px;
+}
+div#post_type_box>div#btng_post_display {
+	float: right;
+}
+div#post_page_header {
+	margin-top: -1px;
+	height: 50px;
+	margin-bottom: 0px;
+}
+div#post_page_header>div:nth-child(1) {
+	font-size: 14px;
+	padding-top: 15px;
+	padding-left: 40px;
+}
+div#post_page_header>div:nth-child(2) {
+	margin: 7px;
+}
+div#post_page_header>div:nth-child(2) li {
+	margin: 0px;
+}
+div#post_page_header>div:nth-child(2) a {
+	margin: 0px;
+	border: none;
+	padding: 10px 15px;
 }
 
 /*
@@ -1061,25 +1098,31 @@ div.post_item_content>div:nth-child(3) {
 	width: 482px;
 }
 div.post_item_content>div:nth-child(3)>div:nth-child(1) {
+	height: 30px;
+	width: 482px;
+}
+div.post_item_user_nick {
+	height: 30px;
 	float: left;
-	height: 60px;
-	width: 60px;
 }
-div.post_item_content>div:nth-child(3)>div:nth-child(1) img {
-	height: 60px;
-	width: 60px;
+div.post_item_user_nick span {
+	height: 30px;
+	width: 30px;
 }
-div.post_item_content>div:nth-child(3)>div:nth-child(2) {
+div.post_item_user_need {
+	min-width: 270px;
+	height: 30px;
 	float: left;
-	height: 60px;
-	width: 422px;
-	padding-left: 10px;
 }
-div.post_item_content>div:nth-child(3)>div:nth-child(2) button {
+div.post_item_user_need button {
 	display: none;
 	padding: 5px 7px;
 	font-size: 14px;
 	margin-right: 10px;
+}
+div.post_item_content>div:nth-child(3)>div:nth-child(2) {
+	height: 30px;
+	width: 482px;
 }
 div.post_item_content>div:nth-child(3)>div:nth-child(2) span {
 	font-size: 14px;
@@ -1087,12 +1130,8 @@ div.post_item_content>div:nth-child(3)>div:nth-child(2) span {
   	overflow: hidden;
   	white-space: nowrap;
   	margin-top: 5px;
-}
-div.post_item_content>div:nth-child(3)>div:nth-child(2) span:nth-child(1) {
-	max-width: 145px;
-}
-div.post_item_content>div:nth-child(3)>div:nth-child(2) span:nth-child(2) {
-	max-width: 172px;
+  	margin-right: 10px;
+  	max-width: 175px;
 }
 div.post_item_price {
 	float: left;
@@ -1113,6 +1152,7 @@ div.post_item_price>div:nth-child(2) {
 	overflow: hidden;
   	white-space: nowrap;
 }
+
 
 
 

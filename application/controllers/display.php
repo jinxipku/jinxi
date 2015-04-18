@@ -9,14 +9,23 @@ class Display extends MY_Controller {
 		$this->load->model('favorites_model');
 		$this->load->model('reply_model');
 	}
-	public function sell($area = 'school', $category1 = 0, $category2 = -1, $page = 1) {
+	public function sell($area = 'school', $sort = 'time', $category1 = 'all', $category2 = 'all', $page = 1) {
 		if ($area != 'global' && $area != 'school') {
 			redirect('info/nopage');
+		}
+		if ($sort != 'time' && $sort != 'heat') {
+			redirect('info/nopage');
+		}
+		if ($category1 == 'all') {
+			$category1 = 0;
+		}
+		if ($category2 == 'all') {
+			$category2 = -1;
 		}
 		if (!checkCategory($category1, $category2)) {
 			redirect('info/nopage');
 		}
-		if (!(is_numeric($page) && is_int($page + 0)) || $page < 1) {
+		if (!(is_numeric($page) && is_int($page + 0)) || $page < 0) {
 			redirect('info/nopage');
 		}
 
@@ -32,6 +41,67 @@ class Display extends MY_Controller {
 			$this->assign('another_area', 'global');
 		} else {
 			$this->assign('another_area', 'school');
+		}
+		$this->assign('sort', $sort);
+		if ($sort == 'time') {
+			$this->assign('another_sort', 'heat');
+		} else {
+			$this->assign('another_sort', 'time');
+		}
+		$this->assign('category1', $category1);
+		$this->assign('category1_name', get_category1_name2($category1));
+		$this->assign('category2', $category2);
+		$this->assign('category2_name', get_category2_name($category2));
+		$this->assign('page', $page);
+
+		$this->assign('nav_tab', 3);
+		$this->assign('title', '今昔网-商品大厅');
+		$this->assign('baseurl', base_url());
+		$this->assign('tips', show_tips());
+		
+		$this->display ( 'templates/header.php' );
+		$this->display ( 'display/main.php' );
+		$this->display ( 'templates/side.php' );
+		$this->display ( 'templates/footer.php' );
+	}
+	public function buy($area = 'school', $sort = 'time', $category1 = 'all', $category2 = 'all', $page = 1) {
+		if ($area != 'global' && $area != 'school') {
+			redirect('info/nopage');
+		}
+		if ($sort != 'time' && $sort != 'heat') {
+			redirect('info/nopage');
+		}
+		if ($category1 == 'all') {
+			$category1 = 0;
+		}
+		if ($category2 == 'all') {
+			$category2 = -1;
+		}
+		if (!checkCategory($category1, $category2)) {
+			redirect('info/nopage');
+		}
+		if (!(is_numeric($page) && is_int($page + 0)) || $page < 0) {
+			redirect('info/nopage');
+		}
+
+		$login_user =  $this->session->userdata('login_user');
+		if (!empty($login_user)) {
+			$this->assign('login_user', $login_user);
+		}
+
+		$this->assign('type', 'buy');
+		$this->assign('another_type', 'sell');
+		$this->assign('area', $area);
+		if ($area == 'school') {
+			$this->assign('another_area', 'global');
+		} else {
+			$this->assign('another_area', 'school');
+		}
+		$this->assign('sort', $sort);
+		if ($sort == 'time') {
+			$this->assign('another_sort', 'heat');
+		} else {
+			$this->assign('another_sort', 'time');
 		}
 		$this->assign('category1', $category1);
 		$this->assign('category1_name', get_category1_name2($category1));

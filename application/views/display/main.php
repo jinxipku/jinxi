@@ -35,7 +35,7 @@
 				<p>一级分类</p>
 				<div id="btng_category1">
 					<ul class="nav nav-pills">
-					  	<li{if $category1 == 0} class="active"{/if}><a href="{$baseurl}display/{$type}/{$area}/" onmouseover="show_category2(0)">全部</a></li>
+					  	<li{if $category1 == 0} class="active"{/if}><a href="{$baseurl}display/{$type}/{$area}" onmouseover="show_category2(0)">全部</a></li>
 					  	<li{if $category1 == 1} class="active"{/if}><a href="{$baseurl}display/{$type}/{$area}/1" onmouseover="show_category2(1)">电脑数码</a></li>
 					  	<li{if $category1 == 2} class="active"{/if}><a href="{$baseurl}display/{$type}/{$area}/2" onmouseover="show_category2(2)">日用百货</a></li>
 					  	<li{if $category1 == 3} class="active"{/if}><a href="{$baseurl}display/{$type}/{$area}/3" onmouseover="show_category2(3)">服饰箱包</a></li>
@@ -49,12 +49,46 @@
 				<p>二级分类</p>
 				<div id="btng_category2">
 				</div>
-				<script type="text/javascript" src="{$baseurl}js/bootstrap.js"></script>
 				<script type="text/javascript" src="{$baseurl}js/show_category2.js"></script>
 			</div>
 
+			<div id="post_type_box">
+				<div id="ul_post_type">
+					<ul class="nav nav-tabs">
+						<li{if $type == 'sell'} class="active"{/if}>
+							<a href="{$baseurl}display/sell/{$area}{if $category1 > 0}/{$category1}{if $category2 > -1}/{$category2}{/if}{/if}">转 让</a>
+						</li>
+						<li{if $type == 'buy'} class="active"{/if}>
+							<a href="{$baseurl}display/buy/{$area}{if $category1 > 0}/{$category1}{if $category2 > -1}/{$category2}{/if}{/if}">求 购</a>
+						</li>
+					</ul>
+				</div>
+				<div id="btng_post_display" class="btn-group">
+					<button type="button" class="btn btn-primary btn-sm active"><span class="fui-list"></span></button>
+					<button type="button" class="btn btn-primary btn-sm"><span class="fui-checkbox-unchecked"></span></button>
+				</div>
+				<div id="btng_post_sorting" class="btn-group">
+				  	<button type="button" class="btn btn-primary btn-sm active">按时间排序</button>
+					<button type="button" class="btn btn-primary btn-sm">按热度排序</button>
+				</div>
+			</div>
+			<div id="post_page_header" class="panel panel-default">
+				<div class="pull-left">共3页（78篇帖子），这是第1页（每页30项）。</div>
+				<div class="pagination pull-right">
+				  	<ul>
+				    	<li class="previous">
+				      		<a href="{$baseurl}display/{$type}/{$area}/{if $category1 > 0}{$category1}{else}all{/if}/{if $category2 > -1}{$category2}{else}all{/if}/{$page - 1}" class="fui-arrow-left"></a>
+				    	</li>
+				    	<li class="next">
+				      		<a href="{$baseurl}display/{$type}/{$area}/{if $category1 > 0}{$category1}{else}all{/if}/{if $category2 > -1}{$category2}{else}all{/if}/{$page + 1}" class="fui-arrow-right"></a>
+				    	</li>
+				  	</ul>
+				</div>
+				
+			</div>
+			
+			<div id="post_items_box" class="panel panel-default">
 
-			<div id="post_items_box" class="panel">
 				<div class="post_item_box">
 					<div class="post_item_img">
 						<a href="{$baseurl}post/viewpost/sell/3">
@@ -69,34 +103,33 @@
 								电脑数码 > 手机 : 苹果 iphone5s手机 : 苹果 iphone5s
 							</a>
 						</div>
-						<div>
+						<div class="post_item_description">
 							大神的三大大神的三大大神的三大大神的三大大神的三大大神的三大大神的三大大神的三大大神的三大大神的三大...
 						</div>
 						<div>
 							<div>
-								<a href="{$baseurl}user/profile/1">
-									<img class="lazy" data-original="http://www.xn--wmqr18c.cn/img/head/svxvkeeS1xmvThxME1429093424.jpg" alt="一剑轻安"/>
-								</a>
-							</div>
-							<div>
-								<div onmouseover="$(this).find('button').show();" onmouseout="$(this).find('button').hide();">
-									<a href="{$baseurl}user/profile/1" class="text-primary">一剑轻安</a>
+								<div class="post_item_user_nick">
+									<a href="{$baseurl}user/profile/1" class="text-primary">
+										<span class="fui-user"></span>一剑轻安一剑轻安一剑	
+									</a>
+								</div>
+								<div class="post_item_user_need">
 									<button type="button" class="btn btn-info pull-right">我有类似需求</button>
 								</div>
-								<div>
-									<span class="fui-location">
-										北京航天航空大学空
-									</span>
-									<span class="fui-time">
-										2015-04-14 00:38:15
-									</span>
-									<span class="fui-new">
-										12
-									</span>
-									<span class="fui-heart">
-										3
-									</span>
-								</div>
+							</div>
+							<div>
+								<span class="fui-location">
+									北京航天航空大学空
+								</span>
+								<span class="fui-time">
+									2015-04-14 00:38:15
+								</span>
+								<span class="fui-new">
+									12
+								</span>
+								<span class="fui-heart">
+									3
+								</span>
 							</div>
 						</div>
 					</div>
@@ -109,6 +142,8 @@
 						</div>
 					</div>
 				</div>
+
 			</div>
+			<script type="text/javascript" src="{$baseurl}js/post_item.js"></script>
 			
 		</div>
