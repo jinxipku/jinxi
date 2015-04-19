@@ -178,7 +178,7 @@ class Display extends MY_Controller {
 	//sort  time heat
 	//area school global
 	//type 0卖  1买
-	public function get_posts($type=0,$area='school',$sort='time',$category1=null,$category2=null,$page=1,$keyword=null){
+	public function get_posts($type=0,$area='school',$sort='time',$category1=0,$category2=-1,$page=1,$keyword=null){
 		$data = array();
 		$login_user =  $this->session->userdata('login_user');
 
@@ -196,7 +196,7 @@ class Display extends MY_Controller {
 			$total = $this->post_model->get_post_ids_total($type,$school_id,$category1,$category2);
 			$data['total'] = $total;
 			if($total==0){
-				$data['posts'] = null;
+				$data['posts'] = array();
 			}else{
 				$page_num = intval(ceil($data['total']/$num_per_page));
 				$page = $page%$page_num;

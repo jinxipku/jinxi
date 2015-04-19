@@ -93,8 +93,8 @@ class post_model extends CI_Model {
 		$table = get_post_table($type);
 		$map = array();
 		$map['active'] = 1;
-		if(isset($category1)) $map['category1'] = $category1;
-		if(isset($category2)) $map['category2'] = $category2;
+		if($category1!=0) $map['category1'] = $category1;
+		if($category2!=-1) $map['category2'] = $category2;
 		$num = $this->config->item('num_per_page');
 		$this->db->select($table.".post_id");
 		$this->db->limit($num,($page-1)*$num);
@@ -123,8 +123,8 @@ class post_model extends CI_Model {
 
 	public function get_post_ids_total($type,$school_id,$category1,$category2){
 		$map = array();
-		if(isset($category1)) $map['category1'] = $category1;
-		if(isset($category2)) $map['category2'] = $category2;
+		if($category1!=0) $map['category1'] = $category1;
+		if($category2!=-1) $map['category2'] = $category2;
 		$map['active'] = 1;
 		$table = get_post_table($type);
 		if(!isset($school_id)){
