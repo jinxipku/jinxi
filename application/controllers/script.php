@@ -174,12 +174,10 @@ echo '</pre>';
 		$type = 0;//发转让贴
 	
 		for( $i=0; $i<$num;$i=$i+1){
-			$post['user_id'] = rand(0,1);
+			$post['user_id'] = rand(1,2);
 			$class = rand(0,50);
 			$post['category1'] = map_to_cat1($class);
-			if ($class == 10 || $class == 15 || $class == 20 || $class == 26 || $class == 40 || $class == 45 || $class == 50 || $class == 51){
-				$class=51;
-			}
+			
 			$post['category2'] = $class;
 			$post['brand'] = "随机生成的brand";
 			$post['model'] = "随机生成的model";
@@ -190,7 +188,7 @@ echo '</pre>';
 			$post['contactby'] = rand(0,4);
 			
 			$this->post_model->insert_post($post, $type);
-			echo 'i';
+			//echo 'i';
 		}
 	}
 }
