@@ -32,6 +32,8 @@ class Display extends MY_Controller {
 		$login_user =  $this->session->userdata('login_user');
 		if (!empty($login_user)) {
 			$this->assign('login_user', $login_user);
+		} else {
+			$area = 'global';
 		}
 
 		$this->assign('type', 'sell');
