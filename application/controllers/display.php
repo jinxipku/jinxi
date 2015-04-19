@@ -190,15 +190,20 @@ class Display extends MY_Controller {
 		}else{
 			$total = $this->post_model->get_post_ids_total($type,$school_id,$category1,$category2);
 			$data['total'] = $total;
-			$page_num = intval(ceil($data['total']/$num_per_page));
-			$page = $page%$page_num;
-			$page = ($page==0)? $page_num : $page;
-			$res = $this->post_model->get_post_ids($type,$school_id,$category1,$category2,$page,$sort);
-			$data['posts'] = array();
-			
-			foreach ($res as $key => $value) {
-				$data['posts'][] = $this->get_post_info($value,$type);
+			if($total==0){
+				$data['posts'] = null;
+			}else{
+				$page_num = intval(ceil($data['total']/$num_per_page));
+				$page = $page%$page_num;
+				$page = ($page==0)? $page_num : $page;
+				$res = $this->post_model->get_post_ids($type,$school_id,$category1,$category2,$page,$sort);
+				$data['posts'] = array();
+				
+				foreach ($res as $key => $value) {
+					$data['posts'][] = $this->get_post_info($value,$type);
+				}
 			}
+			
 		}
 		foreach ($data['posts'] as $key => $value) {
 			$data['posts'][$key]['description'] = cutString($data['posts'][$key]['description']);
