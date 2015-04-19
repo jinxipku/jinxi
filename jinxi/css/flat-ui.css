@@ -2081,7 +2081,6 @@ fieldset[disabled] .form-control + .input-icon,
   position: relative;
 }
 .pagination ul {
-  background: #d6dbdf;
   color: #ffffff;
   padding: 0;
   margin: 0;
@@ -2090,7 +2089,6 @@ fieldset[disabled] .form-control + .input-icon,
 }
 .pagination ul li {
   display: inline-block;
-  margin-right: -3px;
   vertical-align: middle;
 }
 .pagination ul li:first-child {
@@ -2098,7 +2096,6 @@ fieldset[disabled] .form-control + .input-icon,
 }
 .pagination ul li:first-child.previous + li > a,
 .pagination ul li:first-child.previous + li > span {
-  border-left-width: 5px;
 }
 .pagination ul li:last-child {
   border-radius: 1px;
@@ -2108,11 +2105,9 @@ fieldset[disabled] .form-control + .input-icon,
 .pagination ul li.next > a,
 .pagination ul li.previous > span,
 .pagination ul li.next > span {
-  background: transparent;
   border: none;
-  border-right: 2px solid #e4e7ea;
   font-size: 16px;
-  margin: 0 9px 0 0;
+  margin: 0px;
   padding: 12px 17px;
   border-radius: 1px;
 }
@@ -2139,21 +2134,19 @@ fieldset[disabled] .form-control + .input-icon,
   }
 }
 .pagination ul li.next {
-  margin-left: 9px;
+  margin-left: 0px;
 }
 .pagination ul li.next > a,
 .pagination ul li.next > span {
-  border-left: 2px solid #e4e7ea;
   border-right: none;
   margin: 0;
   border-radius: 1px;
 }
 .pagination ul li.active > a,
 .pagination ul li.active > span {
-  background-color: #ffffff;
-  border-color: #ffffff;
-  border-width: 2px !important;
-  color: #d6dbdf;
+  background-color: #1abc9c;
+  border-color: #1abc9c;
+  color: #fff;
   margin: 10px 5px 9px;
 }
 .pagination ul li.active > a:hover,
@@ -2175,8 +2168,8 @@ fieldset[disabled] .form-control + .input-icon,
 .pagination ul li > span {
   display: inline-block;
   background: #ffffff;
-  border: 5px solid #d6dbdf;
-  color: #ffffff;
+  border: 5px solid #fff;
+  color: #1abc9c;
   font-size: 14px;
   line-height: 16px;
   margin: 7px 2px 6px;

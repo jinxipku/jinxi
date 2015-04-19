@@ -32,7 +32,7 @@
 				{/if}
 				<span class="pull-right">{if $area == 'school'}{$login_user.school_name}{else}全站{/if}</span>
 			</div>
-			<div id="category_selection_box" class="panel">
+			<div id="category_selection_box" class="panel panel-default">
 				<p>一级分类</p>
 				<div id="btng_category1">
 					<ul class="nav nav-pills">

@@ -970,6 +970,8 @@ display
 */
 div#category_selection_box {
 	padding: 20px;
+}
+div#category_selection_box:hover {
 	border-color: #1abc9c;
 }
 div#category_selection_box ul li {
@@ -1051,7 +1053,7 @@ div#post_items_box {
 	border-top: none;
 }
 div.post_item_box {
-	margin: 10px 0px 10px 0px;
+	margin: 15px 0px;
 	width: 742px;
 	height: 140px;
 }
