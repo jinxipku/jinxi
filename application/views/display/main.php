@@ -74,44 +74,43 @@
 				</div>
 			</div>
 			<div id="post_page_header" class="panel panel-default">
-				<div class="pull-left">共3页（78篇帖子），这是第1页（每页30项）。</div>
+				<div class="pull-left">共{$page_num}页（{$total}篇帖子），这是第{$cur_page}页（每页30项）。</div>
 				<div class="pagination pull-right">
 				  	<ul>
 				    	<li class="previous">
-				      		<a href="{$baseurl}display/{$type}/{$area}/{$sort}/{if $category1 > 0}{$category1}{else}all{/if}/{if $category2 > -1}{$category2}{else}all{/if}/{$page - 1}" class="fui-arrow-left"></a>
+				      		<a href="{$baseurl}display/{$type}/{$area}/{$sort}/{if $category1 > 0}{$category1}{else}all{/if}/{if $category2 > -1}{$category2}{else}all{/if}/{$cur_page - 1}" class="fui-arrow-left"></a>
 				    	</li>
 				    	<li class="next">
-				      		<a href="{$baseurl}display/{$type}/{$area}/{$sort}/{if $category1 > 0}{$category1}{else}all{/if}/{if $category2 > -1}{$category2}{else}all{/if}/{$page + 1}" class="fui-arrow-right"></a>
+				      		<a href="{$baseurl}display/{$type}/{$area}/{$sort}/{if $category1 > 0}{$category1}{else}all{/if}/{if $category2 > -1}{$category2}{else}all{/if}/{$cur_page + 1}" class="fui-arrow-right"></a>
 				    	</li>
 				  	</ul>
 				</div>
-				
 			</div>
 			
 			<div id="post_items_box" class="panel panel-default">
 
+				{foreach from = $posts item = post}
+				<hr/>
 				<div class="post_item_box">
 					<div class="post_item_img">
-						<a href="{$baseurl}post/viewpost/sell/3">
-							<img class="lazy" data-original="http://www.xn--wmqr18c.cn/img/picture/1/thumb_nm4QQNuu1RUjsEyjp1428943080.jpg" alt="tiezibiaoti" />
+						<a href="{$baseurl}post/viewpost/{$type}/{$post.post_id}">
+							<img class="lazy" data-original="{$post.picture}" alt="{$post.plain_title}" />
 						</a>
 					</div>
 					<div class="post_item_content">
 						<div>
-							<a href="{$baseurl}post/viewpost/sell/3" title='[转让][图]电脑数码>手机:苹果 iphone5s手机'>
-								<span class="tag bg-primary">转让</span>
-								<span class="tag bg-purple">图</span>
-								电脑数码 > 手机 : 苹果 iphone5s手机 : 苹果 iphone5s
+							<a href="{$baseurl}post/viewpost/{$type}/{$post.post_id}" title='{$post.plain_title}'>
+								{$post.title}
 							</a>
 						</div>
 						<div class="post_item_description">
-							大神的三大大神的三大大神的三大大神的三大大神的三大大神的三大大神的三大大神的三大大神的三大大神的三大...
+							{$post.description}
 						</div>
 						<div>
 							<div>
 								<div class="post_item_user_nick">
-									<a href="{$baseurl}user/profile/1" class="text-primary">
-										<span class="fui-user"></span>一剑轻安一剑轻安一剑	
+									<a href="{$baseurl}user/profile/{$post.user_id}" class="{$post.user.nick_color}">
+										<span class="fui-user"></span>{$post.user.nick}	
 									</a>
 								</div>
 								<div class="post_item_user_need">
@@ -120,29 +119,30 @@
 							</div>
 							<div>
 								<span class="fui-location">
-									北京航天航空大学空
+									{$post.user.school}
 								</span>
 								<span class="fui-time">
-									2015-04-14 00:38:15
+									{$post.createat}
 								</span>
 								<span class="fui-new">
-									12
+									{$post.reply_num}
 								</span>
 								<span class="fui-heart">
-									3
+									{$post.favrite_num}
 								</span>
 							</div>
 						</div>
 					</div>
 					<div class="post_item_price">
 						<div>
-							<img class="lazy" data-original="http://www.xn--wmqr18c.cn/img/class/3.png" alt="物品状态" />
+							<img class="lazy" data-original="http://www.xn--wmqr18c.cn/img/class/{$post.class}.png" alt="物品状态" />
 						</div>
 						<div>
-							￥3500.00
+							{if $thispost.price == 0}面议{else}￥{$thispost.price}{/if}
 						</div>
 					</div>
 				</div>
+				{/foreach}
 
 			</div>
 			<script type="text/javascript" src="{$baseurl}js/post_item.js"></script>

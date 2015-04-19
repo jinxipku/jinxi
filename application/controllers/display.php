@@ -52,15 +52,13 @@ class Display extends MY_Controller {
 		$this->assign('category1_name', get_category1_name2($category1));
 		$this->assign('category2', $category2);
 		$this->assign('category2_name', get_category2_name($category2));
-		$this->assign('page', $page);
 
-		$data = get_posts($type, $area, $sort, $category1, $category2, $page);
+		$data = $this->get_posts(0, $area, $sort, $category1, $category2, $page);
 		$this->assign('total', $data['total']);
 		$this->assign('page_num', $data['page_num']);
+		$this->assign('cur_page', $data['cur_page']);
 		$this->assign('post_num', $data['post_num']);
 		$this->assign('posts', $data['posts']);
-
-
 
 		$this->assign('nav_tab', 3);
 		$this->assign('title', '今昔网-商品大厅');
@@ -116,6 +114,13 @@ class Display extends MY_Controller {
 		$this->assign('category2', $category2);
 		$this->assign('category2_name', get_category2_name($category2));
 		$this->assign('page', $page);
+
+		$data = $this->get_posts(0, $area, $sort, $category1, $category2, $page);
+		$this->assign('total', $data['total']);
+		$this->assign('page_num', $data['page_num']);
+		$this->assign('cur_page', $data['cur_page']);
+		$this->assign('post_num', $data['post_num']);
+		$this->assign('posts', $data['posts']);
 
 		$this->assign('nav_tab', 3);
 		$this->assign('title', '今昔网-商品大厅');
