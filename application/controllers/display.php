@@ -117,7 +117,7 @@ class Display extends MY_Controller {
 		$this->assign('category2_name', get_category2_name($category2));
 		$this->assign('page', $page);
 
-		$data = $this->get_posts(1, $area, $sort, $category1, $category2, $page);
+		$data = $this->get_posts(0, $area, $sort, $category1, $category2, $page);
 		$this->assign('total', $data['total']);
 		$this->assign('page_num', $data['page_num']);
 		$this->assign('cur_page', $data['cur_page']);
@@ -161,7 +161,7 @@ class Display extends MY_Controller {
 			$hasimg = true;
 			$post['picture'] = $post['picture'][$post['first_picture']]['thumb_picture_url'];
 		}else{
-			$post['picture'] = base_url("img/post/".$post['category2'].".png");
+			$post['picture'] = base_url("img/post/".($post['category2']+1).".png");
 		}
 		$post['title'] = get_title($type,$post['deal'],$post['class'],$hasimg,$post['category1_name'],$post['category2_name'],$post['brand'],$post['model']);
 		$post['plain_title'] = get_plain_title($type,$post['deal'],$post['class'],$hasimg,$post['category1_name'],$post['category2_name'],$post['brand'],$post['model']);

@@ -168,11 +168,27 @@ echo '</pre>';
 		//echo now();
 	}
 
+	//用于发一火车皮帖子
 	public function auto_make_post(){
 		$num = 200;
 		$type = 0;//发转让贴
-		foreach ($variable as $key => $value) {
-			# code...
+	
+		for( $i=0; $i<$num;$i=$i+1){
+			$post['user_id'] = rand(1,2);
+			$class = rand(0,50);
+			$post['category1'] = map_to_cat1($class);
+			
+			$post['category2'] = $class;
+			$post['brand'] = "随机生成的brand";
+			$post['model'] = "随机生成的model";
+			$post['class'] = rand(0,4);
+			$post['description'] = "随机生成的描述";
+			$post['price'] = rand(0,9999);
+			$post['deal'] = rand(1,4);
+			$post['contactby'] = rand(0,4);
+			
+			$this->post_model->insert_post($post, $type);
+			//echo 'i';
 		}
 	}
 }
