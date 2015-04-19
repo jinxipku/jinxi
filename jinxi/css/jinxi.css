@@ -1014,7 +1014,7 @@ div#post_type_box>div#ul_post_type {
 }
 div#post_type_box>div#btng_post_sorting {
 	float: right;
-	margin-right: 50px;
+	margin-right: 100px;
 }
 div#post_type_box>div#btng_post_display {
 	float: right;
@@ -1054,6 +1054,11 @@ div.post_item_box {
 	margin: 10px 0px 10px 0px;
 	width: 742px;
 	height: 140px;
+}
+div.post_item_box:hover {
+	filter:alpha(opacity=90); /*IE滤镜，透明度50%*/
+	-moz-opacity:0.9; /*Firefox私有，透明度50%*/
+	opacity:0.9;/*其他，透明度50%*/
 }
 div.post_item_img {
 	float: left;
@@ -1116,9 +1121,7 @@ div.post_item_user_nick span {
 	width: 30px;
 }
 div.post_item_user_need {
-	min-width: 270px;
 	height: 30px;
-	float: left;
 }
 div.post_item_user_need button {
 	display: none;
@@ -1158,8 +1161,16 @@ div.post_item_price>div:nth-child(2) {
 	overflow: hidden;
   	white-space: nowrap;
 }
-
-
+div#post_items_box div.pagination {
+	width: 742px;
+	margin: 0px 0px 5px 0px;
+}
+div#post_items_box div.pagination div {
+	margin-left: 20px;
+	padding-top: 8px;
+	color: #1abc9c;
+	font-size: 17px;
+}
 
 
 

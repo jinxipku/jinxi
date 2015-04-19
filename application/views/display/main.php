@@ -73,6 +73,8 @@
 					<a href="{$baseurl}display/{$type}/{$area}/heat{if $category1 > 0}/{$category1}{if $category2 > -1}/{$category2}{/if}{/if}" type="button" class="btn btn-primary btn-sm{if $sort == 'heat'} active{/if}">按热度排序</a>
 				</div>
 			</div>
+
+			{if $total > 0}
 			<div id="post_page_header" class="panel panel-default">
 				<div class="pull-left">共{$page_num}页（{$total}篇帖子），这是第{$cur_page}页（每页30项）。</div>
 				<div class="pagination pull-right">
@@ -86,9 +88,11 @@
 				  	</ul>
 				</div>
 			</div>
-			
+			{/if}
+
 			<div id="post_items_box" class="panel panel-default">
 				{if $total == 0}
+				<hr/>
 				<div class="sorry_box">
 					<div>
 						<img class="passive" src="{$baseurl}img/info/sorry.png" alt="sorry"/>
@@ -100,60 +104,148 @@
 				</div>
 				{else}
 
-				{foreach from = $posts item = post}
-				<hr/>
-				<div class="post_item_box">
-					<div class="post_item_img">
-						<a href="{$baseurl}post/viewpost/{$type}/{$post.post_id}" target="_blank">
-							<img class="lazy" data-original="{$post.picture}" alt="{$post.plain_title}" />
-						</a>
-					</div>
-					<div class="post_item_content">
-						<div>
-							<a href="{$baseurl}post/viewpost/{$type}/{$post.post_id}" title='{$post.plain_title}' target="_blank">
-								{$post.title}
+				<div id="display_in_line">
+					{foreach from = $posts item = post}
+					<hr/>
+					<div class="post_item_box">
+						<div class="post_item_img">
+							<a href="{$baseurl}post/viewpost/{$type}/{$post.post_id}" target="_blank">
+								<img class="lazy" data-original="{$post.picture}" alt="{$post.plain_title}" />
 							</a>
 						</div>
-						<div class="post_item_description">
-							{$post.description}
-						</div>
-						<div>
+						<div class="post_item_content">
 							<div>
-								<div class="post_item_user_nick">
-									<a href="{$baseurl}user/profile/{$post.user_id}" class="{$post.user.nick_color}" target="_blank">
-										<span class="fui-user"></span>{$post.user.nick}	
-									</a>
-								</div>
-								<div class="post_item_user_need">
-									<button type="button" class="btn btn-info pull-right">我有类似需求</button>
-								</div>
+								<a href="{$baseurl}post/viewpost/{$type}/{$post.post_id}" title='{$post.plain_title}' target="_blank">
+									{$post.title}
+								</a>
+							</div>
+							<div class="post_item_description">
+								{$post.description}
 							</div>
 							<div>
-								<span class="fui-location">
-									{$post.user.school_name}
-								</span>
-								<span class="fui-time">
-									{$post.createat}
-								</span>
-								<span class="fui-new">
-									{$post.reply_num}
-								</span>
-								<span class="fui-heart">
-									{$post.favorite_num}
-								</span>
+								<div>
+									<div class="post_item_user_nick">
+										<a href="{$baseurl}user/profile/{$post.user_id}" class="{$post.user.nick_color}" target="_blank">
+											<span class="fui-user"></span>{$post.user.nick}	
+										</a>
+									</div>
+									<div class="post_item_user_need">
+										<button type="button" class="btn btn-info pull-right">我有{if $type==0}类似闲置{else}类似需求{/if}</button>
+									</div>
+								</div>
+								<div>
+									<span class="fui-location">
+										{$post.user.school_name}
+									</span>
+									<span class="fui-time">
+										{$post.createat}
+									</span>
+									<span class="fui-new">
+										{$post.reply_num}
+									</span>
+									<span class="fui-heart">
+										{$post.favorite_num}
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="post_item_price">
+							<div>
+								<img class="lazy" data-original="http://www.xn--wmqr18c.cn/img/class/{$post.class}.png" alt="物品状态" />
+							</div>
+							<div>
+								{if $post.price == 0}面议{else}￥{$post.price}{/if}
 							</div>
 						</div>
 					</div>
-					<div class="post_item_price">
-						<div>
-							<img class="lazy" data-original="http://www.xn--wmqr18c.cn/img/class/{$post.class}.png" alt="物品状态" />
-						</div>
-						<div>
-							{if $post.price == 0}面议{else}￥{$post.price}{/if}
-						</div>
-					</div>
+					{/foreach}
 				</div>
-				{/foreach}
+
+				<div id="display_in_block">
+					{foreach from = $posts item = post}
+					<hr/>
+					<div class="post_item_box">
+						<div class="post_item_img">
+							<a href="{$baseurl}post/viewpost/{$type}/{$post.post_id}" target="_blank">
+								<img class="lazy" data-original="{$post.picture}" alt="{$post.plain_title}" />
+							</a>
+						</div>
+						<div class="post_item_content">
+							<div>
+								<a href="{$baseurl}post/viewpost/{$type}/{$post.post_id}" title='{$post.plain_title}' target="_blank">
+									{$post.title}
+								</a>
+							</div>
+							<div class="post_item_description">
+								{$post.description}
+							</div>
+							<div>
+								<div>
+									<div class="post_item_user_nick">
+										<a href="{$baseurl}user/profile/{$post.user_id}" class="{$post.user.nick_color}" target="_blank">
+											<span class="fui-user"></span>{$post.user.nick}	
+										</a>
+									</div>
+									<div class="post_item_user_need">
+										<button type="button" class="btn btn-info pull-right">我有{if $type==0}类似闲置{else}类似需求{/if}</button>
+									</div>
+								</div>
+								<div>
+									<span class="fui-location">
+										{$post.user.school_name}
+									</span>
+									<span class="fui-time">
+										{$post.createat}
+									</span>
+									<span class="fui-new">
+										{$post.reply_num}
+									</span>
+									<span class="fui-heart">
+										{$post.favorite_num}
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="post_item_price">
+							<div>
+								<img class="lazy" data-original="http://www.xn--wmqr18c.cn/img/class/{$post.class}.png" alt="物品状态" />
+							</div>
+							<div>
+								{if $post.price == 0}面议{else}￥{$post.price}{/if}
+							</div>
+						</div>
+					</div>
+					{/foreach}
+				</div>
+				
+				<hr/>
+				{if $page_num > 0}
+				<div class="pagination">
+				  	<div class="pull-right">{$cur_page}/{$page_num}页</div>
+				  	<center>
+				  	<ul>
+				  		<li class="previous">
+				      		<a href="{$baseurl}display/{$type}/{$area}/{$sort}/{if $category1 > 0}{$category1}{else}all{/if}/{if $category2 > -1}{$category2}{else}all{/if}/1">首页</a>
+				    	</li>
+				    	<li class="previous">
+				      		<a href="{$baseurl}display/{$type}/{$area}/{$sort}/{if $category1 > 0}{$category1}{else}all{/if}/{if $category2 > -1}{$category2}{else}all{/if}/{$cur_page - 1}" class="fui-arrow-left"></a>
+				    	</li>
+				    	{assign var="page_index" value=$ed_page-$st_page+1}
+				    	{section name="loop" loop=$page_index}
+						<li {if $smarty.section.loop.index+$st_page==$cur_page}class="active"{/if}>
+							<a href="{$baseurl}display/{$type}/{$area}/{$sort}/{if $category1 > 0}{$category1}{else}all{/if}/{if $category2 > -1}{$category2}{else}all{/if}/{$smarty.section.loop.index + $st_page}">{$smarty.section.loop.index + $st_page}</a>
+						</li>
+						{/section}
+						<li class="next">
+				      		<a href="{$baseurl}display/{$type}/{$area}/{$sort}/{if $category1 > 0}{$category1}{else}all{/if}/{if $category2 > -1}{$category2}{else}all{/if}/{$cur_page + 1}" class="fui-arrow-right"></a>
+				    	</li>
+				    	<li class="next">
+				      		<a href="{$baseurl}display/{$type}/{$area}/{$sort}/{if $category1 > 0}{$category1}{else}all{/if}/{if $category2 > -1}{$category2}{else}all{/if}/{$page_num}">末页</a>
+				    	</li> 
+				  	</ul>
+				  	</center>
+				</div>
+				{/if}
 
 				{/if}
 
