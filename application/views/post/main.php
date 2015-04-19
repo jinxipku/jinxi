@@ -72,7 +72,6 @@
 					<p class="p_post_content">帖子类型： {$post_type}</p>
 					<p class="p_post_content">一级分类： {$thispost.category1_name}</p>
 					<p class="p_post_content">二级分类： {$thispost.category2_name}</p>
-					<p class="p_post_content">品牌型号： {$thispost.brand} {$thispost.model}</p>
 					<p class="p_post_content">物品状态： 
 					{if $thispost.class == 0}S级别（正品）
 					{elseif $thispost.class == 1}S级别（自制）

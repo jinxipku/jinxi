@@ -71,7 +71,7 @@
 					<p class="p_post_content"><strong>帖子类型</strong>： {$post_type}</p>
 					<p class="p_post_content"><strong>一级分类</strong>： {$thispost.category1_name}</p>
 					<p class="p_post_content"><strong>二级分类</strong>： {$thispost.category2_name}</p>
-					<p class="p_post_content"><strong>品牌型号</strong>： {$thispost.brand} {$thispost.model}</p>
+					<p class="p_post_content">{if $thispost.category1 == 5}<strong>书本信息</strong>：《{$thispost.brand}》{$thispost.model}{else}<strong>品牌型号</strong>： {$thispost.brand} {$thispost.model}{/if}</p>
 					<p class="p_post_content"><strong>物品状态</strong>： 
 					{if $thispost.class == 0}S级别（正品）
 					{elseif $thispost.class == 1}S级别（自制）
