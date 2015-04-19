@@ -2,9 +2,9 @@
         <div id="main">
 			<div id="post_directory">
 				<ol class="breadcrumb">
-					<li><a href="{$baseurl}display/hall">商品大厅[{$post_type}]</a></li>
-					<li><a href="{$baseurl}display/hall/{$thispost.category1}">{$thispost.category1_name}</a></li>
-					<li><a href="{$baseurl}display/hall/{$thispost.category2}">{$thispost.category2_name}</a></li>
+					<li><a href="{$baseurl}display/{if $thispost.type == 0}sell{else}buy{/if}">商品大厅[{$post_type}]</a></li>
+					<li><a href="{$baseurl}display/{if $thispost.type == 0}sell{else}buy{/if}/school/time/{$thispost.category1}">{$thispost.category1_name}</a></li>
+					<li><a href="{$baseurl}display/{if $thispost.type == 0}sell{else}buy{/if}/school/time/{$thispost.category1}/{$thispost.category2}">{$thispost.category2_name}</a></li>
 				</ol>
 				<ol class="breadcrumb">
 					<li></li>

@@ -104,13 +104,13 @@
 				<hr/>
 				<div class="post_item_box">
 					<div class="post_item_img">
-						<a href="{$baseurl}post/viewpost/{$type}/{$post.post_id}">
+						<a href="{$baseurl}post/viewpost/{$type}/{$post.post_id}" target="_blank">
 							<img class="lazy" data-original="{$post.picture}" alt="{$post.plain_title}" />
 						</a>
 					</div>
 					<div class="post_item_content">
 						<div>
-							<a href="{$baseurl}post/viewpost/{$type}/{$post.post_id}" title='{$post.plain_title}'>
+							<a href="{$baseurl}post/viewpost/{$type}/{$post.post_id}" title='{$post.plain_title}' target="_blank">
 								{$post.title}
 							</a>
 						</div>
@@ -120,7 +120,7 @@
 						<div>
 							<div>
 								<div class="post_item_user_nick">
-									<a href="{$baseurl}user/profile/{$post.user_id}" class="{$post.user.nick_color}">
+									<a href="{$baseurl}user/profile/{$post.user_id}" class="{$post.user.nick_color}" target="_blank">
 										<span class="fui-user"></span>{$post.user.nick}	
 									</a>
 								</div>
