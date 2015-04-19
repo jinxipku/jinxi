@@ -183,11 +183,10 @@ class Display extends MY_Controller {
 		$login_user =  $this->session->userdata('login_user');
 
 		$school_id = null;
-		if(empty($login_user)&&$area=='school'){
-			return null;
-		}else{
+		if(!empty($login_user)&&$area=='school'){
 			$school_id = $login_user['school_id'];//当前用户学校
 		}
+		
 		$num_per_page = $this->config->item("num_per_page");
 		if($type!=0&&$type!=1) return null;
 		if(isset($keyword)){       //有关键词使用关键词进行搜索---sphinx排序暂时先不改。。
