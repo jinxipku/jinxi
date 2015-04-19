@@ -326,7 +326,6 @@ div#user_tabs {
 	background-color: #f4f4f4;
 }
 div#user_panels {
-	margin-top: -1px;
 	min-height: 300px;
 	border-top: none;
 }
@@ -336,6 +335,7 @@ div#user_panels div.tab-pane{
 
 div.sorry_box {
 	height: 240px;
+	width: 710px;
 }
 div.sorry_box>div:nth-child(1){
 	float: left;
@@ -1010,6 +1010,7 @@ div#post_directory li.breadwraper{
 
 div#post_type_box {
 	height: 47px;
+	border-bottom: 1px solid #dddddd;
 }
 div#post_type_box>div#ul_post_type {
 	float: left;
@@ -1022,9 +1023,9 @@ div#post_type_box>div#btng_post_display {
 	float: right;
 }
 div#post_page_header {
-	margin-top: -1px;
+	border-top: none;
 	height: 50px;
-	margin-bottom: 0px;
+	margin-bottom: -4px;
 }
 div#post_page_header>div:nth-child(1) {
 	font-size: 14px;
@@ -1048,7 +1049,6 @@ div#post_page_header>div:nth-child(2) a {
 display in line
 */
 div#post_items_box {
-	margin-top: -5px;
 	padding: 0px 15px 0px 15px;
 	border-top: none;
 }
@@ -1174,7 +1174,174 @@ div#post_items_box div.pagination div {
 	font-size: 17px;
 }
 
+/*
+display in block
+*/
+div#post_items_block.panel {
+	display: none;
+	margin-top: 0px;
+	padding: 0px 15px 0px 15px;
+	border-top: none;
+}
+div#post_items_block {
+	display: none;
+}
+div.post_item_block {
+	float: left;
+	width: 248px;
+	height: 392px;
+	margin: 14px 14px 0px 0px;
+	padding: 10px 12px;
+}
+div.post_item_block:hover {
+	filter:alpha(opacity=90); /*IE滤镜，透明度50%*/
+	-moz-opacity:0.9; /*Firefox私有，透明度50%*/
+	opacity:0.9;/*其他，透明度50%*/
+}
+div#post_items_block>div:nth-child(3n) {
+	margin-right: 0px;
+}
 
+div.post_item_block_user {
+	width: 224px;
+	height: 48px;
+}
+div.post_item_block_user>div:nth-child(1) {
+	float: left;
+	width: 48px;
+	height: 48px;
+}
+div.post_item_block_user>div:nth-child(1) img {
+	width: 48px;
+	height: 48px;
+}
+div.post_item_block_user>div:nth-child(2) {
+	float: left;
+	width: 176px;
+	height: 48px;
+}
+div.post_item_block_user>div:nth-child(2)>p:nth-child(1) {
+	padding-left: 10px;
+	font-size: 15px;
+	margin-bottom: -3px;
+}
+div.post_item_block_user>div:nth-child(2)>p:nth-child(1) small {
+	color: #7F8C8D;
+	padding-left: 5px;
+	font-size: 13px;
+}
+div.post_item_block_user>div:nth-child(2)>p:nth-child(2) small {
+	color: #7F8C8D;
+	padding-left: 10px;
+	font-size: 13px;
+}
+
+div.post_item_block_img {
+	position: relative;
+	margin-top: 5px;
+	width: 224px;
+	height: 224px;
+}
+div.post_item_block_class_cover {
+	position: absolute;
+	bottom: 0;
+	background-color: white;
+	filter:alpha(opacity=50); /*IE滤镜，透明度50%*/
+	-moz-opacity:0.5; /*Firefox私有，透明度50%*/
+	opacity:0.5;/*其他，透明度50%*/
+	width: 224px;
+	height: 50px;
+}
+div.post_item_block_class_cont {
+	position: absolute;
+	bottom: 0;
+	width: 224px;
+	height: 50px;
+}
+div.post_item_block_class_cont>div:nth-child(1) {
+	float: left;
+	width: 174px;
+	height: 50px;
+	font-size: 28px;
+	color: red;
+}
+div.post_item_block_class_cont>div:nth-child(2) {
+	float: left;
+	width: 50px;
+	height: 50px;
+}
+div.post_item_block_img>a>img {
+	width: 224px;
+	height: 224px;
+}
+
+div.post_item_block_title {
+	margin-top: 5px;
+	height: 50px;
+	font-size: 14px;
+	font-weight: bold;
+	width: 224px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	color: #16a085;
+}
+div.post_item_block_title:hover {
+	color: #1abc9c;
+}
+div.post_item_block_title span.tag {
+	padding: 2px 6px 2px 6px;
+  	border-radius: 0px;
+  	font-size: 14px;
+  	cursor: pointer;
+  	margin-right: 3px;
+}
+
+div.post_item_block_others {
+	margin-top: 5px;
+	height: 35px;
+	width: 224px;
+}
+div.post_item_block_others>div:nth-child(1) {
+	float: left;
+	height: 30px;
+	width: 126px;
+	padding-top: 2px;
+}
+div.post_item_block_others>div:nth-child(1) span {
+	font-size: 16px;
+  	color: #7F8C8D;
+  	margin-right: 8px;
+}
+div.post_item_block_others>div:nth-child(2) {
+	float: left;
+	height: 30px;
+	width: 98px;
+}
+div.post_item_block_others>div:nth-child(2) button {
+	padding: 5px 7px;
+  	font-size: 14px;
+}
+div#post_items_block div.pagination {
+	width: 772px;
+}
+div#post_items_block div.pagination div {
+	margin-right: 20px;
+	padding-top: 8px;
+	color: #1abc9c;
+	font-size: 17px;
+}
+
+/*
+10*2
+48
+5
+224
+55
+35
+=392
+
+*/
 
 
 

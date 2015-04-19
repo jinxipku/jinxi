@@ -72,6 +72,7 @@
 					<p class="p_post_content">帖子类型： {$post_type}</p>
 					<p class="p_post_content">一级分类： {$thispost.category1_name}</p>
 					<p class="p_post_content">二级分类： {$thispost.category2_name}</p>
+					<p class="p_post_content">{if $thispost.category1 == 5}书本信息：《{$thispost.brand}》{$thispost.model}{else}品牌型号： {$thispost.brand} {$thispost.model}{/if}</p>
 					<p class="p_post_content">物品状态： 
 					{if $thispost.class == 0}S级别（正品）
 					{elseif $thispost.class == 1}S级别（自制）
@@ -116,7 +117,7 @@
 			<hr/>
 			<p class="p_post_section">图片展示</p>
 			<div id="post_picture">
-				{if isset($thispost.picture)}
+				{if isset($thispost.picture) && $thispost.picture != null}
 				{foreach from = $thispost.picture item = pic} 
 				<img class="lazy" data-original="{$pic.picture_url}" alt="图片展示"/>
 				<pre class="p_picture_des">{$pic.picture_des}</pre>

@@ -499,8 +499,8 @@ class Post extends MY_Controller {
 				$config4 ['source_image'] = $thumb;
 				$config4 ['new_image'] = $thumb;
 				//$config4 ['maintain_ratio'] = TRUE; // 保证设置的长宽有效
-				$config4 ['width'] =  200;
-				$config4 ['height'] = 200;
+				$config4 ['width'] =  225;
+				$config4 ['height'] = 225;
 				$this->image_lib->initialize($config4);
 				$flag1 = $this->image_lib->resize();  //resize结果
 				if(!$flag1){
