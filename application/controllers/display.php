@@ -169,7 +169,7 @@ class Display extends MY_Controller {
 		$post['createat'] = format_time($post['createat']);
 		$post['updateat'] = format_time($post['updateat']);
 
-		$post['category1_name'] = get_category1_name($post['category1']);
+		$post['category1_name'] = get_category1_name2($post['category1']);
 		$post['category2_name'] = get_category2_name($post['category2']);
 		$post['deal'] = get_deal_name($post['deal']);
 
