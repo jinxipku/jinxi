@@ -168,7 +168,7 @@ function get_category_name($class) {
                 "电子词典",
                 "数码录音笔",
                 "电子书",
-                "耳机", // 5
+                "耳机", 
                 "移动硬盘",
                 "笔记本",
                 "平板",
@@ -271,6 +271,24 @@ function get_category2_name($class) {
         return get_category_name ( $class );
 }
 
+function map_to_cat1($class){
+    if ($class <= 10)
+        return 10;
+    else if ($class <= 15)
+        return 15;
+    else if ($class <= 20)
+        return 20;
+    else if ($class <= 26)
+        return 26;
+    else if ($class <= 40)
+        return 40;
+    else if ($class <= 45)
+        return 45;
+    else if ($class <= 50)
+        return 50;
+    else if ($class <= 51)
+        return 51;
+}
 
 
 
