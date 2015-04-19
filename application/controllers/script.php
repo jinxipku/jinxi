@@ -161,5 +161,11 @@ echo '</pre>';
 	public function test_admin(){
 
 	}
+
+	public function test_post_model(){
+		 $res = $this->post_model->get_post_ids(0,1002,null,null,1,'heat');
+		 var_dump($res);
+		//echo now();
+	}
 }
 ?>
