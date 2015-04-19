@@ -103,7 +103,7 @@
 			{else}
 			<div id="post_description">
 			{/if}
-				<pre>{$thispost.description}</pre>
+				<pre>{if $thispost.description == ""}无{else}{$thispost.description}{/if}</pre>
 			</div>
 			{if isset($mypost)}
 			<div id="post_editor" class="clearfix">
@@ -113,16 +113,20 @@
 			</div>
 			{/if}
 			
-			{if isset($thispost.picture)}
+			
 			<hr/>
 			<p class="p_post_section">图片展示</p>
 			<div id="post_picture">
+				{if isset($thispost.picture)}
 				{foreach from = $thispost.picture item = pic} 
 				<img class="lazy" data-original="{$pic.picture_url}" alt="图片展示"/>
 				<pre class="p_picture_des">{$pic.picture_des}</pre>
 				{/foreach}
+				{else}
+				无
+				{/if}
 			</div>
-			{/if}
+			
 			
 			<hr/>
 			<p class="p_post_section">联系方式</p>
@@ -199,8 +203,13 @@
 						</div>
 					</div>
 					{if isset($login_user)}
+					{if $login_user.id == $reply_item.reply_from}
+					<div class="reply_content" onmouseover="$(this).find('button.btn_delete_reply').show();" onmouseout="$(this).find('button.btn_delete_reply').hide();">
+						<button  type="button" class="btn btn-danger btn-sm btn_delete_reply" onclick="delete_reply({$reply_item.id})"><span class="fui-cross"></span>删除</button>
+					{else}
 					<div class="reply_content" onmouseover="$(this).find('button.btn_report').show();" onmouseout="$(this).find('button.btn_report').hide();">
 						<button  type="button" class="btn btn-warning btn-sm btn_report" onclick="go_to_report({$reply_item.id},{$reply_item.floor})"><span class="fui-eye"></span>举报</button>
+					{/if}
 					{else}
 					<div class="reply_content">
 					{/if}

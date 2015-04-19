@@ -82,7 +82,7 @@
 					</p>
 					<p class="p_post_content"><strong>成交方式</strong>： {$thispost.deal}</p>
 					<p class="p_post_content"><strong>心理价位</strong>： {if $thispost.price == 0}面议{else}{$thispost.price} 元{/if}</p>
-					<p class="p_post_content"><strong>详细描述</strong>： {$thispost.description}</p>
+					<p class="p_post_content"><strong>详细描述</strong>： {if $thispost.description == ""}无{else}{$thispost.description}{/if}</p>
 				</div>
 				<hr/>
 				<div id="side_view_footer">

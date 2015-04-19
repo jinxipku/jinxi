@@ -887,7 +887,10 @@ div.reply_content blockquote {
 div.reply_content button.btn_report {
 	float: right;
 	display: none;
-
+}
+div.reply_content button.btn_delete_reply {
+	float: right;
+	display: none;
 }
 div.reply_footer p {
 	text-align: right;
@@ -1025,9 +1028,10 @@ div#post_page_header>div:nth-child(1) {
 	font-size: 14px;
 	padding-top: 15px;
 	padding-left: 40px;
+	border-bottom: none;
 }
 div#post_page_header>div:nth-child(2) {
-	margin: 6px;
+	margin: 6px 5px 0px 0px;
 }
 div#post_page_header>div:nth-child(2) li {
 	margin: 0px;
@@ -1042,8 +1046,9 @@ div#post_page_header>div:nth-child(2) a {
 display in line
 */
 div#post_items_box {
-	margin-top: -1px;
+	margin-top: -5px;
 	padding: 0px 15px 0px 15px;
+	border-top: none;
 }
 div.post_item_box {
 	margin: 10px 0px 10px 0px;

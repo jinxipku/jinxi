@@ -965,6 +965,47 @@ function confirm_reply() {
 	$("#btn_confirm_reply").html('<i class="icon-spinner icon-spin"></i> 处理中');
 	$("#btn_confirm_reply").attr('disabled', true);
 }
+function delete_reply(reply_id) {
+	$("#info_modal").find('.modal-title').text("删除回复");
+	$("#info_modal").find('.modal-cont').text("您确定要删除这条回复吗？");
+	$("#info_modal").find('.btn-primary').bind('click',function() {
+		$("#info_modal").modal('hide');
+		setTimeout(function() {
+			$.post(
+				baseurl + "reply/delete_reply",
+				{
+					reply_id: reply_id
+				},
+				function(res) {
+					if (res.status == 1) {
+						$("#info_modal").find('.modal-title').text("删除回复成功");
+						$("#info_modal").find('.modal-cont').text("恭喜，删除回复成功！");
+						$("#info_modal").find('.btn-default').css('display','none');
+						$("#info_modal").find('.btn-primary').bind('click',function() {
+							$("#info_modal").modal("hide");
+							window.location.href = window.location.href;
+						});
+						$("#info_modal").modal();
+					} else {
+						$("#info_modal").find('.modal-title').text("删除失败");
+						$("#info_modal").find('.modal-cont').text("对不起，操作失败，请重试！");
+						$("#info_modal").find('.btn-default').css('display','none');
+						$("#info_modal").find('.btn-primary').bind('click',function() {
+							$("#info_modal").modal('hide');
+						});
+						$("#btn_delete_reply").html('<span class="fui-cross"></span>删除');
+						$("#btn_delete_reply").attr('disabled', false);
+						$("#info_modal").modal();
+					}
+				},
+				'json'
+			);
+		}, 1000);
+		$("#btn_delete_reply").html('<i class="icon-spinner icon-spin"></i> 处理中');
+		$("#btn_delete_reply").attr('disabled', true);
+	});
+	$("#info_modal").modal();
+}
 function go_to_report(reply_id, user_id) {
 	$("#report_reply_id").val(reply_id);
 	$("#report_user_id").val(user_id);
