@@ -53,7 +53,7 @@ class Display extends MY_Controller {
 		$this->assign('category2', $category2);
 		$this->assign('category2_name', get_category2_name($category2));
 
-		$data = get_posts(0, $area, $sort, $category1, $category2, $page);
+		$data = $this->get_posts(0, $area, $sort, $category1, $category2, $page);
 		$this->assign('total', $data['total']);
 		$this->assign('page_num', $data['page_num']);
 		$this->assign('cur_page', $data['cur_page']);
@@ -115,7 +115,7 @@ class Display extends MY_Controller {
 		$this->assign('category2_name', get_category2_name($category2));
 		$this->assign('page', $page);
 
-		$data = get_posts(0, $area, $sort, $category1, $category2, $page);
+		$data = $this->get_posts(0, $area, $sort, $category1, $category2, $page);
 		$this->assign('total', $data['total']);
 		$this->assign('page_num', $data['page_num']);
 		$this->assign('cur_page', $data['cur_page']);
