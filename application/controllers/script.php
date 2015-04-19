@@ -167,5 +167,13 @@ echo '</pre>';
 		 var_dump($res);
 		//echo now();
 	}
+
+	public function auto_make_post(){
+		$num = 200;
+		$type = 0;//发转让贴
+		foreach ($variable as $key => $value) {
+			# code...
+		}
+	}
 }
 ?>

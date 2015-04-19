@@ -93,6 +93,8 @@ create table jx_seller_post(
 	deal int(11) not null default 0 comment '成交方式(1一口价，2接受砍价，3一元赠送，4面议)',
 	contactby varchar(20) null comment '期望的联系方式（1邮箱，4手机，2qq，3微信，0站内），可多选，以逗号分隔',
 	active tinyint not null default 1 comment '帖子状态(1,正常，2，关闭）',
+	favorite_num int(11) not null default 0 comment '收藏数量',
+	reply_num int(11) not null default 0 comment '回复数量',
 	primary key(post_id)
 )DEFAULT CHARSET=utf8 COMMENT='卖家帖子';
 create index user_index on jx_seller_post(user_id);
@@ -114,6 +116,8 @@ create table jx_buyer_post(
 	deal int(11) not null default 0 comment '成交方式(1心理价位，2,面议)',
 	contactby varchar(20) null comment '期望的联系方式（1邮箱，4手机，2qq，3微信，0站内），可多选，以逗号分隔',
 	active tinyint not null default 1 comment '帖子状态(1,正常，2，关闭）',
+	favorite_num int(11) not null default 0 comment '收藏数量',
+	reply_num int(11) not null default 0 comment '回复数量',
 	primary key(post_id)
 )DEFAULT CHARSET=utf8 COMMENT='买家帖子';
 create index user_index on jx_buyer_post(user_id);
@@ -152,9 +156,9 @@ create table jx_admin(
 )DEFAULT CHARSET=utf8 COMMENT='后台admin表';
 insert into jx_admin values(1,'jx_admin','H6eBqhiZJyg2KESRqKwuh3BY8qGeSkMW1YDO54KzR67wNSOmWgszWuzuV/dr1lOHSa8aE0yxSYDBcEI0or347w==');
 
-drop view if exists seller_post_heat;
-create view seller_post_heat as select jx_seller_post.post_id,(jx_seller_post.createat-unix_timestamp())/86400 as daypass,count(jx_reply.id) as count from jx_seller_post left join jx_reply on jx_reply.post_id=jx_seller_post.post_id and jx_reply.type=0 group by jx_seller_post.post_id;
-select * from seller_post_heat;
+-- drop view if exists seller_post_heat;
+-- create view seller_post_heat as select jx_seller_post.post_id,(jx_seller_post.createat-unix_timestamp())/86400 as daypass,count(jx_reply.id) as count from jx_seller_post left join jx_reply on jx_reply.post_id=jx_seller_post.post_id and jx_reply.type=0 group by jx_seller_post.post_id;
+-- select * from seller_post_heat;
 
-drop view if exists buyer_post_heat;
-create view buyer_post_heat as select jx_buyer_post.post_id,(jx_buyer_post.createat-unix_timestamp())/86400 as daypass,count(jx_reply.id) as count from jx_buyer_post left join jx_reply on jx_reply.post_id=jx_buyer_post.post_id and jx_reply.type=1 group by jx_buyer_post.post_id;
+-- drop view if exists buyer_post_heat;
+-- create view buyer_post_heat as select jx_buyer_post.post_id,(jx_buyer_post.createat-unix_timestamp())/86400 as daypass,count(jx_reply.id) as count from jx_buyer_post left join jx_reply on jx_reply.post_id=jx_buyer_post.post_id and jx_reply.type=1 group by jx_buyer_post.post_id;

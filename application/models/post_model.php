@@ -102,11 +102,9 @@ class post_model extends CI_Model {
 		if($sort=='time'){
 			$this->db->order_by("createat", "desc"); 
 		}elseif($sort=='heat'){
-			//热度计算  每天减2，每个收藏加5
-			$heat_view = get_heat_view($type);
-			$this->db->select("(daypass*2+count*5) as heat");
+			//热度计算  每天减2，每个收藏加5，每个回复+4
+			$this->db->select("(2*(createat-unix_timestamp())/86400+reply_num*4+favorite_num*5) as heat");
 			$this->db->order_by("heat desc");
-			$this->db->join($heat_view,$heat_view.".post_id=".$table.'.post_id');
 		}
 		if(isset($school_id)){
 			$map['school_id'] = $school_id;
@@ -140,6 +138,23 @@ class post_model extends CI_Model {
 			$res = $this->db->count_all_results();
 		}
 		return $res;
+	}
+
+
+	public function update_reply_num($post_id,$type,$num){
+		$table = get_post_table($type);
+		$num = ($num==1) ? "+1":"-1";
+		$sql = "update ".$table." set reply_num=reply_num".$num." where post_id=".$post_id ;
+		$query = $this->db->query($sql);
+		return !empty($query);
+	}
+
+	public function update_favorite_num($post_id,$type,$num){
+		$table = get_post_table($type);
+		$num = ($num==1) ? "+1":"-1";
+		$sql = "update ".$table." set favorite_num=favorite_num".$num." where post_id=".$post_id ;
+		$query = $this->db->query($sql);
+		return !empty($query);
 	}
 
 

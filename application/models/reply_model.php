@@ -2,6 +2,7 @@
 class reply_model extends CI_Model {
 	public function __construct() {
 		$this->load->database ();
+		$this->load->model("post_model");
 	}
 
 	//add_reply时要确保每层楼只有一个0
@@ -19,6 +20,7 @@ class reply_model extends CI_Model {
 		$reply['floor'] = $max_floor + 1; //最高楼上加1
 		$reply['createat'] = time();
 		$res = $this->db->insert("jx_reply",$reply);  //插入回复表
+		$res2 = $this->post_model->update_reply_num($reply['post_id'],$reply['type'],1);
 		return $res;
 	}
 
@@ -51,9 +53,19 @@ class reply_model extends CI_Model {
 		return $res;
 	}
 
-	public function delete_reply($reply_id){
+	public function get_reply_by_id($reply_id){
 		$map['id'] = $reply_id;
-		return $this->db->delete('jx_reply',$map);
+		$this->db->where($map);
+		$query = $this->db->get("jx_reply");
+		return $query->row_array();
+	}
+
+	public function delete_reply($reply){
+		$map['id'] = $reply['id'];
+		$res = $this->db->delete('jx_reply',$map);	
+		if($res)
+			$this->post_model->update_reply_num($reply['post_id'],$reply['type'],-1);
+		return $res;	
 	}
 
 	public function make_report($reply_id,$reason,$other_reason){
