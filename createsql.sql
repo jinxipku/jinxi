@@ -152,3 +152,9 @@ create table jx_admin(
 )DEFAULT CHARSET=utf8 COMMENT='后台admin表';
 insert into jx_admin values(1,'jx_admin','H6eBqhiZJyg2KESRqKwuh3BY8qGeSkMW1YDO54KzR67wNSOmWgszWuzuV/dr1lOHSa8aE0yxSYDBcEI0or347w==');
 
+drop view if exists seller_post_heat;
+create view seller_post_heat as select jx_seller_post.post_id,(jx_seller_post.createat-unix_timestamp())/86400 as daypass,count(jx_reply.id) as count from jx_seller_post left join jx_reply on jx_reply.post_id=jx_seller_post.post_id and jx_reply.type=0 group by jx_seller_post.post_id;
+select * from seller_post_heat;
+
+drop view if exists buyer_post_heat;
+create view buyer_post_heat as select jx_buyer_post.post_id,(jx_buyer_post.createat-unix_timestamp())/86400 as daypass,count(jx_reply.id) as count from jx_buyer_post left join jx_reply on jx_reply.post_id=jx_buyer_post.post_id and jx_reply.type=1 group by jx_buyer_post.post_id;

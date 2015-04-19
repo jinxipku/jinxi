@@ -166,16 +166,33 @@ class Display extends MY_Controller {
 	//给参数，$type,$category1,$category2分别表示对帖子进行筛选
 	//$page分页
 	//$keyword为关键词搜索
-	public function get_posts($type=0,$category1=null,$category2=null,$page=3,$keyword=null){
+	//($type, $area, $sort, $category1, $category2, $page);
+	//sort  time heat
+	//area school global
+	//type 0卖  1买
+	public function get_posts($type=0,$area='school',$sort='time',$category1=null,$category2=null,$page=1,$keyword=null){
 		$data = array();
+		$login_user =  $this->session->userdata('login_user');
+
+		$school_id = null;
+		if(empty($login_user)&&$area=='school'){
+			return null;
+		}else{
+			$school_id = $login_user['school_id'];//当前用户学校
+		}
+		$num_per_page = $this->config->item("num_per_page");
 		if($type!=0&&$type!=1) return null;
-		if(isset($keyword)){       //有关键词使用关键词进行搜索
+		if(isset($keyword)){       //有关键词使用关键词进行搜索---sphinx排序暂时先不改。。
 			$data = $this->get_sphinx_result($keyword,$type,$category1,$category2,$page);
 		}else{
-			$res = $this->post_model->get_post_ids($type,$category1,$category2,$page);
-			$total = $this->post_model->get_post_ids_total($type,$category1,$category2);
-			$data['posts'] = array();
+			$total = $this->post_model->get_post_ids_total($type,$school_id,$category1,$category2);
 			$data['total'] = $total;
+			$page_num = intval(ceil($data['total']/$num_per_page));
+			$page = $page%$page_num;
+			$page = ($page==0)? $page_num : $page;
+			$res = $this->post_model->get_post_ids($type,$school_id,$category1,$category2,$page,$sort);
+			$data['posts'] = array();
+			
 			foreach ($res as $key => $value) {
 				$data['posts'][] = $this->get_post_info($value,$type);
 			}
@@ -183,8 +200,11 @@ class Display extends MY_Controller {
 		foreach ($data['posts'] as $key => $value) {
 			$data['posts'][$key]['description'] = cutString($data['posts'][$key]['description']);
 		}
-		//var_dump($data);
-		return $data;
+		$data['post_num'] = count($data['posts']);
+		$data['page_num'] = intval(ceil($data['total']/$num_per_page));
+		$data['cur_page'] = $page;
+		var_dump($data);
+		//return $data;
 	}
 
 	//sphinx调用，用于搜索关键词（关键词的搜索范围为brand,model,description)

@@ -86,17 +86,30 @@ class post_model extends CI_Model {
 		return $this->db->update($table,array("active"=>$active));
 	}
 
-	public function get_post_ids($type,$category1,$category2,$page){
+	public function get_post_ids($type,$school_id,$category1,$category2,$page,$sort){
 		$table = get_post_table($type);
 		$map = array();
 		if(isset($category1)) $map['category1'] = $category1;
 		if(isset($category2)) $map['category2'] = $category2;
 		$num = $this->config->item('num_per_page');
-		$this->db->select("post_id");
+		$this->db->select($table.".post_id");
 		$this->db->limit($num,($page-1)*$num);
+		$this->db->from($table);
+		if($sort=='time'){
+			$this->db->order_by("createat", "desc"); 
+		}elseif($sort=='heat'){
+			//热度计算  每天减2，每个收藏加5
+			$heat_view = get_heat_view($type);
+			$this->db->select("(daypass*2+count*5) as heat");
+			$this->db->order_by("heat desc");
+			$this->db->join($heat_view,$heat_view.".post_id=".$table.'.post_id');
+		}
+		if(isset($school_id)){
+			$map['school_id'] = $school_id;
+			$this->db->join('jx_user','jx_user.id='.$table.'.user_id');
+		}
 		$this->db->where($map);
-		$this->db->order_by("createat", "desc"); 
-		$post_ids = $this->db->get($table)->result_array();
+		$post_ids = $this->db->get()->result_array();
 		$res = array();
 		foreach ($post_ids as $key => $value) {
 			$res[] = $value['post_id'];
@@ -104,14 +117,23 @@ class post_model extends CI_Model {
 		return $res;
 	}
 
-	public function get_post_ids_total($type,$category1,$category2){
+	public function get_post_ids_total($type,$school_id,$category1,$category2){
 		$map = array();
 		if(isset($category1)) $map['category1'] = $category1;
 		if(isset($category2)) $map['category2'] = $category2;
-		$this->db->where($map);
 		$table = get_post_table($type);
-		$this->db->from($table);
-		$res = $this->db->count_all_results();
+		if(!isset($school_id)){
+			$this->db->where($map);
+			$this->db->from($table);
+			$res = $this->db->count_all_results();
+		}else{
+			$map['school_id'] = $school_id;
+			$this->db->select($table.".*,"."jx_user.school_id");
+			$this->db->where($map);
+			$this->db->from($table);
+			$this->db->join('jx_user','jx_user.id='.$table.'.user_id');
+			$res = $this->db->count_all_results();
+		}
 		return $res;
 	}
 

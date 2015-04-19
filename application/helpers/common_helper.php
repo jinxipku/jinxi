@@ -337,6 +337,14 @@ function get_post_table($type){
 
 }
 
+function get_heat_view($type){
+    if($type==0){
+        return "seller_post_heat";
+    }elseif($type==1){
+        return "buyer_post_heat";
+    }
+}
+
 function parse_tag($text){
     return strip_tags($text);
     //return htmlentities($text);
@@ -427,6 +435,7 @@ function cutString($str,$num=50){
         return mb_substr($str, 0, 50).'......';
     }
 }
+
 
 
 ?>
