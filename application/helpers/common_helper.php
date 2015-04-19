@@ -396,7 +396,10 @@ function get_title($type,$deal,$class,$hasimg,$cat1,$cat2,$brand,$model){
     $t5 = " > ";
     $t6 = $cat2;
     $t7 = " : ";
-    $t8 = $brand." ";
+    if($cat1=='图书'){
+        $t8 = "《".$brand."》 ";
+    }
+    else $t8 = $brand." ";
     $t9 = $model." ";
     return $title.$t1.$t2.$t10.$t3.$t4.$t5.$t6.$t7.$t8.$t9;
 }
@@ -415,7 +418,10 @@ function get_plain_title($type,$deal,$class,$hasimg,$cat1,$cat2,$brand,$model){
     $t5 = " > ";
     $t6 = $cat2;
     $t7 = " : ";
-    $t8 = $brand." ";
+    if($cat1=='图书'){
+        $t8 = "《".$brand."》 ";
+    }
+    else $t8 = $brand." ";
     $t9 = $model." ";
     return $title.$t1.$t2.$t10.$t3.$t4.$t5.$t6.$t7.$t8.$t9;
 }

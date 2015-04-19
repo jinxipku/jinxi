@@ -134,7 +134,7 @@ class Post extends MY_Controller {
 		$post['createat'] = format_time($post['createat']);
 		$post['updateat'] = format_time($post['updateat']);
 
-		$post['category1_name'] = get_category1_name($post['category1']);
+		$post['category1_name'] = get_category1_name2($post['category1']);
 		$post['category2_name'] = get_category2_name($post['category2']);
 		$post['deal'] = get_deal_name($post['deal']);
 
@@ -142,7 +142,7 @@ class Post extends MY_Controller {
 		$hasimg = false;
 		if(!empty($post['picture'])){
 			$hasimg = true;
-		}
+		}else $post['picture'] = array();
 		$post['title'] = get_title($type,$post['deal'],$post['class'],$hasimg,$post['category1_name'],$post['category2_name'],$post['brand'],$post['model']);
 		$post['plain_title'] = get_plain_title($type,$post['deal'],$post['class'],$hasimg,$post['category1_name'],$post['category2_name'],$post['brand'],$post['model']);
 		
@@ -152,23 +152,23 @@ class Post extends MY_Controller {
 		
 		if(!empty($contactby)&&count($contactby)>0){
 			foreach ($contactby as $key => $value) {
-				if($key==0){
+				if($value==0){
 					$contact[] = "站内： 回复本帖";
-				}elseif($key==1){
+				}elseif($value==1){
 					$contact[] = "邮箱： ". $post['user']['email'];
-				}elseif($key==2){
+				}elseif($value==2){
 					$contact[] = "Q  Q： ".turnToMars($post['user']['qq'],$flag);
-				}elseif($key==3){
+				}elseif($value==3){
 					$contact[] = "微信： ".$post['user']['weixin'];
-				}elseif($key==4){
+				}elseif($value==4){
 					$contact[] = "手机： ".turnToMars($post['user']['phone'],$flag);
 				}
 			}
 			$post['contactby'] = $contact;
 		}else $post['contactby'] = null;
 
-		$post['favorite_num'] = $this->favorites_model->get_favorites_num($post_id,$type);
-		$post['reply_num'] = $this->reply_model->get_reply_num($post_id,$type);
+		//$post['favorite_num'] = $this->favorites_model->get_favorites_num($post_id,$type);
+		//$post['reply_num'] = $this->reply_model->get_reply_num($post_id,$type);
 		
 			$reply = $this->reply_model->get_reply($post_id,$type);
 			if(empty($reply)) $post['reply'] = null;

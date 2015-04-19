@@ -165,8 +165,8 @@ class Display extends MY_Controller {
 		}
 		$post['title'] = get_title($type,$post['deal'],$post['class'],$hasimg,$post['category1_name'],$post['category2_name'],$post['brand'],$post['model']);
 		$post['plain_title'] = get_plain_title($type,$post['deal'],$post['class'],$hasimg,$post['category1_name'],$post['category2_name'],$post['brand'],$post['model']);
-		$post['favorite_num'] = $this->favorites_model->get_favorites_num($post_id,$type);
-		$post['reply_num'] = $this->reply_model->get_reply_num($post_id,$type);
+		//$post['favorite_num'] = $this->favorites_model->get_favorites_num($post_id,$type);
+		//$post['reply_num'] = $this->reply_model->get_reply_num($post_id,$type);
 		unset($post['contactby']);
 		return $post;
 	}

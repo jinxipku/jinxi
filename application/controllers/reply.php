@@ -1,6 +1,6 @@
 <?php
 // +----------------------------------------------------------------------
-// | Reply 用户账户操作（注册、登录）
+// | Reply 用户回帖相关
 // +----------------------------------------------------------------------
 // | Author: JINXI
 // +----------------------------------------------------------------------
@@ -12,6 +12,7 @@ class Reply extends MY_Controller {
 		$this->load->helper('url');
 		$this->load->helper('array');
 		$this->load->model('reply_model');
+		$this->load->model("post_model");
 	}
 
 // +----------------------------------------------------------------------
@@ -34,18 +35,18 @@ class Reply extends MY_Controller {
 			$this->ajaxReturn(null,"回复失败",0);
 		}
 	}
-	//post参数 post_id type floor
+	//post参数 reply_id
 	public function delete_reply(){
 		$user =  $this->session->userdata('login_user');
 		if(empty($user)) $this->ajaxReturn(null,'未登录',0);
-		$res = $this->reply_model->get_single_reply($_POST['post_id'],$_POST['type'],$_POST['floor']);
+		$res = $this->reply_model->get_reply_by_id($_POST['reply_id']);
 		if(empty($res)){
 			$this->ajaxReturn(null,'帖子不存在',0);
 		}else{
 			if($res['reply_from']!=$user['id']){
 				$this->ajaxReturn(null,'你不能删除别人的回复',0);
 			}
-			$res = $this->reply_model->delete_reply($res['id']);
+			$res = $this->reply_model->delete_reply($res);
 			if($res) $this->ajaxReturn(null,'操作成功',1);
 			else $this->ajaxReturn(null,'操作失败',0);
 		}
