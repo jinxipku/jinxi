@@ -89,6 +89,7 @@ class post_model extends CI_Model {
 	public function get_post_ids($type,$school_id,$category1,$category2,$page,$sort){
 		$table = get_post_table($type);
 		$map = array();
+		$map['active'] = 1;
 		if(isset($category1)) $map['category1'] = $category1;
 		if(isset($category2)) $map['category2'] = $category2;
 		$num = $this->config->item('num_per_page');
@@ -121,6 +122,7 @@ class post_model extends CI_Model {
 		$map = array();
 		if(isset($category1)) $map['category1'] = $category1;
 		if(isset($category2)) $map['category2'] = $category2;
+		$map['active'] = 1;
 		$table = get_post_table($type);
 		if(!isset($school_id)){
 			$this->db->where($map);

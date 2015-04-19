@@ -152,6 +152,9 @@ class Display extends MY_Controller {
 		$hasimg = false;
 		if(!empty($post['picture'])){
 			$hasimg = true;
+			$post['picture'] = $post['picture'][$post['first_picture']]['thumb_picture_url'];
+		}else{
+			$post['picture'] = base_url("img/post/".$post['category2'].".png");
 		}
 		$post['title'] = get_title($type,$post['deal'],$post['class'],$hasimg,$post['category1_name'],$post['category2_name'],$post['brand'],$post['model']);
 		$post['plain_title'] = get_plain_title($type,$post['deal'],$post['class'],$hasimg,$post['category1_name'],$post['category2_name'],$post['brand'],$post['model']);
@@ -203,8 +206,10 @@ class Display extends MY_Controller {
 		$data['post_num'] = count($data['posts']);
 		$data['page_num'] = intval(ceil($data['total']/$num_per_page));
 		$data['cur_page'] = $page;
-		var_dump($data);
-		//return $data;
+		// echo '<pre>';
+		// print_r($data);
+		// echo '</pre>';
+		return $data;
 	}
 
 	//sphinx调用，用于搜索关键词（关键词的搜索范围为brand,model,description)
