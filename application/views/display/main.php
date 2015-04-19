@@ -88,6 +88,17 @@
 			</div>
 			
 			<div id="post_items_box" class="panel panel-default">
+				{if $total == 0}
+				<div class="sorry_box">
+					<div>
+						<img class="passive" src="{$baseurl}img/info/sorry.png" alt="sorry"/>
+					</div>
+					<div>
+						<p>sorry，今昔网木有为您找到数据~</p>
+						<p>立刻去发帖吧，或者试试其他的分类~</p>
+					</div>
+				</div>
+				{else}
 
 				{foreach from = $posts item = post}
 				<hr/>
@@ -119,7 +130,7 @@
 							</div>
 							<div>
 								<span class="fui-location">
-									{$post.user.school}
+									{$post.user.school_name}
 								</span>
 								<span class="fui-time">
 									{$post.createat}
@@ -128,7 +139,7 @@
 									{$post.reply_num}
 								</span>
 								<span class="fui-heart">
-									{$post.favrite_num}
+									{$post.favorite_num}
 								</span>
 							</div>
 						</div>
@@ -138,11 +149,13 @@
 							<img class="lazy" data-original="http://www.xn--wmqr18c.cn/img/class/{$post.class}.png" alt="物品状态" />
 						</div>
 						<div>
-							{if $thispost.price == 0}面议{else}￥{$thispost.price}{/if}
+							{if $post.price == 0}面议{else}￥{$post.price}{/if}
 						</div>
 					</div>
 				</div>
 				{/foreach}
+
+				{/if}
 
 			</div>
 			<script type="text/javascript" src="{$baseurl}js/post_item.js"></script>

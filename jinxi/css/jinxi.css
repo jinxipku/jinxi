@@ -1042,6 +1042,7 @@ div#post_page_header>div:nth-child(2) a {
 display in line
 */
 div#post_items_box {
+	margin-top: -1px;
 	padding: 0px 15px 0px 15px;
 }
 div.post_item_box {
