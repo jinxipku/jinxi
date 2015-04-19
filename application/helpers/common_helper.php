@@ -273,21 +273,21 @@ function get_category2_name($class) {
 
 function map_to_cat1($class){
     if ($class <= 10)
-        return 10;
+        return 1;
     else if ($class <= 15)
-        return 15;
+        return 2;
     else if ($class <= 20)
-        return 20;
+        return 3;
     else if ($class <= 26)
-        return 26;
+        return 4;
     else if ($class <= 40)
-        return 40;
+        return 5;
     else if ($class <= 45)
-        return 45;
+        return 6;
     else if ($class <= 50)
-        return 50;
+        return 7;
     else if ($class <= 51)
-        return 51;
+        return 8;
 }
 
 
