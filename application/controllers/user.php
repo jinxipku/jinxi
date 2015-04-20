@@ -42,8 +42,11 @@ class User extends MY_Controller {
 				$this->assign('myself', true);
 				$this->assign('nav_tab', 2);
 			}
-			else if ($this->love_model->get_love($login_user['id'], $id) > 0) {
-				$this->assign('has_love', true);
+			else{
+				$this->user_model->visit($login_user['id'],$id);
+				if ($this->love_model->get_love($login_user['id'], $id) > 0) {
+					$this->assign('has_love', true);
+				}
 			}
 		}
 		$user = $this->user_model->get_info($id);

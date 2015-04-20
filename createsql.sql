@@ -164,6 +164,14 @@ create table jx_advice(
 	addat int(11) comment '创建时间',
 	primary key(id)
 )DEFAULT CHARSET=utf8 COMMENT='用户建议';
+
+drop table if exists jx_visit;
+create table jx_visit(
+	visitor int(11) comment '看的人',
+	visitee int(11) comment '被看的人',
+	unique(visitor,visitee)
+)DEFAULT CHARSET=utf8 COMMENT='拜访表';
+create index visit_index on jx_visit(visitee);
 -- drop view if exists seller_post_heat;
 -- create view seller_post_heat as select jx_seller_post.post_id,(jx_seller_post.createat-unix_timestamp())/86400 as daypass,count(jx_reply.id) as count from jx_seller_post left join jx_reply on jx_reply.post_id=jx_seller_post.post_id and jx_reply.type=0 group by jx_seller_post.post_id;
 -- select * from seller_post_heat;

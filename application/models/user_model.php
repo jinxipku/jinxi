@@ -38,6 +38,8 @@ class user_model extends CI_Model {
 		$this->db->where("active",1);
 		$this->db->from('jx_buyer_post');
 		$user['active_post_number'] += $this->db->count_all_results();
+
+		$user['visits'] = $this->get_visit_num($user_id);
 		return $user;
 	}
 
@@ -60,5 +62,25 @@ class user_model extends CI_Model {
 		$sql = "update jx_user set points=points+".$points." where id=".$user_id ;
 		$query = $this->db->query($sql);
 		return !empty($query);
+	}
+
+	public function visit($visitor,$visitee){
+		$map['visitor'] = $visitor;
+		$map['visitee'] = $visitee;
+		$this->db->where($map);
+		$this->db->from("jx_visit");
+		$res = $this->db->count_all_results();
+		if($res==0){
+			return $this->db->insert("jx_visit",$map);
+		}
+		return false;
+	}
+
+	public function get_visit_num($id){
+		$map['visitee'] = $id;
+		$this->db->where($map);
+		$this->db->from("jx_visit");
+		$res = $this->db->count_all_results();
+		return $res;
 	}
 }

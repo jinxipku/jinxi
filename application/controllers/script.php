@@ -181,6 +181,12 @@ echo '</pre>';
 		var_dump($res);
 	}
 
+	public function test_visit(){
+		$this->user_model->visit(1,2);
+		$tremp = $this->user_model->get_visit_num(2);
+		var_dump($tremp);
+	}
+
 	//用于发一火车皮帖子
 	public function auto_make_post(){
 		$num = 200;
