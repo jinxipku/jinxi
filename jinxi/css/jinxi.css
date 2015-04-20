@@ -1305,7 +1305,7 @@ div.post_item_block_others {
 div.post_item_block_others>div:nth-child(1) {
 	float: left;
 	height: 30px;
-	width: 126px;
+	width: 120px;
 	padding-top: 2px;
 }
 div.post_item_block_others>div:nth-child(1) span {
@@ -1314,9 +1314,8 @@ div.post_item_block_others>div:nth-child(1) span {
   	margin-right: 8px;
 }
 div.post_item_block_others>div:nth-child(2) {
-	float: left;
+	float: right;
 	height: 30px;
-	width: 98px;
 }
 div.post_item_block_others>div:nth-child(2) button {
 	padding: 5px 7px;
