@@ -846,7 +846,7 @@ function delete_collect(pid, ptype){
 						$("#info_modal").find('.btn-primary').bind('click',function() {
 							$("#info_modal").modal('hide');
 						});
-						$("#btn_collcet").html(' 已收藏');
+						$("#btn_collcet").html('已收藏');
 						$("#btn_collcet").attr('disabled', false);
 						$("#info_modal").modal();
 					}
@@ -863,7 +863,7 @@ function change2dc() {
 	$("#btn_collcet").html('&nbsp;- 取消');
 }
 function change2ac() {
-	$("#btn_collcet").html(' 已收藏');
+	$("#btn_collcet").html('已收藏');
 }
 function edit_description() {
 	$("#post_description").slideUp(800, function() {
@@ -1054,25 +1054,6 @@ function confirm_report() {
 
 
 
-function addfocus(focuser,focusee,focuss){
-	$.post(baseurl + "ajax/addfocus",{focuser:focuser,focusee:focusee,focuss:focuss},function(str){
-		alert(str);
-		window.location.href=window.location.href;
-	})
-	$("#focusbox").html('<i class="icon-spinner icon-spin"></i> 正在处理');
-}
-function deletefocus(focuser,focusee,focuss){
-	$.post(baseurl + "ajax/deletefocus",{focuser:focuser,focusee:focusee,focuss:focuss},function(){
-		window.location.href=window.location.href;
-	})
-	$("#focusbox").html('<i class="icon-spinner icon-spin"></i> 正在处理');
-}
-function change2df(){
-	$("#focusbt").html('&nbsp;- 取消');
-}
-function change2af(){
-	$("#focusbt").html(' 已收藏');
-}
 
 
 function gotocomm(uid){

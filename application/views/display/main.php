@@ -128,7 +128,15 @@
 									</a>
 								</div>
 								<div class="post_item_user_need">
-									<button type="button" class="btn btn-info pull-right">我有{if $type==0}类似闲置{else}类似需求{/if}</button>
+									{if !isset($login_user)}
+									<a type="button" class="btn btn-sm btn-info" href="{$baseurl}account/loginfo"><span class="fui-plus"></span>收藏</a>
+									{elseif $post.user_id == $login_user.id}
+									<button type="button" class="btn btn-warning btn-sm" disabled>我 的</button>
+									{elseif $has_collect}
+									<button type="button" data-pid="{$post.post_id}" class="btn1_post_item btn btn-sm btn-info">已收藏</button>
+									{else}
+									<button type="button" data-pid="{$post.post_id}" class="btn2_post_item btn btn-info btn-sm"><span class="fui-plus"></span>收藏</button>
+									{/if}
 								</div>
 							</div>
 							<div>
@@ -252,7 +260,15 @@
 							</span>
 						</div>
 						<div>
-							<button type="button" class="btn btn-info btn-sm">我有{if $type==0}类似闲置{else}类似需求{/if}</button>
+							{if !isset($login_user)}
+							<a type="button" class="btn btn-sm btn-info" href="{$baseurl}account/loginfo"><span class="fui-plus"></span>收藏</a>
+							{elseif $post.user_id == $login_user.id}
+							<button type="button" class="btn btn-warning btn-sm" disabled>我 的</button>
+							{elseif $has_collect}
+							<button type="button" data-pid="{$post.post_id}" class="btn1_post_item btn btn-sm btn-info">已收藏</button>
+							{else}
+							<button type="button" data-pid="{$post.post_id}" class="btn2_post_item btn btn-info btn-sm"><span class="fui-plus"></span>收藏</button>
+							{/if}
 						</div>
 					</div>
 				</div>			
