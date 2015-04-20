@@ -3,6 +3,7 @@ class post_model extends CI_Model {
 	public function __construct() {
 		$this->load->database ();
 		$this->load->model("user_model");
+		$this->load->helper('url');
 	}
 
 
@@ -68,25 +69,53 @@ class post_model extends CI_Model {
 		return $res;
 	}
 
-	//返回某个用户发的所有帖子，不需要联立其他表，只需要返回对应post表中信息
-	public function get_user_posts($user_id,$type){
-		$table = get_post_table($type);
-		$this->db->order_by("createat", "desc"); 
-		$query = $this->db->get_where($table, array('user_id' => $user_id));
-		$res = $query->result_array();
 
-		foreach ($res as $key => &$v) {
-			$v['createat'] = date('Y-m-d H:i:s',$v['createat']);
-			$v['updateat'] = date('Y-m-d H:i:s',$v['updateat']);
-			$temp = unserialize($v['picture']);
-			if(is_array($temp)&&count($temp)!=0){
-				foreach ($temp as $ke => $value) {
-					$temp[$ke]['thumb_picture_url'] = get_thumb($value['picture_url']);
-				}
-			}else $temp = null;
-			$v['picture'] = $temp;
+	//返回某个用户发的某一页的帖子
+	public function get_user_posts($user_id,$type,$page=1){
+		$sql = "select post_id from jx_seller_post where user_id=".$user_id." union all select post_id from jx_buyer_post where user_id=".$user_id;
+		$query = $this->db->query($sql);
+		$total = $query->num_rows();
+
+		$num_per_page = $this->config->item("num_per_page");
+		$downer = ($page-1)*$num_per_page;
+		$upper = $page*$num_per_page;
+		$sql = "select post_id,0 as type,createat from jx_seller_post where user_id=".$user_id." union all select post_id,1 as type,createat from jx_buyer_post where user_id=".$user_id." limit $downer,$upper";
+		
+		$query = $this->db->query($sql);
+		$records = $query->result_array();
+		$posts = array();//结果数组
+		foreach ($records as $key => $value) {
+			$post = $this->get_post($value['post_id'],$value['type'],true);
+			if(empty($post)) continue;
+
+			$post['type'] = $type;
+			$post['createat'] = format_time($post['createat']);
+			$post['updateat'] = format_time($post['updateat']);
+
+			$post['category1_name'] = get_category1_name2($post['category1']);
+			$post['category2_name'] = get_category2_name($post['category2']);
+			$post['deal'] = get_deal_name($post['deal']);
+
+			$hasimg = false;
+			if(!empty($post['picture'])){
+				$hasimg = true;
+				$post['picture'] = $post['picture'][$post['first_picture']]['thumb_picture_url'];
+			}else{
+				$post['picture'] = base_url("img/post/".($post['category2']+1).".png");
+			}
+			$post['title'] = get_title($type,$post['deal'],$post['class'],$hasimg,$post['category1_name'],$post['category2_name'],$post['brand'],$post['model']);
+			$post['plain_title'] = get_plain_title($type,$post['deal'],$post['class'],$hasimg,$post['category1_name'],$post['category2_name'],$post['brand'],$post['model']);
+			unset($post['contactby']);
+			$posts[] = $post;
 		}
-		return $res;
+		$data['total'] = $total;
+		$data['posts'] = $posts;
+		$data['post_num'] = count($data['posts']);
+		$data['page_num'] = intval(ceil($data['total']/$num_per_page));
+		$data['cur_page'] = $page;
+
+
+		return $data;
 	}
 
 	public function set_active($post_id,$type,$active){

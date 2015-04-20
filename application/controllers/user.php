@@ -127,7 +127,14 @@ class User extends MY_Controller {
 		$this->display ( 'templates/side.php' );
 		$this->display ( 'templates/footer.php' );
 	}
+// +----------------------------------------------------------------------
+// | 普通函数
+// +----------------------------------------------------------------------
 
+	//获取用户发的帖子，不分买和卖
+	public function get_user_post($user_id){
+
+	}
 
 // +----------------------------------------------------------------------
 // | 以下为ajax接口
@@ -314,6 +321,8 @@ class User extends MY_Controller {
 			$this->ajaxReturn(null,"",1);
 		else $this->ajaxReturn(null,"",0);
 	}
+
+
 
 
 

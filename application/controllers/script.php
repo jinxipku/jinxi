@@ -187,6 +187,10 @@ echo '</pre>';
 		var_dump($tremp);
 	}
 
+	public function test_get_user_posts(){
+		$this->post_model->get_user_posts(1,0);
+	}
+
 	//用于发一火车皮帖子
 	public function auto_make_post(){
 		$num = 200;
