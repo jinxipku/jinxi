@@ -2,6 +2,7 @@
 class post_model extends CI_Model {
 	public function __construct() {
 		$this->load->database ();
+		$this->load->model("user_model");
 	}
 
 
@@ -9,7 +10,9 @@ class post_model extends CI_Model {
 		$table = get_post_table($type);
 		$res = $this->db->insert($table, $info); 
 		if( $res ){
-			return $this->db->insert_id();//post id
+			$post_id =  $this->db->insert_id();//post id
+			$res3 = $this->user_model->addpoints($info['user_id'],$this->config->item("post_bonus"));
+			return $post_id;
 		}else return 0;
 		
 	}
@@ -39,14 +42,17 @@ class post_model extends CI_Model {
 		$query = $this->db->get_where($table, array('post_id' => $post_id));
 		$res = $query->row_array();
 		if(empty($res)) return null;
-		$picture = unserialize($res['picture']);
-		if(is_array($picture)){
-			foreach ($picture as $key => $value) {
-				$picture[$key]['thumb_picture_url'] = get_thumb($value['picture_url']);
+		if($type==0){
+			$picture = unserialize($res['picture']);
+			if(is_array($picture)){
+				foreach ($picture as $key => $value) {
+					$picture[$key]['thumb_picture_url'] = get_thumb($value['picture_url']);
+				}
 			}
+			
+			$res['picture'] = $picture;
 		}
 		
-		$res['picture'] = $picture;
 
 		$this->db->from("jx_user");
 		if(!$hall)
@@ -103,7 +109,7 @@ class post_model extends CI_Model {
 			$this->db->order_by("createat", "desc"); 
 		}elseif($sort=='heat'){
 			//热度计算  每天减2，每个收藏加5，每个回复+4
-			$this->db->select("(2*(createat-unix_timestamp())/86400+reply_num*4+favorite_num*5) as heat");
+			$this->db->select("(3*(createat-unix_timestamp())/86400+reply_num*4+favorite_num*5) as heat");
 			$this->db->order_by("heat desc");
 		}
 		if(isset($school_id)){

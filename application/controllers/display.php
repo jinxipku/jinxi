@@ -208,6 +208,12 @@ class Display extends MY_Controller {
 		
 		$num_per_page = $this->config->item("num_per_page");
 		if($type!=0&&$type!=1) return null;
+
+		if(!empty($login_user)){            //如果已经登录，获取收藏贴的id
+			$favorite_ids = $this->favorites_model->get_favorite_ids($login_user['id'],$type);
+		}
+		
+
 		if(isset($keyword)){       //有关键词使用关键词进行搜索---sphinx排序暂时先不改。。
 			$data = $this->get_sphinx_result($keyword,$type,$category1,$category2,$page);
 		}else{
@@ -230,6 +236,9 @@ class Display extends MY_Controller {
 		}
 		foreach ($data['posts'] as $key => $value) {
 			$data['posts'][$key]['description'] = cutString($data['posts'][$key]['description']);
+			if(isset($favorite_ids)&&in_array($data['posts'][$key]['post_id'], $favorite_ids)){
+				$data['posts'][$key]['has_collect'] = 1;
+			}else $data['posts'][$key]['has_collect'] = 0;
 		}
 		$data['post_num'] = count($data['posts']);
 		$data['page_num'] = intval(ceil($data['total']/$num_per_page));
@@ -237,6 +246,7 @@ class Display extends MY_Controller {
 		// echo '<pre>';
 		// print_r($data);
 		// echo '</pre>';
+
 		return $data;
 	}
 

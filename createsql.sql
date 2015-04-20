@@ -156,6 +156,14 @@ create table jx_admin(
 )DEFAULT CHARSET=utf8 COMMENT='后台admin表';
 insert into jx_admin values(1,'jx_admin','H6eBqhiZJyg2KESRqKwuh3BY8qGeSkMW1YDO54KzR67wNSOmWgszWuzuV/dr1lOHSa8aE0yxSYDBcEI0or347w==');
 
+drop table if exists jx_advice;
+create table jx_advice(
+	id int(11) not null AUTO_INCREMENT comment 'id',
+	content text null comment '建议内容',
+	user_id int(11) not null default 0 comment '用户id，若无，默认为0',
+	addat int(11) comment '创建时间',
+	primary key(id)
+)DEFAULT CHARSET=utf8 COMMENT='用户建议';
 -- drop view if exists seller_post_heat;
 -- create view seller_post_heat as select jx_seller_post.post_id,(jx_seller_post.createat-unix_timestamp())/86400 as daypass,count(jx_reply.id) as count from jx_seller_post left join jx_reply on jx_reply.post_id=jx_seller_post.post_id and jx_reply.type=0 group by jx_seller_post.post_id;
 -- select * from seller_post_heat;

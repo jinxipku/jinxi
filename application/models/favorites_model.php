@@ -12,15 +12,28 @@ class favorites_model extends CI_Model {
 		$this->db->order_by("addat", "desc"); 
 		$map = array();
 		$map['user_id'] = $user_id;
-		if($type!=0){
-			$map['type'] = $type;
-		}
+		$map['type'] = $type;
 		$table = get_post_table($type);
 		$this->db->join($table,'post.id');
 		$query = $this->db->get_where('jx_favorites', $map);
 
 		$res = $query->result_array();
 		return $res;
+	}
+
+	public function get_favorite_ids($user_id,$type){
+		$map = array();
+		$map['user_id'] = $user_id;
+		$map['type'] = $type;
+		$this->db->select('post_id');
+		$query = $this->db->get_where('jx_favorites', $map);
+
+		$res = $query->result_array();
+		$result = array();
+		foreach ($res as $key => $value) {
+			$result[] = $value['post_id'];
+		}
+		return $result;
 	}
 
 	public function delete_favorite($user_id,$post_id,$type){

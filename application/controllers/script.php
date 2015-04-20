@@ -13,6 +13,7 @@ class Script extends MY_Controller {
 		$this->load->model("post_model");
 		$this->load->model("reply_model");
 		$this->load->model("admin_model");
+		$this->load->model("favorites_model");
 		$this->load->database();
 	}
 
@@ -168,6 +169,18 @@ echo '</pre>';
 		//echo now();
 	}
 
+	public function test_advice(){
+		$content = '你们网站做的不错~个别地方需要改进，比如。。。。。';
+		$user_id = 2;
+		$this->load->model("advice_model");
+		$this->advice_model->add_advice($content,$user_id);
+	}
+
+	public function test_get_favorite_ids(){
+		$res = $this->favorites_model->get_favorite_ids(2,0);
+		var_dump($res);
+	}
+
 	//用于发一火车皮帖子
 	public function auto_make_post(){
 		$num = 200;
@@ -186,6 +199,28 @@ echo '</pre>';
 			$post['price'] = rand(0,9999);
 			$post['deal'] = rand(1,4);
 			$post['contactby'] = rand(0,4);
+			$post['createat'] = rand(1000000,time());
+			
+			$this->post_model->insert_post($post, $type);
+			//echo 'i';
+		}
+
+		$type = 1;//发求购贴
+	
+		for( $i=0; $i<$num;$i=$i+1){
+			$post['user_id'] = rand(1,2);
+			$class = rand(0,50);
+			$post['category1'] = map_to_cat1($class);
+			
+			$post['category2'] = $class;
+			$post['brand'] = "随机生成的brand";
+			$post['model'] = "随机生成的model";
+			$post['class'] = rand(0,4);
+			$post['description'] = "随机生成的描述";
+			$post['price'] = rand(0,9999);
+			$post['deal'] = rand(1,4);
+			$post['contactby'] = rand(0,4);
+			$post['createat'] = rand(1000000,time());
 			
 			$this->post_model->insert_post($post, $type);
 			//echo 'i';

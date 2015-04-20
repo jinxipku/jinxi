@@ -20,6 +20,24 @@ class user_model extends CI_Model {
 		$this->db->where('lovee', $user['id']);
 		$this->db->from('jx_love');
 		$user['lovers'] = $this->db->count_all_results();
+		
+		$user['post_number'] = 0;
+		$this->db->where("user_id",$user['id']);
+		$this->db->from('jx_seller_post');
+		$user['post_number'] += $this->db->count_all_results();
+		$this->db->where("user_id",$user['id']);
+		$this->db->from('jx_buyer_post');
+		$user['post_number'] += $this->db->count_all_results();
+
+		$user['active_post_number'] = 0;
+		$this->db->where("user_id",$user['id']);
+		$this->db->where("active",1);
+		$this->db->from('jx_seller_post');
+		$user['active_post_number'] += $this->db->count_all_results();
+		$this->db->where("user_id",$user['id']);
+		$this->db->where("active",1);
+		$this->db->from('jx_buyer_post');
+		$user['active_post_number'] += $this->db->count_all_results();
 		return $user;
 	}
 
