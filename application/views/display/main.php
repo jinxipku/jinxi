@@ -129,13 +129,13 @@
 								</div>
 								<div class="post_item_user_need">
 									{if !isset($login_user)}
-									<a type="button" class="btn btn-sm btn-info" href="{$baseurl}account/loginfo"><span class="fui-plus"></span>收藏</a>
+									<a type="button" class="btn btn-sm btn-info pull-right" href="{$baseurl}account/loginfo"><span class="fui-plus"></span>收藏</a>
 									{elseif $post.user_id == $login_user.id}
-									<button type="button" class="btn btn-warning btn-sm" disabled>我 的</button>
-									{elseif $has_collect}
-									<button type="button" data-pid="{$post.post_id}" class="btn1_post_item btn btn-sm btn-info">已收藏</button>
+									<button type="button" class="btn btn-warning btn-sm pull-right" disabled>我 的</button>
+									{elseif $post.has_collect}
+									<button type="button" data-pid="{$post.post_id}" class="btn1_post_item btn btn-sm btn-info pull-right">已收藏</button>
 									{else}
-									<button type="button" data-pid="{$post.post_id}" class="btn2_post_item btn btn-info btn-sm"><span class="fui-plus"></span>收藏</button>
+									<button type="button" data-pid="{$post.post_id}" class="btn2_post_item btn btn-sm btn-info pull-right"><span class="fui-plus"></span>收藏</button>
 									{/if}
 								</div>
 							</div>
@@ -264,7 +264,7 @@
 							<a type="button" class="btn btn-sm btn-info" href="{$baseurl}account/loginfo"><span class="fui-plus"></span>收藏</a>
 							{elseif $post.user_id == $login_user.id}
 							<button type="button" class="btn btn-warning btn-sm" disabled>我 的</button>
-							{elseif $has_collect}
+							{elseif $post.has_collect}
 							<button type="button" data-pid="{$post.post_id}" class="btn1_post_item btn btn-sm btn-info">已收藏</button>
 							{else}
 							<button type="button" data-pid="{$post.post_id}" class="btn2_post_item btn btn-info btn-sm"><span class="fui-plus"></span>收藏</button>
