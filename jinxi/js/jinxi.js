@@ -682,6 +682,7 @@ function confirm_post() {
 				$("#info_modal").find('.modal-title').text("发布失败");
 				$("#info_modal").find('.modal-cont').text("对不起，操作失败，请重试！");
 				$("#info_modal").find('.btn-default').css('display','none');
+				$("#info_modal").find('.btn-primary').unbind();
 				$("#info_modal").find('.btn-primary').bind('click',function() {
 					$("#btn_saveaccount").html('保 存');
 				});
@@ -710,6 +711,7 @@ function confirm_post() {
 function close_post(pid, ptype){
 	$("#info_modal").find('.modal-title').text("操作提醒");
 	$("#info_modal").find('.modal-cont').text("关闭此帖后，此贴将不会出现在商品大厅中，确定要关闭它么？");
+	$("#info_modal").find('.btn-primary').unbind();
 	$("#info_modal").find('.btn-primary').bind('click',function() {
 		$("#info_modal").modal("hide");
 		setTimeout(function() {
@@ -725,6 +727,7 @@ function close_post(pid, ptype){
 						$("#info_modal").find('.modal-title').text("操作成功");
 						$("#info_modal").find('.modal-cont').text("关闭帖子成功！");
 						$("#info_modal").find('.btn-default').css('display','none');
+						$("#info_modal").find('.btn-primary').unbind();
 						$("#info_modal").find('.btn-primary').bind('click',function() {
 							$("#info_modal").modal("hide");
 							window.location.href = window.location.href;
@@ -734,6 +737,7 @@ function close_post(pid, ptype){
 						$("#info_modal").find('.modal-title').text("操作失败");
 						$("#info_modal").find('.modal-cont').text(res.status.info);
 						$("#info_modal").find('.btn-default').css('display','none');
+						$("#info_modal").find('.btn-primary').unbind();
 						$("#info_modal").find('.btn-primary').bind('click',function() {
 							$("#info_modal").modal("hide");
 							window.location.href = window.location.href;
@@ -762,6 +766,7 @@ function open_post(pid, ptype){
 				$("#info_modal").find('.modal-title').text("操作成功");
 				$("#info_modal").find('.modal-cont').text("恭喜，打开帖子成功！");
 				$("#info_modal").find('.btn-default').css('display','none');
+				$("#info_modal").find('.btn-primary').unbind();
 				$("#info_modal").find('.btn-primary').bind('click',function() {
 					$("#info_modal").modal("hide");
 					window.location.href = window.location.href;
@@ -771,6 +776,7 @@ function open_post(pid, ptype){
 				$("#info_modal").find('.modal-title').text("操作失败");
 				$("#info_modal").find('.modal-cont').text(res.status.info);
 				$("#info_modal").find('.btn-default').css('display','none');
+				$("#info_modal").find('.btn-primary').unbind();
 				$("#info_modal").find('.btn-primary').bind('click',function() {
 					$("#info_modal").modal("hide");
 					window.location.href = window.location.href;
@@ -795,6 +801,7 @@ function add_collect(pid, ptype){
 				$("#info_modal").find('.modal-title').text("收藏成功");
 				$("#info_modal").find('.modal-cont').text("恭喜，收藏成功！");
 				$("#info_modal").find('.btn-default').css('display','none');
+				$("#info_modal").find('.btn-primary').unbind();
 				$("#info_modal").find('.btn-primary').bind('click',function() {
 					$("#info_modal").modal("hide");
 					window.location.href = window.location.href;
@@ -804,6 +811,7 @@ function add_collect(pid, ptype){
 				$("#info_modal").find('.modal-title').text("收藏失败");
 				$("#info_modal").find('.modal-cont').text("对不起，操作失败，请重试！");
 				$("#info_modal").find('.btn-default').css('display','none');
+				$("#info_modal").find('.btn-primary').unbind();
 				$("#info_modal").find('.btn-primary').bind('click',function() {
 					$("#info_modal").modal('hide');
 				});
@@ -820,6 +828,7 @@ function add_collect(pid, ptype){
 function delete_collect(pid, ptype){
 	$("#info_modal").find('.modal-title').text("取消收藏");
 	$("#info_modal").find('.modal-cont').text("您确定要取消收藏此帖吗？");
+	$("#info_modal").find('.btn-primary').unbind();
 	$("#info_modal").find('.btn-primary').bind('click',function() {
 		$("#info_modal").modal('hide');
 		setTimeout(function() {
@@ -834,6 +843,7 @@ function delete_collect(pid, ptype){
 						$("#info_modal").find('.modal-title').text("取消收藏成功");
 						$("#info_modal").find('.modal-cont').text("恭喜，取消收藏成功！");
 						$("#info_modal").find('.btn-default').css('display','none');
+						$("#info_modal").find('.btn-primary').unbind();
 						$("#info_modal").find('.btn-primary').bind('click',function() {
 							$("#info_modal").modal("hide");
 							window.location.href = window.location.href;
@@ -843,6 +853,7 @@ function delete_collect(pid, ptype){
 						$("#info_modal").find('.modal-title').text("收藏失败");
 						$("#info_modal").find('.modal-cont').text("对不起，操作失败，请重试！");
 						$("#info_modal").find('.btn-default').css('display','none');
+						$("#info_modal").find('.btn-primary').unbind();
 						$("#info_modal").find('.btn-primary').bind('click',function() {
 							$("#info_modal").modal('hide');
 						});
@@ -890,6 +901,7 @@ function confirm_edit_des(pid, ptype) {
 				$("#info_modal").find('.modal-title').text("修改失败");
 				$("#info_modal").find('.modal-cont').text("对不起，操作失败，请重试！");
 				$("#info_modal").find('.btn-default').css('display','none');
+				$("#info_modal").find('.btn-primary').unbind();
 				$("#info_modal").find('.btn-primary').bind('click',function() {
 					$("#info_modal").modal("hide");
 				});
@@ -927,6 +939,7 @@ function confirm_reply() {
 		$("#info_modal").find('.modal-title').text("回复失败");
 		$("#info_modal").find('.modal-cont').text("对不起，您没有填写任何内容，请先填写~");
 		$("#info_modal").find('.btn-default').css('display','none');
+		$("#info_modal").find('.btn-primary').unbind();
 		$("#info_modal").find('.btn-primary').bind('click',function() {
 			$("#info_modal").modal("hide");
 		});
@@ -952,6 +965,7 @@ function confirm_reply() {
 				$("#info_modal").find('.modal-title').text("回复失败");
 				$("#info_modal").find('.modal-cont').text("对不起，操作失败，请重试！");
 				$("#info_modal").find('.btn-default').css('display','none');
+				$("#info_modal").find('.btn-primary').unbind();
 				$("#info_modal").find('.btn-primary').bind('click',function() {
 					$("#info_modal").modal("hide");
 				});
@@ -968,6 +982,7 @@ function confirm_reply() {
 function delete_reply(reply_id) {
 	$("#info_modal").find('.modal-title').text("删除回复");
 	$("#info_modal").find('.modal-cont').text("您确定要删除这条回复吗？");
+	$("#info_modal").find('.btn-primary').unbind();
 	$("#info_modal").find('.btn-primary').bind('click',function() {
 		$("#info_modal").modal('hide');
 		setTimeout(function() {
@@ -981,6 +996,7 @@ function delete_reply(reply_id) {
 						$("#info_modal").find('.modal-title').text("删除回复成功");
 						$("#info_modal").find('.modal-cont').text("恭喜，删除回复成功！");
 						$("#info_modal").find('.btn-default').css('display','none');
+						$("#info_modal").find('.btn-primary').unbind();
 						$("#info_modal").find('.btn-primary').bind('click',function() {
 							$("#info_modal").modal("hide");
 							window.location.href = window.location.href;
@@ -990,6 +1006,7 @@ function delete_reply(reply_id) {
 						$("#info_modal").find('.modal-title').text("删除失败");
 						$("#info_modal").find('.modal-cont').text("对不起，操作失败，请重试！");
 						$("#info_modal").find('.btn-default').css('display','none');
+						$("#info_modal").find('.btn-primary').unbind();
 						$("#info_modal").find('.btn-primary').bind('click',function() {
 							$("#info_modal").modal('hide');
 						});
@@ -1027,6 +1044,7 @@ function confirm_report() {
 					$("#info_modal").find('.modal-title').text("举报成功");
 					$("#info_modal").find('.modal-cont').text("恭喜，举报成功，请等待审核~");
 					$("#info_modal").find('.btn-default').css('display','none');
+					$("#info_modal").find('.btn-primary').unbind();
 					$("#info_modal").find('.btn-primary').bind('click',function() {
 						$("#info_modal").modal("hide");
 					});
@@ -1035,6 +1053,7 @@ function confirm_report() {
 					$("#info_modal").find('.modal-title').text("举报失败");
 					$("#info_modal").find('.modal-cont').text("对不起，操作失败，请重试！");
 					$("#info_modal").find('.btn-default').css('display','none');
+					$("#info_modal").find('.btn-primary').unbind();
 					$("#info_modal").find('.btn-primary').bind('click',function() {
 						$("#info_modal").modal("hide");
 					});
