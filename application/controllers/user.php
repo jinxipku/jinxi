@@ -68,12 +68,15 @@ class User extends MY_Controller {
 		$tab = $_POST ['tab_id'];
 		$page = $_POST ['page'];
 		$id = $_POST ['user_id'];
-		$user = $this->user_model->get_info ( $id );
 		$this->assign('baseurl', base_url());
+		$login_user =  $this->session->userdata('login_user');
+		if (!empty($login_user)) {
+			$this->assign('login_user', $login_user);
+		}
 		switch ($tab) {
 			case '#user_post' :
 			{
-				$data = $this->$post_model->get_posts($id, $page);
+				$data = $this->post_model->get_user_posts($id, $page);
 				$this->assign('total', $data['total']);
 				$this->assign('page_num', $data['page_num']);
 				$this->assign('cur_page', $data['cur_page']);
@@ -97,7 +100,21 @@ class User extends MY_Controller {
 			}
 			case '#user_coll' :
 			{
-				$this->display ( 'user/usercoll.php' );
+				$data = $this->post_model->get_user_posts($id, $page);
+				$this->assign('total', $data['total']);
+				$this->assign('page_num', $data['page_num']);
+				$this->assign('cur_page', $data['cur_page']);
+				$this->assign('post_num', $data['post_num']);
+				$this->assign('posts', $data['posts']);
+
+				if ($data['page_num'] > 0) {
+					$this->assign('st_page', floor($data['cur_page'] / 10) * 10 + 1);
+					$end_page = floor($data['cur_page'] / 10 + 1) * 10;
+					if ($end_page > $data['page_num'])
+						$end_page = $data['page_num'];
+					$this->assign('ed_page', $end_page);
+				}
+				$this->display ( 'user/userpost.php' );
 				break;
 			}
 			case '#user_love' :

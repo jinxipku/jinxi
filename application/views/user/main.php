@@ -3,10 +3,11 @@
             <div id="user_header">
 				<div id="user_img">
 					<a href="{$baseurl}user/profile/{$user.id}">
-						<img class="passive" src="{$baseurl}img/head/{$user.head}" alt="user_{$user.id}_headimg" title="{$user['nick']}"/>
+						<img class="passive" src="{$baseurl}img/head/{$user.head}" alt="{$user['nick']}" title="{$user['nick']}"/>
 					</a>
 				</div>
 				<div id="user_info">
+					<input type="hidden" id="user_id" name="user_id" value="{$user.id}" />
 					<p class="user_name">
 						<a class="{$user.nick_color}" href="{$baseurl}user/profile/{$user.id}">{$user.nick}</a>
 						<small>（{$user.visits}人看过，{$user.lovers}名关注者）</small>
@@ -41,25 +42,25 @@
 				{if isset($myself)}
 				<ul class="nav nav-tabs">
 					<li class="active">
-						<a href="#user_post" data-toggle="tab" onclick="show_user_page('#user_post', {$user.id}, 1)">我的帖子</a>
+						<a href="#user_post" data-toggle="tab" onclick="show_user_page('#user_post', 1)">我的帖子</a>
 					</li>
 					<li>
-						<a href="#user_best" data-toggle="tab" onclick="show_user_page('#user_best', {$user.id}, 2)">我的推荐</a>
+						<a href="#user_best" data-toggle="tab" onclick="show_user_page('#user_best', 1)">我的推荐</a>
 					</li>
 					<li>
-						<a href="#user_coll" data-toggle="tab" onclick="show_user_page('#user_coll', {$user.id}, 3)">我的收藏</a>
+						<a href="#user_coll" data-toggle="tab" onclick="show_user_page('#user_coll', 1)">我的收藏</a>
 					</li>
 					<li>
-						<a href="#user_love" data-toggle="tab" onclick="show_user_page('#user_love', {$user.id}, 4)">我的关注</a>
+						<a href="#user_love" data-toggle="tab" onclick="show_user_page('#user_love', 1)">我的关注</a>
 					</li>
 					<li>
-						<a href="#user_mess" data-toggle="tab" onclick="show_user_page('#user_mess', {$user.id}, 5)">我的消息</a>
+						<a href="#user_mess" data-toggle="tab" onclick="show_user_page('#user_mess', 1)">我的消息</a>
 					</li>
 				</ul>
 				{else}
 				<ul class="nav nav-tabs">
 					<li class="active">
-						<a href="#user_post" data-toggle="tab" onclick="show_user_page('#user_post', {$user.id}, 1)">TA的帖子</a>
+						<a href="#user_post" data-toggle="tab" onclick="show_user_page('#user_post', 1)">TA的帖子</a>
 					</li>
 				</ul>
 				{/if}
@@ -78,7 +79,7 @@
 				});
 			</script>
 
-			<div id="user_panels" class=" panel panel-default">
+			<div id="user_panels">
 				{if isset($myself)}
 				<div class="tab-content">
 					<div id="user_post" class="tab-pane fade in active"></div>

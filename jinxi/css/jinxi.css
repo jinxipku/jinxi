@@ -324,13 +324,15 @@ div#user_tabs {
 	height: 47px;
 	margin-top: 45px;
 	background-color: #f4f4f4;
+	z-index: 100;
 }
 div#user_panels {
 	min-height: 300px;
 	border-top: none;
 }
 div#user_panels div.tab-pane{
-	padding: 5px 30px 10px 30px;
+	padding: 0px;
+	border: none;
 }
 
 div.sorry_box {
@@ -352,6 +354,47 @@ div.sorry_box>div:nth-child(2){
 div.sorry_box p{
 	font-size: 23px;
 	margin: 20px;
+}
+
+div.user_tab_header {
+	border-top: none;
+	height: 50px;
+	margin-bottom: -4px;
+}
+div.user_tab_header>center {
+	padding: 7px 0px;
+}
+div.user_tab_header>div:nth-child(1) {
+	font-size: 14px;
+	padding-top: 15px;
+	padding-left: 40px;
+	border-bottom: none;
+}
+div.user_tab_header>div:nth-child(2) {
+	margin: 6px 5px 0px 0px;
+}
+div.user_tab_header>div:nth-child(2) li {
+	margin: 0px;
+}
+div.user_tab_header>div:nth-child(2) a {
+	margin: 0px;
+	border: none;
+	padding: 10px 15px;
+}
+
+div.user_tab_box {
+	padding: 0px 15px 0px 15px;
+	border-top: none;
+}
+div.user_tab_box div.pagination {
+	width: 742px;
+	margin: 0px 0px 5px 0px;
+}
+div.user_tab_box div.pagination div {
+	margin-left: 20px;
+	padding-top: 8px;
+	color: #1abc9c;
+	font-size: 17px;
 }
 
 

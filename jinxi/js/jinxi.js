@@ -15,6 +15,21 @@ $(document).ready( function() {
 			}
 		}
 	});
+	if ($("#user_tabs").val() != undefined) {
+		$.post(
+			baseurl + "user/show_user_page",
+			{
+				tab_id: '#user_post',
+				user_id: $("#user_id").val(),
+				page: 1
+			},
+			function(gethtml) {
+        		$('#user_post').html(gethtml);
+        		$("img.lazy").lazyload({effect: "fadeIn"});
+			}
+		);
+		$('#user_post').children("div.user_tab_header").html('<center><i class="icon-spinner icon-spin"></i> 正在加载</center>');
+	}
 	$("img.lazy").lazyload({effect: "fadeIn"});
 });
 $(window).bind('scroll', function() {
@@ -401,7 +416,7 @@ function change2dl(){
 function change2al(){
 	$("#btn_love").html(' 已关注');
 }
-function show_user_page(tabid, uid, page){
+function show_user_page(tabid, page){
 	$("html,body").animate(
 		{
 			scrollTop: $("#scroll_bench").offset().top 
@@ -413,15 +428,40 @@ function show_user_page(tabid, uid, page){
 			baseurl + "user/show_user_page",
 			{
 				tab_id: tabid,
-				user_id: uid,
+				user_id: $("#user_id").val(),
 				page: page
 			},
 			function(gethtml) {
         		$(tabid).html(gethtml);
+        		$("img.lazy").lazyload({effect: "fadeIn"});
 			}
 		);
-		$(tabid).html('<center><i class="icon-spinner icon-spin"></i> 正在加载</center>');
+		$(tabid).children("div.user_tab_header").html('<center><i class="icon-spinner icon-spin"></i> 正在加载</center>');
 	}
+}
+function show_user_page2(tabid, page){
+	$("html,body").animate(
+		{
+			scrollTop: $("#scroll_bench").offset().top 
+		},
+		700
+	);
+	$.post(
+		baseurl + "user/show_user_page",
+		{
+			tab_id: tabid,
+			user_id: $("#user_id").val(),
+			page: page
+		},
+		function(gethtml) {
+			$(tabid).slideUp(500, function() {
+				$(tabid).html(gethtml);
+				$(tabid).slideDown(500);
+				$("img.lazy").lazyload({effect: "fadeIn"});
+			});
+		}
+	);
+	$(tabid).children("div.user_tab_header").html('<center><i class="icon-spinner icon-spin"></i> 正在加载</center>');
 }
 function save_info(){
 	$.post(
