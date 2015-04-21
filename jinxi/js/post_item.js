@@ -1,35 +1,3 @@
-$("div#post_items_box div.post_item_user_need").bind("mouseover", function() {
-	$(this).find("button").show();
-	$(this).find("a.btn").show();
-});
-$("div#post_items_box div.post_item_user_need").bind("mouseout", function() {
-	$(this).find("button").hide();
-	$(this).find("a.btn").hide();
-});
-$("div#post_items_box div.post_item_description").bind("mouseover", function() {
-	$(this).siblings().find("button").show();
-	$(this).siblings().find("a.btn").show();
-});
-$("div#post_items_box div.post_item_description").bind("mouseout", function(e) {
-	$(this).siblings().find("a.btn").hide();
-});
-
-$("div.user_tab_box div.post_item_user_need").bind("mouseover", function() {
-	$(this).find("button").show();
-	$(this).find("a.btn").show();
-});
-$("div.user_tab_box div.post_item_user_need").bind("mouseout", function() {
-	$(this).find("button").hide();
-	$(this).find("a.btn").hide();
-});
-$("div.user_tab_box div.post_item_description").bind("mouseover", function() {
-	$(this).siblings().find("button").show();
-	$(this).siblings().find("a.btn").show();
-});
-$("div.user_tab_box div.post_item_description").bind("mouseout", function(e) {
-	$(this).siblings().find("a.btn").hide();
-});
-
 $(".btn-group>button").on('click', function() {
     $(this).siblings().removeClass("active").end().addClass("active");
 });

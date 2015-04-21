@@ -1165,17 +1165,7 @@ div.post_item_user_nick span {
 	height: 30px;
 	width: 30px;
 }
-div.post_item_user_need {
-	height: 30px;
-}
-div.post_item_user_need button {
-	display: none;
-	padding: 5px 7px;
-	font-size: 14px;
-	margin-right: 10px;
-}
 div.post_item_user_need a {
-	display: none;
 	padding: 5px 7px;
 	font-size: 14px;
 	margin-right: 10px;

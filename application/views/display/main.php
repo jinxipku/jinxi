@@ -127,15 +127,15 @@
 										<span class="fui-user"></span>{$post.user.nick}	
 									</a>
 								</div>
-								<div class="post_item_user_need">
+								<div>
 									{if !isset($login_user)}
-									<a type="button" class="btn btn-sm btn-info pull-right" href="{$baseurl}account/loginfo"><span class="fui-plus"></span>收藏</a>
+									<a type="button" class="btn btn-xs btn-info pull-right" href="{$baseurl}account/loginfo"><span class="fui-plus"></span>收藏</a>
 									{elseif $post.user_id == $login_user.id}
-									<button type="button" class="btn btn-warning btn-sm pull-right" disabled>我 的</button>
+									<button type="button" class="btn btn-warning btn-xs pull-right" disabled>我 的</button>
 									{elseif $post.has_collect}
-									<button type="button" data-pid="{$post.post_id}" class="btn1_post_item btn btn-sm btn-info pull-right">已收藏</button>
+									<button type="button" data-pid="{$post.post_id}" class="btn1_post_item btn btn-xs btn-info pull-right">已收藏</button>
 									{else}
-									<button type="button" data-pid="{$post.post_id}" class="btn2_post_item btn btn-sm btn-info pull-right"><span class="fui-plus"></span>收藏</button>
+									<button type="button" data-pid="{$post.post_id}" class="btn2_post_item btn btn-xs btn-info pull-right"><span class="fui-plus"></span>收藏</button>
 									{/if}
 								</div>
 							</div>
