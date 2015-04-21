@@ -113,8 +113,52 @@ class post_model extends CI_Model {
 		$data['post_num'] = count($data['posts']);
 		$data['page_num'] = intval(ceil($data['total']/$num_per_page));
 		$data['cur_page'] = $page;
+		return $data;
+	}
 
+	public function get_user_favorites($user_id,$page=1){
+		$map['user_id'] = $user_id;
+		$this->db->where($map);
+		$this->db->from("jx_favorites");
+		$total = $this->db->count_all_results();
 
+		$num = $this->config->item('num_per_page2');
+		$this->db->select("post_id,type");
+		$this->db->limit($num,($page-1)*$num);
+		$this->db->from("jx_favorites");
+		$this->db->order_by("addat","desc");
+		$this->db->where($map);
+		$records = $this->db->get()->result_array();
+		$posts = array();//结果数组
+		foreach ($records as $key => $value) {
+			$post = $this->get_post($value['post_id'],$value['type'],true);
+			if(empty($post)) continue;
+
+			$post['type'] = $value['type'];
+			$post['createat'] = format_time($post['createat']);
+			$post['updateat'] = format_time($post['updateat']);
+
+			$post['category1_name'] = get_category1_name2($post['category1']);
+			$post['category2_name'] = get_category2_name($post['category2']);
+			$post['deal'] = get_deal_name($post['deal']);
+
+			$hasimg = false;
+			if(!empty($post['picture'])){
+				$hasimg = true;
+				$post['picture'] = $post['picture'][$post['first_picture']]['thumb_picture_url'];
+			}else{
+				$post['picture'] = base_url("img/post/".($post['category2']+1).".png");
+			}
+			$post['title'] = get_title($value['type'],$post['deal'],$post['class'],$hasimg,$post['category1_name'],$post['category2_name'],$post['brand'],$post['model']);
+			$post['plain_title'] = get_plain_title($value['type'],$post['deal'],$post['class'],$hasimg,$post['category1_name'],$post['category2_name'],$post['brand'],$post['model']);
+			unset($post['contactby']);
+			$posts[] = $post;
+		}
+		$data['total'] = $total;
+		$data['posts'] = $posts;
+		$data['post_num'] = count($data['posts']);
+		$data['page_num'] = intval(ceil($data['total']/$num));
+		$data['cur_page'] = $page;
 		return $data;
 	}
 
