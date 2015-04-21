@@ -1,6 +1,6 @@
 {if $total > 0}
 <div class="user_tab_header panel panel-default">
-	<div class="pull-left">共{$page_num}页（{$total}篇帖子），这是第{$cur_page}页（每页30项）。</div>
+	<div class="pull-left">共{$page_num}页（{$total}篇帖子），这是第{$cur_page}页（每页10项）。</div>
 	<div class="pagination pull-right">
 	  	<ul>
 	    	<li class="previous">

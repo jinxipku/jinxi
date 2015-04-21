@@ -28,7 +28,7 @@ $(document).ready( function() {
         		$("img.lazy").lazyload({effect: "fadeIn"});
 			}
 		);
-		$('#user_post').children("div.user_tab_header").html('<center><i class="icon-spinner icon-spin"></i> 正在加载</center>');
+		$('#user_post').html('<div class="user_tab_header panel panel-default"><center><i class="icon-spinner icon-spin"></i> 正在加载</center></div>');
 	}
 	$("img.lazy").lazyload({effect: "fadeIn"});
 });
@@ -436,7 +436,7 @@ function show_user_page(tabid, page){
         		$("img.lazy").lazyload({effect: "fadeIn"});
 			}
 		);
-		$(tabid).children("div.user_tab_header").html('<center><i class="icon-spinner icon-spin"></i> 正在加载</center>');
+		$(tabid).html('<div class="user_tab_header panel panel-default"><center><i class="icon-spinner icon-spin"></i> 正在加载</center></div>');
 	}
 }
 function show_user_page2(tabid, page){
@@ -454,11 +454,8 @@ function show_user_page2(tabid, page){
 			page: page
 		},
 		function(gethtml) {
-			$(tabid).slideUp(500, function() {
-				$(tabid).html(gethtml);
-				$(tabid).slideDown(500);
-				$("img.lazy").lazyload({effect: "fadeIn"});
-			});
+			$(tabid).html(gethtml);
+			$("img.lazy").lazyload({effect: "fadeIn"});
 		}
 	);
 	$(tabid).children("div.user_tab_header").html('<center><i class="icon-spinner icon-spin"></i> 正在加载</center>');
