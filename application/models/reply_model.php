@@ -21,7 +21,12 @@ class reply_model extends CI_Model {
 		$reply['floor'] = $max_floor + 1; //最高楼上加1
 		$reply['createat'] = time();
 		$res = $this->db->insert("jx_reply",$reply);  //插入回复表
-		$res2 = $this->post_model->update_reply_num($reply['post_id'],$reply['type'],1);
+		if($res){
+			if($this->db->affected_rows()>0){
+				$res2 = $this->post_model->update_reply_num($reply['post_id'],$reply['type'],1);
+			}
+		}
+		
 		$res3 = $this->user_model->addpoints($reply['reply_from'],$this->config->item("reply_bonus"));
 		return $res;
 	}
@@ -65,8 +70,12 @@ class reply_model extends CI_Model {
 	public function delete_reply($reply){
 		$map['id'] = $reply['id'];
 		$res = $this->db->delete('jx_reply',$map);	
-		if($res)
-			$this->post_model->update_reply_num($reply['post_id'],$reply['type'],-1);
+		if($res){
+			if($this->db->affected_rows()>0){
+				$this->post_model->update_reply_num($reply['post_id'],$reply['type'],-1);
+			}
+		}
+			
 		return $res;	
 	}
 

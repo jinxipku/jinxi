@@ -43,8 +43,10 @@ class favorites_model extends CI_Model {
 		$map['post_id'] = $post_id;
 		$map['type'] = $type;
 		$res = $this->db->delete("jx_favorites",$map);
-		if($res)
-			$this->post_model->update_favorite_num($post_id,$type,-1);
+		if($res){
+			if($this->db->affected_rows()>0)
+				$this->post_model->update_favorite_num($post_id,$type,-1);
+		}
 		return $res;
 	}
 
@@ -54,8 +56,10 @@ class favorites_model extends CI_Model {
 		$map['type'] = $type;
 		$map['addat'] = time();
 		$res = $this->db->insert("jx_favorites",$map);
-		if($res)
-			$this->post_model->update_favorite_num($post_id,$type,1);
+		if($res){
+			if($this->db->affected_rows()>0)
+				$this->post_model->update_favorite_num($post_id,$type,1);
+		}
 		return $res;
 	}
 

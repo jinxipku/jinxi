@@ -72,7 +72,10 @@ class post_model extends CI_Model {
 
 	//返回某个用户发的某一页的帖子
 	public function get_user_posts($user_id, $login_user_id=null, $page=1){
-		$sql = "select post_id from jx_seller_post where user_id=".$user_id." union all select post_id from jx_buyer_post where user_id=".$user_id;
+
+		$addon = "";
+		if($user_id!=$login_user_id) $addon = " and active=1";  //如果不是自己看，需要显示active为1的
+		$sql = "select post_id from jx_seller_post where user_id=".$user_id." union all select post_id from jx_buyer_post where user_id=".$user_id.$addon;
 		$query = $this->db->query($sql);
 		$total = $query->num_rows();
 
@@ -96,7 +99,7 @@ class post_model extends CI_Model {
 
 		$length = $num_per_page;
 		$offset = ($page-1)*$num_per_page;
-		$sql = "select post_id,0 as type,createat from jx_seller_post where user_id=".$user_id." union all select post_id,1 as type,createat from jx_buyer_post where user_id=".$user_id." order by createat limit $offset,$length";
+		$sql = "select post_id,0 as type,createat,active from jx_seller_post where user_id=".$user_id." union all select post_id,1 as type,createat,active from jx_buyer_post where user_id=".$user_id.$addon." order by createat desc limit $offset,$length";
 		
 		$query = $this->db->query($sql);
 		$records = $query->result_array();
