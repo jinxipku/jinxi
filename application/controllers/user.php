@@ -13,6 +13,7 @@ class User extends MY_Controller {
 		$this->load->model ( 'user_model' );
 		$this->load->model ( 'love_model' );
 		$this->load->model ( 'account_model' );
+		$this->load->model ( 'post_model' );
 		$this->load->helper('url');
 		$this->load->helper('array');
 	}
@@ -20,11 +21,8 @@ class User extends MY_Controller {
 // +----------------------------------------------------------------------
 // | 前台页面跳转
 // +----------------------------------------------------------------------
-	public function profile($id = '') {
-		if ($id == '') {
-			redirect(base_url());
-		}
-		else if ($id == 0) {
+	public function profile($id = 0) {
+		if ($id == 0) {
 			$login_user =  $this->session->userdata('login_user');
 			if (!empty($login_user)) {
 				redirect(base_url('user/profile/' . $login_user['id']));
@@ -34,6 +32,11 @@ class User extends MY_Controller {
 				redirect('account/loginfo/redirect');
 			}
 		}
+		$user = $this->user_model->get_info($id);
+		if ($user == null) {
+			redirect('info/nopage');
+		}
+
 		$this->assign('nav_tab', 0);
 		$login_user =  $this->session->userdata('login_user');
 		if (!empty($login_user)) {
@@ -49,10 +52,7 @@ class User extends MY_Controller {
 				}
 			}
 		}
-		$user = $this->user_model->get_info($id);
-		if ($user == null) {
-			redirect('info/nopage');
-		}
+		
 		$this->assign('user', $user);
 		$this->assign('title', '今昔网-'.$user['nick']);
 		$this->assign('baseurl', base_url());
@@ -65,8 +65,6 @@ class User extends MY_Controller {
 	}
 
 	public function show_user_page() {
-		if ($_SERVER ['REQUEST_METHOD'] == 'GET')
-			exit ( "PERMISSION DENIED!" );
 		$tab = $_POST ['tab_id'];
 		$page = $_POST ['page'];
 		$id = $_POST ['user_id'];
@@ -75,6 +73,20 @@ class User extends MY_Controller {
 		switch ($tab) {
 			case '#user_post' :
 			{
+				$data = $this->$post_model->get_posts($id, $page);
+				$this->assign('total', $data['total']);
+				$this->assign('page_num', $data['page_num']);
+				$this->assign('cur_page', $data['cur_page']);
+				$this->assign('post_num', $data['post_num']);
+				$this->assign('posts', $data['posts']);
+
+				if ($data['page_num'] > 0) {
+					$this->assign('st_page', floor($data['cur_page'] / 10) * 10 + 1);
+					$end_page = floor($data['cur_page'] / 10 + 1) * 10;
+					if ($end_page > $data['page_num'])
+						$end_page = $data['page_num'];
+					$this->assign('ed_page', $end_page);
+				}
 				$this->display ( 'user/userpost.php' );
 				break;
 			}

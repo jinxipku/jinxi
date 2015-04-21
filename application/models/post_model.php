@@ -71,7 +71,7 @@ class post_model extends CI_Model {
 
 
 	//返回某个用户发的某一页的帖子
-	public function get_user_posts($user_id,$type,$page=1){
+	public function get_user_posts($user_id, $page=1){
 		$sql = "select post_id from jx_seller_post where user_id=".$user_id." union all select post_id from jx_buyer_post where user_id=".$user_id;
 		$query = $this->db->query($sql);
 		$total = $query->num_rows();

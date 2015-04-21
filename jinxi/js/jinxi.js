@@ -401,14 +401,14 @@ function change2dl(){
 function change2al(){
 	$("#btn_love").html(' 已关注');
 }
-function show_user_page(tabid, uid, page, first){
+function show_user_page(tabid, uid, page){
 	$("html,body").animate(
 		{
 			scrollTop: $("#scroll_bench").offset().top 
 		},
 		700
 	);
-	if(first == 0 || $(tabid).html() == '') {	
+	if($(tabid).html() == '') {	
 		$.post(
 			baseurl + "user/show_user_page",
 			{

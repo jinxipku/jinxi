@@ -1131,6 +1131,12 @@ div.post_item_user_need button {
 	font-size: 14px;
 	margin-right: 10px;
 }
+div.post_item_user_need a {
+	display: none;
+	padding: 5px 7px;
+	font-size: 14px;
+	margin-right: 10px;
+}
 div.post_item_content>div:nth-child(3)>div:nth-child(2) {
 	height: 30px;
 	width: 482px;
