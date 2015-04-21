@@ -100,7 +100,7 @@ class User extends MY_Controller {
 			}
 			case '#user_coll' :
 			{
-				$data = $this->post_model->get_user_posts($id, $page);
+				$data = $this->post_model->get_user_favorites($id, $page);
 				$this->assign('total', $data['total']);
 				$this->assign('page_num', $data['page_num']);
 				$this->assign('cur_page', $data['cur_page']);

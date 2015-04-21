@@ -71,11 +71,22 @@ class post_model extends CI_Model {
 
 
 	//返回某个用户发的某一页的帖子
-	public function get_user_posts($user_id, $page=1){
+	public function get_user_posts($user_id, $login_user_id=null, $page=1){
 		$sql = "select post_id from jx_seller_post where user_id=".$user_id." union all select post_id from jx_buyer_post where user_id=".$user_id;
 		$query = $this->db->query($sql);
 		$total = $query->num_rows();
 
+		if($total==0){
+			$data['total'] = 0;
+			$data['posts'] = array();
+			$data['post_num'] = 0;
+			$data['page_num'] = 0;
+			$data['cur_page'] = 0;
+			return $data;
+		}
+		if($login_user_id!=null){
+			$my_favorites = $this->get_favorite_id_type($login_user_id);
+		}
 
 		$num_per_page = $this->config->item("num_per_page2");
 
@@ -112,6 +123,9 @@ class post_model extends CI_Model {
 			$post['title'] = get_title($value['type'],$post['deal'],$post['class'],$hasimg,$post['category1_name'],$post['category2_name'],$post['brand'],$post['model']);
 			$post['plain_title'] = get_plain_title($value['type'],$post['deal'],$post['class'],$hasimg,$post['category1_name'],$post['category2_name'],$post['brand'],$post['model']);
 			unset($post['contactby']);
+			if(isset($my_favorites)&&in_array($value['post_id']."#".$value['type'], $my_favorites)){
+				$post['has_collect'] = 1;
+			}else $post['has_collect'] = 0;
 			$posts[] = $post;
 		}
 		$data['total'] = $total;
@@ -122,12 +136,34 @@ class post_model extends CI_Model {
 		return $data;
 	}
 
+	public function get_favorite_id_type($user_id){
+		$map = array();
+		$map['user_id'] = $user_id;
+		$this->db->select('post_id,type');
+		$query = $this->db->get_where('jx_favorites', $map);
+
+		$res = $query->result_array();
+		$result = array();
+		foreach ($res as $key => $value) {
+			$result[] = $value['post_id']."#".$value['type'];
+		}
+		return $result;
+	}
+
 	public function get_user_favorites($user_id,$page=1){
 		$map['user_id'] = $user_id;
 		$this->db->where($map);
 		$this->db->from("jx_favorites");
 		$total = $this->db->count_all_results();
 
+		if($total==0){
+			$data['total'] = 0;
+			$data['posts'] = array();
+			$data['post_num'] = 0;
+			$data['page_num'] = 0;
+			$data['cur_page'] = 0;
+			return $data;
+		}
 		$num_per_page = $this->config->item("num_per_page2");
 		$page_num = intval(ceil($total/$num_per_page));
 		$page = $page%$page_num;
@@ -161,6 +197,7 @@ class post_model extends CI_Model {
 			}
 			$post['title'] = get_title($value['type'],$post['deal'],$post['class'],$hasimg,$post['category1_name'],$post['category2_name'],$post['brand'],$post['model']);
 			$post['plain_title'] = get_plain_title($value['type'],$post['deal'],$post['class'],$hasimg,$post['category1_name'],$post['category2_name'],$post['brand'],$post['model']);
+			$post['has_collect'] = 1;
 			unset($post['contactby']);
 			$posts[] = $post;
 		}

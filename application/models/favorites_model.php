@@ -36,6 +36,8 @@ class favorites_model extends CI_Model {
 		return $result;
 	}
 
+
+
 	public function delete_favorite($user_id,$post_id,$type){
 		$map['user_id'] = $user_id;
 		$map['post_id'] = $post_id;
