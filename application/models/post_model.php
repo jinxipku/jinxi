@@ -76,10 +76,10 @@ class post_model extends CI_Model {
 		$query = $this->db->query($sql);
 		$total = $query->num_rows();
 
-		$num_per_page = $this->config->item("num_per_page");
+		$num_per_page = $this->config->item("num_per_page2");
 		$downer = ($page-1)*$num_per_page;
 		$upper = $page*$num_per_page;
-		$sql = "select post_id,0 as type,createat from jx_seller_post where user_id=".$user_id." union all select post_id,1 as type,createat from jx_buyer_post where user_id=".$user_id." limit $downer,$upper";
+		$sql = "select post_id,0 as type,createat from jx_seller_post where user_id=".$user_id." union all select post_id,1 as type,createat from jx_buyer_post where user_id=".$user_id." order by createat limit $downer,$upper";
 		
 		$query = $this->db->query($sql);
 		$records = $query->result_array();
@@ -88,7 +88,7 @@ class post_model extends CI_Model {
 			$post = $this->get_post($value['post_id'],$value['type'],true);
 			if(empty($post)) continue;
 
-			$post['type'] = $type;
+			$post['type'] = $value['type'];
 			$post['createat'] = format_time($post['createat']);
 			$post['updateat'] = format_time($post['updateat']);
 
@@ -103,8 +103,8 @@ class post_model extends CI_Model {
 			}else{
 				$post['picture'] = base_url("img/post/".($post['category2']+1).".png");
 			}
-			$post['title'] = get_title($type,$post['deal'],$post['class'],$hasimg,$post['category1_name'],$post['category2_name'],$post['brand'],$post['model']);
-			$post['plain_title'] = get_plain_title($type,$post['deal'],$post['class'],$hasimg,$post['category1_name'],$post['category2_name'],$post['brand'],$post['model']);
+			$post['title'] = get_title($value['type'],$post['deal'],$post['class'],$hasimg,$post['category1_name'],$post['category2_name'],$post['brand'],$post['model']);
+			$post['plain_title'] = get_plain_title($value['type'],$post['deal'],$post['class'],$hasimg,$post['category1_name'],$post['category2_name'],$post['brand'],$post['model']);
 			unset($post['contactby']);
 			$posts[] = $post;
 		}

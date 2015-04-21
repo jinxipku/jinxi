@@ -188,7 +188,8 @@ echo '</pre>';
 	}
 
 	public function test_get_user_posts(){
-		$this->post_model->get_user_posts(1,0);
+		$res = $this->post_model->get_user_posts(1,1);
+		var_dump($res);
 	}
 
 	//用于发一火车皮帖子
