@@ -36,8 +36,13 @@
 						<button id="btn_open_post" type="button" class="btn btn-sm btn-info" onclick="open_post({$thispost.post_id}, {$thispost.type})">
 							<span class="fui-play"></span>打开
 						</button>
+						{elseif isset($has_collect)}
+						<button id="btn_collcet" type="button" class="btn btn-sm btn-info" onclick="delete_collect({$thispost.post_id}, {$thispost.type})" onmouseover="change2dc()" onmouseout="change2ac()">
+							已收藏
+						</button>
 						{/if}
-						{elseif !isset($login_user)}
+						{else}
+						{if !isset($login_user)}
 						<a type="button" class="btn btn-sm btn-info" href="{$baseurl}account/loginfo">
 							<span class="fui-plus"></span>收藏
 						</a>
@@ -53,6 +58,7 @@
 						<button id="btn_collcet" type="button" class="btn btn-sm btn-info" onclick="add_collect({$thispost.post_id}, {$thispost.type})">
 							<span class="fui-plus"></span>收藏
 						</button>
+						{/if}
 						{/if}
 					</div>
 					<p class="post_user_nick">

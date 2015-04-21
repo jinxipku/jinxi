@@ -68,6 +68,9 @@ span.tag {
 span.bg-primary {
 	background-color: #1abc9c;
 }
+span.bg-info {
+	background-color: #3498db;
+}
 span.bg-danger {
   	background-color: #e74c3c;
 }
@@ -199,6 +202,10 @@ div#side>a:nth-of-type(2) {
 }
 div#side_tags ul {
 	margin-top: -1px;
+}
+div#side_tags span {
+	cursor: pointer;
+  	font-size: 16px;
 }
 p.side_tag{
 	font-size: 17px;

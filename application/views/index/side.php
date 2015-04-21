@@ -51,27 +51,27 @@
 				<div class="panel panel-default">
 					<ul class="list-group">
 						<li class="list-group-item">
-							<p class="text-primary side_tag" data-toggle="collapse" data-target="#tag1">【转】：适用于待转物品</p>
+							<p class="text-primary side_tag" data-toggle="collapse" data-target="#tag1"><span class="tag bg-primary">转让</span>：适用于待转物品</p>
 							<p id="tag1" class="collapse side_tagcon">&nbsp;&nbsp;标明此物品为转让物品，有相关需求的用户可以收藏并回复此帖。</p>
 						</li>
 						<li class="list-group-item">
-							<p class="text-primary side_tag" data-toggle="collapse" data-target="#tag2">【求】：适用于欲求物品</p>
+							<p class="text-info side_tag" data-toggle="collapse" data-target="#tag2"><span class="tag bg-info">求购</span>：适用于欲求物品</p>
 							<p id="tag2" class="collapse side_tagcon">&nbsp;&nbsp;标明此物品为求购物品，有相关闲置的用户可以收藏并回复此帖。</p>
 						</li>
 						<li class="list-group-item">
-							<p class="text-danger side_tag" data-toggle="collapse" data-target="#tag3">【自制】：适用于待转物品</p>
+							<p class="text-danger side_tag" data-toggle="collapse" data-target="#tag3"><span class="tag bg-danger">自制</span>：适用于待转物品</p>
 							<p id="tag3" class="collapse side_tagcon">&nbsp;&nbsp;标明此物品为楼主手工自制品，物品品质为S级别。</p>
 						</li>
 						<li class="list-group-item">
-							<p class="text-warning side_tag" data-toggle="collapse" data-target="#tag4">【一元送】：适用于待转物品</p>
+							<p class="text-warning side_tag" data-toggle="collapse" data-target="#tag4"><span class="tag bg-warning">一元送</span>：适用于待转物品</p>
 							<p id="tag4" class="collapse side_tagcon">&nbsp;&nbsp;标明此物品为福利赠送，只收一元钱。</p>
 						</li>
 						<li class="list-group-item">
-							<p class="text-warning side_tag" data-toggle="collapse" data-target="#tag5">【一口价】：适用于待转物品</p>
+							<p class="text-warning side_tag" data-toggle="collapse" data-target="#tag5"><span class="tag bg-warning">一口价</span>：适用于待转物品</p>
 							<p id="tag5" class="collapse side_tagcon">&nbsp;&nbsp;标明此物品不接受讲价。</p>
 						</li>
 						<li class="list-group-item">
-							<p class="text-purple side_tag" data-toggle="collapse" data-target="#tag6">【图】：适用于待转物品</p>
+							<p class="text-purple side_tag" data-toggle="collapse" data-target="#tag6"><span class="tag bg-purple">图</span>：适用于待转物品</p>
 							<p id="tag6" class="collapse side_tagcon">&nbsp;&nbsp;标明此物品附带展示图片。</p>
 						</li>
 					</ul>

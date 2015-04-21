@@ -205,7 +205,7 @@
 						<img class="passive" src="{$baseurl}img/info/sorry.png" alt="sorry"/>
 					</div>
 					<div>
-						<p>sorry，今昔网木有为您找到数据~sss</p>
+						<p>sorry，今昔网木有为您找到数据~</p>
 						<p>立刻去发帖吧，或者试试其他的分类~</p>
 					</div>
 				</div>
