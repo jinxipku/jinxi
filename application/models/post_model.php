@@ -76,10 +76,16 @@ class post_model extends CI_Model {
 		$query = $this->db->query($sql);
 		$total = $query->num_rows();
 
+
 		$num_per_page = $this->config->item("num_per_page2");
-		$downer = ($page-1)*$num_per_page;
-		$upper = $page*$num_per_page;
-		$sql = "select post_id,0 as type,createat from jx_seller_post where user_id=".$user_id." union all select post_id,1 as type,createat from jx_buyer_post where user_id=".$user_id." order by createat limit $downer,$upper";
+
+		$page_num = intval(ceil($total/$num_per_page));
+		$page = $page%$page_num;
+		$page = ($page==0)? $page_num : $page;
+
+		$length = $num_per_page;
+		$offset = ($page-1)*$num_per_page;
+		$sql = "select post_id,0 as type,createat from jx_seller_post where user_id=".$user_id." union all select post_id,1 as type,createat from jx_buyer_post where user_id=".$user_id." order by createat limit $offset,$length";
 		
 		$query = $this->db->query($sql);
 		$records = $query->result_array();
@@ -122,9 +128,13 @@ class post_model extends CI_Model {
 		$this->db->from("jx_favorites");
 		$total = $this->db->count_all_results();
 
-		$num = $this->config->item('num_per_page2');
+		$num_per_page = $this->config->item("num_per_page2");
+		$page_num = intval(ceil($total/$num_per_page));
+		$page = $page%$page_num;
+		$page = ($page==0)? $page_num : $page;
+
 		$this->db->select("post_id,type");
-		$this->db->limit($num,($page-1)*$num);
+		$this->db->limit($num_per_page,($page-1)*$num_per_page);
 		$this->db->from("jx_favorites");
 		$this->db->order_by("addat","desc");
 		$this->db->where($map);
@@ -157,7 +167,7 @@ class post_model extends CI_Model {
 		$data['total'] = $total;
 		$data['posts'] = $posts;
 		$data['post_num'] = count($data['posts']);
-		$data['page_num'] = intval(ceil($data['total']/$num));
+		$data['page_num'] = intval(ceil($data['total']/$num_per_page));
 		$data['cur_page'] = $page;
 		return $data;
 	}

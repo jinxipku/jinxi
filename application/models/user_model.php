@@ -83,4 +83,8 @@ class user_model extends CI_Model {
 		$res = $this->db->count_all_results();
 		return $res;
 	}
+
+	public function get_user_love($id){
+
+	}
 }
