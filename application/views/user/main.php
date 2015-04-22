@@ -55,7 +55,7 @@
 					</li>
 					{if $user.level >= 5}
 					<li>
-						<a href="#user_mess" data-toggle="tab" onclick="show_user_page('#user_mess', 1)">我的消息</a>
+						<a href="#user_mess" data-toggle="tab" onclick="show_user_page('#user_mess', 1)">我的私信</a>
 					</li>
 					{/if}
 				</ul>

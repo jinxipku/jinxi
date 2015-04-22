@@ -116,3 +116,24 @@
 			</div>
 		</div>
 	</div>
+
+	<div id="mess_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title"></h4>
+				</div>
+				<div class="modal-body">
+					<p class="modal-cont">请填写私信内容</p>
+					<textarea rows="8" id="mess_content" name="mess_content" class="form-control flat" placeholder="填写私信" maxlength=300></textarea>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary">确认</button>
+				</div>
+			</div>
+		</div>
+	</div>

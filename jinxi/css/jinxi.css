@@ -1385,6 +1385,11 @@ div.lovee_user_box {
   	width: 742px;
 	height: 140px;
 }
+div.lovee_user_box:hover {
+	filter:alpha(opacity=90); /*IE滤镜，透明度50%*/
+	-moz-opacity:0.9; /*Firefox私有，透明度50%*/
+	opacity:0.9;/*其他，透明度50%*/
+}
 div.lovee_user_img {
 	float: left;
   	width: 140px;
@@ -1409,6 +1414,15 @@ div.lovee_user_content>div:nth-child(2) {
 div.lovee_user_content>div:nth-child(3) {
 	height: 75px;
 }
+div.lovee_user_content>div:nth-child(3) a div{
+	height: 31px;
+	width: 410px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
 div.lovee_user_content>div:nth-child(3) p span {
 	font-size: 12px;
 	color: #7F8C8D;
@@ -1591,6 +1605,9 @@ div#picture_modal div {
 	width: auto;
 	max-width: 800px;
 	padding: 0px;
+}
+div#mess_modal textarea {
+	resize: none;
 }
 
 
