@@ -399,8 +399,7 @@ function get_class_name($type){
 
 function get_title($type,$deal,$class,$hasimg,$cat1,$cat2,$brand,$model){
     $title = "";
-    $t1 = $type==0? "转让":"求购";  
-    $t1 = '<span class="tag bg-primary">'.$t1.'</span>';
+    $t1 = $type==0? '<span class="tag bg-primary">转让</span>':'<span class="tag bg-info">求购</span>';  
     if ($deal == "一元赠送")
         $deal = "一元送";
     $t2 = '<span class="tag bg-warning">'.$deal.'</span>';                     // warning

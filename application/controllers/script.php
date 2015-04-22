@@ -197,6 +197,17 @@ echo '</pre>';
 		var_dump($res);
 	}
 
+	public function test_get_user_love(){
+		$res = $this->user_model->get_user_love(2,1);
+		$this->debug_array($res);
+	}
+
+	public function debug_array($data){
+		echo '<pre>';
+		print_r($data);
+		echo "</pre>";
+	}
+
 	//用于发一火车皮帖子
 	public function auto_make_post(){
 		$num = 200;
