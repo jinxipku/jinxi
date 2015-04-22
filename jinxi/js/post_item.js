@@ -39,7 +39,7 @@ $("button.btn1_post_item").bind('click', function() {
 						$("#info_modal").modal();
 						thisbtn.html('已取消');
 					} else {
-						$("#info_modal").find('.modal-title').text("收藏失败");
+						$("#info_modal").find('.modal-title').text("取消失败");
 						$("#info_modal").find('.modal-cont').text("对不起，操作失败，请重试！");
 						$("#info_modal").find('.btn-default').css('display','none');
 						$("#info_modal").find('.btn-primary').bind('click',function() {
@@ -99,5 +99,5 @@ $("button.btn1_post_item").bind('mouseover', function() {
 	$(this).html('&nbsp;- 取消');
 });
 $("button.btn1_post_item").bind('mouseout', function() {
-	$(this).html(' 已收藏');
+	$(this).html('已收藏');
 });

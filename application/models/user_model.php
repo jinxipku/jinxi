@@ -18,6 +18,8 @@ class user_model extends CI_Model {
 		$user['type'] = get_user_type($user['type']);
 		$user['year'] = empty($user['year'])? 0:$user['year'];
 
+		if($info_type=="message") return $user;
+
 		$this->db->where('lovee', $user['id']);
 		$this->db->from('jx_love');
 		$user['lovers'] = $this->db->count_all_results();
@@ -163,6 +165,7 @@ class user_model extends CI_Model {
 		$data['total'] = $total;
 		$data['posts'] = $users;
 		$data['post_num'] = count($users);
+		$data['page_num'] = $page_num;
 		$data['cur_page'] = $page;
 		$data['page_num'] = $page_num;
 		return $data;

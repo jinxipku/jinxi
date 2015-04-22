@@ -53,6 +53,17 @@
 				<a href="{$baseurl}post/viewpost/{if $user.newest_post.type==0}sell{else}buy{/if}/{$user.newest_post.post_id}" title='{$user.newest_post.plain_title}' target="_blank">
 					{$user.newest_post.title}
 				</a>
+				<p>
+					<span class="fui-time">
+						{$user.newest_post.createat}
+					</span>
+					<span class="fui-new">
+						{$user.newest_post.reply_num}
+					</span>
+					<span class="fui-heart">
+						{$user.newest_post.favorite_num}
+					</span>
+				</p>
 				{/if}
 			</div>
 		</div>
@@ -60,6 +71,10 @@
 			<div>
 				<p class="user_post"><strong>发帖总数：</strong>{$user.post_number}</p>
 				<p class="user_post"><strong>活跃帖数：</strong>{$user.active_post_number}</p>
+			</div>
+			<div>
+				<button type="button" data-uid="{$user.id}" class="btn_messta btn btn-warning btn-sm pull-right">私信TA</button>
+				<button type="button" data-uid="{$user.id}" class="btn_cancel_love btn btn-info btn-sm pull-right">已关注</button>
 			</div>
 		</div>
 	</div>
@@ -96,4 +111,4 @@
 
 	{/if}
 </div>
-<script type="text/javascript" src="{$baseurl}js/post_item.js"></script>
+<script type="text/javascript" src="{$baseurl}js/user_love.js"></script>

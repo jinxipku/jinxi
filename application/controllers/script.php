@@ -208,6 +208,13 @@ echo '</pre>';
 		echo "</pre>";
 	}
 
+	public function test_message(){
+		$this->load->model("message_model");
+		//$this->message_model->add_message(2,1,'woca');
+		//$this->message_model->get_message(1);
+		$this->message_model->delete_message(3,2);
+	}
+
 	//用于发一火车皮帖子
 	public function auto_make_post(){
 		$num = 200;
