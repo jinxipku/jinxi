@@ -1101,6 +1101,9 @@ function confirm_report() {
 		);
 	}, 1000);
 }
+function mess_user(uid) {
+	$("#mess_modal"),modal();
+};
 
 function open_reminder() {
 	if (head_height > 0) {

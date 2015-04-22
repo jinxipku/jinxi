@@ -50,9 +50,9 @@
 				</p>
 				{else}
 				</p>
-				<a href="{$baseurl}post/viewpost/{if $user.newest_post.type==0}sell{else}buy{/if}/{$user.newest_post.post_id}" title='{$user.newest_post.plain_title}' target="_blank">
-					{$user.newest_post.title}
-				</a>
+					<a href="{$baseurl}post/viewpost/{if $user.newest_post.type==0}sell{else}buy{/if}/{$user.newest_post.post_id}" title='{$user.newest_post.plain_title}' target="_blank">
+						<div>{$user.newest_post.title}</div>
+					</a>
 				<p>
 					<span class="fui-time">
 						{$user.newest_post.createat}
