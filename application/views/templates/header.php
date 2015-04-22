@@ -13,7 +13,10 @@
 	<link href="{$baseurl}css/school.css" rel="stylesheet"/>
 	<link href="{$baseurl}css/jinxi.css" rel="stylesheet"/>
 	<link href="{$baseurl}css/Jcrop.css" rel="stylesheet"/>
-	<script src="{$baseurl}js/jquery.js"></script>
+	<script type="text/javascript" src="{$baseurl}js/jquery.js"></script>
+	<script type="text/javascript">
+		var head_height = 90;
+	</script>
 
 </head>
 
@@ -75,6 +78,11 @@
 						<li {if $nav_tab == 6}class=" active"{/if}>
 							<a href="{$baseurl}user/setup">设置</a>
 						</li>
+						{if isset($login_user)}
+						<li id="reminder">
+							<a href="" onclick="open_reminder();return false;">提醒</a>
+						</li>
+						{/if}
 						{if isset($login_user)}
 						<li>
 							<a href="" onClick="logout();return false;">退出</a>

@@ -3,7 +3,7 @@
             <div id="user_header">
 				<div id="user_img">
 					<a href="{$baseurl}user/profile/{$user.id}">
-						<img class="passive" src="{$baseurl}img/head/{$user.head}" alt="{$user['nick']}" title="{$user['nick']}"/>
+						<img class="passive" src="{$baseurl}img/head/{$user.head}" alt="{$user.nick}" title="{$user.nick}"/>
 					</a>
 				</div>
 				<div id="user_info">
@@ -70,7 +70,7 @@
 			<script type="text/javascript">
 				$(window).scroll(function(event) {
 					var st = $(this).scrollTop();
-					if (st > 351) {
+					if (st > 261 + head_height) {
 						$("#user_tabs").css("position","fixed");
 						$("#user_tabs").css("top",0);
 						$("#user_panels").css("margin-top", 92);

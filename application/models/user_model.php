@@ -136,8 +136,8 @@ class user_model extends CI_Model {
 		$total = $this->db->count_all_results();
 		if($total==0){
 			$data['total'] = 0;
-			$data['users'] = array();
-			$data['user_num'] = 0;
+			$data['posts'] = array();
+			$data['post_num'] = 0;
 			$data['page_num'] = 0;
 			$data['cur_page'] = 0;
 			return $data;
@@ -160,9 +160,11 @@ class user_model extends CI_Model {
 			$user = $this->get_info($value['lovee'],'profile');
 			$users[] = $user;
 		}
-		$data['users'] = $users;
+		$data['total'] = $total;
+		$data['posts'] = $users;
 		$data['post_num'] = count($users);
 		$data['cur_page'] = $page;
+		$data['page_num'] = $page_num;
 		return $data;
 
 	}

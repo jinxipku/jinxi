@@ -1386,14 +1386,41 @@ div.lovee_user_box {
 	height: 140px;
 }
 div.lovee_user_img {
+	float: left;
   	width: 140px;
 	height: 140px;
 }
 div.lovee_user_content {
+	float: left;
   	width: 462px;
 	height: 140px;
+	padding-left: 10px;
+}
+div.lovee_user_content>div:nth-child(1) {
+	height: 32px;
+}
+div.lovee_user_content>div:nth-child(2) {
+	height: 48px;
+}
+div.lovee_user_content>div:nth-child(3) {
+	height: 60px;
+}
+div.lovee_user_content span {
+	margin-right: 5px;
+	font-size: 13px;
+}
+div.lovee_user_content p {
+	margin: 0px;
+}
+div.lovee_user_content span:nth-child(2) {
+	font-size: 16px;
+}
+div.lovee_user_content span:nth-child(3) {
+	font-size: 14px;
+	color: #666;
 }
 div.lovee_user_post {
+	float: left;
   	width: 120px;
 	height: 140px;
 }
@@ -1465,6 +1492,16 @@ div.user_mess_content:hover {
 }
 
 
+
+
+/*
+reminder_box
+*/
+div#reminder_box {
+	height: 100%;
+	width: 264px;
+	background-color: blue;
+}
 
 
 
