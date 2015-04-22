@@ -132,7 +132,7 @@ class user_model extends CI_Model {
 		return $res;
 	}
 
-	public function get_user_love($id,$page){
+	public function get_user_loves($id,$page){
 		$map['lover'] = $id;
 		$this->db->where($map);
 		$this->db->from("jx_love");
