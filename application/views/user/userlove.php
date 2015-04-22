@@ -58,16 +58,16 @@
 	?></p>
 	</div>
 </div>
-<!-- {if $total > 0}
+{if $total > 0}
 <div class="user_tab_header panel panel-default">
 	<div class="pull-left">共{$page_num}页（{$total}名用户），这是第{$cur_page}页（每页10项）。</div>
 	<div class="pagination pull-right">
 	  	<ul>
 	    	<li class="previous">
-	      		<a href="" class="fui-arrow-left" onclick="show_user_page2('#user_post', {$cur_page - 1});return false;"></a>
+	      		<a href="" class="fui-arrow-left" onclick="show_user_page2('#user_love', {$cur_page - 1});return false;"></a>
 	    	</li>
 	    	<li class="next">
-	      		<a href="" class="fui-arrow-right" onclick="show_user_page2('#user_post', {$cur_page + 1});return false;"></a>
+	      		<a href="" class="fui-arrow-right" onclick="show_user_page2('#user_love', {$cur_page + 1});return false;"></a>
 	    	</li>
 	  	</ul>
 	</div>
@@ -88,7 +88,38 @@
 	{else}
 
 	{foreach from = $users item = user}
-	
+	<div class="lovee_user_box">
+		<div class="lovee_user_img">
+			<img class="lazy passive" data-original="{$user.head}" alt="{$user.nick}" />
+		</div>
+		<div class="lovee_user_content">
+			<div>
+				<span>{$user.nick}</span>
+				<span>{$user.sex}</span>
+				<span>{$user.school_name</span>
+				<span>{$user.level}级</span>
+				<span>（{$user.visit_num}人看过，{$user.love_num}名关注者）</span>
+			</div>
+			<div>
+				<p class="user_sign">签名：{$user.signature}</p>
+			</div>
+			<div>
+				<p>最新帖子：</p>
+				<a href="{$baseurl}post/viewpost/{$user.newest_post.type}/{$user.newest_post.id}" title='{$user.newest_post.plain_title}' target="_blank">
+					{$user.newest_post.title}
+				</a>
+			</div>
+		</div>
+		<div class="lovee_user_post">
+			<div>
+				<p class="user_post">发帖总数：{$user.post_number}</p>
+				<p class="user_post">活跃帖数：{$user.active_post_number}</p>
+			</div>
+			<div>
+				<img class="lazy passive" data-original="{$user.newest_post.picture}" alt="{$user.newest_post.plain_title}">
+			</div>
+		</div>
+	</div>
 	{/foreach}
 	
 	<hr/>
@@ -98,22 +129,22 @@
 	  	<center>
 	  	<ul>
 	  		<li class="previous">
-	      		<a href="" onclick="show_user_page2('#user_post', 1);return false;">首页</a>
+	      		<a href="" onclick="show_user_page2('#user_love', 1);return false;">首页</a>
 	    	</li>
 	    	<li class="previous">
-	      		<a href="" class="fui-arrow-left" onclick="show_user_page2('#user_post', {$cur_page - 1});return false;"></a>
+	      		<a href="" class="fui-arrow-left" onclick="show_user_page2('#user_love', {$cur_page - 1});return false;"></a>
 	    	</li>
 	    	{assign var="page_index" value=$ed_page-$st_page+1}
 	    	{section name="loop" loop=$page_index}
 			<li {if $smarty.section.loop.index+$st_page==$cur_page}class="active"{/if}>
-				<a href="" onclick="show_user_page2('#user_post', {$smarty.section.loop.index + $st_page});return false;">{$smarty.section.loop.index + $st_page}</a>
+				<a href="" onclick="show_user_page2('#user_love', {$smarty.section.loop.index + $st_page});return false;">{$smarty.section.loop.index + $st_page}</a>
 			</li>
 			{/section}
 			<li class="next">
-	      		<a href="" class="fui-arrow-right" onclick="show_user_page2('#user_post', {$cur_page + 1});return false;"></a>
+	      		<a href="" class="fui-arrow-right" onclick="show_user_page2('#user_love', {$cur_page + 1});return false;"></a>
 	    	</li>
 	    	<li class="next">
-	      		<a href="" onclick="show_user_page2('#user_post', {$page_num});return false;">末页</a>
+	      		<a href="" onclick="show_user_page2('#user_love', {$page_num});return false;">末页</a>
 	    	</li> 
 	  	</ul>
 	  	</center>
@@ -122,4 +153,4 @@
 
 	{/if}
 </div>
-<script type="text/javascript" src="{$baseurl}js/post_item.js"></script> -->
+<script type="text/javascript" src="{$baseurl}js/post_item.js"></script>

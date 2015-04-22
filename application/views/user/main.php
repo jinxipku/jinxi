@@ -53,9 +53,11 @@
 					<li>
 						<a href="#user_love" data-toggle="tab" onclick="show_user_page('#user_love', 1)">我的关注</a>
 					</li>
+					{if $user.level >= 5}
 					<li>
 						<a href="#user_mess" data-toggle="tab" onclick="show_user_page('#user_mess', 1)">我的消息</a>
 					</li>
+					{/if}
 				</ul>
 				{else}
 				<ul class="nav nav-tabs">
@@ -86,7 +88,9 @@
 					<div id="user_best" class="tab-pane fade"></div>
 					<div id="user_coll" class="tab-pane fade"></div>
 					<div id="user_love" class="tab-pane fade"></div>
+					{if $user.level >= 5}
 					<div id="user_mess" class="tab-pane fade"></div>
+					{/if}
 				</div>
 				{else}
 				<div class="tab-content">

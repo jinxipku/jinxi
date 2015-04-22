@@ -1,28 +1,98 @@
-{if $total > 0}
+<!-- {if $total > 0}
 <div class="user_tab_header panel panel-default">
-	<div class="pull-left">共{$page_num}页（{$total}篇帖子），这是第{$cur_page}页（每页10项）。</div>
+	<div class="pull-left">共{$page_num}页（{$total}封私信），这是第{$cur_page}页（每页10项）。</div>
 	<div class="pagination pull-right">
 	  	<ul>
 	    	<li class="previous">
-	      		<a href="" class="fui-arrow-left" onclick="show_user_page2('#user_post', {$cur_page - 1});return false;"></a>
+	      		<a href="" class="fui-arrow-left" onclick="show_user_page2('#user_mess', {$cur_page - 1});return false;"></a>
 	    	</li>
 	    	<li class="next">
-	      		<a href="" class="fui-arrow-right" onclick="show_user_page2('#user_post', {$cur_page + 1});return false;"></a>
+	      		<a href="" class="fui-arrow-right" onclick="show_user_page2('#user_mess', {$cur_page + 1});return false;"></a>
 	    	</li>
 	  	</ul>
 	</div>
 </div>
-{/if}
+{/if} -->
 
 <div class="user_tab_box panel panel-default">
-	{if $total == 0}
+	<hr/>
+	<div class="user_mess_box">
+		<div class="user_mess_header">
+			<div>
+				<div>
+					<a href="http://www.xn--wmqr18c.cn/user/profile/1">
+						<img class="lazy passive" data-original="http://www.xn--wmqr18c.cn/img/head/svxvkeeS1xmvThxME1429093424.jpg" alt="一剑轻安" src="http://www.xn--wmqr18c.cn/img/head/svxvkeeS1xmvThxME1429093424.jpg" style="display: inline;">
+					</a>
+				</div>
+				<div>
+					<p class="post_user_nick">
+						<a class="text_purple" href="http://www.xn--wmqr18c.cn/user/profile/1">一剑轻安</a>
+					</p>
+					<p>
+						<small class="post_user_school">北京大学</small>
+					</p>
+				</div>
+			</div>
+			<div>
+				<p>发给</p>
+				<p><small class="post_user_date">2015-04-22 14:29:39</small></p>
+			</div>
+			<div>
+				我
+			</div>
+			<button type="button" class="close" aria-label="Close" onclick="delete_mess()" title="删除">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="user_mess_content" title="点击回复" onclick="send_mess()">
+			我想要你的吉他，能不能便宜点卖给我呀~
+		</div>
+	</div>
+
+	<hr/>
+	<div class="user_mess_box">
+		<div class="user_mess_header">
+			<div>
+				<div>
+					<a href="http://www.xn--wmqr18c.cn/user/profile/1">
+						<img class="lazy passive" data-original="http://www.xn--wmqr18c.cn/img/head/svxvkeeS1xmvThxME1429093424.jpg" alt="一剑轻安" src="http://www.xn--wmqr18c.cn/img/head/svxvkeeS1xmvThxME1429093424.jpg" style="display: inline;">
+					</a>
+				</div>
+				<div>
+					<p class="post_user_nick">
+						<a class="text_purple" href="http://www.xn--wmqr18c.cn/user/profile/1">一剑轻安</a>
+					</p>
+					<p>
+						<small class="post_user_school">北京大学</small>
+					</p>
+				</div>
+			</div>
+			<div>
+				<p>发给</p>
+				<p><small class="post_user_date">2015-04-22 14:29:39</small></p>
+			</div>
+			<div>
+				我
+			</div>
+			<button type="button" class="close" aria-label="Close" onclick="delete_mess()" title="删除">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="user_mess_content" title="点击回复" onclick="send_mess()">
+			我想要你的吉他，能不能便宜点卖给我呀~
+		</div>
+	</div>
+
+
+
+	<!-- {if $total == 0}
 	<div class="sorry_box">
 		<div>
 			<img class="passive" src="{$baseurl}img/info/sorry.png" alt="sorry"/>
 		</div>
 		<div>
 			<p>sorry，今昔网木有为您找到数据~</p>
-			<p>立刻去发帖或者收藏一些帖子吧~</p>
+			<p>立刻去私信小伙伴们吧~</p>
 		</div>
 	</div>
 	{else}
@@ -30,70 +100,7 @@
 	{foreach from = $posts item = post}
 	<hr/>
 	<div class="post_item_box">
-		<div class="post_item_img">
-			<a href="{$baseurl}post/viewpost/{if $post.type == 0}sell{else}buy{/if}/{$post.post_id}" target="_blank">
-				<img class="lazy" data-original="{$post.picture}" alt="{$post.plain_title}" />
-			</a>
-		</div>
-		<div class="post_item_content">
-			<div>
-				<a href="{$baseurl}post/viewpost/{if $post.type == 0}sell{else}buy{/if}/{$post.post_id}" title='{$post.plain_title}' target="_blank">
-					{$post.title}
-				</a>
-			</div>
-			<div class="post_item_description">
-				{$post.description}
-			</div>
-			<div>
-				<div>
-					<div class="post_item_user_nick">
-						<a href="{$baseurl}user/profile/{$post.user_id}" class="{$post.user.nick_color}" target="_blank">
-							<span class="fui-user"></span>{$post.user.nick}	
-						</a>
-					</div>
-					<div>
-						{if $post.active == 0}
-						{if $post.has_collect}
-						<button type="button" data-pid="{$post.post_id}" data-ptype="{$post.type}" class="btn1_post_item btn btn-xs btn-info pull-right">已收藏</button>
-						{/if}
-						<button type="button" class="btn btn-danger btn-xs pull-right" disabled>已关闭</button>
-						{else}
-						{if !isset($login_user)}
-						<a type="button" class="btn btn-xs btn-info pull-right" href="{$baseurl}account/loginfo"><span class="fui-plus"></span>收藏</a>
-						{elseif $post.user_id == $login_user.id}
-						<button type="button" class="btn btn-warning btn-xs pull-right" disabled>我 的</button>
-						{elseif $post.has_collect}
-						<button type="button" data-pid="{$post.post_id}" data-ptype="{$post.type}" class="btn1_post_item btn btn-xs btn-info pull-right">已收藏</button>
-						{else}
-						<button type="button" data-pid="{$post.post_id}" data-ptype="{$post.type}" class="btn2_post_item btn btn-xs btn-info pull-right"><span class="fui-plus"></span>收藏</button>
-						{/if}
-						{/if}
-					</div>
-				</div>
-				<div>
-					<span class="fui-location">
-						{$post.user.school_name}
-					</span>
-					<span class="fui-time">
-						{$post.createat}
-					</span>
-					<span class="fui-new">
-						{$post.reply_num}
-					</span>
-					<span class="fui-heart">
-						{$post.favorite_num}
-					</span>
-				</div>
-			</div>
-		</div>
-		<div class="post_item_price">
-			<div>
-				<img class="lazy" data-original="http://www.xn--wmqr18c.cn/img/class/{$post.class}.png" alt="物品状态" />
-			</div>
-			<div>
-				{if $post.price == 0}面议{else}￥{$post.price}{/if}
-			</div>
-		</div>
+		
 	</div>
 	{/foreach}
 	
@@ -104,28 +111,28 @@
 	  	<center>
 	  	<ul>
 	  		<li class="previous">
-	      		<a href="" onclick="show_user_page2('#user_post', 1);return false;">首页</a>
+	      		<a href="" onclick="show_user_page2('#user_mess', 1);return false;">首页</a>
 	    	</li>
 	    	<li class="previous">
-	      		<a href="" class="fui-arrow-left" onclick="show_user_page2('#user_post', {$cur_page - 1});return false;"></a>
+	      		<a href="" class="fui-arrow-left" onclick="show_user_page2('#user_mess', {$cur_page - 1});return false;"></a>
 	    	</li>
 	    	{assign var="page_index" value=$ed_page-$st_page+1}
 	    	{section name="loop" loop=$page_index}
 			<li {if $smarty.section.loop.index+$st_page==$cur_page}class="active"{/if}>
-				<a href="" onclick="show_user_page2('#user_post', {$smarty.section.loop.index + $st_page});return false;">{$smarty.section.loop.index + $st_page}</a>
+				<a href="" onclick="show_user_page2('#user_mess', {$smarty.section.loop.index + $st_page});return false;">{$smarty.section.loop.index + $st_page}</a>
 			</li>
 			{/section}
 			<li class="next">
-	      		<a href="" class="fui-arrow-right" onclick="show_user_page2('#user_post', {$cur_page + 1});return false;"></a>
+	      		<a href="" class="fui-arrow-right" onclick="show_user_page2('#user_mess', {$cur_page + 1});return false;"></a>
 	    	</li>
 	    	<li class="next">
-	      		<a href="" onclick="show_user_page2('#user_post', {$page_num});return false;">末页</a>
+	      		<a href="" onclick="show_user_page2('#user_mess', {$page_num});return false;">末页</a>
 	    	</li> 
 	  	</ul>
 	  	</center>
 	</div>
 	{/if}
 
-	{/if}
+	{/if} -->
 </div>
-<script type="text/javascript" src="{$baseurl}js/post_item.js"></script>
+<script type="text/javascript" src="{$baseurl}js/message.js"></script>
