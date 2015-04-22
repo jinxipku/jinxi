@@ -13,6 +13,7 @@
 	<link href="{$baseurl}css/school.css" rel="stylesheet"/>
 	<link href="{$baseurl}css/jinxi.css" rel="stylesheet"/>
 	<link href="{$baseurl}css/Jcrop.css" rel="stylesheet"/>
+	<link href="{$baseurl}css/timeline.css" rel="stylesheet"/>
 	<script type="text/javascript" src="{$baseurl}js/jquery.js"></script>
 	<script type="text/javascript">
 		var head_height = 90;

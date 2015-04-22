@@ -211,7 +211,7 @@ echo '</pre>';
 	public function test_message(){
 		$this->load->model("message_model");
 		//$this->message_model->add_message(2,1,'woca');
-		$res = $this->message_model->get_message(1);
+		$res = $this->message_model->get_message(1,10);
 		//$this->message_model->delete_message(3,2);
 		var_dump($res);
 	}

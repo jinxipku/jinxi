@@ -40,10 +40,30 @@ class message_model extends CI_Model {
 	}
 
 	//获取一个用户的所有私信，数组
-	public function get_message($id){
+	public function get_message($id,$page){
 		$this->db->where("(from_id=$id and delete_by_from=0) or (to_id=$id and delete_by_to=0)");
 		$this->db->from("jx_message");
+		$total = $this->db->count_all_results();
+
+		if($total==0){
+			$data['total'] = 0;
+			$data['posts'] = array();
+			$data['post_num'] = 0;
+			$data['page_num'] = 0;
+			$data['cur_page'] = 0;
+			return $data;
+		}
+
+		$num_per_page = $this->config->item("num_per_page2");
+		$page_num = intval(ceil($total/$num_per_page));
+		$page = $page%$page_num;
+		$page = ($page==0)? $page_num : $page;
+
+		$this->db->where("(from_id=$id and delete_by_from=0) or (to_id=$id and delete_by_to=0)");
+		$this->db->limit($num_per_page,($page-1)*$num_per_page);
 		$this->db->order_by("createat","desc");
+		$this->db->from("jx_message");
+
 		$query = $this->db->get();
 		$res = $query->result_array();
 		foreach ($res as $key => $value) {
@@ -53,7 +73,12 @@ class message_model extends CI_Model {
 			}
 			$res[$key]['who'] = $this->user_model->get_info($who,"message");
 		}
-		return $res;
+		$data['posts'] = $res;
+		$data['total'] = $total;
+		$data['page_num'] = $page_num;
+		$data['cur_page'] = $page;
+		$data['post_num'] = count($res);
+		return $data;
 	}
 
 }

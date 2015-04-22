@@ -41,6 +41,10 @@ if (! function_exists ( 'show_tips' )) {
     }
 }
 
+function about_us(){
+    return "我们是谁？#我们来自北京市海淀区三所高校，是一个致力于为大学生提供便利的高校创业团队，您的支持是我们不断改进的动力，我们将竭诚为您服务！";
+}
+
 if (! function_exists ( 'get_sex' )) {
     function get_sex($sexint) {
         $sex = array (

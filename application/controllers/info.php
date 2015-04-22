@@ -37,9 +37,10 @@ class Info extends MY_Controller {
 		$this->assign('title', '今昔网-关于');
 		$this->assign('baseurl', base_url());
 		$this->assign('tips', show_tips());
-	
+		$this->assign("about_us",about_us());
 		$this->display ( 'templates/header.php' );
 		$this->display ( 'info/about.php' );
+		$this->display ( 'templates/side.php' );
 		$this->display ( 'templates/footer.php' );
 	}
 
