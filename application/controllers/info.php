@@ -32,4 +32,15 @@ class Info extends MY_Controller {
 		$this->display ( 'templates/footer.php' );
 	}
 
+	public function about(){
+		$this->assign('nav_tab', 0);
+		$this->assign('title', '今昔网-关于');
+		$this->assign('baseurl', base_url());
+		$this->assign('tips', show_tips());
+	
+		$this->display ( 'templates/header.php' );
+		$this->display ( 'info/about.php' );
+		$this->display ( 'templates/footer.php' );
+	}
+
 }

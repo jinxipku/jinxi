@@ -96,7 +96,7 @@
 			<div>
 				<span>{$user.nick}</span>
 				<span>{$user.sex}</span>
-				<span>{$user.school_name</span>
+				<span>{$user.school_name}</span>
 				<span>{$user.level}级</span>
 				<span>（{$user.visit_num}人看过，{$user.love_num}名关注者）</span>
 			</div>
