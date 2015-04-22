@@ -68,10 +68,10 @@ class user_model extends CI_Model {
 				}
 			}else if(empty($newest_seller_post)&&!empty($newest_buyer_post)){
 				$post = $newest_buyer_post;
-				$post['type'] = 0;
+				$post['type'] = 1;
 			}else if(empty($newest_buyer_post)&&!empty($newest_seller_post)){
 				$post = $newest_seller_post;
-				$post['type'] = 1;
+				$post['type'] = 0;
 			}
 			if(empty($post)) $user['newest_post'] = null;
 			else{
@@ -168,7 +168,6 @@ class user_model extends CI_Model {
 		$data['post_num'] = count($users);
 		$data['page_num'] = $page_num;
 		$data['cur_page'] = $page;
-		$data['page_num'] = $page_num;
 		return $data;
 
 	}

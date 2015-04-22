@@ -211,8 +211,9 @@ class Display extends MY_Controller {
 			$favorite_ids = $this->favorites_model->get_favorite_ids($login_user['id'],$type);
 		}
 		
-
-		if(isset($keyword)){       //有关键词使用关键词进行搜索---sphinx排序暂时先不改。。
+		//有关键词使用关键词进行搜索---sphinx排序和area
+		//type没有值表示都返回
+		if(isset($keyword)){      
 			$data = $this->get_sphinx_result($keyword,$type,$category1,$category2,$page);
 		}else{
 			$total = $this->post_model->get_post_ids_total($type,$school_id,$category1,$category2);
