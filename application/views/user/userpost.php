@@ -52,16 +52,21 @@
 						</a>
 					</div>
 					<div>
+						{if $post.active == 0}
+						{if $post.has_collect}
+						<button type="button" data-pid="{$post.post_id}" data-ptype="{$post.type}" class="btn1_post_item btn btn-xs btn-info pull-right">已收藏</button>
+						{/if}
+						<button type="button" class="btn btn-danger btn-xs pull-right" disabled>已关闭</button>
+						{else}
 						{if !isset($login_user)}
 						<a type="button" class="btn btn-xs btn-info pull-right" href="{$baseurl}account/loginfo"><span class="fui-plus"></span>收藏</a>
-						{elseif $post.user_id == $login_user.id && $post.active}
-						<button type="button" class="btn btn-warning btn-xs pull-right" disabled>我 的</button>
 						{elseif $post.user_id == $login_user.id}
-						<button type="button" class="btn btn-danger btn-xs pull-right" disabled>已关闭</button>
+						<button type="button" class="btn btn-warning btn-xs pull-right" disabled>我 的</button>
 						{elseif $post.has_collect}
-						<button type="button" data-pid="{$post.post_id}" class="btn1_post_item btn btn-xs btn-info pull-right">已收藏</button>
+						<button type="button" data-pid="{$post.post_id}" data-ptype="{$post.type}" class="btn1_post_item btn btn-xs btn-info pull-right">已收藏</button>
 						{else}
-						<button type="button" data-pid="{$post.post_id}" class="btn2_post_item btn btn-xs btn-info pull-right"><span class="fui-plus"></span>收藏</button>
+						<button type="button" data-pid="{$post.post_id}" data-ptype="{$post.type}" class="btn2_post_item btn btn-xs btn-info pull-right"><span class="fui-plus"></span>收藏</button>
+						{/if}
 						{/if}
 					</div>
 				</div>

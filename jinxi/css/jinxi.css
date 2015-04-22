@@ -68,6 +68,9 @@ span.tag {
 span.bg-primary {
 	background-color: #1abc9c;
 }
+span.bg-info {
+	background-color: #3498db;
+}
 span.bg-danger {
   	background-color: #e74c3c;
 }
@@ -199,6 +202,10 @@ div#side>a:nth-of-type(2) {
 }
 div#side_tags ul {
 	margin-top: -1px;
+}
+div#side_tags span {
+	cursor: pointer;
+  	font-size: 16px;
 }
 p.side_tag{
 	font-size: 17px;
@@ -1371,15 +1378,91 @@ div#post_items_block div.pagination div {
 }
 
 /*
-10*2
-48
-5
-224
-55
-35
-=392
-
+my love
 */
+div.lovee_user_box {
+	margin: 15px 0px;
+  	width: 742px;
+	height: 140px;
+}
+div.lovee_user_img {
+  	width: 140px;
+	height: 140px;
+}
+div.lovee_user_content {
+  	width: 462px;
+	height: 140px;
+}
+div.lovee_user_post {
+  	width: 120px;
+	height: 140px;
+}
+
+/*
+my mess
+*/
+div.user_mess_box {
+	margin: 15px 0px;
+  	width: 742px;
+	min-height: 120px;
+}
+div.user_mess_header {
+	position: relative;
+	width: 742px;
+	height: 60px;
+}
+div.user_mess_header button {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+}
+div.user_mess_header>div:nth-child(1) {
+	float: left;
+	width: 250px;
+	height: 60px;
+}
+div.user_mess_header>div:nth-child(1)>div:nth-child(1) {
+	float: left;
+	width: 60px;
+	height: 60px;
+}
+div.user_mess_header>div:nth-child(1)>div:nth-child(2) {
+	float: left;
+	width: 190px;
+	height: 60px;
+	padding-left: 10px;
+}
+div.user_mess_header>div:nth-child(2) {
+	float: left;
+	width: 242px;
+	height: 60px;
+	text-align: center;
+}
+div.user_mess_header>div:nth-child(2)>p {
+	margin: 0px;
+	font-size: 16px;
+}
+div.user_mess_header>div:nth-child(3) {
+	float: left;
+	width: 250px;
+	height: 60px;
+	font-size: 30px;
+	padding-left: 50px;
+}
+div.user_mess_content {
+	width: 742px;
+	height: 60px;
+	cursor: pointer;
+	padding: 15px;
+	font-size: 16px;
+	color: #333;
+	font-family: 宋体;
+}
+div.user_mess_content:hover {
+	filter:alpha(opacity=80); /*IE滤镜，透明度50%*/
+	-moz-opacity:0.8; /*Firefox私有，透明度50%*/
+	opacity:0.8;/*其他，透明度50%*/
+}
 
 
 

@@ -25,7 +25,7 @@ $("button.btn1_post_item").bind('click', function() {
 				baseurl + "post/delete_favorite",
 				{
 					post_id: thisbtn.attr('data-pid'),
-					post_type: $("#type").val()
+					post_type: thisbtn.attr('data-ptype')
 				},
 				function(res) {
 					if (res.status == 1) {
@@ -64,7 +64,7 @@ $("button.btn2_post_item").bind('click', function() {
 		baseurl + "post/add_favorite",
 		{
 			post_id: thisbtn.attr('data-pid'),
-			post_type: $("#type").val()
+			post_type: thisbtn.attr('data-ptype')
 		},
 		function(res) {
 			if (res.status == 1) {
