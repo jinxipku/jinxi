@@ -73,7 +73,7 @@
 				<p class="user_post"><strong>活跃帖数：</strong>{$user.active_post_number}</p>
 			</div>
 			<div>
-				<button type="button" data-uid="{$user.id}" class="btn_messta btn btn-warning btn-sm pull-right">私信TA</button>
+				<button type="button" data-uid="{$user.id}" class="btn_messta btn btn-warning btn-sm pull-right" onclick="mess_user({$user.id}, '{$user.nick}')">私信TA</button>
 				<button type="button" data-uid="{$user.id}" class="btn_cancel_love btn btn-info btn-sm pull-right">已关注</button>
 			</div>
 		</div>

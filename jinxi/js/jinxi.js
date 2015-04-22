@@ -1101,8 +1101,9 @@ function confirm_report() {
 		);
 	}, 1000);
 }
-function mess_user(uid) {
-	$("#mess_modal"),modal();
+function mess_user(uid, unick) {
+	$("#mess_modal").find('.modal-cont').html("发给 <strong>" + unick + "</strong> 的私信：");
+	$("#mess_modal").modal();
 };
 
 function open_reminder() {

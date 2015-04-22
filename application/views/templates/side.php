@@ -124,11 +124,11 @@
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title"></h4>
+					<h4 class="modal-title">请填写私信内容</h4>
 				</div>
 				<div class="modal-body">
-					<p class="modal-cont">请填写私信内容</p>
-					<textarea rows="8" id="mess_content" name="mess_content" class="form-control flat" placeholder="填写私信" maxlength=300></textarea>
+					<p class="modal-cont"></p>
+					<textarea id="mess_content" name="mess_content" class="form-control flat" placeholder="填写私信" onpropertychange="this.style.height=this.scrollHeight + 'px'" oninput="this.style.height=this.scrollHeight + 'px'" maxlength=300></textarea>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
