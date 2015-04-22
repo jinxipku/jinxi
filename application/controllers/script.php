@@ -211,8 +211,9 @@ echo '</pre>';
 	public function test_message(){
 		$this->load->model("message_model");
 		//$this->message_model->add_message(2,1,'woca');
-		//$this->message_model->get_message(1);
-		$this->message_model->delete_message(3,2);
+		$res = $this->message_model->get_message(1);
+		//$this->message_model->delete_message(3,2);
+		var_dump($res);
 	}
 
 	//用于发一火车皮帖子
@@ -220,16 +221,24 @@ echo '</pre>';
 		$num = 200;
 		$type = 0;//发转让贴
 	
+		$dict = array("iphone","三星","小米","篮球","足球","地震");
+		$desc_dict = array(
+			"昨天才买的，很新的苹果手机",
+			"低价甩",
+			"推荐同学们购买",
+			"资料很不错"
+		);
+		$length = count($dict);
 		for( $i=0; $i<$num;$i=$i+1){
 			$post['user_id'] = rand(1,2);
 			$class = rand(0,50);
 			$post['category1'] = map_to_cat1($class);
 			
 			$post['category2'] = $class;
-			$post['brand'] = "随机生成的brand";
-			$post['model'] = "随机生成的model";
+			$post['brand'] = $dict[rand(0,$length)];
+			$post['model'] = $dict[rand(0,$length)];
 			$post['class'] = rand(0,4);
-			$post['description'] = "随机生成的描述";
+			$post['description'] = $desc_dict[rand(0,count($desc_dict))];
 			$post['price'] = rand(0,9999);
 			$post['deal'] = rand(1,4);
 			$post['contactby'] = rand(0,4);
@@ -241,16 +250,17 @@ echo '</pre>';
 
 		$type = 1;//发求购贴
 	
+		
 		for( $i=0; $i<$num;$i=$i+1){
 			$post['user_id'] = rand(1,2);
 			$class = rand(0,50);
 			$post['category1'] = map_to_cat1($class);
 			
 			$post['category2'] = $class;
-			$post['brand'] = "随机生成的brand";
-			$post['model'] = "随机生成的model";
+			$post['brand'] = $dict[rand(0,$length)];
+			$post['model'] = $dict[rand(0,$length)];
 			$post['class'] = rand(0,4);
-			$post['description'] = "随机生成的描述";
+			$post['description'] = $desc_dict[rand(0,count($desc_dict))];
 			$post['price'] = rand(0,9999);
 			$post['deal'] = rand(1,4);
 			$post['contactby'] = rand(0,4);

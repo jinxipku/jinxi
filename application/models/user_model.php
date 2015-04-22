@@ -78,6 +78,7 @@ class user_model extends CI_Model {
 				$post['category1_name'] = get_category1_name2($post['category1']);
 				$post['category2_name'] = get_category2_name($post['category2']);
 				$post['deal'] = get_deal_name($post['deal']);
+				$post['createat'] = format_time($post['createat']);
 				$hasimg = false;
 				if(!empty($post['picture'])){
 					$hasimg = true;
