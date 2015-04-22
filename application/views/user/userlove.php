@@ -1,73 +1,13 @@
-<div class="postitembig">
-	<div class="postimage">
-	<a href="{$baseurl}user/<?=$loveitem['user_id']?>"><img style="width: 114px; height: 114px;"
-		src=""alt="" title="<?=$loveitem['user_name']?>" /></a></div>
-
-	<div class="postinfo">
-		<p class="username">
-			<a class="text-primary" href="{$baseurl}user/<?=$loveitem['user_id']?>">fabkxd</a>
-			<span>北京大学</span><span style="color: #999;">15级</span>
-			<small>1人看过，1名关注者）</small>
-		</p>
-		<div style="height: 43px; width: 543px;">
-			<p style="margin-bottom: 0; color: #7F8C8D; font-size: 13px;">签名：</p>
-			<div class="signwraper">
-				<norb class="userlatest" title="<?=$loveitem['sign']?>">
-				<?=$loveitem['sign']?>
-			</norb>
-			</div>
-		</div>
-		<div style="height: 43px; width: 543px;">
-			<p style="margin-bottom: 0; color: #7F8C8D; font-size: 13px;">最新帖子：</p>
-			<div class="signwraper">
-				<norb class="userlatest"
-					title="<?php
-	if ($loveitem ['latest'] == 1)
-		echo '暂无';
-	else
-		echo get_title_str ( $loveitem ['ptype'], $loveitem ['pgtype'], $loveitem ['pstype'], $loveitem ['class'], $loveitem ['brand'], $loveitem ['modal'], $loveitem ['pimage'] );
-	?>">
-				<?php
-	if ($loveitem ['latest'] == 1)
-		echo '暂无';
-	else
-		echo '<a href="'.$baseurl.'item/viewpost/'.$loveitem ['post_id'].'">'.get_title_str ( $loveitem ['ptype'], $loveitem ['pgtype'],
-				$loveitem ['pstype'], $loveitem ['class'],
-				$loveitem ['brand'], $loveitem ['modal'], $loveitem ['pimage'] ).'</a>';
-	?>
-			</norb>
-			</div>
-		</div>
-	</div>
-	<div class="postquality" style="text-align: center;">
-		<p class="userstat">帖子总数</p>
-		<p style="margin-bottom: 0; font-size: 12px;"><?=$loveitem['post_num']?></p>
-		<p class="userstat">卖家评分</p>
-		<p style="margin-bottom: 0; font-size: 12px;"><?php
-	if ($loveitem ['sell_comment'] == 0)
-		echo '暂无评分';
-	else
-		echo round ( 10 * $loveitem ['sell_mark'] / $loveitem ['sell_comment'] ) / 10;
-	?></p>
-		<p class="userstat">买家评分</p>
-		<p style="margin-bottom: 0; font-size: 12px;"><?php
-	if ($loveitem ['buy_comment'] == 0)
-		echo '暂无评分';
-	else
-		echo round ( 10 * $loveitem ['buy_mark'] / $loveitem ['buy_comment'] ) / 10;
-	?></p>
-	</div>
-</div>
 {if $total > 0}
 <div class="user_tab_header panel panel-default">
 	<div class="pull-left">共{$page_num}页（{$total}名用户），这是第{$cur_page}页（每页10项）。</div>
 	<div class="pagination pull-right">
 	  	<ul>
 	    	<li class="previous">
-	      		<a href="" class="fui-arrow-left" onclick="show_user_page2('#user_love', {$cur_page - 1});return false;"></a>
+	      		<a href="" class="fui-arrow-left" onclick="show_user_page2('#user_post', {$cur_page - 1});return false;"></a>
 	    	</li>
 	    	<li class="next">
-	      		<a href="" class="fui-arrow-right" onclick="show_user_page2('#user_love', {$cur_page + 1});return false;"></a>
+	      		<a href="" class="fui-arrow-right" onclick="show_user_page2('#user_post', {$cur_page + 1});return false;"></a>
 	    	</li>
 	  	</ul>
 	</div>
@@ -87,36 +27,54 @@
 	</div>
 	{else}
 
-	{foreach from = $users item = user}
+	{foreach from = $posts item = user}
+	<hr/>
 	<div class="lovee_user_box">
 		<div class="lovee_user_img">
-			<img class="lazy passive" data-original="{$user.head}" alt="{$user.nick}" />
+			<a href="{$baseurl}user/profile/{$user.id}" target="_blank"><img class="lazy passive" data-original="{$baseurl}img/head/{$user.head}" alt="{$user.nick}" title="{$user.nick}" /></a>
 		</div>
 		<div class="lovee_user_content">
 			<div>
-				<span>{$user.nick}</span>
-				<span>{$user.sex}</span>
-				<span>{$user.school_name}</span>
-				<span>{$user.level}级</span>
-				<span>（{$user.visit_num}人看过，{$user.love_num}名关注者）</span>
+				<span><a class="{$user.nick_color}" href="{$baseurl}user/profile/{$user.id}" target="_blank">{$user.nick}</a></span>
+				<span>{$user.sex} {$user.school_name}</span>
+				<span>{$user.level}级 （{$user.visits}人看过，{$user.lovers}名关注者）</span>
 			</div>
 			<div>
-				<p class="user_sign">签名：{$user.signature}</p>
+				<p class="user_sign"><strong>签名： </strong>{$user.signature}</p>
 			</div>
 			<div>
-				<p>最新帖子：</p>
-				<a href="{$baseurl}post/viewpost/{$user.newest_post.type}/{$user.newest_post.id}" title='{$user.newest_post.plain_title}' target="_blank">
+				<p>
+					<strong>最新帖子： </strong>
+				{if $user.newest_post == null}
+					无
+				</p>
+				{else}
+				</p>
+				<a href="{$baseurl}post/viewpost/{if $user.newest_post.type==0}sell{else}buy{/if}/{$user.newest_post.post_id}" title='{$user.newest_post.plain_title}' target="_blank">
 					{$user.newest_post.title}
 				</a>
+				<p>
+					<span class="fui-time">
+						{$user.newest_post.createat}
+					</span>
+					<span class="fui-new">
+						{$user.newest_post.reply_num}
+					</span>
+					<span class="fui-heart">
+						{$user.newest_post.favorite_num}
+					</span>
+				</p>
+				{/if}
 			</div>
 		</div>
 		<div class="lovee_user_post">
 			<div>
-				<p class="user_post">发帖总数：{$user.post_number}</p>
-				<p class="user_post">活跃帖数：{$user.active_post_number}</p>
+				<p class="user_post"><strong>发帖总数：</strong>{$user.post_number}</p>
+				<p class="user_post"><strong>活跃帖数：</strong>{$user.active_post_number}</p>
 			</div>
 			<div>
-				<img class="lazy passive" data-original="{$user.newest_post.picture}" alt="{$user.newest_post.plain_title}">
+				<button type="button" data-uid="{$user.id}" class="btn_messta btn btn-warning btn-sm pull-right">私信TA</button>
+				<button type="button" data-uid="{$user.id}" class="btn_cancel_love btn btn-info btn-sm pull-right">已关注</button>
 			</div>
 		</div>
 	</div>
@@ -153,4 +111,4 @@
 
 	{/if}
 </div>
-<script type="text/javascript" src="{$baseurl}js/post_item.js"></script>
+<script type="text/javascript" src="{$baseurl}js/user_love.js"></script>

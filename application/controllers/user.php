@@ -73,66 +73,42 @@ class User extends MY_Controller {
 		if (!empty($login_user)) {
 			$this->assign('login_user', $login_user);
 		}
-		switch ($tab) {
-			case '#user_post' :
-			{
-				$data = $this->post_model->get_user_posts($id, $page);
-				$this->assign('total', $data['total']);
-				$this->assign('page_num', $data['page_num']);
-				$this->assign('cur_page', $data['cur_page']);
-				$this->assign('post_num', $data['post_num']);
-				$this->assign('posts', $data['posts']);
+		$this->assign('user_id', $id);
 
-				if ($data['page_num'] > 0) {
-					$this->assign('st_page', floor($data['cur_page'] / 10) * 10 + 1);
-					$end_page = floor($data['cur_page'] / 10 + 1) * 10;
-					if ($end_page > $data['page_num'])
-						$end_page = $data['page_num'];
-					$this->assign('ed_page', $end_page);
-				}
-				$this->display ( 'user/userpost.php' );
-				break;
-			}
-			case '#user_best' :
-			{
-				$this->display ( 'user/userbest.php' );
-				break;
-			}
-			case '#user_coll' :
-			{
-				$data = $this->post_model->get_user_favorites($id, $page);
-				$this->assign('total', $data['total']);
-				$this->assign('page_num', $data['page_num']);
-				$this->assign('cur_page', $data['cur_page']);
-				$this->assign('post_num', $data['post_num']);
-				$this->assign('posts', $data['posts']);
-
-				if ($data['page_num'] > 0) {
-					$this->assign('st_page', floor($data['cur_page'] / 10) * 10 + 1);
-					$end_page = floor($data['cur_page'] / 10 + 1) * 10;
-					if ($end_page > $data['page_num'])
-						$end_page = $data['page_num'];
-					$this->assign('ed_page', $end_page);
-				}
-				$this->display ( 'user/userpost.php' );
-				break;
-			}
-			case '#user_love' :
-			{
-				$this->assign('tuser', 0);
-				$this->assign('tpage', 0);
-				$this->assign('cpage', 0);
-				$this->display ( 'user/userlove.php' );
-				break;
-			}
-			case '#user_mess' :
-			{
-				$this->display ( 'user/usermess.php' );
-				break;
-			}
-			default :
-			break;
+		if ($tab == '#user_post')
+			$data = $this->post_model->get_user_posts($id, $login_user['id'], $page);
+		else if ($tab == '#user_best')
+			$data = $this->post_model->get_user_posts($id, $login_user['id'], $page);
+		else if ($tab == '#user_coll')
+			$data = $this->post_model->get_user_favorites($id, $page);
+		else if ($tab == '#user_love')
+			$data = $this->user_model->get_user_love($id, $page);
+		else {
+			//$data = $this->post_model->get_user_messages($id, $page);
+			$this->display ( 'user/usermess.php' );
+			return;
 		}
+
+		$this->assign('total', $data['total']);
+		$this->assign('page_num', $data['page_num']);
+		$this->assign('cur_page', $data['cur_page']);
+		$this->assign('post_num', $data['post_num']);
+		$this->assign('posts', $data['posts']);
+
+		if ($data['page_num'] > 0) {
+			$this->assign('st_page', floor($data['cur_page'] / 10) * 10 + 1);
+			$end_page = floor($data['cur_page'] / 10 + 1) * 10;
+			if ($end_page > $data['page_num'])
+				$end_page = $data['page_num'];
+			$this->assign('ed_page', $end_page);
+		}
+
+		if ($tab == '#user_love')
+			$this->display ( 'user/userlove.php' );
+		else if ($tab == '#user_mess')
+			$this->display ( 'user/usermess.php' );
+		else
+			$this->display ( 'user/userpost.php' );
 	}
 
 	public function setup($set_tabs = 1) {

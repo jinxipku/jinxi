@@ -22,7 +22,11 @@
 		</div>
 		<div>
 			<p>sorry，今昔网木有为您找到数据~</p>
+			{if isset($login_user) && $user_id == $login_user.id}
 			<p>立刻去发帖或者收藏一些帖子吧~</p>
+			{else}
+			<p>快提醒你的小伙伴去发帖吧！</p>
+			{/if}
 		</div>
 	</div>
 	{else}

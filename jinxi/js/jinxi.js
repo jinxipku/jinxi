@@ -33,7 +33,7 @@ $(document).ready( function() {
 	$("img.lazy").lazyload({effect: "fadeIn"});
 });
 $(window).bind('scroll', function() {
-	$(this).scrollTop() > 600 ? $("#back_to_top").fadeIn(500) : $("#back_to_top").fadeOut(500);
+	$(this).scrollTop() > 510 + head_height ? $("#back_to_top").fadeIn(500) : $("#back_to_top").fadeOut(500);
 	if ($("#post_picture").val() != undefined) {
 		if ($(this).scrollTop() > $("#post_picture").offset().top) {
 			$("#side_view_box").fadeIn(500);
@@ -1100,6 +1100,36 @@ function confirm_report() {
 			'json'
 		);
 	}, 1000);
+}
+
+function open_reminder() {
+	if (head_height > 0) {
+		head_height = 0;
+		$("div#header").slideUp(700);
+		$("div#side").slideUp(700, function() {
+			$("div#side").html("<div id='reminder_box' class='panel panel-default'></div>");
+			$("div#side").slideDown(500);
+			$("div#navbar").removeClass("stuckMenu");
+			$("div#navbar").css("position", "fixed");
+			$("div#navbar").css("top", 0);
+			$("div#body").css("padding-top", "45px");
+			$("li#reminder").addClass("active");
+			// $.post(
+			// 	baseurl + "user/show_user_page",
+			// 	{
+			// 		tab_id: tabid,
+			// 		user_id: $("#user_id").val(),
+			// 		page: page
+			// 	},
+			// 	function(gethtml) {
+	  //       		$(tabid).html(gethtml);
+	  //       		$("img.lazy").lazyload({effect: "fadeIn"});
+			// 	}
+			// );
+		});
+	} else {
+		window.location.href = window.location.href;
+	}
 }
 
 

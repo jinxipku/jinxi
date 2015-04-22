@@ -139,7 +139,7 @@ class user_model extends CI_Model {
 		$total = $this->db->count_all_results();
 		if($total==0){
 			$data['total'] = 0;
-			$data['users'] = array();
+			$data['posts'] = array();
 			$data['post_num'] = 0;
 			$data['page_num'] = 0;
 			$data['cur_page'] = 0;
@@ -164,10 +164,11 @@ class user_model extends CI_Model {
 			$users[] = $user;
 		}
 		$data['total'] = $total;
-		$data['users'] = $users;
+		$data['posts'] = $users;
 		$data['post_num'] = count($users);
 		$data['page_num'] = $page_num;
 		$data['cur_page'] = $page;
+		$data['page_num'] = $page_num;
 		return $data;
 
 	}
