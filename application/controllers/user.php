@@ -14,6 +14,7 @@ class User extends MY_Controller {
 		$this->load->model ( 'love_model' );
 		$this->load->model ( 'account_model' );
 		$this->load->model ( 'post_model' );
+		$this->load->model ( 'message_model' );
 		$this->load->helper('url');
 		$this->load->helper('array');
 	}
@@ -82,11 +83,9 @@ class User extends MY_Controller {
 		else if ($tab == '#user_coll')
 			$data = $this->post_model->get_user_favorites($id, $page);
 		else if ($tab == '#user_love')
-			$data = $this->user_model->get_user_love($id, $page);
+			$data = $this->user_model->get_user_loves($id, $page);
 		else {
-			//$data = $this->post_model->get_user_messages($id, $page);
-			$this->display ( 'user/usermess.php' );
-			return;
+			$data = $this->message_model->get_user_messages($id, $page);
 		}
 
 		$this->assign('total', $data['total']);

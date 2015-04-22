@@ -1003,7 +1003,7 @@ function confirm_reply() {
 				$("#info_modal").find('.modal-cont').text("对不起，操作失败，请重试！");
 				$("#info_modal").find('.btn-default').css('display','none');
 				$("#info_modal").find('.btn-primary').unbind();
-				$("#info_modal").find('.btn-primary').bind('click',function() {
+				$("#info_modal").find('.btn-primary').bind('click', function() {
 					$("#info_modal").modal("hide");
 				});
 				$("#info_modal").modal();
@@ -1020,7 +1020,7 @@ function delete_reply(reply_id) {
 	$("#info_modal").find('.modal-title').text("删除回复");
 	$("#info_modal").find('.modal-cont').text("您确定要删除这条回复吗？");
 	$("#info_modal").find('.btn-primary').unbind();
-	$("#info_modal").find('.btn-primary').bind('click',function() {
+	$("#info_modal").find('.btn-primary').bind('click', function() {
 		$("#info_modal").modal('hide');
 		setTimeout(function() {
 			$.post(
@@ -1034,7 +1034,7 @@ function delete_reply(reply_id) {
 						$("#info_modal").find('.modal-cont').text("恭喜，删除回复成功！");
 						$("#info_modal").find('.btn-default').css('display','none');
 						$("#info_modal").find('.btn-primary').unbind();
-						$("#info_modal").find('.btn-primary').bind('click',function() {
+						$("#info_modal").find('.btn-primary').bind('click', function() {
 							$("#info_modal").modal("hide");
 							window.location.href = window.location.href;
 						});
@@ -1044,7 +1044,7 @@ function delete_reply(reply_id) {
 						$("#info_modal").find('.modal-cont').text("对不起，操作失败，请重试！");
 						$("#info_modal").find('.btn-default').css('display','none');
 						$("#info_modal").find('.btn-primary').unbind();
-						$("#info_modal").find('.btn-primary').bind('click',function() {
+						$("#info_modal").find('.btn-primary').bind('click', function() {
 							$("#info_modal").modal('hide');
 						});
 						$("#btn_delete_reply").html('<span class="fui-cross"></span>删除');
@@ -1082,7 +1082,7 @@ function confirm_report() {
 					$("#info_modal").find('.modal-cont').text("恭喜，举报成功，请等待审核~");
 					$("#info_modal").find('.btn-default').css('display','none');
 					$("#info_modal").find('.btn-primary').unbind();
-					$("#info_modal").find('.btn-primary').bind('click',function() {
+					$("#info_modal").find('.btn-primary').bind('click', function() {
 						$("#info_modal").modal("hide");
 					});
 					$("#info_modal").modal();
@@ -1091,7 +1091,7 @@ function confirm_report() {
 					$("#info_modal").find('.modal-cont').text("对不起，操作失败，请重试！");
 					$("#info_modal").find('.btn-default').css('display','none');
 					$("#info_modal").find('.btn-primary').unbind();
-					$("#info_modal").find('.btn-primary').bind('click',function() {
+					$("#info_modal").find('.btn-primary').bind('click', function() {
 						$("#info_modal").modal("hide");
 					});
 					$("#info_modal").modal();
@@ -1103,6 +1103,41 @@ function confirm_report() {
 }
 function mess_user(uid, unick) {
 	$("#mess_modal").find('.modal-cont').html("发给 <strong>" + unick + "</strong> 的私信：");
+	$("#mess_modal").find('.btn-primary').unbind();
+	$("#mess_modal").find('.btn-primary').bind('click', function() {
+		$("button.btn_mess_user").attr('disabled', true);
+		$("#mess_modal").modal("hide");
+		$.post(
+			baseurl + "message/add_message",
+			{
+				to_id: uid,
+				content: $("textarea#mess_content").val()
+			},
+			function(res) {
+				$("button.btn_mess_user").attr('disabled', false);
+				if (res.status == 1) {
+					$("#info_modal").find('.modal-title').text("发送成功");
+					$("#info_modal").find('.modal-cont').html("恭喜，您发送给 <strong>" + unick + "</strong> 的私信已送达~");
+					$("#info_modal").find('.btn-default').css('display','none');
+					$("#info_modal").find('.btn-primary').unbind();
+					$("#info_modal").find('.btn-primary').bind('click', function() {
+						$("#info_modal").modal("hide");
+					});
+					$("#info_modal").modal();
+				} else {
+					$("#info_modal").find('.modal-title').text("发送失败");
+					$("#info_modal").find('.modal-cont').text("对不起，操作失败，请重试！");
+					$("#info_modal").find('.btn-default').css('display','none');
+					$("#info_modal").find('.btn-primary').unbind();
+					$("#info_modal").find('.btn-primary').bind('click', function() {
+						$("#info_modal").modal("hide");
+					});
+					$("#info_modal").modal();
+				}
+			},
+			'json'
+		);
+	});
 	$("#mess_modal").modal();
 };
 

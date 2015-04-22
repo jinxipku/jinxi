@@ -128,11 +128,11 @@
 				</div>
 				<div class="modal-body">
 					<p class="modal-cont"></p>
-					<textarea id="mess_content" name="mess_content" class="form-control flat" placeholder="填写私信" onpropertychange="this.style.height=this.scrollHeight + 'px'" oninput="this.style.height=this.scrollHeight + 'px'" maxlength=300></textarea>
+					<textarea id="mess_content" name="mess_content" class="form-control flat" placeholder="填写私信" onpropertychange="if(this.scrollHeight > 80)this.style.height=this.scrollHeight + 'px';" oninput="if(this.scrollHeight > 80)this.style.height=this.scrollHeight + 'px';" maxlength=300></textarea>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-					<button type="button" class="btn btn-primary">确认</button>
+					<button type="button" class="btn btn-primary">发送</button>
 				</div>
 			</div>
 		</div>

@@ -1614,7 +1614,7 @@ div#picture_modal div {
 div#mess_modal textarea {
 	resize: none;
 	overflow-y: hidden; 
-	height: 37px;
+	height: 80px;
 }
 
 
