@@ -40,7 +40,7 @@ class message_model extends CI_Model {
 	}
 
 	//获取一个用户的所有私信，数组
-	public function get_message($id,$page){
+	public function get_user_messages($id,$page){
 		$this->db->where("(from_id=$id and delete_by_from=0) or (to_id=$id and delete_by_to=0)");
 		$this->db->from("jx_message");
 		$total = $this->db->count_all_results();
