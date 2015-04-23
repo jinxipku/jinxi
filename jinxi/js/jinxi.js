@@ -1157,6 +1157,40 @@ function mess_user(uid, unick, refresh) {
 	});
 	$("#mess_modal").modal();
 };
+function delete_mess(mid) {
+	$("#info_modal").find('.modal-title').text("删除私信");
+	$("#info_modal").find('.modal-cont').text("您确定要删除这条私信吗？");
+	$("#info_modal").find('.btn-primary').unbind();
+	$("#info_modal").find('.btn-primary').bind('click', function() {
+		$("#info_modal").modal('hide');
+		setTimeout(function() {
+			$.post(
+				baseurl + "message/delete_message",
+				{
+					message_id: mid
+				},
+				function(res) {
+					if (res.status == 1) {
+						window.location.href = baseurl + "user/profile/" + $("#user_id").val() + "/5";
+					} else {
+						$("#info_modal").find('.modal-title').text("删除失败");
+						$("#info_modal").find('.modal-cont').text("对不起，操作失败，请重试！");
+						$("#info_modal").find('.btn-default').css('display','none');
+						$("#info_modal").find('.btn-primary').unbind();
+						$("#info_modal").find('.btn-primary').bind('click', function() {
+							$("#info_modal").modal('hide');
+						});	
+						$("button.close").attr('disabled', false);
+						$("#info_modal").modal();
+					}
+				},
+				'json'
+			);
+		}, 1000);
+		$("button.close").attr('disabled', true);
+	});
+	$("#info_modal").modal();
+};
 
 function open_reminder() {
 	if (head_height > 0) {

@@ -29,7 +29,7 @@
 
 	{foreach from = $posts item = mess}
 	<hr/>
-	<div class="user_mess_box">
+	<div class="user_mess_box" data-mid="{$mess.id}">
 		<div class="user_mess_header">
 			{if $mess.to_id == $user_id}
 			<div class="mess_for_other">
@@ -59,13 +59,13 @@
 			{if $mess.from_id == $user_id}
 			<div class="mess_for_other">
 				<div>
-					<a href="{$baseurl}user/profile/{$mess.from_id}">
+					<a href="{$baseurl}user/profile/{$mess.from_id}" target="_blank">
 						<img class="lazy passive" data-original="{$baseurl}img/head/{$mess.who.thumb}" alt="{$mess.who.nick}">
 					</a>
 				</div>
 				<div>
 					<p class="post_user_nick">
-						<a class="{$mess.who.nick_color}" href="{$baseurl}user/profile/{$mess.from_id}">{$mess.who.nick}</a>
+						<a class="{$mess.who.nick_color}" href="{$baseurl}user/profile/{$mess.from_id}" target="_blank">{$mess.who.nick}</a>
 					</p>
 					<p>
 						<small class="post_user_school">{$mess.who.school_name}</small>
@@ -118,4 +118,3 @@
 
 	{/if}
 </div>
-<script type="text/javascript" src="{$baseurl}js/message.js"></script>
