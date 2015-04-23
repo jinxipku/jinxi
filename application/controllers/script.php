@@ -217,7 +217,8 @@ echo '</pre>';
 	}
 
 	public function test_hotest(){
-		$res = $this->post_model->get_hotest_post();
+		//$res = $this->post_model->get_hotest_post();
+		$res = $this->post_model->get_newest_post();
 		var_dump($res);
 	}
 

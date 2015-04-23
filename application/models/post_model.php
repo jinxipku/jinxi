@@ -245,6 +245,38 @@ class post_model extends CI_Model {
 		return $this->get_post($result['post_id'],$result['type'],true);
 	}
 
+	public function get_newest_post(){
+		$map['active'] = 1;
+
+		$this->db->order_by("createat","desc");
+		$this->db->where($map);
+		$query = $this->db->get("jx_seller_post");
+		$newest_seller_post = $query->row_array();
+
+		$this->db->order_by("createat","desc");
+		$this->db->where($map);
+		$query = $this->db->get("jx_buyer_post");
+		$newest_buyer_post = $query->row_array();
+
+		$post = null;
+		if(!empty($newest_buyer_post)&&!empty($newest_seller_post)){
+			$post = $newest_buyer_post;
+			$post['type'] = 1;
+			if($newest_seller_post['createat']>$newest_buyer_post['createat']){
+				$post = $newest_seller_post;
+				$post['type'] = 0;
+			}
+		}else if(empty($newest_seller_post)&&!empty($newest_buyer_post)){
+			$post = $newest_buyer_post;
+			$post['type'] = 1;
+		}else if(empty($newest_buyer_post)&&!empty($newest_seller_post)){
+			$post = $newest_seller_post;
+			$post['type'] = 0;
+		}
+		if(empty($post)) return null;
+		else return $this->get_post($post['post_id'],$post['type'],true);
+	}
+
 	public function get_post_ids($type,$school_id,$category1,$category2,$page,$sort){
 		$table = get_post_table($type);
 		$map = array();
