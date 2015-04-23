@@ -16,15 +16,26 @@ $(document).ready( function() {
 		}
 	});
 	if ($("#user_tabs").val() != undefined) {
+		var tab_id = '#user_post';
+		if ($("#tab_id").val() == 5)
+			tab_id = '#user_mess';
 		$.post(
 			baseurl + "user/show_user_page",
 			{
-				tab_id: '#user_post',
+				tab_id: tab_id,
 				user_id: $("#user_id").val(),
 				page: 1
 			},
 			function(gethtml) {
-        		$('#user_post').html(gethtml);
+				if ($("#tab_id").val() == 5) {
+					$("html,body").animate(
+						{
+							scrollTop: $("#scroll_bench").offset().top 
+						},
+						700
+					);
+				}
+        		$(tab_id).html(gethtml);
         		$("img.lazy").lazyload({effect: "fadeIn"});
 			}
 		);
@@ -1101,8 +1112,11 @@ function confirm_report() {
 		);
 	}, 1000);
 }
-function mess_user(uid, unick) {
+function mess_user(uid, unick, refresh) {
 	$("#mess_modal").find('.modal-cont').html("发给 <strong>" + unick + "</strong> 的私信：");
+	setTimeout(function() {
+		$("textarea#mess_content").focus();
+	}, 500);
 	$("#mess_modal").find('.btn-primary').unbind();
 	$("#mess_modal").find('.btn-primary').bind('click', function() {
 		$("button.btn_mess_user").attr('disabled', true);
@@ -1122,6 +1136,9 @@ function mess_user(uid, unick) {
 					$("#info_modal").find('.btn-primary').unbind();
 					$("#info_modal").find('.btn-primary').bind('click', function() {
 						$("#info_modal").modal("hide");
+						if (refresh == 1) {
+							window.location.href = baseurl + "user/profile/" + $("#user_id").val() + "/5";
+						}
 					});
 					$("#info_modal").modal();
 				} else {

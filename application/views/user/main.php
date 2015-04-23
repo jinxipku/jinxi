@@ -8,6 +8,7 @@
 				</div>
 				<div id="user_info">
 					<input type="hidden" id="user_id" name="user_id" value="{$user.id}" />
+					<input type="hidden" id="tab_id" name="tab_id" value="{$tab}" />
 					<p class="user_name">
 						<a class="{$user.nick_color}" href="{$baseurl}user/profile/{$user.id}">{$user.nick}</a>
 						<small>（{$user.visits}人看过，{$user.lovers}名关注者）</small>
@@ -41,7 +42,7 @@
 			<div id="user_tabs">
 				{if isset($myself)}
 				<ul class="nav nav-tabs">
-					<li class="active">
+					<li{if $tab == 1} class="active"{/if}>
 						<a href="#user_post" data-toggle="tab" onclick="show_user_page('#user_post', 1)">我的帖子</a>
 					</li>
 					<li>
@@ -54,7 +55,7 @@
 						<a href="#user_love" data-toggle="tab" onclick="show_user_page('#user_love', 1)">我的关注</a>
 					</li>
 					{if $user.level >= 5}
-					<li>
+					<li{if $tab == 5} class="active"{/if}>
 						<a href="#user_mess" data-toggle="tab" onclick="show_user_page('#user_mess', 1)">我的私信</a>
 					</li>
 					{/if}
@@ -84,12 +85,12 @@
 			<div id="user_panels">
 				{if isset($myself)}
 				<div class="tab-content">
-					<div id="user_post" class="tab-pane fade in active"></div>
+					<div id="user_post" class="tab-pane fade{if $tab == 1} in active{/if}"></div>
 					<div id="user_best" class="tab-pane fade"></div>
 					<div id="user_coll" class="tab-pane fade"></div>
 					<div id="user_love" class="tab-pane fade"></div>
 					{if $user.level >= 5}
-					<div id="user_mess" class="tab-pane fade"></div>
+					<div id="user_mess" class="tab-pane fade{if $tab == 5} in active{/if}"></div>
 					{/if}
 				</div>
 				{else}
