@@ -36,13 +36,6 @@ class Message extends MY_Controller {
 		$this->ajaxReturn(null,'',$res);
 	}
 
-	//无post参数
-	public function get_user_messages(){
-		$login_user =  $this->session->userdata('login_user');	
-		if(empty($login_user)) $this->ajaxReturn(null,"未登录",0);
-		$data = $this->message_model->get_user_messages($login_user['id'],$page);
-		$this->ajaxReturn($data,'',1);
-	}
 }
 
 ?>

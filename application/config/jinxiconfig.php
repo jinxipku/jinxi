@@ -4,6 +4,6 @@ $config['default_head'] = 'default_head.jpg';
 $config['default_thumb'] = 'default_thumb.jpg';
 $config['num_per_page'] = 30;
 $config['num_per_page2'] = 10;
-$config['reply_bonus'] = 2;//回复帖子加2分
-$config['post_bonus'] = 5;//发帖子加5分
+$config['reply_bonus'] = 3;//回复帖子加2分
+$config['post_bonus'] = 10;//发帖子加5分
 ?>

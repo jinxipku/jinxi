@@ -216,6 +216,11 @@ echo '</pre>';
 		var_dump($res);
 	}
 
+	public function test_hotest(){
+		$res = $this->post_model->get_hotest_post();
+		var_dump($res);
+	}
+
 	//用于发一火车皮帖子
 	public function auto_make_post(){
 		$num = 200;

@@ -196,8 +196,6 @@ class Post extends MY_Controller {
 		return $this->favorites_model->get_favorites($user_id,$type);
 	}
 
-	
-
 
 
 

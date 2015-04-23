@@ -6,10 +6,13 @@
 			<p>微信公众号及二维码，微博官方账号及二维码，客服QQ，地址</p>
 			<p class="heading">时间轴(发展历程)</p>
 			<hr/>
-	
-				<div id="timeline">
-				</div>
-			
+			<div class="row">
+			<div id="timeline">
+			</div>
+		</div>
+			<div style="overflow:display;height:auto;position:relative;display:inline-block !important; display:inline;">
+				
+			</div>
 			<hr/>
 
 			<p class="heading">给我们的建议</p>

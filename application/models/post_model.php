@@ -218,6 +218,33 @@ class post_model extends CI_Model {
 		return $this->db->update($table,array("active"=>$active));
 	}
 
+	public function get_hotest_post(){
+		$map['active'] = 1;
+		$this->db->where($map);
+		$this->db->select("(3*(createat-unix_timestamp())/86400+reply_num*4+favorite_num*5) as heat,post_id");
+		$this->db->order_by("heat desc");
+		$this->db->limit(1,0);
+		$this->db->from("jx_seller_post");
+		$res = $this->db->get()->row_array();
+
+		$this->db->where($map);
+		$this->db->select("(3*(createat-unix_timestamp())/86400+reply_num*4+favorite_num*5) as heat,post_id");
+		$this->db->order_by("heat desc");
+		$this->db->limit(1,0);
+		$this->db->from("jx_buyer_post");
+		$res2 = $this->db->get()->row_array();
+
+		if(empty($res)&&empty($res2)) return null;
+		if(!empty($res)&&!empty($res2)){
+			$type = ($res['heat']>$res2['heat'])?0:1;
+		}else{
+			$type = empty($res)? 1:0;
+		}
+		$res['type'] = $type;$res2['type'] = $type;
+		$result = ($type==0)?$res:$res2;
+		return $this->get_post($result['post_id'],$result['type'],true);
+	}
+
 	public function get_post_ids($type,$school_id,$category1,$category2,$page,$sort){
 		$table = get_post_table($type);
 		$map = array();
