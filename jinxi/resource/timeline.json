@@ -1,0 +1,48 @@
+
+{
+    "timeline":
+    {
+        "headline":"今昔发展历程",
+        "type":"default",
+		"startDate":"2009,8",
+		"text":"<i><span class='c1'>历程介绍</span></i>",
+		"asset":
+        {
+            "media":"../img/jinxibig.jpg",
+            "caption":"logo"
+        },
+        "date": [
+            {
+                "startDate":"2010,2",
+                "headline":"第一件事",
+                "text":"第一件事的内容",
+                "asset":
+                {
+                    "media":"../img/jinxi.jpg",
+                    "credit":"",
+                    "caption":"sssssssssssss"
+                }
+            },
+            {
+                "startDate":"2013,5",
+                "headline":"第二件事",
+                "text":"第二件事的内容",
+                "asset":
+                {
+                   "media":"../img/jinxi2.jpg",
+                   "caption":"sssssssssssssss"
+                }
+            },
+            {
+                "startDate":"2015,7",
+                "headline":"第三件事",
+                "text":"第三件事的内容",
+                "asset":
+                {
+                   "media":"../img/jinxi.jpg",
+                   "caption":"sssssssssssssss"
+                }
+            }
+        ]
+    }
+}

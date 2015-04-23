@@ -72,6 +72,7 @@ class message_model extends CI_Model {
 				$who = $value['to_id'];
 			}
 			$res[$key]['who'] = $this->user_model->get_info($who,"message");
+			$res[$key]['createat'] = format_time($res[$key]['createat']);
 		}
 		$data['posts'] = $res;
 		$data['total'] = $total;
