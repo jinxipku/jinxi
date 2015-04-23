@@ -1491,12 +1491,12 @@ div.user_mess_header>div:nth-child(1) {
 	width: 250px;
 	height: 60px;
 }
-div.user_mess_header>div:nth-child(1)>div:nth-child(1) {
+div.user_mess_header>div.mess_for_other>div:nth-child(1) {
 	float: left;
 	width: 60px;
 	height: 60px;
 }
-div.user_mess_header>div:nth-child(1)>div:nth-child(2) {
+div.user_mess_header>div.mess_for_other>div:nth-child(2) {
 	float: left;
 	width: 190px;
 	height: 60px;
@@ -1506,6 +1506,7 @@ div.user_mess_header>div:nth-child(2) {
 	float: left;
 	width: 242px;
 	height: 60px;
+	padding-right: 80px;
 	text-align: center;
 }
 div.user_mess_header>div:nth-child(2)>p {
@@ -1516,12 +1517,14 @@ div.user_mess_header>div:nth-child(3) {
 	float: left;
 	width: 250px;
 	height: 60px;
-	font-size: 30px;
+}
+div.user_mess_header>div.mess_for_me {
+	font-size: 24px;
 	padding-left: 50px;
 }
 div.user_mess_content {
 	width: 742px;
-	height: 60px;
+	min-height: 60px;
 	cursor: pointer;
 	padding: 15px;
 	font-size: 16px;

@@ -22,7 +22,7 @@ class User extends MY_Controller {
 // +----------------------------------------------------------------------
 // | 前台页面跳转
 // +----------------------------------------------------------------------
-	public function profile($id = 0) {
+	public function profile($id = 0, $tab = 1) {
 		if ($id == 0) {
 			$login_user =  $this->session->userdata('login_user');
 			if (!empty($login_user)) {
@@ -54,6 +54,7 @@ class User extends MY_Controller {
 			}
 		}
 		
+		$this->assign('tab', $tab);
 		$this->assign('user', $user);
 		$this->assign('title', '今昔网-'.$user['nick']);
 		$this->assign('baseurl', base_url());

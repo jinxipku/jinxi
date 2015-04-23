@@ -1,4 +1,4 @@
-<!-- {if $total > 0}
+{if $total > 0}
 <div class="user_tab_header panel panel-default">
 	<div class="pull-left">共{$page_num}页（{$total}封私信），这是第{$cur_page}页（每页10项）。</div>
 	<div class="pagination pull-right">
@@ -12,80 +12,10 @@
 	  	</ul>
 	</div>
 </div>
-{/if} -->
+{/if}
 
 <div class="user_tab_box panel panel-default">
-	<hr/>
-	<div class="user_mess_box">
-		<div class="user_mess_header">
-			<div>
-				<div>
-					<a href="http://www.xn--wmqr18c.cn/user/profile/1">
-						<img class="lazy passive" data-original="http://www.xn--wmqr18c.cn/img/head/svxvkeeS1xmvThxME1429093424.jpg" alt="一剑轻安" src="http://www.xn--wmqr18c.cn/img/head/svxvkeeS1xmvThxME1429093424.jpg" style="display: inline;">
-					</a>
-				</div>
-				<div>
-					<p class="post_user_nick">
-						<a class="text_purple" href="http://www.xn--wmqr18c.cn/user/profile/1">一剑轻安</a>
-					</p>
-					<p>
-						<small class="post_user_school">北京大学</small>
-					</p>
-				</div>
-			</div>
-			<div>
-				<p>发给</p>
-				<p><small class="post_user_date">2015-04-22 14:29:39</small></p>
-			</div>
-			<div>
-				我
-			</div>
-			<button type="button" class="close" aria-label="Close" onclick="delete_mess()" title="删除">
-				<span aria-hidden="true">&times;</span>
-			</button>
-		</div>
-		<div class="user_mess_content" title="点击回复" onclick="send_mess()">
-			我想要你的吉他，能不能便宜点卖给我呀~
-		</div>
-	</div>
-
-	<hr/>
-	<div class="user_mess_box">
-		<div class="user_mess_header">
-			<div>
-				<div>
-					<a href="http://www.xn--wmqr18c.cn/user/profile/1">
-						<img class="lazy passive" data-original="http://www.xn--wmqr18c.cn/img/head/svxvkeeS1xmvThxME1429093424.jpg" alt="一剑轻安" src="http://www.xn--wmqr18c.cn/img/head/svxvkeeS1xmvThxME1429093424.jpg" style="display: inline;">
-					</a>
-				</div>
-				<div>
-					<p class="post_user_nick">
-						<a class="text_purple" href="http://www.xn--wmqr18c.cn/user/profile/1">一剑轻安</a>
-					</p>
-					<p>
-						<small class="post_user_school">北京大学</small>
-					</p>
-				</div>
-			</div>
-			<div>
-				<p>发给</p>
-				<p><small class="post_user_date">2015-04-22 14:29:39</small></p>
-			</div>
-			<div>
-				我
-			</div>
-			<button type="button" class="close" aria-label="Close" onclick="delete_mess()" title="删除">
-				<span aria-hidden="true">&times;</span>
-			</button>
-		</div>
-		<div class="user_mess_content" title="点击回复" onclick="send_mess()">
-			我想要你的吉他，能不能便宜点卖给我呀~
-		</div>
-	</div>
-
-
-
-	<!-- {if $total == 0}
+	{if $total == 0}
 	<div class="sorry_box">
 		<div>
 			<img class="passive" src="{$baseurl}img/info/sorry.png" alt="sorry"/>
@@ -97,10 +27,63 @@
 	</div>
 	{else}
 
-	{foreach from = $posts item = post}
+	{foreach from = $posts item = mess}
 	<hr/>
-	<div class="post_item_box">
-		
+	<div class="user_mess_box">
+		<div class="user_mess_header">
+			{if $mess.to_id == $user_id}
+			<div class="mess_for_other">
+				<div>
+					<a href="{$baseurl}user/profile/{$mess.from_id}">
+						<img class="lazy passive" data-original="{$baseurl}img/head/{$mess.who.thumb}" alt="{$mess.who.nick}">
+					</a>
+				</div>
+				<div>
+					<p class="post_user_nick">
+						<a class="{$mess.who.nick_color}" href="{$baseurl}user/profile/{$mess.from_id}">{$mess.who.nick}</a>
+					</p>
+					<p>
+						<small class="post_user_school">{$mess.who.school_name}</small>
+					</p>
+				</div>
+			</div>
+			{else}
+			<div class="mess_for_me">
+				我
+			</div>
+			{/if}
+			<div>
+				<p>发给</p>
+				<p><small class="post_user_date">{$mess.createat}</small></p>
+			</div>
+			{if $mess.from_id == $user_id}
+			<div class="mess_for_other">
+				<div>
+					<a href="{$baseurl}user/profile/{$mess.from_id}">
+						<img class="lazy passive" data-original="{$baseurl}img/head/{$mess.who.thumb}" alt="{$mess.who.nick}">
+					</a>
+				</div>
+				<div>
+					<p class="post_user_nick">
+						<a class="{$mess.who.nick_color}" href="{$baseurl}user/profile/{$mess.from_id}">{$mess.who.nick}</a>
+					</p>
+					<p>
+						<small class="post_user_school">{$mess.who.school_name}</small>
+					</p>
+				</div>
+			</div>
+			{else}
+			<div class="mess_for_me">
+				我
+			</div>
+			{/if}
+			<button type="button" class="close" aria-label="Close" onclick="delete_mess({$mess.id})" title="删除">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="user_mess_content" title="{if $mess.from_id == $user_id}点击再发一封{else}点击回复TA{/if}" onclick="mess_user({$mess.who.id}, '{$mess.who.nick}', 1)">
+			&nbsp;&nbsp;{$mess.content}
+		</div>
 	</div>
 	{/foreach}
 	
@@ -133,6 +116,6 @@
 	</div>
 	{/if}
 
-	{/if} -->
+	{/if}
 </div>
 <script type="text/javascript" src="{$baseurl}js/message.js"></script>
