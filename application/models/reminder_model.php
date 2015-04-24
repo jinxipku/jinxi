@@ -26,12 +26,12 @@ class reminder_model extends CI_Model {
 	public function get_user_reminder($user_id){
 		$map['to_user_id'] = $user_id;
 		$map['is_read'] = 0;
-		$this->db()->where($map);
-		$this->db()->from("jx_reminder");
-		$res = $this->db()->get()->result_array();
+		$this->db->where($map);
+		$this->db->from("jx_reminder");
+		$res = $this->db->get()->result_array();
 		$reminders = array();
 		foreach ($res as $key => $value) {
-			$temp = format_reminder($value);
+			$temp = $this->format_reminder($value);
 			$reminders[] = $temp;
 		}
 		var_dump($reminders);
@@ -40,19 +40,22 @@ class reminder_model extends CI_Model {
 	public function format_reminder($reminder){
 		$url = '';
 		$content = '';
-		$reminder['createat'] = format_time($reminder['createat']);
+		$result['createat'] = format_time($reminder['createat']);
 		switch ($reminder['type']) {
 			case '1':
 				$type = ($reminder['post_type']==0)?"sell":"buy";
 				$url = base_url("post/viewpost/$type/".$reminder['post_id']);
 				$content = "你收藏的帖子《".$this->get_post_title($reminder['post_id'],$reminder['post_type'])."》有了更新";
+				
 				break;
 			
 			default:
 				# code...
 				break;
 		}
-		return $reminder;
+		$result['url'] = $url;
+		$result['content'] = $content;
+		return $result;
 
 	}
 
@@ -69,7 +72,7 @@ class reminder_model extends CI_Model {
 		if(!empty($res['picture'])){
 			$hasimg = true;
 		}
-		$res['plain_title'] = get_plain_title($res['type'],$res['deal'],$res['class'],$hasimg,$res['category1_name'],$res['category2_name'],$res['brand'],$res['model']);
+		$res['plain_title'] = get_plain_title($type,$res['deal'],$res['class'],$hasimg,$res['category1_name'],$res['category2_name'],$res['brand'],$res['model']);
 		$res['plain_title'] = cutString($res['plain_title'],20);
 		return $res['plain_title'];
 	}

@@ -22,6 +22,7 @@ class reply_model extends CI_Model {
 		$reply['createat'] = time();
 		$res = $this->db->insert("jx_reply",$reply);  //插入回复表
 		if($res){
+			$res = $this->db->insert_id();
 			if($this->db->affected_rows()>0){
 				$res2 = $this->post_model->update_reply_num($reply['post_id'],$reply['type'],1);
 			}

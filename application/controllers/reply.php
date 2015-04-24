@@ -29,10 +29,9 @@ class Reply extends MY_Controller {
 		$reply['content'] = $_POST['content'];
 		$reply['reply_from'] = $user['id'];
 		$res = $this->reply_model->add_reply($reply);
-		if($res){
-			$reply_id = $this->db->insert_id();
+		if(!empty($res)){
 			$type_name = ($reply['type']==0)?"sell":"buy";
-			$data = base_url("post/viewpost/$type_name/".$reply['post_id']."/".$reply_id);
+			$data = base_url("post/viewpost/$type_name/".$reply['post_id']."/".$res);
 			$this->ajaxReturn($data,"回复成功",1);
 		}else{
 			$this->ajaxReturn(null,"回复失败",0);

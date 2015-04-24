@@ -14,6 +14,7 @@ class Script extends MY_Controller {
 		$this->load->model("reply_model");
 		$this->load->model("admin_model");
 		$this->load->model("favorites_model");
+		$this->load->model("reminder_model");
 		$this->load->database();
 	}
 
@@ -288,6 +289,10 @@ echo '</pre>';
 	public function test_update_post(){
 		$info['description'] = "测试update";
 		$this->post_model->update_post(8,0,$info);
+	}
+
+	public function test_reminder(){
+		$this->reminder_model->get_user_reminder(2);
 	}
 }
 ?>
