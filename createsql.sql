@@ -59,7 +59,8 @@ create table jx_favorites(
 	user_id int(11) not null comment '收藏者',
 	post_id int(11) not null comment '被收藏帖子id',
 	type tinyint(1) not null comment '被收藏帖子类别,1为卖家的，2为买家的',
-	addat int(11) not null comment '收藏时间'
+	addat int(11) not null comment '收藏时间',
+	primary key(user_id,post_id,type)
 )DEFAULT CHARSET=utf8 COMMENT='收藏表';
 
 create index user_index on jx_favorites(user_id);

@@ -161,10 +161,8 @@ class Display extends MY_Controller {
 
 	//返回特定的一篇帖子在大厅展示的信息
 	public function get_post_info($post_id, $type){
-
 		$post = $this->post_model->get_post($post_id,$type,true);
 		if(empty($post)) return null;
-
 		return $post;
 	}
 
