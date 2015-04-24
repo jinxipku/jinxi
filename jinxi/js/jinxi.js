@@ -1262,33 +1262,7 @@ function delete_mess(mid) {
 };
 
 function open_reminder() {
-	if (head_height > 0) {
-		head_height = 0;
-		$("div#header").slideUp(700);
-		$("div#side").slideUp(700, function() {
-			$("div#side").html("<div id='reminder_box' class='panel panel-default'></div>");
-			$("div#side").slideDown(500);
-			$("div#navbar").removeClass("stuckMenu");
-			$("div#navbar").css("position", "fixed");
-			$("div#navbar").css("top", 0);
-			$("div#body").css("padding-top", "45px");
-			$("li#reminder").addClass("active");
-			// $.post(
-			// 	baseurl + "user/show_user_page",
-			// 	{
-			// 		tab_id: tabid,
-			// 		user_id: $("#user_id").val(),
-			// 		page: page
-			// 	},
-			// 	function(gethtml) {
-	  //       		$(tabid).html(gethtml);
-	  //       		$("img.lazy").lazyload({effect: "fadeIn"});
-			// 	}
-			// );
-		});
-	} else {
-		window.location.href = window.location.href;
-	}
+	$("#reminder_modal").modal();
 }
 
 

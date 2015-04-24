@@ -1550,15 +1550,61 @@ div#side div.post_item_block {
 	padding: 15px 20px;
 }
 
-
-
 /*
 reminder_box
 */
-div#reminder_box {
-	height: 100%;
-	width: 264px;
-	background-color: blue;
+div#reminders_box {
+	height: 600px;
+	width: 360px;
+	background-color: white;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+div.reminder_box {
+	min-height: 90px;
+	width: 345px;
+	padding: 15px 15px 5px 15px;
+	cursor: pointer;
+}
+div.reminder_box:hover {
+	filter:alpha(opacity=80); /*IE滤镜，透明度50%*/
+	-moz-opacity:0.8; /*Firefox私有，透明度50%*/
+	opacity:0.8;/*其他，透明度50%*/
+}
+div.reminder_title {
+	height: 60px;
+	width: 315px;
+}
+div.reminder_title>div:nth-child(1) {
+	float: left;
+	height: 60px;
+	width: 60px;
+}
+div.reminder_title>div:nth-child(2) {
+	float: left;
+	height: 60px;
+	width: 255px;
+	padding-left: 10px;
+	font-size: 12px;
+	line-height: 1.6;
+	color: #333;
+}
+div.reminder_title>div:nth-child(2) span {
+	margin-left: 3px;
+	margin-right: 3px;
+	font-size: 14px;
+}
+div.reminder_title>div:nth-child(2) strong {
+	margin-left: 3px;
+	font-size: 13px;
+	color: #111;
+}
+div.reminder_content {
+	width: 315px;
+	padding: 3px;
+	font-family: 宋体;
+	font-size: 15px;
+	color: #7F8C8D;
 }
 
 
@@ -1610,9 +1656,11 @@ div.modal h4 {
 	color: #1abc9c;
 	font-weight: 500;
 }
+
 div#choose_school>div {
 	width: 650px;
 }
+
 div#info_modal>div {
 	margin-top: 100px;
 	width: 400px;
@@ -1626,10 +1674,30 @@ div#picture_modal div {
 	max-width: 800px;
 	padding: 0px;
 }
+
 div#mess_modal textarea {
 	resize: none;
 	overflow-y: hidden; 
 	height: 80px;
+}
+
+div#reminder_modal>div {
+	width: 382px;
+}
+div#reminder_modal>div>div>div {
+	padding: 0px;
+}
+div#reminder_modal div.modal-header {
+	border-bottom: 1px solid #7F8C8D
+}
+div#reminder_modal h4 {
+	padding: 10px;
+	text-align: center;
+}
+
+div#report_modal>div {
+	width: 500px;
+	margin-top: 70px;
 }
 
 
@@ -1650,242 +1718,4 @@ a#ujian>img {
 	border: 0;
 	padding: 0;
 	margin: 0;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-div#report_modal>div {
-	width: 500px;
-	margin-top: 70px;
-}
-
-
-
-
-
-
-div.rightpart2{
-	position: relative;
-	float: left;
-	width: 772px;
-}
-
-
-
-div.postitembig{
-	width: 772px;
-	height: 136px;
-}
-div.postitembig img.postimage{
-	position: relative;
-	float: left;
-	margin-top: 10px;
-	width: 114px;
-	height: 114px;
-	margin-right: 15px;
-	overflow: hidden;
-}
-div.postitembig div.postinfo{
-	position: relative;
-	float: left;
-	width: 543px;
-	height: 136px;
-}
-div.postitembig div.postquality{
-	position: relative;
-	float: left;
-	width: 100px;
-	height: 136px;
-}
-div.postitembig div.postquality img.quality{
-	margin-top: -10px;
-	height: 100px;
-	width: 100px;
-}
-div.tableline{
-	height: 50px;
-}
-div.tableleft{
-	position: relative;
-	float: left;
-	width: 82px;
-	padding-top: 6px;
-}
-div.tableright{
-	position: relative;
-	float: left;
-	width: 446px;
-}
-div.textbookitem{
-	position: relative;
-	float: left;
-	width: 200.5px;
-	padding-left: 15px;
-	padding-right: 15px;
-}
-div.userheader{
-	width: 772px;
-	height: 250px;
-}
-div.ujian-hook img{
-	width: 110px !important;
-	border-radius: 1px !important;
-}
-div.ujian-hook div{
-	border-radius: 1px !important;
-}
-div.colordis{
-	float: left;
-	height: 35px;
-	width: 60px;
-	text-align: center;
-	color: #FFF;
-	margin-bottom: 15px;
-	margin-right: 15px;
-}
-div.signwraper{
-	height: 25px;
-	width: 543px;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	-o-text-overflow: ellipsis;
-	white-space: nowrap;
-}
-div.titlewraper{
-	margin-top: 5px;
-	width: 543px;
-	height: 45px;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	-o-text-overflow: ellipsis;
-	white-space: nowrap;
-}
-
-
-p.postaddress{
-	font-family: 微软雅黑,黑体,幼圆,宋体;
-	font-size: 20px;
-	margin-left: 12px;
-}
-p.postuser{
-	font-family: 宋体;
-	margin-left: 12px;
-	margin-bottom: 0;
-	color: #808080;
-}
-p.postusersm{
-	font-family: 宋体;
-	font-size: 15px;
-	color: #808080;
-	margin-right: 5px;
-}
-p.postprice{
-	font-family: 宋体;
-	font-weight: 600;
-	font-size: 24px;
-	margin-top: 5px;
-	margin-bottom: 0;
-	color: #E74C3C;	
-}
-p.userschool{
-	font-family: 微软雅黑,黑体,幼圆,宋体;
-	font-size: 18px;
-	margin-bottom: 2px;
-}
-p.userstat{
-	font-family: 微软雅黑,黑体,幼圆,宋体;
-	color: #3498DB;
-	font-size: 15px;
-	margin-bottom: 0;
-}
-
-norb.userlatest{
-	font-family: 宋体;
-	font-size: 13px;
-	margin-bottom: 2px;
-	margin-left: 5px;
-	color: #808080;
-}
-
-p.tbtitle{
-	color: #404040;
-	font-size: 15px;
-	font-weight: 500;
-	margin: 0;
-}
-p.tbinfo{
-	font-family: 宋体;
-	font-size: 13px;
-	color: #808080;
-	margin-right: 5px;
-}
-
-p.postcon{
-	font-family: 微软雅黑,黑体,幼圆,宋体;
-	font-size: 15px;
-}
-p.replycon{
-	font-family: 宋体;
-	font-size: 14px;
-	color: #95A5A6;
-}
-
-p.numinfo{
-	margin: 5px 0 5px 20px;
-	height: 25px;
-}
-a.commreport{
-	margin-bottom: 0;
-	font-family: 微软雅黑,黑体,幼圆,宋体;
-	font-size: 12px;
-	color: #E74C3C;
-	display: none;
-}
-a.switch{
-	color: #666666;
-	font-size: 14px;
-	font-family: 宋体;
-	margin-left: 8px;
-}
-a.switch:hover {
-	color: #000000;
-}
-
-
-a.posttitle{
-	color: #404040;
-	font-size: 24px;
-	font-weight: 600;
-	margin-top: 0;
-}
-a.posttitlesm{
-	color: #404040;
-	font-size: 15px;
-	font-weight: 500;
-	margin-top: 0;
-}
-span.check{
-	font-size: 14px;
-}
-span.numinfo{
-	margin: 5px 0 5px 20px;
-	height: 25px;
-	font-size: 14px;
 }
