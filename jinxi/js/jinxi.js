@@ -1118,15 +1118,7 @@ function delete_reply(reply_id) {
 				},
 				function(res) {
 					if (res.status == 1) {
-						$("#info_modal").find('.modal-title').text("删除回复成功");
-						$("#info_modal").find('.modal-cont').text("恭喜，删除回复成功！");
-						$("#info_modal").find('.btn-default').css('display','none');
-						$("#info_modal").find('.btn-primary').unbind();
-						$("#info_modal").find('.btn-primary').bind('click', function() {
-							$("#info_modal").modal("hide");
-							window.location.href = window.location.href;
-						});
-						$("#info_modal").modal();
+						$("div.reply_box[data-rid=" + reply_id + "]").slideUp(300);
 					} else {
 						$("#info_modal").find('.modal-title').text("删除失败");
 						$("#info_modal").find('.modal-cont').text("对不起，操作失败，请重试！");
@@ -1142,7 +1134,7 @@ function delete_reply(reply_id) {
 				},
 				'json'
 			);
-		}, 1000);
+		}, 500);
 		$("#btn_delete_reply").html('<i class="icon-spinner icon-spin"></i> 处理中');
 		$("#btn_delete_reply").attr('disabled', true);
 	});

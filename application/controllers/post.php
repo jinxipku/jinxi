@@ -63,6 +63,8 @@ class Post extends MY_Controller {
 		$thispost = $this->get_post($post_id, $ptype, $reply_id);
 		if (empty($thispost)) {
 			redirect('info/nopage');
+		} else if (!$thispost['reply_valid']) {
+			redirect('post/viewpost/' . $post_type . '/' . $post_id);
 		}
 
 		$this->assign('reply_id', $reply_id);
@@ -130,11 +132,10 @@ class Post extends MY_Controller {
 // +----------------------------------------------------------------------
 
 	//返回特定的一篇帖子
-	public function get_post($post_id, $type,$reply_id=0){
+	public function get_post($post_id, $type){
 
 		$post = $this->post_model->get_post($post_id,$type);
 		if(empty($post)) return null;
-
 
 		$post['type'] = $type;
 		$post['createat'] = format_time($post['createat']);
@@ -178,23 +179,17 @@ class Post extends MY_Controller {
 		//$post['reply_num'] = $this->reply_model->get_reply_num($post_id,$type);
 		
 			$reply = $this->reply_model->get_reply($post_id,$type);
-			$reply_ids = array();
 			if(empty($reply)) $post['reply'] = null;
 			else{
 				foreach ($reply as $key => $value) {
 					$reply[$key]['reply_thumb'] = base_url("img/head/".$reply[$key]['reply_thumb']);
 					$reply[$key]['reply_date'] = format_time($reply[$key]['reply_date']);
-					$reply_ids[] = $reply[$key]['id'];
 				}
 				$post['reply'] = $reply;
 			}
-				if($reply_id!='0'){
-					if(!in_array($reply_id, $reply_ids)){
-						$post = null;
-					}
-				}
 	
 		//TODO:当前用户是否关注帖子
+		//var_dump($post);
 		return $post;
 	}
 
