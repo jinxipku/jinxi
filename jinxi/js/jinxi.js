@@ -1085,10 +1085,7 @@ function confirm_reply() {
 		},
 		function(res) {
 			if (res.status == 1) {
-				if (window.location.href.indexOf('reply') < 0)
-					window.location.href = window.location.href + "/reply";
-				else
-					window.location.href = window.location.href;
+				window.location.href = res.data;
 			} else {
 				$("#info_modal").find('.modal-title').text("回复失败");
 				$("#info_modal").find('.modal-cont').text("对不起，操作失败，请重试！");

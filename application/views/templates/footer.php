@@ -132,11 +132,11 @@
 	<script type="text/javascript">
 		show_user_page('#user_mess', 1);
 	</script>
-	{elseif isset($replyto)}
+	{elseif isset($reply_id)}
 	<script type="text/javascript">
 		$("html,body").animate(
 			{
-				scrollTop: $("#post_doreply").offset().top 
+				scrollTop: $("div.reply_box[data-rid=" + {$reply_id} + "]").offset().top 
 			},
 			700
 		);
