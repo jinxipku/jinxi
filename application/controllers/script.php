@@ -222,6 +222,9 @@ echo '</pre>';
 		var_dump($res);
 	}
 
+	public function test_is_favorite(){
+		echo $this->post_model->is_favorite(51,1,1);
+	}
 	//用于发一火车皮帖子
 	public function auto_make_post(){
 		$num = 200;

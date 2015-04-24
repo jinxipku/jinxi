@@ -6,7 +6,6 @@ class post_model extends CI_Model {
 		$this->load->helper('url');
 	}
 
-
 	public function insert_post($info, $type){
 		$table = get_post_table($type);
 		$res = $this->db->insert($table, $info); 
@@ -15,9 +14,9 @@ class post_model extends CI_Model {
 			$res3 = $this->user_model->addpoints($info['user_id'],$this->config->item("post_bonus"));
 			return $post_id;
 		}else return 0;
-		
 	}
 
+	//TODO: check if this interface is used!
 	public function update_post($info,$user_id,$post_id,$type){
 		$table = get_post_table($type);
 		$map['user_id'] = $user_id;
@@ -26,6 +25,7 @@ class post_model extends CI_Model {
 		return $this->db->update($table,$info);
 	}
 
+	//TODO: if price is permitted to modify, delete this.
 	public function edit_description($post_id,$type,$desc){
 		$table = get_post_table($type);
 		$map['post_id'] = $post_id;
@@ -34,16 +34,14 @@ class post_model extends CI_Model {
 	}
 
 
-	//TODO:当两张表区别较大时，再区别处理.
+	//第三个参数用于区别该帖子在帖子页面还是在大厅、个人页面显示
 	public function get_post($post_id,$type,$hall=false){
 		$table = get_post_table($type);
-		if($hall){
-			//$this->db->select('post_id,user_id,class,updateat,createat,description,first_picture,picture,price');
-		}
 		$query = $this->db->get_where($table, array('post_id' => $post_id));
 		$res = $query->row_array();
 		if(empty($res)) return null;
-		if($type==0){
+
+		if($type==0){  //卖家帖子要处理图片
 			$picture = unserialize($res['picture']);
 			if(is_array($picture)){
 				foreach ($picture as $key => $value) {
@@ -54,14 +52,15 @@ class post_model extends CI_Model {
 			$res['picture'] = $picture;
 		}
 		
-
 		$this->db->from("jx_user");
+		
 		if(!$hall)
 			$this->db->select('jx_school_info.school_name, nick,id, thumb,nick_color,email,qq,phone,weixin,is_mars');
 		else $this->db->select('jx_school_info.school_name, nick,id, thumb,nick_color');
 		$this->db->join('jx_school_info',"jx_school_info.school_id=jx_user.school_id");
 		$this->db->where(array("id"=>$res['user_id']));
 		$user = $this->db->get()->row_array();
+
 		if(empty($user)) return null;
 		$user['nick_color'] = get_namecolor($user['nick_color']);
 		$user['thumb'] = base_url("img/head/".$user['thumb']);
@@ -203,7 +202,7 @@ class post_model extends CI_Model {
 		return $this->db->update($table,array("active"=>$active));
 	}
 
-	public function get_hotest_post(){
+	public function get_hotest_post($login_user_id=null){
 		$map['active'] = 1;
 		$this->db->where($map);
 		$this->db->select("(3*(createat-unix_timestamp())/86400+reply_num*4+favorite_num*5) as heat,post_id");
@@ -213,7 +212,7 @@ class post_model extends CI_Model {
 		$res = $this->db->get()->row_array();
 
 		$this->db->where($map);
-		$this->db->select("(3*(createat-unix_timestamp())/86400+reply_num*4+favorite_num*5) as heat,post_id");
+		$this->db->select("(".$this->config->item("heat_daypass")."*(createat-unix_timestamp())/86400+reply_num*".$this->config->item("heat_reply")."+favorite_num*".$this->config->item("heat_favorite").") as heat,post_id");
 		$this->db->order_by("heat desc");
 		$this->db->limit(1,0);
 		$this->db->from("jx_buyer_post");
@@ -227,10 +226,15 @@ class post_model extends CI_Model {
 		}
 		$res['type'] = $type;$res2['type'] = $type;
 		$result = ($type==0)?$res:$res2;
-		return $this->get_post($result['post_id'],$result['type'],true);
+		$hotest_post = $this->get_post($result['post_id'],$result['type'],true);
+		if(empty($login_user_id)){
+			$hotest_post['has_collect'] = $this->is_favorite($result['post_id'],$result['type'],$login_user_id);
+		}else
+			$hotest_post['has_collect'] = 1;
+		return $hotest_post;
 	}
 
-	public function get_newest_post(){
+	public function get_newest_post($login_user_id=null){
 		$map['active'] = 1;
 
 		$this->db->order_by("createat","desc");
@@ -259,9 +263,17 @@ class post_model extends CI_Model {
 			$post['type'] = 0;
 		}
 		if(empty($post)) return null;
-		else return $this->get_post($post['post_id'],$post['type'],true);
+		else{
+			$newest_post = $this->get_post($post['post_id'],$post['type'],true);
+			if(empty($login_user_id)){
+				$newest_post['has_collect'] = $this->is_favorite($newest_post['post_id'],$newest_post['type'],$login_user_id);
+			}else
+				$newest_post['has_collect'] = 1;
+			return $newest_post;
+		}
 	}
 
+	//获取特定过滤的post_id列表，大厅显示。
 	public function get_post_ids($type,$school_id,$category1,$category2,$page,$sort){
 		$table = get_post_table($type);
 		$map = array();
@@ -330,108 +342,15 @@ class post_model extends CI_Model {
 		return !empty($query);
 	}
 
+	public function is_favorite($post_id,$type,$user_id){
+		if(empty($user_id)) return 0;
+		$map['post_id'] = $post_id;
+		$map['type'] = $type;
+		$map['user_id'] = $user_id;
+		$this->db->where($map);
+		$this->db->from("jx_favorites");
+		return  $this->db->count_all_results();
+	}
 
 
-//************************************以下是旧的*****************//
-
-	
-	// public function add_post($user_id) {
-	// 	$ptime = date ( 'Y-m-d H:i:s' );
-	// 	$data = array (
-	// 		'post_user' => $user_id,
-	// 		'ptype' => $this->session->userdata ( 'ptype' ),
-	// 		'pgtype' => $this->session->userdata ( 'pgtype' ),
-	// 		'pstype' => $this->session->userdata ( 'pstype' ),
-	// 		'class' => $this->session->userdata ( 'class' ),
-	// 		'brand' => $this->session->userdata ( 'brand' ),
-	// 		'modal' => $this->session->userdata ( 'modal' ),
-	// 		'status' => $this->session->userdata ( 'status' ),
-	// 		'price' => $this->session->userdata ( 'price' ),
-	// 		'pcontent' => $this->session->userdata ( 'pcontent' ),
-	// 		'ptime' => $ptime 
-	// 		);
-	// 	$this->db->insert ( 'jx_post', $data );
-	// 	$query = $this->db->get_where ( 'jx_post', array (
-	// 		'post_user' => $user_id,
-	// 		'ptime' => $ptime 
-	// 		) );
-	// 	$post_id = $query->row_array ()['post_id'];
-
-	// 	$query = $this->db->get_where ( 'jx_user', array (
-	// 		'user_id' => $user_id 
-	// 		) );
-	// 	$userinfo = $query->row_array ();
-	// 	$score = $userinfo ['score'];
-	// 	$level = $userinfo ['level'];
-	// 	$post_num = $userinfo ['post_num'];
-	// 	$latest = $post_id;
-	// 	$post_num += 1;
-	// 	$score += po_score ( $post_num );
-	// 	$level = get_level ( $score );
-	// 	$data = array (
-	// 		'post_num' => $post_num,
-	// 		'latest' => $latest,
-	// 		'score' => $score,
-	// 		'level' => $level 
-	// 		);
-	// 	$this->db->where ( 'user_id', $user_id );
-	// 	$this->db->update ( 'jx_user', $data );
-
-	// 	return $post_id;
-	// }
-	// public function upload_picture($post_id, $pimage) {
-	// 	$data = array (
-	// 		'pimage' => $pimage 
-	// 		);
-	// 	$this->db->where ( 'post_id', $post_id );
-	// 	$this->db->update ( 'jx_post', $data );
-	// }
-	// public function view($post_id) {
-	// 	$query = $this->db->get_where ( 'jx_post', array (
-	// 		'post_id' => $post_id 
-	// 		) );
-	// 	$view = $query->row_array ()['view'];
-	// 	$data = array (
-	// 		'view' => $view + 1 
-	// 		);
-	// 	$this->db->where ( 'post_id', $post_id );
-	// 	$this->db->update ( 'jx_post', $data );
-	// }
-	// public function get_post($post_id) {		
-	// 	$this->db->from ( 'jx_post' );
-	// 	$this->db->join ( 'jx_user', 'jx_post.post_user = jx_user.user_id' );
-	// 	$this->db->where ( 'jx_post.post_id', $post_id );
-	// 	return $this->db->get ()->row_array ();
-	// }
-	// public function check_focus($user_id , $post_id) {
-	// 	$query = $this->db->get_where ( 'jx_focus', array (
-	// 		'focuser' => $user_id,
-	// 		'focusee' => $post_id 
-	// 		) );
-	// 	return $query->num_rows ();
-	// }
-	// public function add_focus($focuser, $focusee, $focus) {
-	// 	$data = array (
-	// 		'focuser' => $focuser,
-	// 		'focusee' => $focusee 
-	// 		);
-	// 	$this->db->insert ( 'jx_focus', $data );
-	// 	$data = array (
-	// 		'focus' => $focus + 1 
-	// 		);
-	// 	$this->db->where ( 'post_id', $focusee );
-	// 	$this->db->update ( 'jx_post', $data );
-	// }
-	// public function delete_focus($focuser, $focusee, $focus) {
-	// 	$data = array (
-	// 		'focuser' => $focuser,
-	// 		'focusee' => $focusee 
-	// 		);
-	// 	$this->db->delete ( 'jx_focus', $data );
-	// 	$data = array (
-	// 		'focus' => $focus - 1 
-	// 		);
-	// 	$this->db->where ( 'post_id', $focusee );
-	// 	$this->db->update ( 'jx_post', $data );
-	// }
 }
