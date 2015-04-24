@@ -953,6 +953,9 @@ div.reply_footer hr{
 	margin: 0px;
 	margin-left: 50%;
 }
+button#btn_confirm_reply {
+	margin-left: 5px;
+}
 
 div#side_view_box {
 	top: 70px;
