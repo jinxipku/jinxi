@@ -184,6 +184,18 @@ create table jx_message(
 	createat int(11) comment '私信时间',
 	primary key(id)
 )DEFAULT CHARSET=utf8 COMMENT='私信表';
+
+drop table if exists jx_reminder;
+create table jx_reminder(
+	id int(11) not null AUTO_INCREMENT comment '提醒id(考虑突破上限)',
+	content text not null comment '内容',
+	from_id int(11) not null comment '来自用户',
+	delete_by_from tinyint not null default 0 comment '来自用户删除',
+	to_id int(11) not null comment '去往用户',
+	delete_by_to tinyint not null default 0 comment '去往用户删除',
+	createat int(11) comment '私信时间',
+	primary key(id)
+)DEFAULT CHARSET=utf8 COMMENT='提醒表';
 -- drop view if exists seller_post_heat;
 -- create view seller_post_heat as select jx_seller_post.post_id,(jx_seller_post.createat-unix_timestamp())/86400 as daypass,count(jx_reply.id) as count from jx_seller_post left join jx_reply on jx_reply.post_id=jx_seller_post.post_id and jx_reply.type=0 group by jx_seller_post.post_id;
 -- select * from seller_post_heat;

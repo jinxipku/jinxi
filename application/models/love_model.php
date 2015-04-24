@@ -26,14 +26,4 @@ class love_model extends CI_Model {
 		return $this->db->delete ( 'jx_love', $data );
 	}
 
-	public function add_report($object_id, $rtype, $rcontent) {
-		$rtime = date ( 'Y-m-d H:i:s' );
-		$data = array (
-				'object_id' => $object_id,
-				'rtype' => $rtype,
-				'rcontent' => $rcontent,
-				'rtime' => $rtime 
-		);
-		$res = $this->db->insert ( 'jx_report', $data );
-	}
 }

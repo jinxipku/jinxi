@@ -66,6 +66,28 @@ class post_model extends CI_Model {
 		$user['nick_color'] = get_namecolor($user['nick_color']);
 		$user['thumb'] = base_url("img/head/".$user['thumb']);
 		$res['user'] = $user;
+
+		if($hall){         //如果是缩略图展示，需要做一些处理
+			$res['type'] = $type;
+			$res['createat'] = format_time($res['createat']);
+			$res['updateat'] = format_time($res['updateat']);
+
+			$res['category1_name'] = get_category1_name2($res['category1']);
+			$res['category2_name'] = get_category2_name($res['category2']);
+			$res['deal'] = get_deal_name($res['deal']);
+			
+
+			$hasimg = false;
+			if(!empty($res['picture'])){
+				$hasimg = true;
+				$res['picture'] = $res['picture'][$res['first_picture']]['thumb_picture_url'];
+			}else{
+				$res['picture'] = base_url("img/post/".($res['category2']+1).".png");
+			}
+			$res['title'] = get_title($res['type'],$res['deal'],$res['class'],$hasimg,$res['category1_name'],$res['category2_name'],$res['brand'],$res['model']);
+			$res['plain_title'] = get_plain_title($res['type'],$res['deal'],$res['class'],$hasimg,$res['category1_name'],$res['category2_name'],$res['brand'],$res['model']);
+			unset($res['contactby']);
+		}
 		return $res;
 	}
 
@@ -108,24 +130,6 @@ class post_model extends CI_Model {
 			$post = $this->get_post($value['post_id'],$value['type'],true);
 			if(empty($post)) continue;
 
-			$post['type'] = $value['type'];
-			$post['createat'] = format_time($post['createat']);
-			$post['updateat'] = format_time($post['updateat']);
-
-			$post['category1_name'] = get_category1_name2($post['category1']);
-			$post['category2_name'] = get_category2_name($post['category2']);
-			$post['deal'] = get_deal_name($post['deal']);
-
-			$hasimg = false;
-			if(!empty($post['picture'])){
-				$hasimg = true;
-				$post['picture'] = $post['picture'][$post['first_picture']]['thumb_picture_url'];
-			}else{
-				$post['picture'] = base_url("img/post/".($post['category2']+1).".png");
-			}
-			$post['title'] = get_title($value['type'],$post['deal'],$post['class'],$hasimg,$post['category1_name'],$post['category2_name'],$post['brand'],$post['model']);
-			$post['plain_title'] = get_plain_title($value['type'],$post['deal'],$post['class'],$hasimg,$post['category1_name'],$post['category2_name'],$post['brand'],$post['model']);
-			unset($post['contactby']);
 			if(isset($my_favorites)&&in_array($value['post_id']."#".$value['type'], $my_favorites)){
 				$post['has_collect'] = 1;
 			}else $post['has_collect'] = 0;
@@ -182,26 +186,7 @@ class post_model extends CI_Model {
 		foreach ($records as $key => $value) {
 			$post = $this->get_post($value['post_id'],$value['type'],true);
 			if(empty($post)) continue;
-
-			$post['type'] = $value['type'];
-			$post['createat'] = format_time($post['createat']);
-			$post['updateat'] = format_time($post['updateat']);
-
-			$post['category1_name'] = get_category1_name2($post['category1']);
-			$post['category2_name'] = get_category2_name($post['category2']);
-			$post['deal'] = get_deal_name($post['deal']);
-
-			$hasimg = false;
-			if(!empty($post['picture'])){
-				$hasimg = true;
-				$post['picture'] = $post['picture'][$post['first_picture']]['thumb_picture_url'];
-			}else{
-				$post['picture'] = base_url("img/post/".($post['category2']+1).".png");
-			}
-			$post['title'] = get_title($value['type'],$post['deal'],$post['class'],$hasimg,$post['category1_name'],$post['category2_name'],$post['brand'],$post['model']);
-			$post['plain_title'] = get_plain_title($value['type'],$post['deal'],$post['class'],$hasimg,$post['category1_name'],$post['category2_name'],$post['brand'],$post['model']);
 			$post['has_collect'] = 1;
-			unset($post['contactby']);
 			$posts[] = $post;
 		}
 		$data['total'] = $total;
