@@ -382,8 +382,19 @@ function get_thumb($picture){
 }
 
 function format_time($time){
-    return date('Y-m-d H:i:s',$time);
+    $delta = time()-$time;
 
+    if($delta<3600){ //几十分钟前
+        $minites = 10* intval(floor($delta/600)); 
+        if($minites<10) return "刚刚"; 
+        return $minites."分钟以前";
+    }
+    if($delta<86400){
+        $hours = intval(floor($delta/3600));
+        return $hours."小时前";
+    }
+    if($delta>=86400)
+        return date('Y-m-d H:i:s',$time);
 }
 
 function get_deal_name($type){//1一口价，2接受砍价，3一元赠送，4面议
