@@ -4,7 +4,17 @@ class reminder_model extends CI_Model {
 		$this->load->database ();
 	}
 
-	
+	//info
+	public function add_reminder($info){
+		$res = $this->db->insert("jx_favorites",$info);
+		return $res;
+	}
+
+	public function get_reminder($reminder_id){
+		$res = $this->db->get("jx_reminder",array("id"=>$reminder_id))
+		if(empty($res)) return null;
+		
+	}
 
 }
 ?>

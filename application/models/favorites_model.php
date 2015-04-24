@@ -39,7 +39,7 @@ class favorites_model extends CI_Model {
 
 
 	public function delete_favorite($user_id,$post_id,$type){
-		if(is_favorite($user_id,$post_id,$type)==0){
+		if($this->is_favorite($user_id,$post_id,$type)==0){
 			return 1;
 		}
 		$map['user_id'] = $user_id;
@@ -54,7 +54,7 @@ class favorites_model extends CI_Model {
 	}
 
 	public function add_favorite($user_id,$post_id,$type){
-		if(is_favorite($user_id,$post_id,$type)>0){
+		if($this->is_favorite($user_id,$post_id,$type)>0){
 			return 1;
 		}
 		$map['user_id'] = $user_id;
