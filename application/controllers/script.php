@@ -284,5 +284,10 @@ echo '</pre>';
 			//echo 'i';
 		}
 	}
+
+	public function test_update_post(){
+		$info['description'] = "测试update";
+		$this->post_model->update_post(8,0,$info);
+	}
 }
 ?>

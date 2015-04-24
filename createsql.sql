@@ -191,12 +191,12 @@ create table jx_reminder(
 	id int(11) not null AUTO_INCREMENT comment '提醒id(考虑突破上限)',
 	type smallint not null comment '提醒类型',
 	to_user_id int(11) not null comment '去往用户',
-	from_user_id int(11) not null comment '来自用户',
-	post_id int(11) not null comment '帖子id',
-	post_type tinyint not null comment '帖子类型',
-	reply_id int(11) not null comment '回复id',
+	from_user_id int(11) null comment '来自用户',
+	post_id int(11) null comment '帖子id',
+	post_type tinyint null comment '帖子类型',
+	reply_id int(11) null comment '回复id',
 	createat int(11) comment '私信时间',
-	content text not null comment '内容',
+	content text null comment '内容',
 	is_read tinyint not null default 0 comment '是否已读',
 	primary key(id)
 )DEFAULT CHARSET=utf8 COMMENT='提醒表';

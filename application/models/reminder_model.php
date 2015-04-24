@@ -26,17 +26,15 @@ class reminder_model extends CI_Model {
 	public function get_user_reminder($user_id){
 		$map['to_user_id'] = $user_id;
 		$map['is_read'] = 0;
-
-	}
-
-	public function post_update($post_id,$post_type){
-		$map['post_id'] = $post_id;
-		$map['type'] = $post_type;
-		$res = $this->db->get("jx_favorites",$map);
-		$batch_data = array();
-		foreach ($variable as $key => $value) {
-			# code...
+		$this->db()->where($map);
+		$this->db()->from("jx_reminder");
+		$res = $this->db()->get()->result_array();
+		$reminders = array();
+		foreach ($res as $key => $value) {
+			$temp = format_reminder($value);
+			$reminders[] = $temp;
 		}
+		var_dump($reminders);
 	}
 
 	public function format_reminder($reminder){
@@ -74,6 +72,26 @@ class reminder_model extends CI_Model {
 		$res['plain_title'] = get_plain_title($res['type'],$res['deal'],$res['class'],$hasimg,$res['category1_name'],$res['category2_name'],$res['brand'],$res['model']);
 		$res['plain_title'] = cutString($res['plain_title'],20);
 		return $res['plain_title'];
+	}
+
+	public function post_update($post_id,$post_type){
+		$map['post_id'] = $post_id;
+		$map['type'] = $post_type;
+		$this->db->where($map);
+		$this->db->from("jx_favorites");
+		$res = $this->db->get()->result_array();
+		$batch = array();
+		$time = time();
+		foreach ($res as $key => $value) {
+			$temp['to_user_id'] = $value['user_id'];
+			$temp['post_id'] = $post_id;
+			$temp['post_type'] = $post_type;
+			$temp['type'] = 1;
+			$temp['createat'] = $time;
+			$batch[] = $temp;
+		}
+		$res = $this->db->insert_batch('jx_reminder', $batch); 
+		return $res;
 	}
 
 }

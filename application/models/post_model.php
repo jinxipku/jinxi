@@ -288,7 +288,6 @@ class post_model extends CI_Model {
 		
 		$query = $this->db->get($table);
 		$res = $query->row_array();
-		echo $this->db->last_query();
 		if(empty($res)){
 			$data = null;
 		}else{
