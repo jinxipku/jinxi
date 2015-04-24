@@ -17,9 +17,9 @@ class post_model extends CI_Model {
 	}
 
 	//TODO: check if this interface is used!
-	public function update_post($info,$user_id,$post_id,$type){
+	//info['description']  info['price']aaa
+	public function update_post($post_id,$type,$info){
 		$table = get_post_table($type);
-		$map['user_id'] = $user_id;
 		$map['post_id'] = $post_id;
 		$this->db->where($map);
 		return $this->db->update($table,$info);
@@ -227,10 +227,9 @@ class post_model extends CI_Model {
 		$res['type'] = $type;$res2['type'] = $type;
 		$result = ($type==0)?$res:$res2;
 		$hotest_post = $this->get_post($result['post_id'],$result['type'],true);
-		if(empty($login_user_id)){
-			$hotest_post['has_collect'] = $this->is_favorite($result['post_id'],$result['type'],$login_user_id);
-		}else
-			$hotest_post['has_collect'] = 1;
+	
+		$hotest_post['has_collect'] = $this->is_favorite($result['post_id'],$result['type'],$login_user_id);
+		
 		return $hotest_post;
 	}
 
@@ -265,10 +264,9 @@ class post_model extends CI_Model {
 		if(empty($post)) return null;
 		else{
 			$newest_post = $this->get_post($post['post_id'],$post['type'],true);
-			if(empty($login_user_id)){
-				$newest_post['has_collect'] = $this->is_favorite($newest_post['post_id'],$newest_post['type'],$login_user_id);
-			}else
-				$newest_post['has_collect'] = 1;
+			
+			$newest_post['has_collect'] = $this->is_favorite($newest_post['post_id'],$newest_post['type'],$login_user_id);
+		
 			return $newest_post;
 		}
 	}

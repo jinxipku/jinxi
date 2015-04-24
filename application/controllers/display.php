@@ -165,24 +165,6 @@ class Display extends MY_Controller {
 		$post = $this->post_model->get_post($post_id,$type,true);
 		if(empty($post)) return null;
 
-		$post['type'] = $type;
-		$post['createat'] = format_time($post['createat']);
-		$post['updateat'] = format_time($post['updateat']);
-
-		$post['category1_name'] = get_category1_name2($post['category1']);
-		$post['category2_name'] = get_category2_name($post['category2']);
-		$post['deal'] = get_deal_name($post['deal']);
-
-		$hasimg = false;
-		if(!empty($post['picture'])){
-			$hasimg = true;
-			$post['picture'] = $post['picture'][$post['first_picture']]['thumb_picture_url'];
-		}else{
-			$post['picture'] = base_url("img/post/".($post['category2']+1).".png");
-		}
-		$post['title'] = get_title($type,$post['deal'],$post['class'],$hasimg,$post['category1_name'],$post['category2_name'],$post['brand'],$post['model']);
-		$post['plain_title'] = get_plain_title($type,$post['deal'],$post['class'],$hasimg,$post['category1_name'],$post['category2_name'],$post['brand'],$post['model']);
-		unset($post['contactby']);
 		return $post;
 	}
 
