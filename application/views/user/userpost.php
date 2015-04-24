@@ -132,4 +132,4 @@
 
 	{/if}
 </div>
-<script type="text/javascript" src="{$baseurl}js/post_item.js"></script>
+<script type="text/javascript" src="{$baseurl}js/collect_bind.js"></script>

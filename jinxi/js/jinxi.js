@@ -16,27 +16,16 @@ $(document).ready( function() {
 		}
 	});
 	if ($("#user_tabs").val() != undefined) {
-		var tab_id = '#user_post';
-		if ($("#tab_id").val() == 5)
-			tab_id = '#user_mess';
 		$.post(
 			baseurl + "user/show_user_page",
 			{
-				tab_id: tab_id,
+				tab_id: '#user_post',
 				user_id: $("#user_id").val(),
 				page: 1
 			},
 			function(gethtml) {
-				if ($("#tab_id").val() == 5) {
-					$("html,body").animate(
-						{
-							scrollTop: $("#scroll_bench").offset().top 
-						},
-						700
-					);
-				}
-        		$(tab_id).html(gethtml);
-        		$("img.lazy").lazyload({effect: "fadeIn"});
+        		$('#user_post').html(gethtml);
+        		$("div#user_panels img.lazy").lazyload({effect: "fadeIn"});
 			}
 		);
 		$('#user_post').html('<div class="user_tab_header panel panel-default"><center><i class="icon-spinner icon-spin"></i> 正在加载</center></div>');
@@ -92,6 +81,94 @@ $("textarea").bind('blur', function() {
 	else {
 		$(this).addClass("flat");
 	}
+});
+$("button.btn1_post_item").bind('click', function() {
+	var thisbtn = $(this);
+	$("#info_modal").find('.modal-title').text("取消收藏");
+	$("#info_modal").find('.modal-cont').text("您确定要取消收藏此帖吗？");
+	$("#info_modal").find('.btn-primary').unbind();
+	$("#info_modal").find('.btn-primary').bind('click',function() {
+		$("#info_modal").modal('hide');
+		setTimeout(function() {
+			$.post(
+				baseurl + "post/delete_favorite",
+				{
+					post_id: thisbtn.attr('data-pid'),
+					post_type: thisbtn.attr('data-ptype')
+				},
+				function(res) {
+					if (res.status == 1) {
+						$("#info_modal").find('.modal-title').text("取消收藏成功");
+						$("#info_modal").find('.modal-cont').text("恭喜，取消收藏成功！");
+						$("#info_modal").find('.btn-default').css('display','none');
+						$("#info_modal").find('.btn-primary').unbind();
+						$("#info_modal").find('.btn-primary').bind('click', function() {
+							$("#info_modal").modal("hide");
+						});
+						$("#info_modal").modal();
+						thisbtn.html('已取消');
+					} else {
+						$("#info_modal").find('.modal-title').text("取消失败");
+						$("#info_modal").find('.modal-cont').text("对不起，操作失败，请重试！");
+						$("#info_modal").find('.btn-default').css('display','none');
+						$("#info_modal").find('.btn-primary').bind('click',function() {
+							$("#info_modal").modal('hide');
+						});
+						$("#info_modal").modal();
+						thisbtn.html('已收藏');
+						thisbtn.attr('disabled', false);
+					}
+				},
+				'json'
+			);
+		}, 1000);
+		thisbtn.html('<i class="icon-spinner icon-spin"></i> 处理中');
+		thisbtn.attr('disabled', true);
+	});
+	$("#info_modal").modal();
+});
+$("button.btn2_post_item").bind('click', function() {
+	var thisbtn = $(this);
+	$.post(
+		baseurl + "post/add_favorite",
+		{
+			post_id: thisbtn.attr('data-pid'),
+			post_type: thisbtn.attr('data-ptype')
+		},
+		function(res) {
+			if (res.status == 1) {
+				$("#info_modal").find('.modal-title').text("收藏成功");
+				$("#info_modal").find('.modal-cont').text("恭喜，收藏成功！");
+				$("#info_modal").find('.btn-default').css('display','none');
+				$("#info_modal").find('.btn-primary').unbind();
+				$("#info_modal").find('.btn-primary').bind('click',function() {
+					$("#info_modal").modal("hide");
+				});
+				$("#info_modal").modal();
+				thisbtn.html('已收藏');
+			} else {
+				$("#info_modal").find('.modal-title').text("收藏失败");
+				$("#info_modal").find('.modal-cont').text("对不起，操作失败，请重试！");
+				$("#info_modal").find('.btn-default').css('display','none');
+				$("#info_modal").find('.btn-primary').unbind();
+				$("#info_modal").find('.btn-primary').bind('click',function() {
+					$("#info_modal").modal('hide');
+				});
+				$("#info_modal").modal();
+				thisbtn.html('<span class="fui-plus"></span>收藏');
+				thisbtn.attr('disabled', false);
+			}
+		},
+		'json'
+	);
+	thisbtn.html('<i class="icon-spinner icon-spin"></i> 处理中');
+	thisbtn.attr('disabled', true);
+});
+$("button.btn1_post_item").bind('mouseover', function() {
+	$(this).html('&nbsp;- 取消');
+});
+$("button.btn1_post_item").bind('mouseout', function() {
+	$(this).html('已收藏');
 });
 function add_favorite(title, url) {
     try {
@@ -444,7 +521,7 @@ function show_user_page(tabid, page){
 			},
 			function(gethtml) {
         		$(tabid).html(gethtml);
-        		$("img.lazy").lazyload({effect: "fadeIn"});
+        		$("div#user_panels img.lazy").lazyload({effect: "fadeIn"});
 			}
 		);
 		$(tabid).html('<div class="user_tab_header panel panel-default"><center><i class="icon-spinner icon-spin"></i> 正在加载</center></div>');
@@ -466,7 +543,7 @@ function show_user_page2(tabid, page){
 		},
 		function(gethtml) {
 			$(tabid).html(gethtml);
-			$("img.lazy").lazyload({effect: "fadeIn"});
+			$("div#user_panels img.lazy").lazyload({effect: "fadeIn"});
 		}
 	);
 	$(tabid).children("div.user_tab_header").html('<center><i class="icon-spinner icon-spin"></i> 正在加载</center>');

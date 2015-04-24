@@ -133,9 +133,9 @@
 									{elseif $post.user_id == $login_user.id}
 									<button type="button" class="btn btn-warning btn-xs pull-right" disabled>我 的</button>
 									{elseif $post.has_collect}
-									<button type="button" data-pid="{$post.post_id}" class="btn1_post_item btn btn-xs btn-info pull-right">已收藏</button>
+									<button type="button" data-pid="{$post.post_id}" data-ptype="{$post.type}" class="btn1_post_item btn btn-xs btn-info pull-right">已收藏</button>
 									{else}
-									<button type="button" data-pid="{$post.post_id}" class="btn2_post_item btn btn-xs btn-info pull-right"><span class="fui-plus"></span>收藏</button>
+									<button type="button" data-pid="{$post.post_id}" data-ptype="{$post.type}" class="btn2_post_item btn btn-xs btn-info pull-right"><span class="fui-plus"></span>收藏</button>
 									{/if}
 								</div>
 							</div>
@@ -157,7 +157,7 @@
 					</div>
 					<div class="post_item_price">
 						<div>
-							<img class="lazy" data-original="http://www.xn--wmqr18c.cn/img/class/{$post.class}.png" alt="物品状态" />
+							<img class="lazy" data-original="{$baseurl}img/class/{$post.class}.png" alt="物品状态" />
 						</div>
 						<div>
 							{if $post.price == 0}面议{else}￥{$post.price}{/if}
@@ -239,7 +239,7 @@
 									{if $post.price == 0}面议{else}￥{$post.price}{/if}
 								</div>
 								<div>
-									<img class="lazy passive" data-original="http://www.xn--wmqr18c.cn/img/class/{$post.class}.png" alt="物品状态" />
+									<img class="lazy passive" data-original="{$baseurl}mg/class/{$post.class}.png" alt="物品状态" />
 								</div>
 							</div>
 							<img class="lazy" data-original="{$post.picture}" alt="{$post.plain_title}" />
@@ -265,9 +265,9 @@
 							{elseif $post.user_id == $login_user.id}
 							<button type="button" class="btn btn-warning btn-sm" disabled>我 的</button>
 							{elseif $post.has_collect}
-							<button type="button" data-pid="{$post.post_id}" class="btn1_post_item btn btn-sm btn-info">已收藏</button>
+							<button type="button" data-pid="{$post.post_id}" data-ptype="{$post.type}" class="btn1_post_item btn btn-sm btn-info">已收藏</button>
 							{else}
-							<button type="button" data-pid="{$post.post_id}" class="btn2_post_item btn btn-info btn-sm"><span class="fui-plus"></span>收藏</button>
+							<button type="button" data-pid="{$post.post_id}" data-ptype="{$post.type}" class="btn2_post_item btn btn-info btn-sm"><span class="fui-plus"></span>收藏</button>
 							{/if}
 						</div>
 					</div>

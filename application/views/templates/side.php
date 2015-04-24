@@ -22,8 +22,64 @@
 				<blockquote>
 					<p class="side_title">最热推荐</p>
 				</blockquote>
-				<div class="panel panel-default">
-					最热推荐
+				<div class="post_item_block panel panel-default">
+					<div class="post_item_block_user">
+						<div>
+							<a href="{$baseurl}user/profile/{$hotest.user_id}" target="_blank">
+								<img class="lazy" data-original="{$hotest.user.thumb}" alt="{$hotest.user.nick}" />	
+							</a>
+						</div>
+						<div>
+							<p>
+								<a href="{$baseurl}user/profile/{$hotest.user_id}" class="{$hotest.user.nick_color}" target="_blank">{$hotest.user.nick}</a><small>{$hotest.user.school_name}</small>
+							</p>
+							<p>
+								<small>{$hotest.createat}</small>
+							</p>
+						</div>
+					</div>
+
+					<div class="post_item_block_img">
+						<a href="{$baseurl}post/viewpost/{if $hotest.type == 0}sell{else}buy{/if}/{$hotest.post_id}" target="_blank">
+							<div class="post_item_block_class_cover">
+							</div>
+							<div class="post_item_block_class_cont">
+								<div>
+									{if $hotest.price == 0}面议{else}￥{$hotest.price}{/if}
+								</div>
+								<div>
+									<img class="lazy passive" data-original="{$baseurl}img/class/{$hotest.class}.png" alt="物品状态" />
+								</div>
+							</div>
+							<img class="lazy" data-original="{$hotest.picture}" alt="{$hotest.plain_title}" />
+						</a>
+					</div>
+					<div class="post_item_block_title">
+						<a href="{$baseurl}post/viewpost/{if $hotest.type == 0}sell{else}buy{/if}/{$hotest.post_id}" title='{$hotest.plain_title}' target="_blank">
+							{$hotest.title}
+						</a>
+					</div>
+					<div class="post_item_block_others">
+						<div>
+							<span class="fui-new">
+								{$hotest.reply_num}
+							</span>
+							<span class="fui-heart">
+								{$hotest.favorite_num}
+							</span>
+						</div>
+						<div>
+							{if !isset($login_user)}
+							<a type="button" class="btn btn-sm btn-info" href="{$baseurl}account/loginfo"><span class="fui-plus"></span>收藏</a>
+							{elseif $hotest.user_id == $login_user.id}
+							<button type="button" class="btn btn-warning btn-sm" disabled>我 的</button>
+							{elseif $hotest.has_collect}
+							<button type="button" data-pid="{$hotest.post_id}" data-ptype="{$hotest.type}" class="btn1_post_item btn btn-sm btn-info">已收藏</button>
+							{else}
+							<button type="button" data-pid="{$hotest.post_id}" data-ptype="{$hotest.type}" class="btn2_post_item btn btn-info btn-sm"><span class="fui-plus"></span>收藏</button>
+							{/if}
+						</div>
+					</div>
 				</div>
 			</div>
 
@@ -31,10 +87,67 @@
 				<blockquote>
 					<p class="side_title">最新推荐</p>
 				</blockquote>
-				<div class="panel panel-default">
-					最新推荐
+				<div class="post_item_block panel panel-default">
+					<div class="post_item_block_user">
+						<div>
+							<a href="{$baseurl}user/profile/{$newest.user_id}" target="_blank">
+								<img class="lazy" data-original="{$newest.user.thumb}" alt="{$newest.user.nick}" />	
+							</a>
+						</div>
+						<div>
+							<p>
+								<a href="{$baseurl}user/profile/{$newest.user_id}" class="{$newest.user.nick_color}" target="_blank">{$newest.user.nick}</a><small>{$newest.user.school_name}</small>
+							</p>
+							<p>
+								<small>{$newest.createat}</small>
+							</p>
+						</div>
+					</div>
+
+					<div class="post_item_block_img">
+						<a href="{$baseurl}post/viewpost/{if $newest.type == 0}sell{else}buy{/if}/{$newest.post_id}" target="_blank">
+							<div class="post_item_block_class_cover">
+							</div>
+							<div class="post_item_block_class_cont">
+								<div>
+									{if $newest.price == 0}面议{else}￥{$newest.price}{/if}
+								</div>
+								<div>
+									<img class="lazy passive" data-original="{$baseurl}img/class/{$newest.class}.png" alt="物品状态" />
+								</div>
+							</div>
+							<img class="lazy" data-original="{$newest.picture}" alt="{$newest.plain_title}" />
+						</a>
+					</div>
+					<div class="post_item_block_title">
+						<a href="{$baseurl}post/viewpost/{if $newest.type == 0}sell{else}buy{/if}/{$newest.post_id}" title='{$newest.plain_title}' target="_blank">
+							{$newest.title}
+						</a>
+					</div>
+					<div class="post_item_block_others">
+						<div>
+							<span class="fui-new">
+								{$newest.reply_num}
+							</span>
+							<span class="fui-heart">
+								{$newest.favorite_num}
+							</span>
+						</div>
+						<div>
+							{if !isset($login_user)}
+							<a type="button" class="btn btn-sm btn-info" href="{$baseurl}account/loginfo"><span class="fui-plus"></span>收藏</a>
+							{elseif $newest.user_id == $login_user.id}
+							<button type="button" class="btn btn-warning btn-sm" disabled>我 的</button>
+							{elseif $newest.has_collect}
+							<button type="button" data-pid="{$newest.post_id}" data-ptype="{$newest.type}" class="btn1_post_item btn btn-sm btn-info">已收藏</button>
+							{else}
+							<button type="button" data-pid="{$newest.post_id}" data-ptype="{$newest.type}" class="btn2_post_item btn btn-info btn-sm"><span class="fui-plus"></span>收藏</button>
+							{/if}
+						</div>
+					</div>
 				</div>
 			</div>
+			<script type="text/javascript" src="{$baseurl}js/collect_bind.js"></script>
 
 			<div id="side_ran">
 				<blockquote>

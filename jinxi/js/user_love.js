@@ -1,3 +1,4 @@
+$("button.btn_cancel_love").unbind();
 $("button.btn_cancel_love").bind('click', function() {
 	var thisbtn = $(this);
 	$("#info_modal").find('.modal-title').text("取消关注");

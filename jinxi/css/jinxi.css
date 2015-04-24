@@ -1172,11 +1172,6 @@ div.post_item_user_nick span {
 	height: 30px;
 	width: 30px;
 }
-div.post_item_user_need a {
-	padding: 5px 7px;
-	font-size: 14px;
-	margin-right: 10px;
-}
 div.post_item_content>div:nth-child(3)>div:nth-child(2) {
 	height: 30px;
 	width: 482px;
@@ -1367,6 +1362,10 @@ div.post_item_block_others>div:nth-child(2) button {
 	padding: 5px 7px;
   	font-size: 14px;
 }
+div.post_item_block_others>div:nth-child(2) a {
+	padding: 5px 7px;
+  	font-size: 14px;
+}
 div#post_items_block div.pagination {
 	width: 772px;
 }
@@ -1537,6 +1536,16 @@ div.user_mess_content:hover {
 	opacity:0.8;/*其他，透明度50%*/
 }
 
+/*
+side_post
+*/
+div#side div.post_item_block {
+	float: none;
+	height: 402px;
+	width: 264px;
+	margin: 0px 0px 20px 0px;
+	padding: 15px 20px;
+}
 
 
 
