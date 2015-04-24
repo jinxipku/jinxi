@@ -70,6 +70,13 @@ class Display extends MY_Controller {
 			$this->assign('ed_page', $end_page);
 		}
 
+		$hotest = $this->post_model->get_hotest_post($login_user['id']);
+		$newest = $this->post_model->get_newest_post($login_user['id']);
+		$random = $this->post_model->get_random_post();
+		$this->assign('hotest', $hotest);
+		$this->assign('newest', $newest);
+		$this->assign('random', $random);
+
 		$this->assign('nav_tab', 3);
 		$this->assign('title', '今昔网-商品大厅');
 		$this->assign('baseurl', base_url());
@@ -140,6 +147,13 @@ class Display extends MY_Controller {
 				$end_page = $data['page_num'];
 			$this->assign('ed_page', $end_page);
 		}
+
+		$hotest = $this->post_model->get_hotest_post($login_user['id']);
+		$newest = $this->post_model->get_newest_post($login_user['id']);
+		$random = $this->post_model->get_random_post();
+		$this->assign('hotest', $hotest);
+		$this->assign('newest', $newest);
+		$this->assign('random', $random);
 
 		$this->assign('nav_tab', 3);
 		$this->assign('title', '今昔网-商品大厅');
