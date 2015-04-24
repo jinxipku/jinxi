@@ -4,16 +4,46 @@ class reminder_model extends CI_Model {
 		$this->load->database ();
 	}
 
+/*
+提醒表结构  id type to_user_id from_user_id post_id post_type reply_id createat content is_read
+提醒包括：
+类型：
+	收藏贴被更新(type=1) 你收藏的帖子《xxx》有了更新
+	发的贴被回复(type=2) 你发表的求购帖《xxx》收到来自今昔兔的回复：“楼主东西不错，求个......”
+	回复被回复(type=3)   今昔兔回复了你在帖子《xxx》的评论：“楼主是傻逼，你觉得呢？”
+	接受到私信(type=4)   你收到了一条来自今昔兔的私信：“求微信联系方式”
+	关注的人发贴(type=5) 你关注的今昔兔发了求购贴：“[求购] 日用百货 > 个人乐器 : 篮球”
+	收藏贴被开关(type=6)  你收藏的帖子《xxx》被楼主关闭了
+*/
+
 	//info
 	public function add_reminder($info){
 		$res = $this->db->insert("jx_favorites",$info);
 		return $res;
 	}
 
-	public function get_reminder($reminder_id){
-		$res = $this->db->get("jx_reminder",array("id"=>$reminder_id))
-		if(empty($res)) return null;
-		
+	public function get_user_reminder($user_id){
+		$map['to_user_id'] = $user_id;
+		$map['is_read'] = 0;
+
+	}
+
+	public function format_reminder($reminder){
+		$url = '';
+		$content = '';
+		$reminder['createat'] = format_time($reminder['createat']);
+		switch ($reminder['type']) {
+			case '1':
+				$url = 
+				$content = "你收藏的帖子有了更新";
+				break;
+			
+			default:
+				# code...
+				break;
+		}
+		return $reminder;
+
 	}
 
 }

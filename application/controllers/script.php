@@ -92,6 +92,11 @@ class Script extends MY_Controller {
 		var_dump($c);
 	}
 
+	public function test_random(){
+		$res = $this->post_model->get_random_post();
+		var_dump($res);
+	}
+
 	public function testHelper(){
 		$picture = "http://wwww.baidu.com/picture/2/123142132.jpg";
 		echo get_thumb($picture);

@@ -271,6 +271,27 @@ class post_model extends CI_Model {
 		}
 	}
 
+	public function get_random_post(){
+		$rand = rand(0,7);
+		if($rand <= 4) $type = 0;
+		else $type = 1;
+		$table = get_post_table($type);
+		$map['active'] = 1;
+		$this->db->order_by("post_id", "random"); 
+		$this->db->limit(1,0);
+		$this->db->where($map);
+		$query = $this->db->get($table);
+		$res = $query->row_array();
+		if(empty($res)){
+			$data = null;
+		}else{
+			$data['post_type'] = $type;
+			$data['post_id'] = $res['post_id'];
+		}
+		return $data;
+
+	}
+
 	//获取特定过滤的post_id列表，大厅显示。
 	public function get_post_ids($type,$school_id,$category1,$category2,$page,$sort){
 		$table = get_post_table($type);
