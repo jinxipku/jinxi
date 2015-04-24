@@ -393,8 +393,12 @@ function format_time($time){
         $hours = intval(floor($delta/3600));
         return $hours."小时前";
     }
-    if($delta>=86400)
-        return date('Y-m-d H:i:s',$time);
+    if($delta<86400*3){
+        $day = intval(floor($delta/86400));
+        return $day."几天前";
+    }
+
+    return date('Y-m-d H:i:s',$time);
 }
 
 function get_deal_name($type){//1一口价，2接受砍价，3一元赠送，4面议
