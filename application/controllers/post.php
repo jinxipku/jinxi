@@ -49,7 +49,7 @@ class Post extends MY_Controller {
 		$this->display ( 'templates/footer.php' );
 	}
 
-	public function viewpost($post_type = 'none', $post_id = 0, $reply = 'none') {
+	public function viewpost($post_type = 'none', $post_id = 0, $reply_id = 0) {
 		$ptype = 0;
 		if ($post_type == 'buy') {
 			$ptype = 1;
@@ -60,16 +60,13 @@ class Post extends MY_Controller {
 		else {
 			redirect('info/nopage');
 		}
-		if ($reply == 'reply') {
-			$this->assign('replyto', true);
-		}
-		else if ($reply != 'none') {
-			redirect('info/nopage');
-		}
-		$thispost = $this->get_post($post_id, $ptype);
+		$thispost = $this->get_post($post_id, $ptype, $reply_id);
 		if (empty($thispost)) {
 			redirect('info/nopage');
 		}
+
+		$this->assign('reply_id', $reply_id);
+
 		$login_user =  $this->session->userdata('login_user');
 		if (!empty($login_user)) {
 			$this->assign('login_user', $login_user);
@@ -77,7 +74,7 @@ class Post extends MY_Controller {
 
 		if ($login_user['id'] == $thispost['user']['id'])
 			$this->assign('mypost',true);
-		if ($this->favorites_model->is_favorite($login_user['id'],$thispost['post_id'],$thispost['type'])>0)
+		if ($this->favorites_model->is_favorite($login_user['id'],$thispost['post_id'],$thispost['type']) > 0)
 			$this->assign('has_collect',true);
 
 		if ($ptype == 0) {
@@ -88,6 +85,14 @@ class Post extends MY_Controller {
 		}
 		$this->assign('post_type', $ptype);
 		$this->assign('thispost', $thispost);
+
+		$hotest = $this->post_model->get_hotest_post($login_user['id']);
+		$newest = $this->post_model->get_newest_post($login_user['id']);
+		$random = $this->post_model->get_random_post();
+		$this->assign('hotest', $hotest);
+		$this->assign('newest', $newest);
+		$this->assign('random', $random);
+
 		$this->assign('nav_tab', 3);
 		$this->assign('title', '今昔网-帖子内容');
 		$this->assign('baseurl', base_url());

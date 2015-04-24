@@ -181,7 +181,7 @@
 			<p class="p_post_section">帖子回复</p>
 			<div id="post_reply">
 				{foreach from = $thispost.reply item = reply_item}
-				<div class="reply_box well">
+				<div data-rid="{$reply_item.id}" class="reply_box well">
 					<div class="reply_header">
 						<div>
 							<a href="{$baseurl}user/profile/{$reply_item.reply_from}">
