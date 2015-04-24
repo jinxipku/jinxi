@@ -2,6 +2,7 @@
 class reminder_model extends CI_Model {
 	public function __construct() {
 		$this->load->database ();
+		$this->load->helper("url");
 	}
 
 /*
@@ -28,14 +29,25 @@ class reminder_model extends CI_Model {
 
 	}
 
+	public function post_update($post_id,$post_type){
+		$map['post_id'] = $post_id;
+		$map['type'] = $post_type;
+		$res = $this->db->get("jx_favorites",$map);
+		$batch_data = array();
+		foreach ($variable as $key => $value) {
+			# code...
+		}
+	}
+
 	public function format_reminder($reminder){
 		$url = '';
 		$content = '';
 		$reminder['createat'] = format_time($reminder['createat']);
 		switch ($reminder['type']) {
 			case '1':
-				$url = 
-				$content = "你收藏的帖子有了更新";
+				$type = ($reminder['post_type']==0)?"sell":"buy";
+				$url = base_url("post/viewpost/$type/".$reminder['post_id']);
+				$content = "你收藏的帖子《".$this->get_post_title($reminder['post_id'],$reminder['post_type'])."》有了更新";
 				break;
 			
 			default:
@@ -44,6 +56,24 @@ class reminder_model extends CI_Model {
 		}
 		return $reminder;
 
+	}
+
+	public function get_post_title($post_id,$type){
+		$table = get_post_table($type);
+		$query = $this->db->get_where($table, array('post_id' => $post_id));
+		$res = $query->row_array();
+
+		$res['category1_name'] = get_category1_name2($res['category1']);
+		$res['category2_name'] = get_category2_name($res['category2']);
+		$res['deal'] = get_deal_name($res['deal']);
+
+		$hasimg = false;
+		if(!empty($res['picture'])){
+			$hasimg = true;
+		}
+		$res['plain_title'] = get_plain_title($res['type'],$res['deal'],$res['class'],$hasimg,$res['category1_name'],$res['category2_name'],$res['brand'],$res['model']);
+		$res['plain_title'] = cutString($res['plain_title'],20);
+		return $res['plain_title'];
 	}
 
 }
