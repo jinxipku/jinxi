@@ -22,7 +22,7 @@ class User extends MY_Controller {
 // +----------------------------------------------------------------------
 // | 前台页面跳转
 // +----------------------------------------------------------------------
-	public function profile($id = 0, $tab = 1) {
+	public function profile($id = 0, $mess = 'nomessage') {
 		if ($id == 0) {
 			$login_user =  $this->session->userdata('login_user');
 			if (!empty($login_user)) {
@@ -32,6 +32,9 @@ class User extends MY_Controller {
 				$this->session->set_userdata('mem_url', base_url('user/profile/0'));
 				redirect('account/loginfo/redirect');
 			}
+		}
+		if ($mess != 'nomessage' && $mess != 'message') {
+			redirect('user/profile/' . $id);
 		}
 		$user = $this->user_model->get_info($id);
 		if ($user == null) {
@@ -45,6 +48,9 @@ class User extends MY_Controller {
 			if ($login_user['id'] == $id) {
 				$this->assign('myself', true);
 				$this->assign('nav_tab', 2);
+				if ($login_user['level'] < 5) {
+					redirect('user/profile/' . $id);
+				}
 			}
 			else{
 				$this->user_model->visit($login_user['id'],$id);
@@ -52,9 +58,17 @@ class User extends MY_Controller {
 					$this->assign('has_love', true);
 				}
 			}
+		} else if($mess == 'message') {
+			redirect('user/profile/' . $id);
 		}
-		
-		$this->assign('tab', $tab);
+		if($mess == 'message')
+			$this->assign('message', true);
+
+		$hotest = $this->post_model->get_hotest_post($login_user['id']);
+		$newest = $this->post_model->get_newest_post($login_user['id']);
+		$this->assign('hotest', $hotest);
+		$this->assign('newest', $newest);
+
 		$this->assign('user', $user);
 		$this->assign('title', '今昔网-'.$user['nick']);
 		$this->assign('baseurl', base_url());
@@ -126,6 +140,11 @@ class User extends MY_Controller {
 			$set_tabs = 1;
 		$this->assign('set_tab', $set_tabs);
 		$this->assign('this', $this);
+
+		$hotest = $this->post_model->get_hotest_post($login_user['id']);
+		$newest = $this->post_model->get_newest_post($login_user['id']);
+		$this->assign('hotest', $hotest);
+		$this->assign('newest', $newest);
 		
 		$this->display ( 'templates/header.php' );
 		$this->display ( 'setup/main.php' );

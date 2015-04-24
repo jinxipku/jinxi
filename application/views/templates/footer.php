@@ -18,6 +18,27 @@
 	</div>
 
 	<img id="back_to_top" onmouseover="back_to_top1()" onmouseout="back_to_top2()" onclick="go_to_top()" src="{$baseurl}img/top.png" alt="回到顶部" />
+
+	<div id="reminder_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title"></h4>
+				</div>
+				<div class="modal-body">
+					<p class="modal-cont"></p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary">确认</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	{if isset($thispost)}
 	<div id="report_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -107,7 +128,11 @@
 	<script type="text/javascript" src="{$baseurl}js/flatui-radio.js"></script>
 	<script type="text/javascript" src="{$baseurl}js/jquery.lazyload.min.js"></script>
 	<script type="text/javascript" src="{$baseurl}js/jinxi.js"></script>
-	{if isset($replyto)}
+	{if isset($message)}
+	<script type="text/javascript">
+		show_user_page('#user_mess', 1);
+	</script>
+	{elseif isset($replyto)}
 	<script type="text/javascript">
 		$("html,body").animate(
 			{
