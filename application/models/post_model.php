@@ -3,6 +3,7 @@ class post_model extends CI_Model {
 	public function __construct() {
 		$this->load->database ();
 		$this->load->model("user_model");
+		$this->load->model("reminder_model");
 		$this->load->helper('url');
 	}
 
@@ -22,7 +23,11 @@ class post_model extends CI_Model {
 		$table = get_post_table($type);
 		$map['post_id'] = $post_id;
 		$this->db->where($map);
-		return $this->db->update($table,$info);
+		$res =  $this->db->update($table,$info);
+		if($res){
+			$this->reminder_model->post_update($post_id,$type);
+		}
+		return $res;
 	}
 
 	//TODO: if price is permitted to modify, delete this.
@@ -277,11 +282,13 @@ class post_model extends CI_Model {
 		else $type = 1;
 		$table = get_post_table($type);
 		$map['active'] = 1;
+		$this->db->where($map);
 		$this->db->order_by("post_id", "random"); 
 		$this->db->limit(1,0);
-		$this->db->where($map);
+		
 		$query = $this->db->get($table);
 		$res = $query->row_array();
+		echo $this->db->last_query();
 		if(empty($res)){
 			$data = null;
 		}else{
