@@ -34,8 +34,8 @@ $(document).ready( function() {
 });
 $(window).bind('scroll', function() {
 	$(this).scrollTop() > 510 + head_height ? $("#back_to_top").fadeIn(500) : $("#back_to_top").fadeOut(500);
-	if ($("#post_picture").val() != undefined) {
-		if ($(this).scrollTop() > $("#post_picture").offset().top) {
+	if ($("#post_contact").val() != undefined) {
+		if ($(this).scrollTop() > $("#post_contact").offset().top) {
 			$("#side_view_box").fadeIn(500);
 			$("#side_view_box").css("position", "fixed");
 		} else {
@@ -1056,7 +1056,10 @@ function go_to_reply(floor, user_id, user_nick) {
 		{
 			scrollTop: $("#post_doreply").offset().top 
 		},
-		700
+		700,
+		function() {
+			$("textarea#reply_content").focus();
+		}
 	);
 }
 function confirm_reply() {

@@ -66,8 +66,10 @@ class User extends MY_Controller {
 
 		$hotest = $this->post_model->get_hotest_post($login_user['id']);
 		$newest = $this->post_model->get_newest_post($login_user['id']);
+		$random = $this->post_model->get_random_post();
 		$this->assign('hotest', $hotest);
 		$this->assign('newest', $newest);
+		$this->assign('random', $random);
 
 		$this->assign('user', $user);
 		$this->assign('title', '今昔网-'.$user['nick']);
@@ -143,8 +145,10 @@ class User extends MY_Controller {
 
 		$hotest = $this->post_model->get_hotest_post($login_user['id']);
 		$newest = $this->post_model->get_newest_post($login_user['id']);
+		$random = $this->post_model->get_random_post();
 		$this->assign('hotest', $hotest);
 		$this->assign('newest', $newest);
+		$this->assign('random', $random);
 		
 		$this->display ( 'templates/header.php' );
 		$this->display ( 'setup/main.php' );

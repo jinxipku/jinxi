@@ -26,7 +26,7 @@
 					<div class="post_item_block_user">
 						<div>
 							<a href="{$baseurl}user/profile/{$hotest.user_id}" target="_blank">
-								<img class="lazy" data-original="{$hotest.user.thumb}" alt="{$hotest.user.nick}" />	
+								<img class="passive" src="{$hotest.user.thumb}" alt="{$hotest.user.nick}" />	
 							</a>
 						</div>
 						<div>
@@ -48,10 +48,10 @@
 									{if $hotest.price == 0}面议{else}￥{$hotest.price}{/if}
 								</div>
 								<div>
-									<img class="lazy passive" data-original="{$baseurl}img/class/{$hotest.class}.png" alt="物品状态" />
+									<img class="passive" src="{$baseurl}img/class/{$hotest.class}.png" alt="物品状态" />
 								</div>
 							</div>
-							<img class="lazy" data-original="{$hotest.picture}" alt="{$hotest.plain_title}" />
+							<img class="passive" src="{$hotest.picture}" alt="{$hotest.plain_title}" />
 						</a>
 					</div>
 					<div class="post_item_block_title">
@@ -91,7 +91,7 @@
 					<div class="post_item_block_user">
 						<div>
 							<a href="{$baseurl}user/profile/{$newest.user_id}" target="_blank">
-								<img class="lazy" data-original="{$newest.user.thumb}" alt="{$newest.user.nick}" />	
+								<img class="passive" src="{$newest.user.thumb}" alt="{$newest.user.nick}" />	
 							</a>
 						</div>
 						<div>
@@ -113,10 +113,10 @@
 									{if $newest.price == 0}面议{else}￥{$newest.price}{/if}
 								</div>
 								<div>
-									<img class="lazy passive" data-original="{$baseurl}img/class/{$newest.class}.png" alt="物品状态" />
+									<img class="passive" src="{$baseurl}img/class/{$newest.class}.png" alt="物品状态" />
 								</div>
 							</div>
-							<img class="lazy" data-original="{$newest.picture}" alt="{$newest.plain_title}" />
+							<img class="passive" src="{$newest.picture}" alt="{$newest.plain_title}" />
 						</a>
 					</div>
 					<div class="post_item_block_title">
@@ -154,11 +154,11 @@
 					<p class="side_title">随便看看</p>
 				</blockquote>
 				<div class="panel panel-default">
-					<button type="button" class="btn btn-primary btn-hg btn-block">走你！</button>
+					<a type="button" class="btn btn-primary btn-hg btn-block" href="{$baseurl}post/viewpost/{if $random.post_type == 0}sell{else}buy{/if}/{$random.post_id}" target="_blank">走你！</a>
 				</div>
 			</div>
 
-			<img class="passive" id="side_icon" src="{$baseurl}img/jinxismall.jpg" alt="http://www.xn--wmqr18c.cn"/>
+			<img class="passive" id="side_icon" src="{$baseurl}img/jinxismall.jpg" alt="{$baseurl}"/>
 
 			{if isset($thispost)}
 			<div id="side_view_box" class="side_content panel panel-default">
