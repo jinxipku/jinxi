@@ -143,6 +143,7 @@ class Post extends MY_Controller {
 		$post['category1_name'] = get_category1_name2($post['category1']);
 		$post['category2_name'] = get_category2_name($post['category2']);
 		$post['deal'] = get_deal_name($post['deal']);
+		$post['reply_valid'] = 1;
 
 
 		$hasimg = false;
@@ -190,7 +191,7 @@ class Post extends MY_Controller {
 			}
 				if($reply_id!='0'){
 					if(!in_array($reply_id, $reply_ids)){
-						$post = null;
+						$post['reply_valid'] = 0;
 					}
 				}
 	
