@@ -9,6 +9,7 @@
 class Script extends MY_Controller {
 	public function __construct() {
 		parent::__construct ();
+		$this->load->model("account_model");
 		$this->load->model("user_model");
 		$this->load->model("post_model");
 		$this->load->model("reply_model");
@@ -65,9 +66,10 @@ class Script extends MY_Controller {
 
 	public function test(){
 		//echo genFileName(2,'',2222222);
-		$user = $this->user_model->get_info(1);
-		$this->session->set_userdata('login_user',$user);
-		var_dump($user);	
+		// $user = $this->user_model->get_info(1);
+		// $this->session->set_userdata('login_user',$user);
+		// var_dump($user);	
+		echo ("3"==0)?"yy":"xx";
 	}
 
 	public function testPost(){
@@ -293,6 +295,14 @@ echo '</pre>';
 
 	public function test_reminder(){
 		$this->reminder_model->get_user_reminder(2);
+	}
+
+	public function create_a_user(){
+		$res = $this->account_model->register("443021181@qq.com","cuidamima0",1003);
+		if($res){
+			$id = $this->db->insert_id();
+			$this->account_model->verify($id);
+		}
 	}
 }
 ?>

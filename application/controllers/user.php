@@ -40,7 +40,6 @@ class User extends MY_Controller {
 		if ($user == null) {
 			redirect('info/nopage');
 		}
-
 		$this->assign('nav_tab', 0);
 		$login_user =  $this->session->userdata('login_user');
 		if (!empty($login_user)) {

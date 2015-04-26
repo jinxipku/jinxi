@@ -12,6 +12,9 @@ class post_model extends CI_Model {
 		$res = $this->db->insert($table, $info); 
 		if( $res ){
 			$post_id =  $this->db->insert_id();//post id
+			$info['post_type'] = $type;
+			$info['post_id'] = $post_id;
+			$res4 = $this->reminder_model->new_post($info);
 			$res3 = $this->user_model->addpoints($info['user_id'],$this->config->item("post_bonus"));
 			return $post_id;
 		}else return 0;
@@ -204,7 +207,12 @@ class post_model extends CI_Model {
 	public function set_active($post_id,$type,$active){
 		$table = get_post_table($type);
 		$this->db->where("post_id",$post_id);
-		return $this->db->update($table,array("active"=>$active));
+		$res =  $this->db->update($table,array("active"=>$active));
+		if($res){
+			$event = ($active==1)?"open":"close";
+			$this->reminder_model->post_update($post_id,$type,$event);
+		}
+		return $res;
 	}
 
 	public function get_hotest_post($login_user_id=null){
