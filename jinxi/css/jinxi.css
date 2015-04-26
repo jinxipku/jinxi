@@ -953,6 +953,9 @@ div.reply_footer hr{
 	margin: 0px;
 	margin-left: 50%;
 }
+button#btn_confirm_reply {
+	margin-left: 5px;
+}
 
 div#side_view_box {
 	top: 70px;
@@ -1101,6 +1104,7 @@ display in line
 div#post_items_box {
 	padding: 0px 15px 0px 15px;
 	border-top: none;
+	display: none;
 }
 div.post_item_box {
 	margin: 15px 0px;
@@ -1219,7 +1223,6 @@ div#post_items_box div.pagination div {
 display in block
 */
 div#post_items_block.panel {
-	display: none;
 	margin-top: 0px;
 	padding: 0px 15px 0px 15px;
 	border-top: none;

@@ -65,7 +65,7 @@
 					</ul>
 				</div>
 				<div id="btng_post_display" class="btn-group">
-					<button type="button" class="btn btn-primary btn-sm active" onclick="change2list()"><span class="fui-list"></span></button>
+					<button type="button" class="btn btn-primary btn-sm" onclick="change2list()"><span class="fui-list"></span></button>
 					<button type="button" class="btn btn-primary btn-sm" onclick="change2block()"><span class="fui-checkbox-unchecked"></span></button>
 				</div>
 				<div id="btng_post_sorting" class="btn-group">

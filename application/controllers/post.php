@@ -63,9 +63,13 @@ class Post extends MY_Controller {
 		$thispost = $this->get_post($post_id, $ptype, $reply_id);
 		if (empty($thispost)) {
 			redirect('info/nopage');
+		} else if (!$thispost['reply_valid']) {
+			redirect('post/viewpost/' . $post_type . '/' . $post_id);
 		}
 
-		$this->assign('reply_id', $reply_id);
+		if ($reply_id > 0) {
+			$this->assign('reply_id', $reply_id);
+		}
 
 		$login_user =  $this->session->userdata('login_user');
 		if (!empty($login_user)) {
