@@ -1262,7 +1262,15 @@ function delete_mess(mid) {
 };
 
 function open_reminder() {
+	$("#reminder_modal div.modal-content").html('<div class="modal-header"><h4 class="modal-title">消息提醒</h4></div><div class="modal-body"><div id="reminders_box"><div id="reminder_loading"><i class="icon-spinner icon-spin"></i> 加载中</div></div></div>');
 	$("#reminder_modal").modal();
+	$.post(
+		baseurl + "info/reminder",
+		{},
+		function(gethtml) {
+    		$("#reminder_modal div.modal-content").html(gethtml);
+		}
+	);
 }
 
 

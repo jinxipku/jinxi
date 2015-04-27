@@ -1606,6 +1606,11 @@ div.reminder_content {
 	font-size: 15px;
 	color: #7F8C8D;
 }
+div#reminders_box div#reminder_loading {
+	padding-top: 250px;
+	width: 80px;
+	margin: auto;
+}
 
 
 
@@ -1680,6 +1685,7 @@ div#mess_modal textarea {
 	overflow-y: hidden; 
 	height: 80px;
 }
+
 
 div#reminder_modal>div {
 	width: 382px;
