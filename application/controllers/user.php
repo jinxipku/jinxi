@@ -48,7 +48,7 @@ class User extends MY_Controller {
 			if ($login_user['id'] == $id) {
 				$this->assign('myself', true);
 				$this->assign('nav_tab', 2);
-				if ($login_user['level'] < 5) {
+				if ($mess == 'message' && $login_user['level'] < 5) {
 					redirect('user/profile/' . $id);
 				}
 			}
