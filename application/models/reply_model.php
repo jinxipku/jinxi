@@ -4,6 +4,7 @@ class reply_model extends CI_Model {
 		$this->load->database ();
 		$this->load->model("post_model");
 		$this->load->model("user_model");
+		$this->load->model("reminder_model");
 	}
 
 	//add_reply时要确保每层楼只有一个0
@@ -25,6 +26,8 @@ class reply_model extends CI_Model {
 			$res = $this->db->insert_id();
 			if($this->db->affected_rows()>0){
 				$res2 = $this->post_model->update_reply_num($reply['post_id'],$reply['type'],1);
+				$reply['id'] = $res;
+				$this->reminder_model->new_reply($reply);
 			}
 		}
 		

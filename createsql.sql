@@ -194,10 +194,9 @@ create table jx_reminder(
 	from_user_id int(11) null comment '来自用户',
 	post_id int(11) null comment '帖子id',
 	post_type tinyint null comment '帖子类型',
-	reply_id int(11) null comment '回复id',
+	extra int(11) null comment '备注，用于记录reply_id或者开/关帖子',
 	createat int(11) comment '私信时间',
 	content text null comment '内容',
-	is_read tinyint not null default 0 comment '是否已读',
 	primary key(id)
 )DEFAULT CHARSET=utf8 COMMENT='提醒表';
 create index user_index on jx_reminder(to_user_id);

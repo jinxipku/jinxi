@@ -3,6 +3,7 @@ class message_model extends CI_Model {
 	public function __construct() {
 		$this->load->database ();
 		$this->load->model("user_model");
+		$this->load->model("reminder_model");
 	}
 
 	public function add_message($from_id,$to_id,$content){
@@ -11,6 +12,11 @@ class message_model extends CI_Model {
 		$map['content'] = $content;
 		$map['createat'] = time();
 		$res = $this->db->insert("jx_message",$map);
+		if($res){
+			$message_id = $this->db->insert_id();
+			$map['id'] = $message_id;
+			$this->reminder_model->new_message($map);
+		}
 		return $res;
 	}
 
