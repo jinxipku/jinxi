@@ -294,7 +294,8 @@ echo '</pre>';
 	}
 
 	public function test_reminder(){
-		$this->reminder_model->get_user_reminder(2);
+		$v = $this->reminder_model->get_user_reminder(2);
+		var_dump($v);
 	}
 
 	public function create_a_user(){

@@ -97,6 +97,7 @@ class reminder_model extends CI_Model {
 		$result['part1'] = $part1;
 		$result['part2'] = $part2;
 		$result['part3'] = $part3;
+		$result['thumb'] = $thumb;
 		return $result;
 
 	}
@@ -115,7 +116,7 @@ class reminder_model extends CI_Model {
 			$hasimg = true;
 		}
 		$res['plain_title'] = get_plain_title($type,$res['deal'],$res['class'],$hasimg,$res['category1_name'],$res['category2_name'],$res['brand'],$res['model']);
-		$data['plain_title'] = cutString($res['plain_title'],20);
+		$data['plain_title'] = "<strong>".cutString($res['plain_title'],40)."</strong>";
 		$data['description'] = cutString($res['description'],20);
 		return $data;
 	}
