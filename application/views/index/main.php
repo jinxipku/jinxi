@@ -23,6 +23,14 @@
                     <span class="glyphicon glyphicon-chevron-right"></span> 
                 </a> 
             </div>
+
+            <div class="main_title">电子数码
+                <a class="pull-right" href="{$baseurl}display/sell/school/time/1">全部</a>
+            </div>
+
+            <div class="main_title">图书教材
+                <a class="pull-right" href="{$baseurl}display/sell/school/time/5">全部</a>
+            </div>
 <!--
     <div class="main_title">自动匹配 | 本站
         <a class=" text-muted switch btn-link">切换到绑定BBS</a>

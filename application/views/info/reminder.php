@@ -7,7 +7,7 @@
 		<div class="reminder_box">
 		  <div class="reminder_title">
 		    <div>
-		      <img class="passive lazy" src="{$baseurl}img/head/MvAdrkKY1XbAjpBWB1429863376.jpg" alt="一剑轻安" />
+		      <img class="passive lazy" src="{$reminder.thumb}" />
 		    </div>
 		    <div>
 		      <div>

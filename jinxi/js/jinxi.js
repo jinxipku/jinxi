@@ -1140,9 +1140,9 @@ function delete_reply(reply_id) {
 	});
 	$("#info_modal").modal();
 }
-function go_to_report(reply_id, user_id) {
+function go_to_report(reply_id, floor) {
 	$("#report_reply_id").val(reply_id);
-	$("#report_user_id").val(user_id);
+	$("#report_floor").val(floor);
 	$("#report_modal").modal();
 }
 function confirm_report() {
@@ -1152,7 +1152,7 @@ function confirm_report() {
 			baseurl + "reply/make_report",
 			{
 				report_reply_id: $("#report_reply_id").val(),
-				report_user_id: $("#report_user_id").val(),
+				report_floor: $("#report_floor").val(),
 				report_reason: $('input[name="report_reason"]:checked').val(),
 				report_other_reason: $("#report_other_reason").val()
 			},
