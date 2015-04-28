@@ -103,7 +103,7 @@ class reminder_model extends CI_Model {
 		$result['part2'] = $part2;
 		$result['part3'] = $part3;
 		$result['thumb'] = $thumb;
-		$result['url'] = base_url("reminder/index/".$reminder['id']);
+		$result['url'] = base_url("reminder/read/".$reminder['id']);
 		return $result;
 
 	}

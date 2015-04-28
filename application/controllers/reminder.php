@@ -25,47 +25,51 @@ class Reminder extends MY_Controller {
 		}
 
 		//TODO:删除reminder的时机？
+		$url = base_url("info/nopage");
 		if(!empty($reminder)){
 			switch ($reminder['type']) {
 				case '1':
 					$addon = ($reminder['post_type']==1)?"buy":"sell";
 					$url = base_url("post/viewpost/".$addon."/".$reminder['post_id']);
-					redirect($url);
+		
 					break;
 				case '2':
 					$addon = ($reminder['post_type']==1)?"buy":"sell";
 					$url = base_url("post/viewpost/".$addon."/".$reminder['post_id']);
-					redirect($url);
+					
 					break;
 				case '3':
 					$addon = ($reminder['post_type']==1)?"buy":"sell";
 					$addon2 = empty($reminder['extra'])?"":("/".$reminder['extra']);
 					$url = base_url("post/viewpost/".$addon."/".$reminder['post_id'].$addon2);
-					redirect($url);
+					
 					break;
 				case '4':
 					$addon = ($reminder['post_type']==1)?"buy":"sell";
 					$addon2 = empty($reminder['extra'])?"":("/".$reminder['extra']);
 					$url = base_url("post/viewpost/".$addon."/".$reminder['post_id'].$addon2);
-					redirect($url);
+					
 					break;
 				case '5':
 					//http://www.xn--wmqr18c.cn/user/profile/2#user_mess
 					//TODO:这地方没用？？？？？？直接进到message页面。
 					$url = base_url("user/profile/".$login_user['id'] . "/message");
-					redirect($url);
+					
 					break;
 				case '6':
 					$addon = ($reminder['post_type']==1)?"buy":"sell";
 					$url = base_url("post/viewpost/".$addon."/".$reminder['post_id']);
-					redirect($url);
+					
 					break;
 				default:
 					# code...
 					break;
 			}
+			$this->reminder_model->delete_reminder($reminder['id']);
+			redirect($url);
 		}else{
 			//已经删除了。要跳转到哪里？
+			redirect($url);
 		}
 	}
 }
