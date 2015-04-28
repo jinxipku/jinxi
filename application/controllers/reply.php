@@ -60,7 +60,8 @@ class Reply extends MY_Controller {
 		$report_reply_id = $_POST['report_reply_id'];
 		$report_reason = $_POST['report_reason'];
 		$report_other_reason = $_POST['report_other_reason'];
-		$res = $this->reply_model->make_report($report_reply_id,$report_reason,$report_other_reason);
+		$report_floor = $_POST['report_floor'];
+		$res = $this->reply_model->make_report($report_reply_id,$report_reason,$report_other_reason,$report_floor);
 		if($res) $this->ajaxReturn(null,'操作成功',1);
 		else $this->ajaxReturn(null,'操作失败',0);
 	}

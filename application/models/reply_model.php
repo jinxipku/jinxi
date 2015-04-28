@@ -83,10 +83,11 @@ class reply_model extends CI_Model {
 		return $res;	
 	}
 
-	public function make_report($reply_id,$reason,$other_reason){
+	public function make_report($reply_id,$reason,$other_reason,$floor){
 		$map['reply_id'] = $reply_id;
 		$map['reason'] = $reason;
 		$map['other_reason'] = $other_reason;
+		$map['floor'] = $floor;
 		return $this->db->insert('jx_report',$map);
 	}
 }

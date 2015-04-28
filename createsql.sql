@@ -145,6 +145,7 @@ create table jx_report(
 	reason varchar(30) not null default 0 comment '举报原因',
 	other_reason text null comment '举报的其他原因',
 	reply_id int(11) comment '被举报回复的id',
+	floor int(11) comment '楼层，当楼层为-1或0时，表示举报的是楼主',
 	primary key(report_id)
 )DEFAULT CHARSET=utf8 COMMENT='举报表';
 

@@ -174,7 +174,7 @@ class reminder_model extends CI_Model {
 	//hint 自己给自己发回复不能发提醒
 	public function new_reply($reply){
 
-		if($reply['reply_from']==$reply['reply_to']) return;
+		//if($reply['reply_from']==$reply['reply_to']) return;
 		$map['post_id'] = $reply['post_id'];
 		$this->db->select("user_id");
 		$this->db->where($map);
@@ -198,9 +198,11 @@ class reminder_model extends CI_Model {
 			
 			//被回复者如果是楼主，那么之前的提醒肯定已经发出去了，故不考虑
 			if($post_user_id != $reply['reply_to']){ 
-				$data['type'] = 4;
-				$data['to_user_id'] = $reply['reply_to'];
-				$this->db->insert("jx_reminder",$data);
+				if($reply['from_id']!=$reply['to_id']){//自己给自己回复也不能算
+					$data['type'] = 4;
+					$data['to_user_id'] = $reply['reply_to'];
+					$this->db->insert("jx_reminder",$data);
+				}
 			}
 
 		}
