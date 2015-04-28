@@ -18,10 +18,15 @@ class reminder_model extends CI_Model {
 	
 */
 
-	//info
-	public function add_reminder($info){
-		$res = $this->db->insert("jx_favorites",$info);
-		return $res;
+	public function get_reminder($reminder_id){
+		$map['id'] = $reminder_id;
+		$this->db->where($map);
+		$this->db->from("jx_reminder");
+		return $this->db->get()->row_array();
+	}
+
+	public function delete_reminder($reminder_id){
+		return $this->db->delete("jx_reminder",array("id"=>$reminder_id));
 	}
 
 	public function get_user_reminder($user_id){

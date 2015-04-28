@@ -38,7 +38,11 @@ class post_model extends CI_Model {
 		$table = get_post_table($type);
 		$map['post_id'] = $post_id;
 		$this->db->where($map);
-		return $this->db->update($table,array("description"=>$desc));
+		$res = $this->db->update($table,array("description"=>$desc));
+		if($res){
+			$this->reminder_model->post_update($post_id,$type);
+		}
+		return $res;
 	}
 
 

@@ -395,7 +395,7 @@ function format_time($time){
     }
     if($delta<86400*3){
         $day = intval(floor($delta/86400));
-        return $day."几天前";
+        return $day."天前";
     }
 
     return date('Y-m-d H:i:s',$time);
