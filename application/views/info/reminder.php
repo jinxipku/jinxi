@@ -7,6 +7,7 @@
 		<div class="reminder_box">
 		  <div class="reminder_title">
 		    <div>
+		      <img class="passive lazy" src="{$reminder.thumb}" />
 		    </div>
 		    <div>
 		      <div>

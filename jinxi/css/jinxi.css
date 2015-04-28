@@ -164,13 +164,21 @@ div#main {
 div#main>div {
 	width: 772px;
 }
-div.main_title{
+div.main_title {
 	padding: 5px 20px 5px 20px;
 	background-color: #1ABC9C;
 	margin-top: 25px;
 	font-size: 23px;
 	font-family: 微软雅黑,黑体,幼圆,宋体;
 	color: #FFFFFF;
+}
+div.main_title a {
+	padding-top: 5px;
+	font-size: 18px;
+	color: #FFFFFF;
+}
+div.main_title a:hover {
+	color: #DDDDDD;
 }
 div#side {
 	float: left;
