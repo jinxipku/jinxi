@@ -105,7 +105,10 @@
 			<p class="p_post_section">详细描述</p>
 			{if isset($mypost)}
 			<div id="post_description" onmouseover="$('#btn_edit_description').show();" onmouseout="$('#btn_edit_description').hide();">
-				<button id="btn_edit_description" type="button" class="btn btn-info btn-sm" onclick="edit_description()"><span class="fui-gear"></span>编辑</button>
+				<button id="btn_edit_description" type="button" class="btn btn-info btn-xs" onclick="edit_description()"><span class="fui-gear"></span>编辑</button>
+			{elseif isset($login_user)}
+			<div id="post_description" onmouseover="$(this).find('button.btn_report').show();" onmouseout="$(this).find('button.btn_report').hide();">
+				<button  type="button" class="btn btn-warning btn-xs btn_report pull-right" onclick="go_to_report({$thispost.post_id},{$thispost.type-1})"><span class="fui-eye"></span>举报</button>
 			{else}
 			<div id="post_description">
 			{/if}
@@ -211,10 +214,10 @@
 					{if isset($login_user)}
 					{if $login_user.id == $reply_item.reply_from}
 					<div class="reply_content" onmouseover="$(this).find('button.btn_delete_reply').show();" onmouseout="$(this).find('button.btn_delete_reply').hide();">
-						<button  type="button" class="btn btn-danger btn-sm btn_delete_reply" onclick="delete_reply({$reply_item.id})"><span class="fui-cross"></span>删除</button>
+						<button  type="button" class="btn btn-danger btn-xs btn_delete_reply" onclick="delete_reply({$reply_item.id})"><span class="fui-cross"></span>删除</button>
 					{else}
 					<div class="reply_content" onmouseover="$(this).find('button.btn_report').show();" onmouseout="$(this).find('button.btn_report').hide();">
-						<button  type="button" class="btn btn-warning btn-sm btn_report" onclick="go_to_report({$reply_item.id},{$reply_item.floor})"><span class="fui-eye"></span>举报</button>
+						<button  type="button" class="btn btn-warning btn-xs btn_report" onclick="go_to_report({$reply_item.id},{$reply_item.floor})"><span class="fui-eye"></span>举报</button>
 					{/if}
 					{else}
 					<div class="reply_content">
