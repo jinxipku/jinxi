@@ -12,15 +12,16 @@ class Reminder extends MY_Controller {
 		$this->load->model("reminder_model");
 		$this->load->helper("url");
 	}
-	public function index($id){
+	public function read($id){
 		$login_user =  $this->session->userdata('login_user');
-		if (empty($login_user)) {
-			echo '这地方是redirect到提示登录页面';exit;
+		if(empty($login_user)) {
+			$this->session->set_userdata('mem_url', base_url('reminder/read/' . $id));
+			redirect('account/loginfo/redirect');
 		}
 		//限制接受提醒的用户必须是登录用户
 		$reminder = $this->reminder_model->get_reminder($id);
 		if($reminder['to_user_id']!=$login_user['id']){
-			echo '这地方需要提示这条提醒不是发送给该用户的';exit;
+			redirect('info/nopage');
 		}
 
 		//TODO:删除reminder的时机？
@@ -51,7 +52,7 @@ class Reminder extends MY_Controller {
 				case '5':
 					//http://www.xn--wmqr18c.cn/user/profile/2#user_mess
 					//TODO:这地方没用？？？？？？直接进到message页面。
-					$url = base_url("user/profile/".$login_user['id']."#mess");
+					$url = base_url("user/profile/".$login_user['id'] . "/message");
 					redirect($url);
 					break;
 				case '6':

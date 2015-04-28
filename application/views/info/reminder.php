@@ -4,24 +4,26 @@
 <div class="modal-body">
 	<div id="reminders_box">
 		{foreach from = $data item = reminder}
-		<div class="reminder_box">
-		  <div class="reminder_title">
-		    <div>
-		      <img class="passive lazy" src="{$reminder.thumb}" />
-		    </div>
-		    <div>
-		      <div>
-		        {$reminder.part1}
-		      </div>
-		      <div>
-		        {$reminder.part2}
-		      </div>
-		    </div>
-		  </div>
-		  <div class="reminder_content">
-		    {$reminder.part3}
-		  </div>
-		</div>
+		<a href="{$reminder.url}" target="_blank">
+			<div class="reminder_box">
+			  <div class="reminder_title">
+			    <div>
+			      <img class="passive lazy" src="{$reminder.thumb}" />
+			    </div>
+			    <div>
+			      <div>
+			        {$reminder.part1}
+			      </div>
+			      <div>
+			        {$reminder.part2}
+			      </div>
+			    </div>
+			  </div>
+			  <div class="reminder_content">
+			    {$reminder.part3}
+			  </div>
+			</div>
+		</a>
 		<hr/>
 		{/foreach}
 	</div>
