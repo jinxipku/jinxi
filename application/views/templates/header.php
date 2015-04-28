@@ -80,7 +80,7 @@
 							<a href="{$baseurl}user/setup">设置</a>
 						</li>
 						{if isset($login_user)}
-						<li id="reminder">
+						<li>
 							<a href="" onclick="open_reminder();return false;">提醒</a>
 						</li>
 						{/if}
