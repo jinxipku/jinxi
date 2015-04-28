@@ -53,7 +53,7 @@ class reminder_model extends CI_Model {
 		if(!empty($reminder['from_user_id'])){
 			$nick_color = get_namecolor($reminder['nick_color']);
 			$from_user = "<span class='".$nick_color."'>".$reminder['nick']."</span>";
-			$thumb = base_url("img/head".$reminder['thumb']);
+			$thumb = base_url("img/head/".$reminder['thumb']);
 		}
 		switch ($reminder['type']) {
 			case '1':
@@ -103,6 +103,7 @@ class reminder_model extends CI_Model {
 		$result['part2'] = $part2;
 		$result['part3'] = $part3;
 		$result['thumb'] = $thumb;
+		$result['url'] = base_url("reminder/index/".$reminder['id']);
 		return $result;
 
 	}
