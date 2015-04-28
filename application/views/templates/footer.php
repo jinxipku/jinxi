@@ -62,7 +62,7 @@
 					</label>
 					<input id="report_other_reason" type="text" placeholder="其他" class="form-control flat" maxlength=30 />
 					<input id="report_reply_id" type="hidden" class="form-control"/>
-					<input id="report_user_id" type="hidden" class="form-control"/>
+					<input id="report_floor" type="hidden" class="form-control"/>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
