@@ -64,7 +64,7 @@ class Reminder extends MY_Controller {
 					break;
 			}
 		}else{
-
+			//已经删除了。要跳转到哪里？
 		}
 	}
 }
