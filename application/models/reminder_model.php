@@ -122,7 +122,7 @@ class reminder_model extends CI_Model {
 			$hasimg = true;
 		}
 		$res['plain_title'] = get_plain_title($type,$res['deal'],$res['class'],$hasimg,$res['category1_name'],$res['category2_name'],$res['brand'],$res['model']);
-		$data['plain_title'] = "<strong>".cutString($res['plain_title'],40)."</strong>";
+		$data['plain_title'] = "<strong>".cutString($res['plain_title'],32)."</strong>";
 		$data['description'] = cutString($res['description'],20);
 		return $data;
 	}
@@ -165,8 +165,9 @@ class reminder_model extends CI_Model {
 			if(isset($reply_id)) $temp['extra'] = $reply_id;
 			$batch[] = $temp;
 		}
-		$res = $this->db->insert_batch('jx_reminder', $batch); 
-		return $res;
+		if(count($batch)>0)
+			return $this->db->insert_batch('jx_reminder', $batch); 
+		return null;
 	}
 
 	//type=3发表帖子有新的回复
@@ -198,7 +199,7 @@ class reminder_model extends CI_Model {
 			
 			//被回复者如果是楼主，那么之前的提醒肯定已经发出去了，故不考虑
 			if($post_user_id != $reply['reply_to']){ 
-				if($reply['from_id']!=$reply['to_id']){//自己给自己回复也不能算
+				if($reply['reply_from']!=$reply['reply_to']){//自己给自己回复也不能算
 					$data['type'] = 4;
 					$data['to_user_id'] = $reply['reply_to'];
 					$this->db->insert("jx_reminder",$data);

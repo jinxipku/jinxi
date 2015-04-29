@@ -472,7 +472,7 @@ function checkCategory($cat1,$cat2){
 }
 
 function cutString($str,$num=50){
-    if(strlen($str)<=$num) return $str;
+    if(mb_strlen($str)<=$num) return $str;
     else{
         return mb_substr($str, 0, $num).'......';
     }

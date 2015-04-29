@@ -282,4 +282,44 @@ class Display extends MY_Controller {
 		$data['posts'] = $posts;
 		return $data;
 	}
+
+	public function get_six_from_category($category1){
+		$map['category1'] = $category1;
+		$map['active'] = 1;
+		$this->db->select("post_id,createat");
+		$this->db->order_by("createat","desc");
+		$this->db->where($map);
+		$this->db->limit(6,0);
+		$this->db->from("jx_seller_post");
+		$seller_posts = $this->db->get()->result_array();
+		
+
+		$this->db->select("post_id,createat");
+		$this->db->order_by("createat","desc");
+		$this->db->where($map);
+		$this->db->limit(6,0);
+		$this->db->from("jx_buyer_post");
+		$buyer_posts = $this->db->get()->result_array();
+
+		$temp = array();
+		foreach ($seller_posts as $key => $value) {
+			$temp[$value['createat']]['post_id'] = $value['post_id'];
+			$temp[$value['createat']]['post_type'] = 0;
+		}
+
+		foreach ($buyer_posts as $key => $value) {
+			$temp[$value['createat']]['post_id'] = $value['post_id'];
+			$temp[$value['createat']]['post_type'] = 1;
+		}
+
+		ksort($temp);
+		$i = 0;
+		$result = array();
+		foreach ($temp as $key => $value) {
+			$result[] = $this->post_model->get_post($value['post_id'],$value['post_type'],true);
+			$i++;
+			if($i>=6) break;
+		}
+		return $result;
+	}
 }
