@@ -73,6 +73,28 @@
 	</div>
 	{/if}
 
+	<script type="text/javascript" src="{$baseurl}js/bootstrap.js"></script>
+	<script type="text/javascript" src="{$baseurl}js/stickup.js"></script>
+	<script type="text/javascript" src="{$baseurl}js/jquery.ellipsis.js"></script>
+	<script type="text/javascript" src="{$baseurl}js/flatui-checkbox.js"></script>
+	<script type="text/javascript" src="{$baseurl}js/flatui-radio.js"></script>
+	<script type="text/javascript" src="{$baseurl}js/jquery.lazyload.min.js"></script>
+	<script type="text/javascript" src="{$baseurl}js/jinxi.js"></script>
+	{if isset($message)}
+	<script type="text/javascript">
+		show_user_page('#user_mess', 1);
+	</script>
+	{elseif isset($reply_id)}
+	<script type="text/javascript">
+		$("html,body").animate(
+			{
+				scrollTop: $("div.reply_box[data-rid=" + {$reply_id} + "]").offset().top 
+			},
+			700
+		);
+	</script>
+	{/if}
+
 	{if isset($is_index)}
 	<script type="text/javascript">
 		var ujian_config = {
@@ -104,30 +126,6 @@
 	}
 	</script>
 	<script type="text/javascript" src="http://v3.jiathis.com/code/jiathis_r.js?btn=r3.gif&move=0" charset="utf-8"></script>
-	{/if}
-	<!-- JiaThis Button BEGIN -->
-<!-- JiaThis Button END -->
-
-	<script type="text/javascript" src="{$baseurl}js/bootstrap.js"></script>
-	<script type="text/javascript" src="{$baseurl}js/stickup.js"></script>
-	<script type="text/javascript" src="{$baseurl}js/jquery.ellipsis.js"></script>
-	<script type="text/javascript" src="{$baseurl}js/flatui-checkbox.js"></script>
-	<script type="text/javascript" src="{$baseurl}js/flatui-radio.js"></script>
-	<script type="text/javascript" src="{$baseurl}js/jquery.lazyload.min.js"></script>
-	<script type="text/javascript" src="{$baseurl}js/jinxi.js"></script>
-	{if isset($message)}
-	<script type="text/javascript">
-		show_user_page('#user_mess', 1);
-	</script>
-	{elseif isset($reply_id)}
-	<script type="text/javascript">
-		$("html,body").animate(
-			{
-				scrollTop: $("div.reply_box[data-rid=" + {$reply_id} + "]").offset().top 
-			},
-			700
-		);
-	</script>
 	{/if}
 </body>
 </html>

@@ -43,6 +43,7 @@ class Info extends MY_Controller {
 		
 		$this->display ( 'templates/header.php' );
 		$this->display ( 'info/show404.php' );
+		$this->display ( 'templates/smallside.php' );
 		$this->display ( 'templates/footer.php' );
 	}
 

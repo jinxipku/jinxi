@@ -673,11 +673,11 @@ div.preview_box>div:nth-child(1):hover {
 div.preview_box>div>textarea {
 	background-color: #f4f4f4;
 	resize: none;
+	height: 122px;
 }
 div.preview_box>div>label {
 	float: left;
-	margin-left: 20px;
-	margin-top: 15px;
+	margin: 3px 0px 0px 3px;
 }
 div.preview_box>div>label span{
 	background-color: #f4f4f4 !important;
