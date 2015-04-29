@@ -96,7 +96,6 @@
 
 			var textarea = $("<textarea></textarea>");
 			textarea.addClass("form-control flat");
-			textarea.attr("rows", "4");
 			textarea.attr("placeholder", "请填写图片描述");
 			textarea.attr("maxlength", "30");
 			div2.append(textarea);
@@ -116,7 +115,7 @@
 			div2.append(label);
 			var button = $("<button></button>");
 			button.attr("type", "button");
-			button.addClass("btn btn-default");
+			button.addClass("btn btn-default btn-xs");
 			button.html('删除<span class="fui-cross"></span>');
 			button.click(function() {
 				$.post(

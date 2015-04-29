@@ -34,6 +34,7 @@ class Account extends MY_Controller {
 		
 		$this->display ( 'templates/header.php' );
 		$this->display ( 'account/login.php' );
+		$this->display ( 'templates/smallside.php' );
 		$this->display ( 'templates/footer.php' );
 	}
 
@@ -52,6 +53,7 @@ class Account extends MY_Controller {
 
 		$this->display ( 'templates/header.php' );
 		$this->display ( 'account/loginfo.php' );
+		$this->display ( 'templates/smallside.php' );
 		$this->display ( 'templates/footer.php' );
 	}
 
@@ -70,6 +72,7 @@ class Account extends MY_Controller {
 		
 		$this->display ( 'templates/header.php' );
 		$this->display ( 'account/register.php' );
+		$this->display ( 'templates/smallside.php' );
 		$this->display ( 'templates/footer.php' );
 	}
 
@@ -87,6 +90,7 @@ class Account extends MY_Controller {
 		else {
 			$this->display ( 'account/regfail.php' );
 		}
+		$this->display ( 'templates/smallside.php' );
 		$this->display ( 'templates/footer.php' );
 	}
 
@@ -114,6 +118,7 @@ class Account extends MY_Controller {
 
 			$this->display ( 'templates/header.php' );
 			$this->display ( 'account/regsuccess.php' );
+			$this->display ( 'templates/smallside.php' );
 			$this->display ( 'templates/footer.php' );
 		}
 

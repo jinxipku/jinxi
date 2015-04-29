@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="description" content="jinxi">
-	<meta name="author" content="fabkxd">
+	<meta name="description" content="今昔网 今昔二手 大学生二手信息平台">
+	<meta name="author" content="JINXI">
 	<link rel="shortcut icon" href="{$baseurl}img/icon/icon.png">
 	<title>{$title}</title> <!-- Bootstrap core CSS -->
 	<link href="{$baseurl}css/bootstrap.css" rel="stylesheet"/>
@@ -71,10 +71,10 @@
 						</li>
 						{/if}
 						<li {if $nav_tab == 4}class=" active"{/if}>
-							<a href="#">关于</a>
+							<a href="{$baseurl}info/about">关于</a>
 						</li>
 						<li {if $nav_tab == 5}class=" active"{/if}>
-							<a href="#">帮助</a>
+							<a href="{$baseurl}info/help">帮助</a>
 						</li>
 						<li {if $nav_tab == 6}class=" active"{/if}>
 							<a href="{$baseurl}user/setup">设置</a>

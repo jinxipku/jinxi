@@ -4,7 +4,7 @@
 <div class="modal-body">
 	<div id="reminders_box">
 		{foreach from = $data item = reminder}
-		<a href="{$reminder.url}" target="_blank">
+		<a href="{$reminder.url}" target="_blank" onclick="go_to_reminder('{$reminder.url}')">
 			<div class="reminder_box">
 			  <div class="reminder_title">
 			    <div>
@@ -23,8 +23,8 @@
 			    {$reminder.part3}
 			  </div>
 			</div>
+			<hr/>
 		</a>
-		<hr/>
 		{/foreach}
 	</div>
 </div>

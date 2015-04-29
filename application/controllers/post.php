@@ -46,6 +46,7 @@ class Post extends MY_Controller {
 		$this->display ( 'post/picture.php' );
 		$this->display ( 'post/contact.php' );
 		$this->display ( 'post/success.php' );
+		$this->display ( 'templates/smallside.php' );
 		$this->display ( 'templates/footer.php' );
 	}
 

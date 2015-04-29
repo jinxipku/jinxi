@@ -32,40 +32,22 @@
 				<img class="passive" src="{$baseurl}img/jinxibig.jpg" alt="http://www.xn--wmqr18c.cn"/>
 			</div>
 		</div>
-		<div id="side">
-			<div id="side_tips">
-				<blockquote>
-					<p class="side_title">今昔贴士</p>
-				</blockquote>
-				<div class="side_content panel panel-default">
-					<p class="p_song_title">{$tips.strtit}</p>
-					<p class="p_song_content">&nbsp;&nbsp;{$tips.strcon}</p>
-					<p class="p_song_content">&nbsp;&nbsp;精彩大学生活，今昔网将与您共同分享！</p>
-					<p class="p_song_link">
-						<a class="text-info btn-link">关于今昔</a>
-						<span> | </span>
-						<a class="text-info btn-link">帮助中心</a>
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
 
-	<div class="modal fade" id="choose_school" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h6 class="modal-title" id="myModalLabel">选择学校</h6>
-				</div>
-				<div class="modal-body">
-					<div id="choose-a-province"></div>
-					<hr />
-					<div id="choose-a-school"></div>
-				</div>
-				<div class="modal-footer">
-					<button id="chooseover" type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+		<div class="modal fade" id="choose_school" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h6 class="modal-title" id="myModalLabel">选择学校</h6>
+					</div>
+					<div class="modal-body">
+						<div id="choose-a-province"></div>
+						<hr />
+						<div id="choose-a-school"></div>
+					</div>
+					<div class="modal-footer">
+						<button id="chooseover" type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
