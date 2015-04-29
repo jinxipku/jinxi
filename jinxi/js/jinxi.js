@@ -1272,47 +1272,9 @@ function open_reminder() {
 		}
 	);
 }
-
-
-
-
-
-
-
-
-
-
-
-function gotocomm(uid){
-	$('#mycommlink').tab('show');
-	if($("#mycomm").html()==''){
-		$.post(baseurl + "ajax/show_user_page",{tab:5,uid:uid,page:1},function(gethtml){
-			$("#mycomm").html(gethtml);
-			$("html,body").animate({scrollTop:$("#scrollfoot").offset().top}, 700);
-		})
-		$("#mycomm").html('<center><i class="icon-spinner icon-spin"></i> 正在加载</center>');
-	}
-	else
-		$("html,body").animate({scrollTop:$("#scrollfoot").offset().top}, 700);
-}
-function docomment(subject_id,user_id){
-	var ctype = $("#ctype").val();
-	var cscore = $("#cscore").val();
-	var ccontent = $("#commcont").val();
-	$.post(baseurl + "ajax/addcomment",{user_id:user_id,subject_id:subject_id,ctype:ctype,cscore:cscore,ccontent:ccontent},function(){
-        showuserpage(5,user_id,1,1);
-	})
-}
-function commreport(oid){
-	$("#report_oid").val(oid);
-	$("#report_rtype").val(1);
-	$("#reportmodal").modal();
-}
-function reportconfirm(){
-	var object_id = $("#report_oid").val();
-	var rtype = $("#report_rtype").val();
-	var rcontent = $('input[name="report_reason"]:checked').val();
-	if(rcontent == '其他')
-		rcontent = $("#report_or").val();
-	$.post(baseurl + "ajax/addreport",{object_id:object_id,rtype:rtype,rcontent:rcontent});
+function go_to_reminder(url) {
+	var clicked_a = $("div#reminders_box>a[href='" + url +"']");
+	clicked_a.remove();
+	var cnt = $("#reminder_modal div.modal-content h4").text().split("(")[1].split(")")[0] - 1;
+	$("#reminder_modal div.modal-content h4").html('消息提醒(' + cnt + ')');
 }
