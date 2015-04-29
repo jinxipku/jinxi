@@ -62,7 +62,7 @@ class Index extends MY_Controller {
 			$i++;
 			if($i>=6) break;
 		}
-		var_dump($result);exit;
+		//var_dump($result);exit;
 		return $result;
 	}
 }
