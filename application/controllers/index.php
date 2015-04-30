@@ -12,7 +12,7 @@ class Index extends MY_Controller {
 		if (!empty($login_user)) {
 			$this->assign('login_user', $login_user);
 		}
-
+		
 		$this->assign('digital', $this->get_six_from_category(1));
 		$this->assign('book', $this->get_six_from_category(5));
 
@@ -30,6 +30,11 @@ class Index extends MY_Controller {
 
 
 	public function get_six_from_category($category1){
+		$login_user =  $this->session->userdata('login_user');
+		if(!empty($login_user)){            //如果已经登录，获取收藏贴的id
+			$favorites = $this->post_model->get_favorite_id_type($login_user['id']);
+		}
+
 		$map['category1'] = $category1;
 		$map['active'] = 1;
 		$this->db->select("post_id,createat");
@@ -66,7 +71,12 @@ class Index extends MY_Controller {
 			$i++;
 			if($i>=6) break;
 		}
-		//var_dump($result);exit;
+		foreach ($result as $key => $value) {
+			$result[$key]['description'] = cutString($result[$key]['description']);
+			if(isset($favorites)&&in_array($result[$key]['post_id']."#".$result[$key]['type'], $favorites)){
+				$result[$key]['has_collect'] = 1;
+			}else $result[$key]['has_collect'] = 0;
+		}
 		return $result;
 	}
 }
