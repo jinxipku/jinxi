@@ -12,6 +12,10 @@ class Index extends MY_Controller {
 		if (!empty($login_user)) {
 			$this->assign('login_user', $login_user);
 		}
+
+		$this->assign('digital', $this->get_six_from_category(1));
+		$this->assign('book', $this->get_six_from_category(5));
+
 		$this->assign('nav_tab', 1);
 		$this->assign('title', '今昔网-主页');
 		$this->assign('baseurl', base_url());

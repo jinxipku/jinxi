@@ -122,7 +122,7 @@
 			</div>
 			{/if}
 			
-			
+			{if $thispost.type == 0}
 			<hr/>
 			<p class="p_post_section">图片展示</p>
 			<div id="post_picture">
@@ -135,6 +135,7 @@
 				无
 				{/if}
 			</div>
+			{/if}
 			
 			
 			<hr/>

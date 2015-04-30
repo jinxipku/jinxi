@@ -28,6 +28,70 @@
                 <a class="pull-right" href="{$baseurl}display/sell/school/time/1">全部</a>
             </div>
 
+            <div id="post_items_block">
+              {foreach from = $digital item = post}
+              <div class="post_item_block panel panel-default">
+                <div class="post_item_block_user">
+                  <div>
+                    <a href="{$baseurl}user/profile/{$post.user_id}" target="_blank">
+                      <img class="lazy" data-original="{$post.user.thumb}" alt="{$post.user.nick}" /> 
+                    </a>
+                  </div>
+                  <div>
+                    <p>
+                      <a href="{$baseurl}user/profile/{$post.user_id}" class="{$post.user.nick_color}" target="_blank">{$post.user.nick}</a><small>{$post.user.school_name}</small>
+                    </p>
+                    <p>
+                      <small>{$post.createat}</small>
+                    </p>
+                  </div>
+                </div>
+
+                <div class="post_item_block_img">
+                  <a href="{$baseurl}post/viewpost/{$type}/{$post.post_id}" target="_blank">
+                    <div class="post_item_block_class_cover">
+                    </div>
+                    <div class="post_item_block_class_cont">
+                      <div>
+                        {if $post.price == 0}面议{else}￥{$post.price}{/if}
+                      </div>
+                      <div>
+                        <img class="lazy passive" data-original="{$baseurl}mg/class/{$post.class}.png" alt="物品状态" />
+                      </div>
+                    </div>
+                    <img class="lazy" data-original="{$post.picture}" alt="{$post.plain_title}" />
+                  </a>
+                </div>
+                <div class="post_item_block_title">
+                  <a href="{$baseurl}post/viewpost/{$type}/{$post.post_id}" title='{$post.plain_title}' target="_blank">
+                    {$post.title}
+                  </a>
+                </div>
+                <div class="post_item_block_others">
+                  <div>
+                    <span class="fui-new">
+                      {$post.reply_num}
+                    </span>
+                    <span class="fui-heart">
+                      {$post.favorite_num}
+                    </span>
+                  </div>
+                  <div>
+                    {if !isset($login_user)}
+                    <a type="button" class="btn btn-sm btn-info" href="{$baseurl}account/loginfo"><span class="fui-plus"></span>收藏</a>
+                    {elseif $post.user_id == $login_user.id}
+                    <button type="button" class="btn btn-warning btn-sm" disabled>我 的</button>
+                    {elseif $post.has_collect}
+                    <button type="button" data-pid="{$post.post_id}" data-ptype="{$post.type}" class="btn1_post_item btn btn-sm btn-info">已收藏</button>
+                    {else}
+                    <button type="button" data-pid="{$post.post_id}" data-ptype="{$post.type}" class="btn2_post_item btn btn-info btn-sm"><span class="fui-plus"></span>收藏</button>
+                    {/if}
+                  </div>
+                </div>
+              </div>      
+              {/foreach}
+            </div>
+
             <div class="main_title">图书教材
                 <a class="pull-right" href="{$baseurl}display/sell/school/time/5">全部</a>
             </div>

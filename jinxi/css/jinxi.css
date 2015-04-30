@@ -185,7 +185,7 @@ div#side {
 	width: 264px;
 }
 p.side_title {
-	color: #1ABC9C;
+	color: #16A085;
 }
 div.side_content {
 	background-color: #ffffff;
@@ -1618,6 +1618,23 @@ div#reminders_box div#reminder_loading {
 	padding-top: 250px;
 	width: 80px;
 	margin: auto;
+}
+
+/*
+agreement
+*/
+div#main.agreement {
+	padding-right: 20px;
+}
+div#main.agreement h6 {
+	color: #16A085
+}
+div#main.agreement blockquote {
+	color: #16A085
+}
+div#main.agreement p {
+	font-size: 15px;
+	color: #444
 }
 
 

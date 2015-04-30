@@ -1,18 +1,18 @@
 	<div id="footer">
 		<div id="footer_links" class="row">
 			<p class="footer_links">
-				<a href="#" class="footer">关于今昔</a><span> &nbsp;&nbsp;| &nbsp;&nbsp;</span>
-				<a href="#" class="footer">今昔历程</a><span> &nbsp;&nbsp;| &nbsp;&nbsp;</span>
-				<a href="#" class="footer">联系我们</a><span> &nbsp;&nbsp;| &nbsp;&nbsp;</span>
-				<a href="#" class="footer">用户协议</a><span> &nbsp;&nbsp;| &nbsp;&nbsp;</span>
-				<a href="#" class="footer">帮助中心</a><span> &nbsp;&nbsp;| &nbsp;&nbsp;</span>
-				<a href="#" class="footer">意见建议</a>
+				<a href="{$baseurl}" class="footer">今昔主页</a><span> &nbsp;&nbsp;| &nbsp;&nbsp;</span>
+				<a href="{$baseurl}info/about/contact" class="footer">联系我们</a><span> &nbsp;&nbsp;| &nbsp;&nbsp;</span>
+				<a href="{$baseurl}info/about/history" class="footer">今昔历程</a><span> &nbsp;&nbsp;| &nbsp;&nbsp;</span>
+				<a href="{$baseurl}info/about/suggest" class="footer">意见建议</a><span> &nbsp;&nbsp;| &nbsp;&nbsp;</span>
+				<a href="{$baseurl}info/help" class="footer">帮助中心</a><span> &nbsp;&nbsp;| &nbsp;&nbsp;</span>
+				<a href="{$baseurl}info/agreement" class="footer">用户协议</a>
 			</p>
 		</div>
 
 		<div id="footer_address" class="row">
 			<p class="footer_address">&copy; 2013 今昔网 &middot; 版权所有&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 京ICP备13053152号</p>
-			<p class="footer_address">后夏科技&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;地址：北京市海淀区</p>
+			<p class="footer_address">后夏天火科技&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;地址：北京市海淀区</p>
 			<p class="footer_address">Designed and Developed by JINXI</p>
 		</div>
 	</div>
