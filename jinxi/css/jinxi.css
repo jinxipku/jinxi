@@ -1635,6 +1635,48 @@ div#reminders_box div#reminder_loading {
 }
 
 /*
+about
+*/
+div#main.about h6 {
+	color: #16A085
+}
+div#main.about blockquote {
+	color: #16A085
+}
+div#main.about img {
+	height: 220px;
+	width: 220px;
+}
+div#main.about div#contact_us_box {
+	height: 300px;
+}
+div#main.about div.contact_us {
+	float: left;
+	width: 247px;
+	height: 300px;
+}
+div#main.about div.contact_us p {
+	font-size: 18px;
+}
+div#main.about div#timeline_box {
+	height: 600px;
+}
+
+/*
+help
+*/
+div#main.help h6 {
+	color: #16A085
+}
+div#main.help blockquote {
+	color: #16A085
+}
+div#main.help p {
+	font-size: 15px;
+	color: #444
+}
+
+/*
 agreement
 */
 div#main.agreement {
@@ -1650,6 +1692,8 @@ div#main.agreement p {
 	font-size: 15px;
 	color: #444
 }
+
+
 
 
 
