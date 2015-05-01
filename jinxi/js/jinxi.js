@@ -31,6 +31,8 @@ $(document).ready( function() {
 		$('#user_post').html('<div class="user_tab_header panel panel-default"><center><i class="icon-spinner icon-spin"></i> 正在加载</center></div>');
 	}
 	$("img.lazy").lazyload({effect: "fadeIn"});
+	get_reminder();
+	setInterval(get_reminder, 10000);
 });
 $(window).bind('scroll', function() {
 	$(this).scrollTop() > 510 + head_height ? $("#back_to_top").fadeIn(500) : $("#back_to_top").fadeOut(500);
@@ -1277,8 +1279,20 @@ function go_to_reminder(url) {
 	clicked_a.remove();
 	var cnt = $("#reminder_modal div.modal-content h4").text().split("(")[1].split(")")[0] - 1;
 	$("#reminder_modal div.modal-content h4").html('消息提醒(' + cnt + ')');
+	cnt = $("#unread_message").text();
+	$("#unread_message").text(cnt - 1);
 }
-function play_reminder(){
-    $('embed').remove();  
-    $('body').append('<embed src="' + baseurl + 'resource/reminder.wav" autostart="true" loop="false">');
+function get_reminder() {
+	$.post(
+		baseurl + "reminder/reminder_number",
+		{},
+		function(res) {
+			if (res.data > 0) {
+    			$("a#unread_box").html('提醒<span id="unread_message" class="navbar-new">' + res.data +'</span>');
+			} else {
+				$("a#unread_box").html('提醒');
+			}
+		},
+		'json'
+	);
 }

@@ -81,7 +81,7 @@
 						</li>
 						{if isset($login_user)}
 						<li>
-							<a href="" onclick="open_reminder();return false;">提醒</a>
+							<a id="unread_box" href="" onclick="open_reminder();return false;">提醒</a>
 						</li>
 						{/if}
 						{if isset($login_user)}
