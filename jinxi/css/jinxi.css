@@ -180,6 +180,9 @@ div.main_title a {
 div.main_title a:hover {
 	color: #DDDDDD;
 }
+div#post_items_block.index_show {
+	display: block;
+}
 div#side {
 	float: left;
 	width: 264px;
@@ -1276,6 +1279,8 @@ div.post_item_block_user>div:nth-child(2)>p:nth-child(1) {
 	padding-left: 10px;
 	font-size: 15px;
 	margin-bottom: -3px;
+	white-space: nowrap;
+	overflow-x: hidden; 
 }
 div.post_item_block_user>div:nth-child(2)>p:nth-child(1) small {
 	color: #7F8C8D;
