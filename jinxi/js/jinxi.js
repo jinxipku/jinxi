@@ -15,22 +15,10 @@ $(document).ready( function() {
 			}
 		}
 	});
-	if ($("#user_tabs").val() != undefined) {
-		$.post(
-			baseurl + "user/show_user_page",
-			{
-				tab_id: '#user_post',
-				user_id: $("#user_id").val(),
-				page: 1
-			},
-			function(gethtml) {
-        		$('#user_post').html(gethtml);
-        		$("div#user_panels img.lazy").lazyload({effect: "fadeIn"});
-			}
-		);
-		$('#user_post').html('<div class="user_tab_header panel panel-default"><center><i class="icon-spinner icon-spin"></i> 正在加载</center></div>');
-	}
+	
 	$("img.lazy").lazyload({effect: "fadeIn"});
+	get_reminder();
+	setInterval(get_reminder, 10000);
 });
 $(window).bind('scroll', function() {
 	$(this).scrollTop() > 510 + head_height ? $("#back_to_top").fadeIn(500) : $("#back_to_top").fadeOut(500);
@@ -512,19 +500,7 @@ function show_user_page(tabid, page){
 		700
 	);
 	if($(tabid).html() == '') {	
-		$.post(
-			baseurl + "user/show_user_page",
-			{
-				tab_id: tabid,
-				user_id: $("#user_id").val(),
-				page: page
-			},
-			function(gethtml) {
-        		$(tabid).html(gethtml);
-        		$("div#user_panels img.lazy").lazyload({effect: "fadeIn"});
-			}
-		);
-		$(tabid).html('<div class="user_tab_header panel panel-default"><center><i class="icon-spinner icon-spin"></i> 正在加载</center></div>');
+		show_user_page_display(tabid, page);
 	}
 }
 function show_user_page2(tabid, page){
@@ -534,6 +510,9 @@ function show_user_page2(tabid, page){
 		},
 		700
 	);
+	show_user_page_display(tabid, page);
+}
+function show_user_page_display(tabid, page) {
 	$.post(
 		baseurl + "user/show_user_page",
 		{
@@ -546,7 +525,7 @@ function show_user_page2(tabid, page){
 			$("div#user_panels img.lazy").lazyload({effect: "fadeIn"});
 		}
 	);
-	$(tabid).children("div.user_tab_header").html('<center><i class="icon-spinner icon-spin"></i> 正在加载</center>');
+	$(tabid).html('<div class="user_tab_header panel panel-default"><center><i class="icon-spinner icon-spin"></i> 正在加载</center></div>');
 }
 function save_info(){
 	$.post(
@@ -1240,7 +1219,7 @@ function delete_mess(mid) {
 				},
 				function(res) {
 					if (res.status == 1) {
-						window.location.href = baseurl + "user/profile/" + $("#user_id").val() + "/5";
+						window.location.href = baseurl + "user/profile/" + $("#user_id").val() + "/message";
 					} else {
 						$("#info_modal").find('.modal-title').text("删除失败");
 						$("#info_modal").find('.modal-cont').text("对不起，操作失败，请重试！");
@@ -1277,8 +1256,20 @@ function go_to_reminder(url) {
 	clicked_a.remove();
 	var cnt = $("#reminder_modal div.modal-content h4").text().split("(")[1].split(")")[0] - 1;
 	$("#reminder_modal div.modal-content h4").html('消息提醒(' + cnt + ')');
+	cnt = $("#unread_message").text();
+	$("#unread_message").text(cnt - 1);
 }
-function play_reminder(){
-    $('embed').remove();  
-    $('body').append('<embed src="' + baseurl + 'resource/reminder.wav" autostart="true" loop="false">');
+function get_reminder() {
+	$.post(
+		baseurl + "reminder/reminder_number",
+		{},
+		function(res) {
+			if (res.data > 0) {
+    			$("a#unread_box").html('提醒<span id="unread_message" class="navbar-new">' + res.data +'</span>');
+			} else {
+				$("a#unread_box").html('提醒');
+			}
+		},
+		'json'
+	);
 }

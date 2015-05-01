@@ -80,15 +80,30 @@
 	<script type="text/javascript" src="{$baseurl}js/flatui-radio.js"></script>
 	<script type="text/javascript" src="{$baseurl}js/jquery.lazyload.min.js"></script>
 	<script type="text/javascript" src="{$baseurl}js/jinxi.js"></script>
-	{if isset($message)}
+	{if isset($user_tab)}
 	<script type="text/javascript">
-		show_user_page('#user_mess', 1);
+		{if $user_tab == 'mine'}
+		show_user_page_display('#user_post', 1);
+		{elseif $user_tab == 'best'}
+		show_user_page_display('#user_best', 1);
+		{elseif $user_tab == 'message'}
+		show_user_page_display('#user_mess', 1);
+		{/if}
+	</script>
+	{elseif isset($about_part)}
+	<script type="text/javascript">
+		$("html,body").animate(
+			{
+				scrollTop: $("blockquote.{$about_part}").offset().top - 50
+			},
+			700
+		);
 	</script>
 	{elseif isset($reply_id)}
 	<script type="text/javascript">
 		$("html,body").animate(
 			{
-				scrollTop: $("div.reply_box[data-rid=" + {$reply_id} + "]").offset().top 
+				scrollTop: $("div.reply_box[data-rid={$reply_id}]").offset().top 
 			},
 			700
 		);

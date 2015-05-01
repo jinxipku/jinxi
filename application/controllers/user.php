@@ -22,18 +22,18 @@ class User extends MY_Controller {
 // +----------------------------------------------------------------------
 // | 前台页面跳转
 // +----------------------------------------------------------------------
-	public function profile($id = 0, $mess = 'nomessage') {
+	public function profile($id = 0, $tab = 'mine') {
 		if ($id == 0) {
 			$login_user =  $this->session->userdata('login_user');
 			if (!empty($login_user)) {
-				redirect(base_url('user/profile/' . $login_user['id']));
+				redirect('user/profile/' . $login_user['id']);
 			}
 			else {
 				$this->session->set_userdata('mem_url', base_url('user/profile/0'));
 				redirect('account/loginfo/redirect');
 			}
 		}
-		if ($mess != 'nomessage' && $mess != 'message') {
+		if ($tab != 'mine' && $tab != 'message' && $tab != 'best') {
 			redirect('user/profile/' . $id);
 		}
 		$user = $this->user_model->get_info($id);
@@ -47,7 +47,7 @@ class User extends MY_Controller {
 			if ($login_user['id'] == $id) {
 				$this->assign('myself', true);
 				$this->assign('nav_tab', 2);
-				if ($mess == 'message' && $login_user['level'] < 5) {
+				if ($tab == 'message' && $login_user['level'] < 5) {
 					redirect('user/profile/' . $id);
 				}
 			}
@@ -57,11 +57,10 @@ class User extends MY_Controller {
 					$this->assign('has_love', true);
 				}
 			}
-		} else if($mess == 'message') {
+		} else if($tab == 'message' || $tab == 'best') {
 			redirect('user/profile/' . $id);
 		}
-		if($mess == 'message')
-			$this->assign('message', true);
+		$this->assign('user_tab', $tab);
 
 		$hotest = $this->post_model->get_hotest_post($login_user['id']);
 		$newest = $this->post_model->get_newest_post($login_user['id']);
