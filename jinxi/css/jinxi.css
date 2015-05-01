@@ -164,6 +164,9 @@ div#main {
 div#main>div {
 	width: 772px;
 }
+div#main>h6 {
+	margin-top: 0px;
+}
 div.main_title {
 	padding: 5px 20px 5px 20px;
 	background-color: #1ABC9C;
@@ -179,6 +182,9 @@ div.main_title a {
 }
 div.main_title a:hover {
 	color: #DDDDDD;
+}
+div#post_items_block.index_show {
+	display: block;
 }
 div#side {
 	float: left;
@@ -1276,6 +1282,8 @@ div.post_item_block_user>div:nth-child(2)>p:nth-child(1) {
 	padding-left: 10px;
 	font-size: 15px;
 	margin-bottom: -3px;
+	white-space: nowrap;
+	overflow-x: hidden; 
 }
 div.post_item_block_user>div:nth-child(2)>p:nth-child(1) small {
 	color: #7F8C8D;
@@ -1676,6 +1684,10 @@ p.footer_address{
 	font-family: 宋体;
 	font-weight: 500;
 	margin-bottom: 0;
+}
+embed {
+	height: 0px;
+	width: 0px;
 }
 
 /*

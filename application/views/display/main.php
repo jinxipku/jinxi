@@ -222,7 +222,7 @@
 						</div>
 						<div>
 							<p>
-								<a href="{$baseurl}user/profile/{$post.user_id}" class="{$post.user.nick_color}" target="_blank">{$post.user.nick}</a><small>{$post.user.school_name}</small>
+								<a href="{$baseurl}user/profile/{$post.user_id}" class="{$post.user.nick_color}" target="_blank" title="{$post.user.school_name}">{$post.user.nick}</a><small  title="{$post.user.school_name}">{$post.user.school_name}</small>
 							</p>
 							<p>
 								<small>{$post.createat}</small>

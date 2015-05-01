@@ -79,5 +79,26 @@
 			</div>
 			
 			<img class="passive" id="side_icon" src="{$baseurl}img/jinxismall.jpg" alt="http://www.xn--wmqr18c.cn"/>
+
+			<div id="info_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title"></h4>
+                  </div>
+                  <div class="modal-body">
+                    <p class="modal-cont"></p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary">确认</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
 		</div>
 	</div>
