@@ -125,4 +125,17 @@ class Info extends MY_Controller {
 		$this->display ( 'templates/footer.php' );
 	}
 
+	//ajax接口
+	//post参数 content
+	public function add_advice(){
+		$login_user =  $this->session->userdata('login_user');
+		if(empty($login_user)) $user_id = 0;
+		else $user_id = $login_user['id'];
+		$content = $_POST['content'];
+		$this->load->model("advice_model");
+		$res = $this->advice_model->add_advice($content,$user_id);
+		$status = $res?1:0;
+		$this->ajaxReturn(null,"",$status);
+	}
+
 }
