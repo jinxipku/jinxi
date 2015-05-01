@@ -30,10 +30,12 @@
 					<button id="btn_love" type="button" class="btn btn-sm btn-info" onclick="delete_love({$login_user.id}, {$user.id})" onmouseover="change2dl()" onmouseout="change2al()">
 						已关注
 					</button>
+					<button type="button" class="btn_mess_user btn btn-warning btn-sm" onclick="mess_user({$user.id}, '{$user.nick}', 0)">私信TA</button>
 					{else}
 					<button id="btn_love" type="button" class="btn btn-sm btn-info" onclick="add_love({$login_user.id}, {$user.id})">
 						<span class="fui-plus"></span>关注
 					</button>
+					<button type="button" class="btn_mess_user btn btn-warning btn-sm pull-right" onclick="mess_user({$user.id}, '{$user.nick}', 0)">私信TA</button>
 					{/if}
 				</div>
 			</div>
@@ -41,10 +43,10 @@
 			<div id="user_tabs">
 				{if isset($myself)}
 				<ul class="nav nav-tabs">
-					<li{if !isset($message)} class="active"{/if}>
+					<li{if $user_tab == "mine"} class="active"{/if}>
 						<a href="#user_post" data-toggle="tab" onclick="show_user_page('#user_post', 1)">我的帖子</a>
 					</li>
-					<li>
+					<li{if $user_tab == "best"} class="active"{/if}>
 						<a href="#user_best" data-toggle="tab" onclick="show_user_page('#user_best', 1)">我的推荐</a>
 					</li>
 					<li>
@@ -54,7 +56,7 @@
 						<a href="#user_love" data-toggle="tab" onclick="show_user_page('#user_love', 1)">我的关注</a>
 					</li>
 					{if $user.level >= 5}
-					<li{if isset($message)} class="active"{/if}>
+					<li{if $user_tab == "message"} class="active"{/if}>
 						<a href="#user_mess" data-toggle="tab" onclick="show_user_page('#user_mess', 1)">我的私信</a>
 					</li>
 					{/if}
@@ -84,12 +86,12 @@
 			<div id="user_panels">
 				{if isset($myself)}
 				<div class="tab-content">
-					<div id="user_post" class="tab-pane fade{if !isset($message)} in active{/if}"></div>
-					<div id="user_best" class="tab-pane fade"></div>
+					<div id="user_post" class="tab-pane fade{if $user_tab == "mine"} in active{/if}"></div>
+					<div id="user_best" class="tab-pane fade{if $user_tab == "best"} in active{/if}"></div>
 					<div id="user_coll" class="tab-pane fade"></div>
 					<div id="user_love" class="tab-pane fade"></div>
 					{if $user.level >= 5}
-					<div id="user_mess" class="tab-pane fade{if isset($message)} in active{/if}"></div>
+					<div id="user_mess" class="tab-pane fade{if $user_tab == "message"} in active{/if}"></div>
 					{/if}
 				</div>
 				{else}
