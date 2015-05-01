@@ -1661,6 +1661,13 @@ div#main.about div.contact_us p {
 div#main.about div#timeline_box {
 	height: 600px;
 }
+div#main.about textarea {
+	background-color: #f4f4f4;
+	resize: vertical;
+}
+div#main.about button {
+	margin-left: 10px;
+}
 
 /*
 help

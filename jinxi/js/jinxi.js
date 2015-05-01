@@ -1273,3 +1273,41 @@ function get_reminder() {
 		'json'
 	);
 }
+function confirm_suggest() {
+	if ($("#suggest_content").val().length == 0) {
+		$("#info_modal").find('.modal-title').text("发布失败");
+		$("#info_modal").find('.modal-cont').text("对不起，您没有填写任何内容，请先填写~");
+		$("#info_modal").find('.btn-default').css('display','none');
+		$("#info_modal").find('.btn-primary').unbind();
+		$("#info_modal").find('.btn-primary').bind('click',function() {
+			$("#info_modal").modal("hide");
+		});
+		$("#info_modal").modal();
+		return;
+	}
+	$.post(
+		baseurl + "info/add_advice",
+		{
+			content: $("#suggest_content").val()
+		},
+		function(res) {
+			if (res.status == 1) {
+				window.location.href = window.location.href;
+			} else {
+				$("#info_modal").find('.modal-title').text("发布失败");
+				$("#info_modal").find('.modal-cont').text("对不起，操作失败，请重试！");
+				$("#info_modal").find('.btn-default').css('display','none');
+				$("#info_modal").find('.btn-primary').unbind();
+				$("#info_modal").find('.btn-primary').bind('click', function() {
+					$("#info_modal").modal("hide");
+				});
+				$("#info_modal").modal();
+				$("#btn_confirm_suggest").html('发布');
+				$("#btn_confirm_suggest").attr('disabled', false);
+			}
+		},
+		'json'
+	);
+	$("#btn_confirm_suggest").html('<i class="icon-spinner icon-spin"></i> 处理中');
+	$("#btn_confirm_suggest").attr('disabled', true);
+}
