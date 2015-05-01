@@ -90,7 +90,7 @@
 		show_user_page_display('#user_mess', 1);
 		{/if}
 	</script>
-	{elseif isset($about_part)}
+	{elseif isset($about_part) && $about_part != 'none'}
 	<script type="text/javascript">
 		$("html,body").animate(
 			{
