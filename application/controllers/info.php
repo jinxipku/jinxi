@@ -48,7 +48,11 @@ class Info extends MY_Controller {
 		$this->display ( 'templates/footer.php' );
 	}
 
-	public function about(){
+	public function about($about_part = "none"){
+		if ($about_part != "none" && $about_part != "contact" && $about_part != "history" && $about_part != "suggest") {
+			redirect('info/nopage');
+		}
+		$this->assign('about_part', $about_part);
 		$login_user =  $this->session->userdata('login_user');
 		if (!empty($login_user)) {
 			$this->assign('login_user', $login_user);

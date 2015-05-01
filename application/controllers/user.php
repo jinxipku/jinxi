@@ -26,7 +26,7 @@ class User extends MY_Controller {
 		if ($id == 0) {
 			$login_user =  $this->session->userdata('login_user');
 			if (!empty($login_user)) {
-				redirect(base_url('user/profile/' . $login_user['id']));
+				redirect('user/profile/' . $login_user['id']);
 			}
 			else {
 				$this->session->set_userdata('mem_url', base_url('user/profile/0'));

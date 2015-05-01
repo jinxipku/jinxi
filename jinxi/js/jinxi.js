@@ -500,19 +500,7 @@ function show_user_page(tabid, page){
 		700
 	);
 	if($(tabid).html() == '') {	
-		$.post(
-			baseurl + "user/show_user_page",
-			{
-				tab_id: tabid,
-				user_id: $("#user_id").val(),
-				page: page
-			},
-			function(gethtml) {
-        		$(tabid).html(gethtml);
-        		$("div#user_panels img.lazy").lazyload({effect: "fadeIn"});
-			}
-		);
-		$(tabid).html('<div class="user_tab_header panel panel-default"><center><i class="icon-spinner icon-spin"></i> 正在加载</center></div>');
+		show_user_page_display(tabid, page);
 	}
 }
 function show_user_page2(tabid, page){
@@ -522,6 +510,9 @@ function show_user_page2(tabid, page){
 		},
 		700
 	);
+	show_user_page_display(tabid, page);
+}
+function show_user_page_display(tabid, page) {
 	$.post(
 		baseurl + "user/show_user_page",
 		{
@@ -534,7 +525,7 @@ function show_user_page2(tabid, page){
 			$("div#user_panels img.lazy").lazyload({effect: "fadeIn"});
 		}
 	);
-	$(tabid).children("div.user_tab_header").html('<center><i class="icon-spinner icon-spin"></i> 正在加载</center>');
+	$(tabid).html('<div class="user_tab_header panel panel-default"><center><i class="icon-spinner icon-spin"></i> 正在加载</center></div>');
 }
 function save_info(){
 	$.post(
