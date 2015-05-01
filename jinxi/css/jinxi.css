@@ -1685,6 +1685,10 @@ p.footer_address{
 	font-weight: 500;
 	margin-bottom: 0;
 }
+embed {
+	height: 0px;
+	width: 0px;
+}
 
 /*
 modals

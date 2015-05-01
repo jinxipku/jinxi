@@ -1278,3 +1278,7 @@ function go_to_reminder(url) {
 	var cnt = $("#reminder_modal div.modal-content h4").text().split("(")[1].split(")")[0] - 1;
 	$("#reminder_modal div.modal-content h4").html('消息提醒(' + cnt + ')');
 }
+function play_reminder(){
+    $('embed').remove();  
+    $('body').append('<embed src="' + baseurl + 'resource/reminder.wav" autostart="true" loop="false">');
+}
