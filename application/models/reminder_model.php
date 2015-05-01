@@ -245,5 +245,12 @@ class reminder_model extends CI_Model {
 		return;
 	}
 
+	public function get_reminder_number($user_id){
+		$map['to_user_id'] = $user_id;
+		$this->db->where($map);
+		$this->db->from("jx_reminder");
+		return $this->db->count_all_results();
+	}
+
 }
 ?>
