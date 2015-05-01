@@ -164,6 +164,9 @@ div#main {
 div#main>div {
 	width: 772px;
 }
+div#main>h6 {
+	margin-top: 0px;
+}
 div.main_title {
 	padding: 5px 20px 5px 20px;
 	background-color: #1ABC9C;
