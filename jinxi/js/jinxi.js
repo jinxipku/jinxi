@@ -1292,7 +1292,15 @@ function confirm_suggest() {
 		},
 		function(res) {
 			if (res.status == 1) {
-				window.location.href = window.location.href;
+				$("#info_modal").find('.modal-title').text("发布成功");
+					$("#info_modal").find('.modal-cont').html("恭喜，您的意见或建议发布成功~非常感谢您的支持！");
+					$("#info_modal").find('.btn-default').css('display','none');
+					$("#info_modal").find('.btn-primary').unbind();
+					$("#info_modal").find('.btn-primary').bind('click', function() {
+						$("#info_modal").modal("hide");
+						window.location.href = window.location.href;
+					});
+					$("#info_modal").modal();
 			} else {
 				$("#info_modal").find('.modal-title').text("发布失败");
 				$("#info_modal").find('.modal-cont').text("对不起，操作失败，请重试！");
