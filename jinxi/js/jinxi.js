@@ -15,21 +15,7 @@ $(document).ready( function() {
 			}
 		}
 	});
-	if ($("#user_tabs").val() != undefined) {
-		$.post(
-			baseurl + "user/show_user_page",
-			{
-				tab_id: '#user_post',
-				user_id: $("#user_id").val(),
-				page: 1
-			},
-			function(gethtml) {
-        		$('#user_post').html(gethtml);
-        		$("div#user_panels img.lazy").lazyload({effect: "fadeIn"});
-			}
-		);
-		$('#user_post').html('<div class="user_tab_header panel panel-default"><center><i class="icon-spinner icon-spin"></i> 正在加载</center></div>');
-	}
+	
 	$("img.lazy").lazyload({effect: "fadeIn"});
 	get_reminder();
 	setInterval(get_reminder, 10000);
@@ -1242,7 +1228,7 @@ function delete_mess(mid) {
 				},
 				function(res) {
 					if (res.status == 1) {
-						window.location.href = baseurl + "user/profile/" + $("#user_id").val() + "/5";
+						window.location.href = baseurl + "user/profile/" + $("#user_id").val() + "/message";
 					} else {
 						$("#info_modal").find('.modal-title').text("删除失败");
 						$("#info_modal").find('.modal-cont').text("对不起，操作失败，请重试！");
