@@ -307,6 +307,9 @@ echo '</pre>';
 	public function test_admin(){
 		$re = $this->session->userdata("admin");
 		var_dump($re);
+
+		$re = $this->admin_model->get_report_info(1002);
+		var_dump($re);
 	}
 }
 ?>

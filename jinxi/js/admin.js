@@ -69,7 +69,10 @@ function get_report(page){
 
 			var report = data.data; 
 			for(var i=0;i<report.length;i++){
-				$("#report_table").append('<tr><td>'+'<a href="'+report[i].url+'" target="_blank">'+report[i].url_thumb+'</a>'+'</td><td>'+report[i].floor+'</td><td>'+report[i].content+'</td><td>'+report[i].reason+'</td><td>'+report[i].other_reason+'</td><td>'+'<button class="btn btn-danger" type="button">删除回复</button><button class="btn btn-danger" type="button">删除举报</button>'+'</td></tr>');
+				var btn_text = "删除楼层";
+				if(report[i].type==0)
+					btn_text = "删除帖子";
+				$("#report_table").append('<tr><td>'+'<a href="'+report[i].url+'" target="_blank">'+report[i].url_thumb+'</a>'+'</td><td>'+report[i].reason+'</td><td>'+report[i].other_reason+'</td><td>'+'<button class="btn btn-danger" type="button">'+btn_text+'</button><button class="btn btn-danger" type="button">删除举报</button>'+'</td></tr>');
 			}
 		},
 		error:function(data){

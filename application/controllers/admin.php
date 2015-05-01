@@ -59,9 +59,17 @@ class Admin extends MY_Controller {
 // +----------------------------------------------------------------------
 
 	public function get_report_info(){
-		$page = $_POST['page'];
-		$res = $this->admin_model->get_report_info();
+
+		$admin =  $this->session->userdata('admin');
+		if(empty($admin)){
+			$this->ajaxReturn(null,"未登录",0);
+		}
+		if($admin['auth_level']>1){
+			$res = $this->admin_model->get_report_info($admin['school_id']);
+		}
+		else $res = $this->admin_model->get_report_info();
 		//var_dump($res);
+		//$page = $_POST['page'];
 		$this->ajaxReturn($res,'',1);
 	}
 

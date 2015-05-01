@@ -101,8 +101,6 @@
 						<table class="table" id="report_table">
 							<tr>
 								<th>举报地</th>
-								<th>举报楼层</th>
-								<th>楼层内容</th>
 								<th>举报原因</th>
 								<th>举报的其他原因</th>
 								<th>处理</th>

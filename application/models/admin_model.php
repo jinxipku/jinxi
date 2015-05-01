@@ -59,17 +59,76 @@ class admin_model extends CI_Model{
 		
 	}
 
-	public function get_report_info(){
-		$this->db->from("jx_report");
-		$this->db->join("jx_reply","jx_reply.id=jx_report.reply_id");
-		$report_info = $this->db->get()->result_array();
-		foreach ($report_info as $key => $value) {
-			
-			$temp = ($value['type']==0)?"sell":"buy";
-			$report_info[$key]['url'] = base_url('post/viewpost/'.$temp.'/'.$value['post_id'].'/'.$value['id']);
-			$report_info[$key]['url_thumb'] = 'post/viewpost/'.$temp.'/'.$value['post_id'].'/'.$value['id'];
+	public function get_school_posts($school_id){
+		$this->db->select("jx_seller_post.post_id");
+		$this->db->from("jx_seller_post");
+		$this->db->where(array("jx_school_info.school_id"=>$school_id));
+		$this->db->join("jx_user","jx_user.id=jx_seller_post.user_id");
+		$this->db->join("jx_school_info","jx_school_info.school_id=jx_user.school_id");
+		$array1 = $this->db->get()->result_array();
+		
+		$this->db->select("jx_buyer_post.post_id");
+		$this->db->from("jx_buyer_post");
+		$this->db->where(array("jx_school_info.school_id"=>$school_id));
+		$this->db->join("jx_user","jx_user.id=jx_buyer_post.user_id");
+		$this->db->join("jx_school_info","jx_school_info.school_id=jx_user.school_id");
+		$array2 = $this->db->get()->result_array();
+
+		$temp = array();
+		foreach ($array1 as $key => $value) {
+			$temp[] = $value['post_id']."#0";
 		}
-		return $report_info;
+
+		foreach ($array2 as $key => $value) {
+			$temp[] = $value['post_id']."#1";
+		}
+		return $temp;
+		
+
+	}
+
+	public function get_report_info($school_id = null){
+		$this->db->from("jx_report");
+		$report_info = $this->db->get()->result_array();
+		if(isset($school_id))
+			$school_posts = $this->get_school_posts($school_id);
+		$return = array();
+		foreach ($report_info as $key => $value) {
+			if($value['floor']<=0){//举报的是帖子
+				$post_type = ($value['floor']==-1)?0:1;
+				$post_id = $value['reply_id'];
+				$id_and_type = $post_id."#".$post_type;
+				if(isset($school_posts)&&!in_array($id_and_type, $school_posts)){
+					continue;
+				}
+				$temp = ($value['floor']==-1)?"sell":"buy";
+				$ele['url'] = base_url('post/viewpost/'.$temp.'/'.$value['reply_id']);
+				$ele['url_thumb'] = 'post/viewpost/'.$temp.'/'.$value['reply_id'];
+				$ele['report_id'] = $value['report_id'];
+				$ele['reason'] = $value['reason'];
+				$ele['other_reason'] = $value['other_reason'];
+				$ele['type'] = 0;
+				$return[] = $ele;
+			}else{
+				$map['reply_id'] = $value['reply_id'];
+				$res = $this->db->get("jx_reply",$map)->row_array();
+				$post_type = $res['type'];
+				$post_id = $res['post_id'];
+				$id_and_type = $post_id."#".$post_type;
+				if(isset($school_posts)&&!in_array($id_and_type, $school_posts)){
+					continue;
+				}
+				$temp = ($post_type==0)?"sell":"buy";
+				$ele['url'] = base_url('post/viewpost/'.$temp.'/'.$post_id.'/'.$value['reply_id']);
+				$ele['url_thumb'] = 'post/viewpost/'.$temp.'/'.$post_id.'/'.$value['reply_id'];
+				$ele['report_id'] = $value['report_id'];
+				$ele['reason'] = $value['reason'];
+				$ele['other_reason'] = $value['other_reason'];
+				$ele['type'] = 1;
+				$return[] = $ele;
+			}
+		}
+		return $return;
 	}
 
 	public function appoint($admin){
