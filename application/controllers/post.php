@@ -192,6 +192,7 @@ class Post extends MY_Controller {
 					$reply[$key]['reply_date'] = format_time($reply[$key]['reply_date']);
 					$reply_ids[] = $reply[$key]['id'];
 				}
+				
 				$post['reply'] = $reply;
 			}
 				if($reply_id!='0'){

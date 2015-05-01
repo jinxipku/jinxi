@@ -8,8 +8,8 @@
     <meta name="author" content="jinxi">
     <title>今昔后台登陆</title>
     <link rel="shortcut icon" href="{$baseurl}img/icon/icon.png">
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/signin.css" rel="stylesheet">
+    <link href="{$baseurl}css/bootstrap.css" rel="stylesheet">
+    <link href="{$baseurl}css/signin.css" rel="stylesheet">
   </head>
 
   <body>

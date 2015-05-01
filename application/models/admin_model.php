@@ -8,10 +8,18 @@ class admin_model extends CI_Model{
 	}
 
 	public function login($admin_name,$password){
-		$admin = $this->db->get_where("jx_admin",array("id"=>1))->row_array();
+		$map['admin_name'] = $admin_name;
+		$admin = $this->db->get_where("jx_admin",$map)->row_array();
 		$rpwd = $this->encrypt->decode($admin['password']);
-		if($admin['admin_name']==$admin_name&&$password==$rpwd){
-			return true;
+		if($password==$rpwd){
+			if($admin['auth_level']>1){
+				$map2['school_id'] = $admin['school_id'];
+				$this->db->where($map2);
+				$this->db->from("jx_school_info");
+				$school_info = $this->db->get()->row_array();	
+				$admin['school_name'] = $school_info['school_name'];
+			}
+			return $admin;
 		}else return false;
 	}
 
@@ -58,10 +66,25 @@ class admin_model extends CI_Model{
 		foreach ($report_info as $key => $value) {
 			
 			$temp = ($value['type']==0)?"sell":"buy";
-			$report_info[$key]['url'] = base_url('post/viewpost/'.$temp.'/'.$value['post_id']);
-			$report_info[$key]['url_thumb'] = 'post/viewpost/'.$temp.'/'.$value['post_id'];
+			$report_info[$key]['url'] = base_url('post/viewpost/'.$temp.'/'.$value['post_id'].'/'.$value['id']);
+			$report_info[$key]['url_thumb'] = 'post/viewpost/'.$temp.'/'.$value['post_id'].'/'.$value['id'];
 		}
 		return $report_info;
+	}
+
+	public function appoint($admin){
+		$map['admin_name'] = $admin['admin_name'];
+		$this->db->where($map);
+		$this->db->from("jx_admin");
+		$res = $this->db->get()->row_array();
+		$admin['password'] = $this->encrypt->encode($admin['password']);
+		if(empty($res)){
+			return $this->db->insert("jx_admin",$admin);
+		}else{
+			$map2['id'] = $res['id'];
+			$this->db->where($map2);
+			return $this->db->update("jx_admin",$admin);
+		}
 	}
 }
 ?>

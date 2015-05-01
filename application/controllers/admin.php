@@ -25,6 +25,7 @@ class Admin extends MY_Controller {
 		$admin =  $this->session->userdata('admin');
 		$this->assign('title', '今昔网-后台');
 		$this->assign('baseurl', base_url());
+		$this->assign('admin',$admin);
 		if(empty($admin)){
 			$this->display("admin/login.php");
 		}else{
@@ -42,10 +43,15 @@ class Admin extends MY_Controller {
 		$password = $_POST['password'];
 
 		$res = $this->admin_model->login($admin_name,$password);
-		if($res){
-			$this->session->set_userdata('admin','admin');
+		if($res!=false){
+			$this->session->set_userdata('admin',$res);
 			redirect('admin/index');
 		}else echo '密码错误';
+	}
+
+	public function dologout(){
+		$this->session->unset_userdata ( 'admin' );
+		$this->ajaxReturn(null,"",1);
 	}
 
 // +----------------------------------------------------------------------
@@ -57,6 +63,19 @@ class Admin extends MY_Controller {
 		$res = $this->admin_model->get_report_info();
 		//var_dump($res);
 		$this->ajaxReturn($res,'',1);
+	}
+
+	public function appoint(){
+		$admin =  $this->session->userdata('admin');
+		if(empty($admin)){
+			$this->ajaxReturn(null,"未登录",0);
+		}
+		if($admin['auth_level']!=1){
+			$this->ajaxReturn(null,"权限不够",1);
+		}
+		$res = $this->admin_model->appoint($_POST);
+		$result = $res?1:0;
+		$this->ajaxReturn($res,'',$res);
 	}
 
 

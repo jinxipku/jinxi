@@ -152,11 +152,14 @@ create table jx_report(
 drop table if exists jx_admin;
 create table jx_admin(
 	id int(11) not null AUTO_INCREMENT comment 'id',
-	admin_name text not null,
+	admin_name varchar(30) not null,
 	password varchar(128) not null,
+	school_id int(11) not null,
+	auth_level tinyint not null comment '1为最大,2为只在本校',
+	unique(admin_name),
 	primary key(id)
 )DEFAULT CHARSET=utf8 COMMENT='后台admin表';
-insert into jx_admin values(1,'jx_admin','H6eBqhiZJyg2KESRqKwuh3BY8qGeSkMW1YDO54KzR67wNSOmWgszWuzuV/dr1lOHSa8aE0yxSYDBcEI0or347w==');
+insert into jx_admin values(1,'jx_admin','H6eBqhiZJyg2KESRqKwuh3BY8qGeSkMW1YDO54KzR67wNSOmWgszWuzuV/dr1lOHSa8aE0yxSYDBcEI0or347w==',1002,1);
 
 drop table if exists jx_advice;
 create table jx_advice(

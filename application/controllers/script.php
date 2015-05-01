@@ -167,9 +167,7 @@ echo '</pre>';
 	public function test_checkcat(){
 		var_dump( checkCategory(45,44) );
 	}
-	public function test_admin(){
 
-	}
 
 	public function test_post_model(){
 		 $res = $this->post_model->get_post_ids(0,1002,null,null,1,'heat');
@@ -304,6 +302,11 @@ echo '</pre>';
 			$id = $this->db->insert_id();
 			$this->account_model->verify($id);
 		}
+	}
+
+	public function test_admin(){
+		$re = $this->session->userdata("admin");
+		var_dump($re);
 	}
 }
 ?>

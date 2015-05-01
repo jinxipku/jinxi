@@ -8,6 +8,7 @@
 	<meta name="author" content="jinxi">
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<title>今昔--后台</title>
+
 	<link rel="stylesheet" type="text/css" href="{$baseurl}css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="{$baseurl}css/admin.css">
 	<link rel="shortcut icon" href="{$baseurl}img/icon/icon.png">
@@ -15,22 +16,35 @@
 <body>
 	<div class="container" id="main">
 		<div class="row">
-			<div class="col-md-2" id="left_block">
+			<div class="col-md-3" id="left_block">
 				<div class="panel panel-default">
 					<!-- Default panel contents -->
-					<div class="panel-heading">今昔-管理菜单</div>
+					<div class="panel-heading" style="text-align:center">今昔-管理菜单<br/>
+						{if $admin.auth_level > 1}<p style="color:green">({$admin.school_name})</p>{/if}
+						
+					</div>
+					<div class="panel-heading" style="text-align:center">您以<span style="color:red">{$admin.admin_name}</span>的身份登录<br/>
+						{if $admin.auth_level == 1}超级管理员{else}普通管理员{/if}<br/>
+						<a href="javascript:void(0)" id="logout">注销</a>
+					</div>
 					<!-- Table -->
 					<table class="table" id="operation">
+
 						<tr>
 							<td><a id="get_info_btn" class="active" linkedtab="info" href="javascript:void(0)">统计信息</a></td>					
 						</tr>
+						{if $admin.auth_level == 1}
+						<tr>
+							<td><a id="appoint_admin" linkedtab="appointment" href="javascript:void(0)">任命管理员</a></td>
+						</tr>
+						{/if}
 						<tr>
 							<td><a id="get_report_btn" linkedtab="report" href="javascript:void(0)">举报信息</a></td>					
 						</tr>
 					</table>
 				</div>
 			</div>
-			<div class="col-md-9 col-md-offset-1"  id="center_block">
+			<div class="col-md-8 col-md-offset-1"  id="center_block">
 				<div id="info" class="admin_panel">
 					<h3>统计信息</h3>
 					<hr/>
@@ -53,6 +67,33 @@
 						</div>
 					</div>
 				</div>
+				
+				<div id="appointment" class="admin_panel">
+					<h3>任命管理员</h3>
+					<hr/>
+					<div class="panel panel-default">
+						<div class="form-group">
+							<input id="admin_name" type="text" placeholder="管理员名称" class="form-control"/>
+						</div>
+						<div class="form-group">
+							<input id="password" type="password" placeholder="管理员密码" class="form-control"/>
+						</div>
+						<div class="form-group">
+							<select id="auth_level" class="form-control">
+								<option value=2>普通管理员</option>
+								<option value=1>超级管理员</option>
+							</select>
+						</div>
+
+						<div class="form-group">
+							<input id="school_id" type="text" placeholder="若为普通管理员，在此输入学校id" class="form-control"/>
+						</div>
+						<div style="text-align:center">
+							<button class="btn btn-primary" id="appoint_btn">任命</button>
+						</div>
+					</div>
+				</div>
+				
 				<div id="report" class="admin_panel">
 					<h3>举报信息</h3>
 					<hr/>
