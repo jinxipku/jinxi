@@ -3,19 +3,6 @@ $(document).ready( function() {
 	$(".carousel").carousel();
 	$(".ellipsis").ellipsis();
 	$(':radio').radio();
-	$("#password").keydown(function(){
-		if(event.keyCode==13){
-			var url = window.location.href;
-			if(url.indexOf("account/login")<0)
-				login(baseurl);
-			else{
-				$.post(baseurl + "ajax/get_mem_url",function(str){
-					login(str);
-				});
-			}
-		}
-	});
-	
 	$("img.lazy").lazyload({effect: "fadeIn"});
 	get_reminder();
 	setInterval(get_reminder, 10000);
@@ -29,6 +16,11 @@ $(window).bind('scroll', function() {
 		} else {
 			$("#side_view_box").fadeOut(500);
 		}
+	}
+});
+$("input#search_key").keydown(function(){
+	if(event.keyCode==13){
+		confirm_search();
 	}
 });
 $("input#qq,input#weixin,input#phone").bind('blur', function() {
@@ -1185,7 +1177,7 @@ function mess_user(uid, unick, refresh) {
 					$("#info_modal").find('.btn-primary').bind('click', function() {
 						$("#info_modal").modal("hide");
 						if (refresh == 1) {
-							window.location.href = baseurl + "user/profile/" + $("#user_id").val() + "/5";
+							window.location.href = baseurl + "user/profile/" + $("#user_id").val() + "/message";
 						}
 					});
 					$("#info_modal").modal();
@@ -1318,4 +1310,11 @@ function confirm_suggest() {
 	);
 	$("#btn_confirm_suggest").html('<i class="icon-spinner icon-spin"></i> 处理中');
 	$("#btn_confirm_suggest").attr('disabled', true);
+}
+function confirm_search() {
+	if ($("input#search_key").val().length == 0) {
+		alert("请输入关键词~");
+	} else {
+		$("form#search_box").submit();
+	}
 }

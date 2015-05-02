@@ -99,9 +99,12 @@ div#header {
 div#header input {
 	background-color: #f4f4f4;
 }
-div#header>div{
+div#header>div {
 	position: relative;
 	float: left;
+}
+form#search_box span {
+	cursor: pointer;
 }
 div#header span.input-search {
 	background-color: #f4f4f4 !important;

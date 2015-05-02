@@ -85,9 +85,9 @@
 		{if $user_tab == 'mine'}
 		show_user_page_display('#user_post', 1);
 		{elseif $user_tab == 'best'}
-		show_user_page_display('#user_best', 1);
+		show_user_page('#user_best', 1);
 		{elseif $user_tab == 'message'}
-		show_user_page_display('#user_mess', 1);
+		show_user_page('#user_mess', 1);
 		{/if}
 	</script>
 	{elseif isset($about_part) && $about_part != 'none'}
