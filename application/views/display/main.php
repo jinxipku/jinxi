@@ -160,7 +160,7 @@
 							<img class="lazy" data-original="{$baseurl}img/class/{$post.class}.png" alt="物品状态" />
 						</div>
 						<div>
-							{if $post.price == 0}面议{else}￥{$post.price}{/if}
+							{if $post.price == 0 && $post.deal == '面议'}面议{else}￥{$post.price}{/if}
 						</div>
 					</div>
 				</div>
@@ -236,7 +236,7 @@
 							</div>
 							<div class="post_item_block_class_cont">
 								<div>
-									{if $post.price == 0}面议{else}￥{$post.price}{/if}
+									{if $post.price == 0 && $post.deal == '面议'}面议{else}￥{$post.price}{/if}
 								</div>
 								<div>
 									<img class="lazy passive" data-original="{$baseurl}img/class/{$post.class}.png" alt="物品状态" />
