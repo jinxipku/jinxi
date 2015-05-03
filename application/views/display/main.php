@@ -239,7 +239,7 @@
 									{if $post.price == 0}面议{else}￥{$post.price}{/if}
 								</div>
 								<div>
-									<img class="lazy passive" data-original="{$baseurl}mg/class/{$post.class}.png" alt="物品状态" />
+									<img class="lazy passive" data-original="{$baseurl}img/class/{$post.class}.png" alt="物品状态" />
 								</div>
 							</div>
 							<img class="lazy" data-original="{$post.picture}" alt="{$post.plain_title}" />

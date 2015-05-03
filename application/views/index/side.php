@@ -37,7 +37,7 @@
 
 			<div id="side_quality">
 				<blockquote>
-					<p class="side_title">商品品质</p>
+					<p class="side_title">物品品质</p>
 				</blockquote>
 				<div class="panel panel-default">
 					<img class="passive" src="{$baseurl}img/quality.jpg" alt="quality.jpg"/>
@@ -46,7 +46,7 @@
 
 			<div id="side_tags">
 				<blockquote>
-					<p class="side_title">商品标签</p>
+					<p class="side_title">物品标签</p>
 				</blockquote>
 				<div class="panel panel-default">
 					<ul class="list-group">
