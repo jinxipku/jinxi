@@ -1,8 +1,6 @@
 	<div id="body" class="row">
-		<div id="main" class="help">
-			<h6><strong>今昔网 搜索结果</strong></h6>
-			<hr/>
-			<br/>
+		<div id="main" class="search">
+			<h6><strong>今昔网 搜索结果（{$keyword}）</strong></h6>
 
 			{if $total > 0}
 			<div id="post_page_header" class="panel panel-default">
@@ -10,7 +8,7 @@
 			</div>
 			{/if}
 
-    		<div id="post_items_box" class="panel panel-default">
+    		<div id="post_items_box" class="panel panel-default{if $total == 0} sorry{/if}">
 				{if $total == 0}
 				<div class="sorry_box">
 					<div>
@@ -27,13 +25,13 @@
 				<hr/>
 				<div class="post_item_box">
 					<div class="post_item_img">
-						<a href="{$baseurl}post/viewpost/{$post.type}/{$post.post_id}" target="_blank">
+						<a href="{$baseurl}post/viewpost/{if $post.type == 0}sell{else}buy{/if}/{$post.post_id}" target="_blank">
 							<img class="lazy" data-original="{$post.picture}" alt="{$post.plain_title}" />
 						</a>
 					</div>
 					<div class="post_item_content">
 						<div>
-							<a href="{$baseurl}post/viewpost/{$post.type}/{$post.post_id}" title='{$post.plain_title}' target="_blank">
+							<a href="{$baseurl}post/viewpost/{if $post.type == 0}sell{else}buy{/if}/{$post.post_id}" title='{$post.plain_title}' target="_blank">
 								{$post.title}
 							</a>
 						</div>
@@ -80,7 +78,7 @@
 							<img class="lazy" data-original="{$baseurl}img/class/{$post.class}.png" alt="物品状态" />
 						</div>
 						<div>
-							{if $post.price == 0}面议{else}￥{$post.price}{/if}
+							{if $post.price == 0 && $post.deal == '面议'}面议{else}￥{$post.price}{/if}
 						</div>
 					</div>
 				</div>
