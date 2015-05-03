@@ -987,7 +987,10 @@ function confirm_edit_des(pid, ptype) {
 		},
 		function(res) {
 			if (res.status == 1) {
-				$("div#post_description>pre").text($("#edit_description").val());
+				if ($("#edit_description").val().length == 0)
+					$("div#post_description>pre").text("无");
+				else
+					$("div#post_description>pre").text($("#edit_description").val());
 				$("#post_editor").slideUp(800, function() {
 					$('#post_description').slideDown(800);
 				});
