@@ -29,7 +29,7 @@
 			</a>
 		</div>
 		<div class="form-group">
-			<form id="search_box" action="{$baseurl}info/search" method="post">
+			<form id="search_box" action="{$baseurl}display/search" method="post">
 				<input id="search_key" name="search_key" type="text" placeholder="请输入关键词搜索" class="form-control flat" enctype="text/plain" accept-charset="utf-8"/>
 				<span class="fui-search input-search" onclick="confirm_search()"></span>
 			</form>
