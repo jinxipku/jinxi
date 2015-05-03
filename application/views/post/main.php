@@ -88,14 +88,14 @@
 					{/if}
 					</p>
 					<p class="p_post_content">成交方式： {$thispost.deal}</p>
-					<p class="p_post_content">心理价位： {if $thispost.price == 0}面议{else}{$thispost.price} 元{/if}</p>
+					<p class="p_post_content">心理价位： {if $thispost.price == 0 && $thispost.deal == '面议'}面议{else}{$thispost.price} 元{/if}</p>
 				</div>
 				<div id="post_content_right">
 					<div>
 						<img class="passive" src="{$baseurl}img/class/{$thispost.class}.png" alt="物品状态">
 					</div>
 					<div>
-						<p id="p_post_deal">{if $thispost.price == 0}面议{else}￥ {$thispost.price}{/if}</p>
+						<p id="p_post_deal">{if $thispost.price == 0 && $thispost.deal == '面议'}面议{else}￥ {$thispost.price}{/if}</p>
 					</div>
 				</div>
 			</div>

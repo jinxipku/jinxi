@@ -45,7 +45,7 @@
 							</div>
 							<div class="post_item_block_class_cont">
 								<div>
-									{if $hotest.price == 0}面议{else}￥{$hotest.price}{/if}
+									{if $hotest.price == 0 && $hotest.deal == '面议'}面议{else}￥{$hotest.price}{/if}
 								</div>
 								<div>
 									<img class="passive" src="{$baseurl}img/class/{$hotest.class}.png" alt="物品状态" />
@@ -110,7 +110,7 @@
 							</div>
 							<div class="post_item_block_class_cont">
 								<div>
-									{if $newest.price == 0}面议{else}￥{$newest.price}{/if}
+									{if $newest.price == 0 && $newest.deal == '面议'}面议{else}￥{$newest.price}{/if}
 								</div>
 								<div>
 									<img class="passive" src="{$baseurl}img/class/{$newest.class}.png" alt="物品状态" />
@@ -194,7 +194,7 @@
 					{/if}
 					</p>
 					<p class="p_post_content"><strong>成交方式</strong>： {$thispost.deal}</p>
-					<p class="p_post_content"><strong>心理价位</strong>： {if $thispost.price == 0}面议{else}{$thispost.price} 元{/if}</p>
+					<p class="p_post_content"><strong>心理价位</strong>： {if $thispost.price == 0 && $thispost.deal == '面议'}面议{else}{$thispost.price} 元{/if}</p>
 					<p class="p_post_content"><strong>详细描述</strong>： {if $thispost.description == ""}无{else}{$thispost.description}{/if}</p>
 				</div>
 				<hr/>
