@@ -27,13 +27,13 @@
 				<hr/>
 				<div class="post_item_box">
 					<div class="post_item_img">
-						<a href="{$baseurl}post/viewpost/{$type}/{$post.post_id}" target="_blank">
+						<a href="{$baseurl}post/viewpost/{$post.type}/{$post.post_id}" target="_blank">
 							<img class="lazy" data-original="{$post.picture}" alt="{$post.plain_title}" />
 						</a>
 					</div>
 					<div class="post_item_content">
 						<div>
-							<a href="{$baseurl}post/viewpost/{$type}/{$post.post_id}" title='{$post.plain_title}' target="_blank">
+							<a href="{$baseurl}post/viewpost/{$post.type}/{$post.post_id}" title='{$post.plain_title}' target="_blank">
 								{$post.title}
 							</a>
 						</div>
