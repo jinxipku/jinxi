@@ -188,7 +188,8 @@ class Display extends MY_Controller {
 		$this->assign('random', $random);
 
 		$keyword = $_POST['search_key'];
-		$data = get_posts(null,null,null,null,null,1,$keyword);
+		$data = $this->get_posts(null,null,null,null,null,1,$keyword);
+		//var_dump($data['posts']);exit;
 		$this->assign('total', $data['total']);
 		$this->assign('posts', $data['posts']);
 
