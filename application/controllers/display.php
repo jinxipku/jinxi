@@ -189,7 +189,7 @@ class Display extends MY_Controller {
 
 		$keyword = $_POST['search_key'];
 		$data = $this->get_posts(null,null,null,null,null,1,$keyword);
-		//var_dump($data['posts']);exit;
+		$this->assign('keyword', $keyword);
 		$this->assign('total', $data['total']);
 		$this->assign('posts', $data['posts']);
 
