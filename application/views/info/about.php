@@ -37,7 +37,7 @@
 
 			<blockquote class="history"><strong>今昔历程</strong></blockquote>
 
-			<div id="timeline_box">
+			<div id="timeline">
 			</div>
 
 			<blockquote class="suggest"><strong>意见建议</strong></blockquote>

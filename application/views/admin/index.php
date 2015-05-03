@@ -41,6 +41,12 @@
 						<tr>
 							<td><a id="get_report_btn" linkedtab="report" href="javascript:void(0)">举报信息</a></td>					
 						</tr>
+						<tr>
+							<td><a id="delete_post_btn" linkedtab="deletepost" href="javascript:void(0)">删除帖子</a></td>					
+						</tr>
+						<tr>
+							<td><a id="delete_reply_btn" linkedtab="deletereply" href="javascript:void(0)">删除回复</a></td>
+						</tr>
 					</table>
 				</div>
 			</div>
@@ -108,6 +114,11 @@
 						</table>
 
 					</div>
+				</div>
+
+				<div id="deletepost" class="admin_panel">
+					<h3>删除帖子</h3>
+					<hr/>
 				</div>
 			</div>
 		</div>
