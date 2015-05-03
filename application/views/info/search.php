@@ -8,7 +8,7 @@
 			</div>
 			{/if}
 
-    		<div id="post_items_box" class="panel panel-default">
+    		<div id="post_items_box" class="panel panel-default{if $total == 0} sorry{/if}">
 				{if $total == 0}
 				<div class="sorry_box">
 					<div>

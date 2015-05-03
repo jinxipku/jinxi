@@ -1711,6 +1711,9 @@ search
 div#main.search div#post_items_box {
 	display: block;
 }
+div#main.search div#post_items_box.sorry {
+	border: 0.8px solid #dddddd;
+}
 div#main.search h6 {
 	color: #16A085
 }
