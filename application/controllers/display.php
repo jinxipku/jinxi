@@ -248,7 +248,7 @@ class Display extends MY_Controller {
 	public function get_sphinx_result($keyword='',$type=null,$category1=null,$category2=null,$page=1){
 		$this->load->library('sphinx_client', NULL, 'sphinx');
 		$this->sphinx->SetServer ( '127.0.0.1', 9312);
-
+		$keyword = urldecode($keyword);//decode url
 		//以下设置用于返回数组形式的结果
 		$this->sphinx->SetArrayResult ( true );
 		if(isset($type)){  
@@ -265,11 +265,16 @@ class Display extends MY_Controller {
 		$num_per_page = $this->config->item("num_per_page");
 		$this->sphinx->SetLimits($num_per_page*($page-1),$num_per_page);
 		$res = $this->sphinx->Query($keyword,"*");
+		if(empty($res)||empty($res['matches'])){
+			$data['total'] = 0;
+			$data['posts'] = array();
+			return $data;
+		}
 		$posts = array();
 		$matches = $res['matches'];
 		if(empty($matches)){
 			$data['total'] = 0;
-			$data['posts'] = null;
+			$data['posts'] = array();
 			return $data;
 		}
 		foreach ($matches as $key => $value) {

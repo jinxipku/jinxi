@@ -145,16 +145,16 @@ class Script extends MY_Controller {
 		var_dump($res);
 	}
 
-	public function test_sphinx(){
+	public function test_sphinx($keyword){
 		$this->load->library('sphinx_client', NULL, 'sphinx');
 		$this->sphinx->SetServer ( '127.0.0.1', 9312);
-
+$keyword = urldecode($keyword);
 //以下设置用于返回数组形式的结果
-
+$this->sphinx->SetMatchMode(SPH_MATCH_EXTENDED2);
 $this->sphinx->SetArrayResult ( true );
 //$this->sphinx->SetIDRange(3,4);
 //$this->sphinx->setFilter('group_id',array(2));
-$res = $this->sphinx->Query("iphone","*");
+$res = $this->sphinx->Query($keyword,"*");
 echo '<pre>';
 
 

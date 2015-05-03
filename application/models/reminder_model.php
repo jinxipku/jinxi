@@ -115,7 +115,7 @@ class reminder_model extends CI_Model {
 
 		$res['category1_name'] = get_category1_name2($res['category1']);
 		$res['category2_name'] = get_category2_name($res['category2']);
-		$res['deal'] = get_deal_name($res['deal']);
+		$res['deal'] = get_deal_name($res['deal'],$type);
 
 		$hasimg = false;
 		if(!empty($res['picture'])){

@@ -400,12 +400,20 @@ function format_time($time){
 
     return date('Y-m-d H:i:s',$time);
 }
-
-function get_deal_name($type){//1一口价，2接受砍价，3一元赠送，4面议
-    if($type==1) return "一口价";
-    if($type==2) return "接受砍价";
-    if($type==3) return "一元赠送";
-    if($type==4) return "面议";
+//1一口价，2接受砍价，3一元赠送，4面议
+//1心理价位 2面议
+function get_deal_name($type,$post_type=0){
+    if($post_type==0){
+        if($type==1) return "一口价";
+        if($type==2) return "接受砍价";
+        if($type==3) return "一元赠送";
+        if($type==4) return "面议";
+    }else if($post_type==1){
+        if($type==1) return "心理价位";
+        if($type==2) return "面议";
+    }
+    return "";
+    
 }
 
 function get_class_name($type){
