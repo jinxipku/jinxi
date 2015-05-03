@@ -33,7 +33,7 @@ class Display extends MY_Controller {
 		if (!empty($login_user)) {
 			$this->assign('login_user', $login_user);
 		} else {
-			$area = 'global';
+			redirect('display/sell/global');
 		}
 
 		$this->assign('type', 'sell');
@@ -54,6 +54,7 @@ class Display extends MY_Controller {
 		$this->assign('category1_name', get_category1_name2($category1));
 		$this->assign('category2', $category2);
 		$this->assign('category2_name', get_category2_name($category2));
+		$this->assign('page', $page);
 
 		$data = $this->get_posts(0, $area, $sort, $category1, $category2, $page);
 		$this->assign('total', $data['total']);
@@ -110,6 +111,8 @@ class Display extends MY_Controller {
 		$login_user =  $this->session->userdata('login_user');
 		if (!empty($login_user)) {
 			$this->assign('login_user', $login_user);
+		} else {
+			redirect('display/buy/global');
 		}
 
 		$this->assign('type', 'buy');
