@@ -1,5 +1,5 @@
 	<div id="body" class="row">
-		<div id="main" class="help">
+		<div id="main" class="search">
 			<h6><strong>今昔网 搜索结果</strong></h6>
 			<hr/>
 			<br/>
@@ -27,21 +27,13 @@
 				<hr/>
 				<div class="post_item_box">
 					<div class="post_item_img">
-<<<<<<< HEAD
 						<a href="{$baseurl}post/viewpost/{if $post.type == 0}sell{else}buy{/if}/{$post.post_id}" target="_blank">
-=======
-						<a href="{$baseurl}post/viewpost/{$post.type}/{$post.post_id}" target="_blank">
->>>>>>> a56ce572f81c426471c55254f8456ccbf8a93ad7
 							<img class="lazy" data-original="{$post.picture}" alt="{$post.plain_title}" />
 						</a>
 					</div>
 					<div class="post_item_content">
 						<div>
-<<<<<<< HEAD
 							<a href="{$baseurl}post/viewpost/{if $post.type == 0}sell{else}buy{/if}/{$post.post_id}" title='{$post.plain_title}' target="_blank">
-=======
-							<a href="{$baseurl}post/viewpost/{$post.type}/{$post.post_id}" title='{$post.plain_title}' target="_blank">
->>>>>>> a56ce572f81c426471c55254f8456ccbf8a93ad7
 								{$post.title}
 							</a>
 						</div>

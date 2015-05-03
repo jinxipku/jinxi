@@ -1705,6 +1705,13 @@ div#main.agreement p {
 	color: #444
 }
 
+/*
+search
+*/
+div#main.search div#post_items_box {
+	display: block;
+}
+
 
 
 
