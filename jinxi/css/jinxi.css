@@ -817,6 +817,7 @@ div#post_content_right {
 div#post_content_right>div:nth-child(1) {
 	height: 172px;
 	width: 172px;
+	padding: 36px;
 }
 div#post_content_right>div:nth-child(2) {
 	margin-top: 90px;
@@ -1218,8 +1219,9 @@ div.post_item_price {
 	height: 140px;
 }
 div.post_item_price>div:nth-child(1) img {
-	width: 100px;
-	height: 100px;
+	margin: 15px;
+	width: 70px;
+	height: 70px;
 }
 div.post_item_price>div:nth-child(2) {
 	width: 100px;

@@ -10,10 +10,10 @@
                 </ol>
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner">
-                    <div class="item active"><img src="{$baseurl}img/bg/1.jpg" alt=""/></div>
-                    <div class="item"><img src="{$baseurl}img/bg/2.jpg" alt=""/></div>
-                    <div class="item"><img src="{$baseurl}img/bg/3.jpg" alt=""/></div>
-                    <div class="item"><img src="{$baseurl}img/bg/4.jpg" alt=""/></div>
+                    <div class="item active"><a href="{$baseurl}account/register"><img src="{$baseurl}img/bg/1.jpg" alt="立即注册"/></a></div>
+                    <div class="item"><a href="{$baseurl}user/profile/0"><img src="{$baseurl}img/bg/2.jpg" alt="前往个人中心"/></a></div>
+                    <div class="item"><a href="{$baseurl}display/sell"><img src="{$baseurl}img/bg/3.jpg" alt="前往商品大厅"/></a></div>
+                    <div class="item"><a href="{$baseurl}post/newpost"><img src="{$baseurl}img/bg/4.jpg" alt="前往信息发布"/></a></div>
                 </div>
                 <!-- Controls --> 
                 <a class="left carousel-control" href="#slide_show" data-slide="prev"> 
@@ -48,7 +48,7 @@
                 </div>
 
                 <div class="post_item_block_img">
-                  <a href="{$baseurl}post/viewpost/{$post.type}/{$post.post_id}" target="_blank">
+                  <a href="{$baseurl}post/viewpost/{if $post.type == 0}sell{else}buy{/if}/{$post.post_id}" target="_blank">
                     <div class="post_item_block_class_cover">
                     </div>
                     <div class="post_item_block_class_cont">
@@ -56,14 +56,14 @@
                         {if $post.price == 0}面议{else}￥{$post.price}{/if}
                       </div>
                       <div>
-                        <img class="lazy passive" data-original="{$baseurl}mg/class/{$post.class}.png" alt="物品状态" />
+                        <img class="lazy passive" data-original="{$baseurl}img/class/{$post.class}.png" alt="物品状态" />
                       </div>
                     </div>
                     <img class="lazy" data-original="{$post.picture}" alt="{$post.plain_title}" />
                   </a>
                 </div>
                 <div class="post_item_block_title">
-                  <a href="{$baseurl}post/viewpost/{$post.type}/{$post.post_id}" title='{$post.plain_title}' target="_blank">
+                  <a href="{$baseurl}post/viewpost/{if $post.type == 0}sell{else}buy{/if}/{$post.post_id}" title='{$post.plain_title}' target="_blank">
                     {$post.title}
                   </a>
                 </div>
@@ -117,7 +117,7 @@
                 </div>
 
                 <div class="post_item_block_img">
-                  <a href="{$baseurl}post/viewpost/{$post.type}/{$post.post_id}" target="_blank">
+                  <a href="{$baseurl}post/viewpost/{if $post.type == 0}sell{else}buy{/if}/{$post.post_id}" target="_blank">
                     <div class="post_item_block_class_cover">
                     </div>
                     <div class="post_item_block_class_cont">
@@ -125,14 +125,14 @@
                         {if $post.price == 0}面议{else}￥{$post.price}{/if}
                       </div>
                       <div>
-                        <img class="lazy passive" data-original="{$baseurl}mg/class/{$post.class}.png" alt="物品状态" />
+                        <img class="lazy passive" data-original="{$baseurl}img/class/{$post.class}.png" alt="物品状态" />
                       </div>
                     </div>
                     <img class="lazy" data-original="{$post.picture}" alt="{$post.plain_title}" />
                   </a>
                 </div>
                 <div class="post_item_block_title">
-                  <a href="{$baseurl}post/viewpost/{$post.type}/{$post.post_id}" title='{$post.plain_title}' target="_blank">
+                  <a href="{$baseurl}post/viewpost/{if $post.type == 0}sell{else}buy{/if}/{$post.post_id}" title='{$post.plain_title}' target="_blank">
                     {$post.title}
                   </a>
                 </div>
