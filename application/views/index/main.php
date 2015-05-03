@@ -10,10 +10,10 @@
                 </ol>
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner">
-                    <div class="item active"><img src="{$baseurl}img/bg/1.jpg" alt=""/></div>
-                    <div class="item"><img src="{$baseurl}img/bg/2.jpg" alt=""/></div>
-                    <div class="item"><img src="{$baseurl}img/bg/3.jpg" alt=""/></div>
-                    <div class="item"><img src="{$baseurl}img/bg/4.jpg" alt=""/></div>
+                    <div class="item active"><a href="{$baseurl}account/register"><img src="{$baseurl}img/bg/1.jpg" alt="立即注册"/></a></div>
+                    <div class="item"><a href="{$baseurl}user/profile/0"><img src="{$baseurl}img/bg/2.jpg" alt="前往个人中心"/></a></div>
+                    <div class="item"><a href="{$baseurl}display/sell"><img src="{$baseurl}img/bg/3.jpg" alt="前往商品大厅"/></a></div>
+                    <div class="item"><a href="{$baseurl}post/newpost"><img src="{$baseurl}img/bg/4.jpg" alt="前往信息发布"/></a></div>
                 </div>
                 <!-- Controls --> 
                 <a class="left carousel-control" href="#slide_show" data-slide="prev"> 
