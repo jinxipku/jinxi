@@ -51,6 +51,21 @@ class Script extends MY_Controller {
 		}
 	}
 
+	public function gen_category(){
+		for($class=0;$class<=51;$class++){
+
+			$name = get_category_name($class);
+			if ($class == 10 || $class == 15 || $class == 20 || $class == 26 || $class == 40 || $class == 45 || $class == 50 || $class == 51)
+     		{
+     			$temp = map_to_cat1($class);
+     			$temp = 0-$temp;
+     		}else $temp = $class;
+     		$map['id'] = $temp;
+     		$map['name'] = $name;
+     		$this->db->insert("jx_category",$map);
+		}
+	}
+
 	public function testSession(){
 		$c=$this->session->userdata('login_user');
 		var_dump($c);
@@ -145,10 +160,11 @@ class Script extends MY_Controller {
 		var_dump($res);
 	}
 
-	public function test_sphinx($keyword){
+	public function test_sphinx($keyword=""){
 		$this->load->library('sphinx_client', NULL, 'sphinx');
 		$this->sphinx->SetServer ( '127.0.0.1', 9312);
-$keyword = urldecode($keyword);
+//$keyword = urldecode($keyword);
+$keyword="数码";
 //以下设置用于返回数组形式的结果
 $this->sphinx->SetMatchMode(SPH_MATCH_EXTENDED2);
 $this->sphinx->SetArrayResult ( true );
@@ -304,12 +320,19 @@ echo '</pre>';
 		}
 	}
 
+
+
 	public function test_admin(){
 		$re = $this->session->userdata("admin");
 		var_dump($re);
 
 		$re = $this->admin_model->get_report_info(1002);
 		var_dump($re);
+	}
+
+	public function test_get_user_recommend(){
+		$res = $this->post_model->get_user_recommend(2);
+
 	}
 }
 ?>

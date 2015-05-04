@@ -205,6 +205,14 @@ create table jx_reminder(
 )DEFAULT CHARSET=utf8 COMMENT='提醒表';
 create index user_index on jx_reminder(to_user_id);
 
+drop table if exists jx_category;
+create table jx_category(
+	id int(11) not null comment '分类id(cat1为负值，cat2为正值)',
+	name text null comment '名称',
+	primary key(id)
+)DEFAULT CHARSET=utf8 COMMENT='分类表';
+
+
 -- drop view if exists seller_post_heat;
 -- create view seller_post_heat as select jx_seller_post.post_id,(jx_seller_post.createat-unix_timestamp())/86400 as daypass,count(jx_reply.id) as count from jx_seller_post left join jx_reply on jx_reply.post_id=jx_seller_post.post_id and jx_reply.type=0 group by jx_seller_post.post_id;
 -- select * from seller_post_heat;

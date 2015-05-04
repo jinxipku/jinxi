@@ -208,6 +208,74 @@ class post_model extends CI_Model {
 		return $data;
 	}
 
+	/*算法:根据用户最近发的一篇帖子以及收藏的最新一篇帖子来看
+	* 若无依据，返回空
+	* 若有依据
+	* 只推荐10篇
+	*/
+	public function get_user_recommend($user_id){
+		$this->load->library('sphinx_client', NULL, 'sphinx');
+		$this->sphinx->SetServer ( '127.0.0.1', 9312);
+		$this->sphinx->SetArrayResult ( true );
+		$this->sphinx->SetMatchMode(SPH_MATCH_EXTENDED2);
+		//$this->sphinx->SetRankingMode ( SPH_RANK_PROXIMITY );
+		//$this->sphinx->SetMatchMode(SPH_MATCH_FULLSCAN);
+	
+		$this->db->order_by("addat","desc");
+		$this->db->where("user_id",$user_id);
+		$this->db->from("jx_favorites");
+		$res = $this->db->get()->row_array();
+		if(!empty($res)){
+			$table = get_post_table($res['type']);
+			$this->db->where("post_id",$res['post_id']);
+			$this->db->from($table);
+			$f_post = $this->db->get()->row_array();
+
+			$this->sphinx->setFilter('type',array($res['type']));
+			$this->sphinx->setFilter('category1',array($f_post['category1']));
+			$this->sphinx->setFilter('category2',array($f_post['category2']));
+			$this->sphinx->setFilter('user_id',array($user_id),true);
+			
+			//$this->sphinx->setFilter('post_id',array($f_post['post_id']),true);
+			//TODO:exclude thisone;
+			$this->sphinx->SetSortMode(SPH_SORT_ATTR_DESC, "createat"); //按创建时间降序排列
+			//var_dump($f_post);exit;
+			$keyword = $f_post['brand']." ".$f_post['model'];
+			//$keyword = "苹果 air";
+			$keyword = "苹果";
+			//echo $keyword;exit;
+			$res = $this->sphinx->Query($keyword,"*");
+			//var_dump($res);
+			if(empty($res)||empty($res['matches'])){
+				$data['total'] = 0;
+				$data['posts'] = array();
+				return $data;
+			}
+			$posts = array();
+			$matches = $res['matches'];
+			if(empty($matches)){
+				$data['total'] = 0;
+				$data['posts'] = array();
+				return $data;
+			}
+			foreach ($matches as $key => $value) {
+				$post_id = $value['id'];
+				$type = $value['attrs']['type'];
+				$temp_post = $this->get_post($post_id,$type,true);
+				$posts[] = $temp_post;
+			}
+			$data['total'] = $res['total'];
+			$data['posts'] = $posts;
+			var_dump($posts);
+		}
+
+		//$m_post = $this->user_model->get_newest_post($user_id);
+
+
+		//$this->db->order_by("");
+
+	}
+
 	public function set_active($post_id,$type,$active){
 		$table = get_post_table($type);
 		$this->db->where("post_id",$post_id);

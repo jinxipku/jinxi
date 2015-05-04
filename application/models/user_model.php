@@ -45,34 +45,7 @@ class user_model extends CI_Model {
 		$user['visits'] = $this->get_visit_num($user_id);
 
 		if($info_type=="profile"){  //需要返回最新一篇帖子
-			$map['user_id'] = $user['id'];
-			$map['active'] = 1;
-
-			$this->db->order_by("createat","desc");
-			$this->db->where($map);
-			$query = $this->db->get("jx_seller_post");
-			$newest_seller_post = $query->row_array();
-
-			$this->db->order_by("createat","desc");
-			$this->db->where($map);
-			$query = $this->db->get("jx_buyer_post");
-			$newest_buyer_post = $query->row_array();
-
-			$post = null;
-			if(!empty($newest_buyer_post)&&!empty($newest_seller_post)){
-				$post = $newest_buyer_post;
-				$post['type'] = 1;
-				if($newest_seller_post['createat']>$newest_buyer_post['createat']){
-					$post = $newest_seller_post;
-					$post['type'] = 0;
-				}
-			}else if(empty($newest_seller_post)&&!empty($newest_buyer_post)){
-				$post = $newest_buyer_post;
-				$post['type'] = 1;
-			}else if(empty($newest_buyer_post)&&!empty($newest_seller_post)){
-				$post = $newest_seller_post;
-				$post['type'] = 0;
-			}
+			$post = $this->get_newest_post($user['id']);
 			if(empty($post)) $user['newest_post'] = null;
 			else{
 				$post['category1_name'] = get_category1_name2($post['category1']);
@@ -80,7 +53,8 @@ class user_model extends CI_Model {
 				$post['deal'] = get_deal_name($post['deal'],$post['type']);
 				$post['createat'] = format_time($post['createat']);
 				$hasimg = false;
-				if(!empty($post['picture'])){
+				$picture = unserialize($post['picture']);
+				if(!empty($picture)){
 					$hasimg = true;
 				}else $post['picture'] = array();
 				$post['title'] = get_title($post['type'],$post['deal'],$post['class'],$hasimg,$post['category1_name'],$post['category2_name'],$post['brand'],$post['model']);
@@ -89,6 +63,38 @@ class user_model extends CI_Model {
 			}
 		}
 		return $user;
+	}
+
+	public function get_newest_post($user_id){
+		$map['user_id'] = $user_id;
+		$map['active'] = 1;
+
+		$this->db->order_by("createat","desc");
+		$this->db->where($map);
+		$query = $this->db->get("jx_seller_post");
+		$newest_seller_post = $query->row_array();
+
+		$this->db->order_by("createat","desc");
+		$this->db->where($map);
+		$query = $this->db->get("jx_buyer_post");
+		$newest_buyer_post = $query->row_array();
+
+		$post = null;
+		if(!empty($newest_buyer_post)&&!empty($newest_seller_post)){
+			$post = $newest_buyer_post;
+			$post['type'] = 1;
+			if($newest_seller_post['createat']>$newest_buyer_post['createat']){
+				$post = $newest_seller_post;
+				$post['type'] = 0;
+			}
+		}else if(empty($newest_seller_post)&&!empty($newest_buyer_post)){
+			$post = $newest_buyer_post;
+			$post['type'] = 1;
+		}else if(empty($newest_buyer_post)&&!empty($newest_seller_post)){
+			$post = $newest_seller_post;
+			$post['type'] = 0;
+		}
+		return $post;
 	}
 
 	//TODO:根据公开等字段返回相应的信息，当前为全部返回
