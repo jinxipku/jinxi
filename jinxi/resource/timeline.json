@@ -2,45 +2,65 @@
 {
     "timeline":
     {
-        "headline":"今昔发展历程",
+        "headline":"今昔历程",
         "type":"default",
-		"startDate":"2009,8",
-		"text":"<i><span class='c1'>历程介绍</span></i>",
+		"startDate":"2013,10",
+		"text":"2013.10-2015.5",
 		"asset":
         {
-            "media":"../img/jinxibig.jpg",
-            "caption":"logo"
+            "media":"http://www.xn--wmqr18c.cn/img/timeline/first.jpg",
+            "caption":""
         },
         "date": [
             {
-                "startDate":"2010,2",
-                "headline":"第一件事",
-                "text":"第一件事的内容",
+                "startDate":"2013,10",
+                "headline":"团队成立",
+                "text":"13年秋天的国家大学生创业项目中，今昔团队在北外成立，团队成员由北外和北大的同学组成",
                 "asset":
                 {
-                    "media":"../img/jinxi.jpg",
+                    "media":"http://www.xn--wmqr18c.cn/img/timeline/BFSU.jpg",
                     "credit":"",
-                    "caption":"sssssssssssss"
+                    "caption":""
                 }
             },
             {
-                "startDate":"2013,5",
-                "headline":"第二件事",
-                "text":"第二件事的内容",
+                "startDate":"2013,12",
+                "headline":"优秀项目",
+                "text":"13年冬天，今昔网第一版开发完成，在北外初步宣传，被评选为优秀项目",
                 "asset":
                 {
-                   "media":"../img/jinxi2.jpg",
-                   "caption":"sssssssssssssss"
+                   "media":"http://www.xn--wmqr18c.cn/img/timeline/jinxi.jpg",
+                   "caption":""
                 }
             },
             {
-                "startDate":"2015,7",
-                "headline":"第三件事",
-                "text":"第三件事的内容",
+                "startDate":"2014,4",
+                "headline":"冯如杯铜奖",
+                "text":"14年春天，今昔网项目于北航参与冯如杯比赛荣获铜奖",
                 "asset":
                 {
-                   "media":"../img/jinxi.jpg",
-                   "caption":"sssssssssssssss"
+                   "media":"http://www.xn--wmqr18c.cn/img/timeline/BUAA.jpg",
+                   "caption":""
+                }
+            },
+            {
+                "startDate":"2015,3",
+                "headline":"开发团队重组",
+                "text":"15年春天，今昔网项目于北大重启，开发团队重组，开始开发第二版",
+                "asset":
+                {
+                   "media":"http://www.xn--wmqr18c.cn/img/timeline/PKU.jpg",
+                   "caption":""
+                }
+            },
+            {
+                "startDate":"2015,5",
+                "headline":"正式上线",
+                "text":"15年5月，今昔网项目第二版开发完成，团队加入北航同学，正式上线",
+                "asset":
+                {
+                   "media":"http://www.xn--wmqr18c.cn/img/timeline/first.jpg",
+                   "caption":""
                 }
             }
         ]

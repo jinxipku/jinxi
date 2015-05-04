@@ -1643,10 +1643,10 @@ div#reminders_box div#reminder_loading {
 about
 */
 div#main.about h6 {
-	color: #16A085
+	color: #16A085;
 }
 div#main.about blockquote {
-	color: #16A085
+	color: #16A085;
 }
 div#main.about img {
 	height: 220px;
@@ -1682,10 +1682,10 @@ div#main.about button {
 help
 */
 div#main.help h6 {
-	color: #16A085
+	color: #16A085;
 }
 div#main.help blockquote {
-	color: #16A085
+	color: #16A085;
 }
 div#main.help p {
 	font-size: 15px;
@@ -1699,10 +1699,10 @@ div#main.agreement {
 	padding-right: 20px;
 }
 div#main.agreement h6 {
-	color: #16A085
+	color: #16A085;
 }
 div#main.agreement blockquote {
-	color: #16A085
+	color: #16A085;
 }
 div#main.agreement p {
 	font-size: 15px;
@@ -1719,7 +1719,7 @@ div#main.search div#post_items_box.sorry {
 	border: 0.8px solid #dddddd;
 }
 div#main.search h6 {
-	color: #16A085
+	color: #16A085;
 }
 div#main.search div#post_page_header {
 	border: 0.8px solid #dddddd;	
