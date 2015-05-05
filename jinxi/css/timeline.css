@@ -19,8 +19,8 @@
 #timeline input[type="search"]::-webkit-search-decoration{-webkit-appearance:none;}
 #timeline textarea{overflow:auto;vertical-align:top;}
 html,body{height:100%;padding:0px;margin:0px;}
-#timeline{width:100%;height:100%;padding:0px;background:#FFFFFF;overflow:hidden;}#timeline .feedback{position:absolute;display:table;overflow:hidden;top:0px;left:0px;z-index:2000;width:100%;height:100%;background-color:#e9e9e9;border:1px solid #cccccc;}#timeline .feedback .messege{display:table-cell;vertical-align:middle;font-size:28px;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:bold;text-transform:uppercase;line-height:36px;width:75%;margin-left:auto;margin-right:auto;margin-top:auto;margin-bottom:auto;text-align:center;}
-#timeline .container.main{position:absolute;top:0px:	left:0px;padding-bottom:3px;width:auto;height:auto;margin:0px;clear:both;}
+#timeline{width:100%;height:100%;padding:0px;overflow:hidden;}#timeline .feedback{position:absolute;display:table;overflow:hidden;top:0px;left:0px;z-index:2000;width:100%;height:100%;background-color:#e9e9e9;border:1px solid #cccccc;}#timeline .feedback .messege{display:table-cell;vertical-align:middle;font-size:28px;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:bold;text-transform:uppercase;line-height:36px;width:75%;margin-left:auto;margin-right:auto;margin-top:auto;margin-bottom:auto;text-align:center;}
+#timeline .container.main{position:absolute;top:0px:	left:0px;width:auto;height:auto;margin:0px;clear:both;}
 #timeline img,#timeline embed,#timeline object,#timeline video,#timeline iframe{max-width:100%;}
 #timeline img{max-height:100%;}
 #timeline a{color:#16A085;text-decoration:none;}
@@ -44,7 +44,7 @@ html,body{height:100%;padding:0px;margin:0px;}
 #timeline .thumbnail.map{background-image:url(../img/timeline/bg.png);background-repeat:no-repeat;background-position:0 -514px;width:26px;height:21px;}
 #timeline .thumbnail.website{background-image:url(../img/timeline/bg.png);background-repeat:no-repeat;background-position:0 -1037px;width:24px;height:24px;}
 #timeline .zFront{z-index:500;}
-#timeline{}#timeline .feature{width:100%;}#timeline .feature .slider{width:100%;float:left;position:relative;z-index:10;  border: 0.8px solid #dddddd;
+#timeline{}#timeline .feature{width:100%;}#timeline .feature .slider{background:#FFFFFF;width:100%;float:left;position:relative;z-index:10;  border: 0.8px solid #dddddd;
   border-radius: 1px;
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);}#timeline .feature .slider h2.date{line-height:24px;}
