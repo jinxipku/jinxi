@@ -213,67 +213,134 @@ class post_model extends CI_Model {
 	* 若有依据
 	* 只推荐10篇
 	*/
-	public function get_user_recommend($user_id){
+	public function get_user_recommend($user_id,$page=1){
 		$this->load->library('sphinx_client', NULL, 'sphinx');
 		$this->sphinx->SetServer ( '127.0.0.1', 9312);
 		$this->sphinx->SetArrayResult ( true );
 		$this->sphinx->SetMatchMode(SPH_MATCH_EXTENDED2);
-		//$this->sphinx->SetRankingMode ( SPH_RANK_PROXIMITY );
+		$this->sphinx->SetRankingMode ( SPH_RANK_PROXIMITY_BM25 );
+	//$this->
+		$this->sphinx->SetFieldWeights(array('brand' => 10, 'model' => 10, 'description' => 4));
+
 		//$this->sphinx->SetMatchMode(SPH_MATCH_FULLSCAN);
-	
+		$recommends = array();//所有找到的推荐
+
 		$this->db->order_by("addat","desc");
 		$this->db->where("user_id",$user_id);
 		$this->db->from("jx_favorites");
-		$res = $this->db->get()->row_array();
+		//$res = $this->db->get()->row_array();
+		$res = $this->db->get()->result_array();
+		foreach ($res as $key => $value) {
+			$user_favorites[] = $value['post_id']."#".$value['type'];
+		}
+
 		if(!empty($res)){
+			$res = $res[0];
 			$table = get_post_table($res['type']);
 			$this->db->where("post_id",$res['post_id']);
 			$this->db->from($table);
 			$f_post = $this->db->get()->row_array();
 
-			$this->sphinx->setFilter('type',array($res['type']));
+			//$this->sphinx->setFilter('type',array($res['type']));
 			$this->sphinx->setFilter('category1',array($f_post['category1']));
 			$this->sphinx->setFilter('category2',array($f_post['category2']));
 			$this->sphinx->setFilter('user_id',array($user_id),true);
 			
 			//$this->sphinx->setFilter('post_id',array($f_post['post_id']),true);
-			//TODO:exclude thisone;
+			//TODO:排除掉已经收藏的
 			$this->sphinx->SetSortMode(SPH_SORT_ATTR_DESC, "createat"); //按创建时间降序排列
 			//var_dump($f_post);exit;
 			$keyword = $f_post['brand']." ".$f_post['model'];
 			//$keyword = "苹果 air";
-			$keyword = "苹果";
+			$keyword = "air";
 			//echo $keyword;exit;
-			$res = $this->sphinx->Query($keyword,"*");
+			$source = get_sphinx_index($res['type']);
+			$res = $this->sphinx->Query($keyword,$source);
 			//var_dump($res);
 			if(empty($res)||empty($res['matches'])){
-				$data['total'] = 0;
-				$data['posts'] = array();
-				return $data;
+			}else{
+				$matches = $res['matches'];
+				foreach ($matches as $key => $value) {
+					$temp = array();
+					$temp['post_id'] = $value['id'];
+					$temp['type'] = $value['attrs']['type'];
+					$temp['createat'] = $value['attrs']['createat'];
+					$recommends[] = $temp;
+				}
 			}
-			$posts = array();
-			$matches = $res['matches'];
-			if(empty($matches)){
-				$data['total'] = 0;
-				$data['posts'] = array();
-				return $data;
-			}
-			foreach ($matches as $key => $value) {
-				$post_id = $value['id'];
-				$type = $value['attrs']['type'];
-				$temp_post = $this->get_post($post_id,$type,true);
-				$posts[] = $temp_post;
-			}
-			$data['total'] = $res['total'];
-			$data['posts'] = $posts;
-			var_dump($posts);
 		}
 
-		//$m_post = $this->user_model->get_newest_post($user_id);
+		$res = $this->user_model->get_newest_post($user_id);
+		if(!empty($res)){
+			$table = get_post_table($res['type']);
+			$this->db->where("post_id",$res['post_id']);
+			$this->db->from($table);
+			$f_post = $this->db->get()->row_array();
+			//这里用相反的
+			//$this->sphinx->setFilter('type',array(1-$res['type']));
+			$this->sphinx->setFilter('category1',array($f_post['category1']));
+			$this->sphinx->setFilter('category2',array($f_post['category2']));
+			$this->sphinx->setFilter('user_id',array($user_id),true);
+			$this->sphinx->SetSortMode(SPH_SORT_ATTR_DESC, "createat"); //按创建时间降序排列
 
+			$keyword = $f_post['brand']." ".$f_post['model'];
+			//echo $res['type'];exit;
+			$source = get_sphinx_index($res['type']);
+		
+			//$res = $this->sphinx->Query("吉他","*");
+			$res = $this->sphinx->Query($keyword,"*");
+			// var_dump($res);
+			// exit;
+			if(empty($res)||empty($res['matches'])){
+			}else{
+				$matches = $res['matches'];
+				foreach ($matches as $key => $value) {
+					$temp = array();
+					$temp['post_id'] = $value['id'];
+					$temp['type'] = $value['attrs']['type'];
+					$temp['createat'] = $value['attrs']['createat'];
+					$recommends[] = $temp;
+				}
+			}
+		}
 
-		//$this->db->order_by("");
+		//根据recommends提取数据
+		$num_per_page = $this->config->item("num_per_page2");
+		$total = count($recommends);
+		$data = array();
+		$data['total'] = $total;
+		if($total==0){
+			$data['posts'] = array();
+		}else{
+			//先对recommends预处理，按照时间排序
+			foreach ($recommends as $key => $value) {
+				$rec[$value['createat']] = $value;
+			}
+			krsort($rec);
+			
+			$page_num = intval(ceil($data['total']/$num_per_page));
+			$page = $page%$page_num;
+			$page = ($page==0)? $page_num : $page;
 
+			$offset = ($page-1)*$num_per_page;
+			$length = $num_per_page;
+			array_slice($rec,$offset,$length);
+			$posts = array();
+			foreach ($rec as $key => $value) {
+				$temp = $this->get_post($value['post_id'],$value['type'],true);
+				if(isset($user_favorites)&&in_array($temp['post_id']."#".$temp['type'], $user_favorites)){
+					$temp['has_collect'] = 1;
+				}else $temp['has_collect'] = 0;
+				$posts[] = $temp;
+			}
+			$data['posts'] = $posts;
+		}
+		
+		$data['post_num'] = count($data['posts']);
+		$data['page_num'] = intval(ceil($data['total']/$num_per_page));
+		$data['cur_page'] = $page;
+		//var_dump($data);
+		return $data;
 	}
 
 	public function set_active($post_id,$type,$active){

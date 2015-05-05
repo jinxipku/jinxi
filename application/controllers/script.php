@@ -332,6 +332,7 @@ echo '</pre>';
 
 	public function test_get_user_recommend(){
 		$res = $this->post_model->get_user_recommend(2);
+		var_dump($res);
 
 	}
 }

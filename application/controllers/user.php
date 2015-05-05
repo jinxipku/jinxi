@@ -94,7 +94,7 @@ class User extends MY_Controller {
 		if ($tab == '#user_post')
 			$data = $this->post_model->get_user_posts($id, $login_user['id'], $page);
 		else if ($tab == '#user_best')
-			$data = $this->post_model->get_user_posts($id, $login_user['id'], $page);
+			$data = $this->post_model->get_user_recommend($id, $login_user['id'], $page);
 		else if ($tab == '#user_coll')
 			$data = $this->post_model->get_user_favorites($id, $page);
 		else if ($tab == '#user_love')

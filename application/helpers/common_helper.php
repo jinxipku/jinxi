@@ -356,7 +356,15 @@ function get_post_table($type){
     }elseif($type==1){
         return "jx_buyer_post";
     }
+}
 
+function get_sphinx_index($type){
+    if($type==0){
+        return "seller_post_index";
+    }elseif($type==1){
+        return "buyer_post_index";
+    }
+    return null;
 }
 
 function get_heat_view($type){
