@@ -47,6 +47,9 @@
 						<tr>
 							<td><a id="delete_reply_btn" linkedtab="deletereply" href="javascript:void(0)">删除回复</a></td>
 						</tr>
+						<tr>
+							<td><a id="user_advice_btn" linkedtab="useradvice" href="javascript:void(0)">用户建议</a></td>
+						</tr>
 					</table>
 				</div>
 			</div>
@@ -119,6 +122,48 @@
 				<div id="deletepost" class="admin_panel">
 					<h3>删除帖子</h3>
 					<hr/>
+					<div class="panel panel-default">
+						<div class="form-group">
+							<input id="delete_post_url" type="text" placeholder="删除帖子的链接" class="form-control"/>
+						</div>
+						<div class="form-group">
+							<input id="delete_reason" type="text" placeholder="删除帖子的原因（请简要说明）" class="form-control"/>
+						</div>
+						<div style="text-align:center">
+							<button class="btn btn-primary" id="delete_post">删除</button>
+						</div>
+					</div>
+				</div>
+
+				<div id="deletereply" class="admin_panel">
+					<h3>删除帖子</h3>
+					<hr/>
+					<div class="panel panel-default">
+						<div class="form-group">
+							<input id="delete_reply_url" type="text" placeholder="回复所在帖子的链接" class="form-control"/>
+						</div>
+						<div class="form-group">
+							<input id="delete_floor" type="text" placeholder="回复楼层" class="form-control"/>
+						</div>
+						<div class="form-group">
+							<input id="delete_reply_reason" type="text" placeholder="删除回复的原因（请简要说明）" class="form-control"/>
+						</div>
+						<div style="text-align:center">
+							<button class="btn btn-primary" id="delete_reply">删除</button>
+						</div>
+					</div>
+				</div>
+
+				<div id="useradvice" class="admin_panel">
+					<h3>用户建议</h3>
+					<hr/>
+					<div class="panel panel-default">
+						<table class="table" id="advice_table">
+							<tr>
+								<th>建议列表</th>
+							</tr>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>

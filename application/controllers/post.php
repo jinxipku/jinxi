@@ -62,7 +62,7 @@ class Post extends MY_Controller {
 			redirect('info/nopage');
 		}
 		$thispost = $this->get_post($post_id, $ptype, $reply_id);
-		if (empty($thispost)) {
+		if (empty($thispost)||$thispost['active']==-1) {
 			redirect('info/nopage');
 		} else if (!$thispost['reply_valid']) {
 			redirect('post/viewpost/' . $post_type . '/' . $post_id);

@@ -10,6 +10,10 @@ class advice_model extends CI_Model {
 		$map['addat'] = time();
 		return $this->db->insert("jx_advice",$map);
 	}
+
+	public function get_advice($page){
+		return $this->db->get("jx_advice")->result_array();
+	}
 }
 
 ?>

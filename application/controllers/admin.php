@@ -87,6 +87,86 @@ class Admin extends MY_Controller {
 	}
 
 
+	//TODO：判断权限
+	public function delete_post(){
+		$admin =  $this->session->userdata('admin');
+		if(empty($admin)){
+			$this->ajaxReturn(null,"未登录",0);
+		}
+		//暂时权限托管给超管
+		if($admin['auth_level']!=1){
+			$this->ajaxReturn(null,"权限不够",1);
+		}
+		$url = $_POST['post_url'];
+		$url_array = explode("/",$url);
+		$flag = true;
+		$post_id = null;
+		$post_type = null;
+		foreach ($url_array as $key => $value) {
+			if(!$flag){
+				$post_id = $value;
+			}
+			if($value=='buy'||$value=='sell'){
+				$flag = false;
+				$post_type = ($value=='buy')?1:0;
+			}
+		}
+		$reason = $_POST['reason'];
+		//$reason = "";
+		if(empty($reason)) $this->ajaxReturn(null,'请填写删除理由',0);
+		//echo $post_id.$post_type;
+		$res = $this->admin_model->delete_post($post_id,$post_type,$reason);
+		if($res)
+			$this->ajaxReturn(null,"删除成功",1);
+		else $this->ajaxReturn(null,"删除失败",0);
+	}
+
+		//TODO：判断权限
+	public function delete_reply(){
+		$admin =  $this->session->userdata('admin');
+		if(empty($admin)){
+			$this->ajaxReturn(null,"未登录",0);
+		}
+		//暂时权限托管给超管
+		if($admin['auth_level']!=1){
+			$this->ajaxReturn(null,"权限不够",1);
+		}
+		$url = $_POST['post_url'];
+		$url_array = explode("/",$url);
+		$flag = true;
+		$post_id = null;
+		$post_type = null;
+		foreach ($url_array as $key => $value) {
+			if(!$flag){
+				$post_id = $value;
+			}
+			if($value=='buy'||$value=='sell'){
+				$flag = false;
+				$post_type = ($value=='buy')?1:0;
+			}
+		}
+		$reason = $_POST['reason'];
+		$floor = $_POST['floor'];
+		//$reason = "";
+		if(empty($reason)) $this->ajaxReturn(null,'请填写删除理由',0);
+		//echo $post_id.$post_type;
+		$res = $this->admin_model->delete_reply($post_id,$post_type,$floor,$reason);
+		if($res)
+			$this->ajaxReturn(null,"删除成功",1);
+		else $this->ajaxReturn(null,"删除失败",0);
+	}
+
+	public function get_advice(){
+		$admin =  $this->session->userdata('admin');
+		if(empty($admin)){
+			$this->ajaxReturn(null,"未登录",0);
+		}
+		$this->load->model("advice_model");
+		$res = $this->advice_model->get_advice(1);
+		$this->ajaxReturn($res,'',1);	
+	}
+
+
 // +----------------------------------------------------------------------
 // | 私有函数
 // +----------------------------------------------------------------------

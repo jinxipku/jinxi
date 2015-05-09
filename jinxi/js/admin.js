@@ -12,11 +12,20 @@ $(document).ready(function(){
 	$("#get_report_btn").click(function(){
 		get_report(1);
 	});
+	$("#user_advice_btn").click(function(){
+		get_user_advice(1);
+	});
 	$("#logout").click(function(){
 		log_out();
 	});
 	$("#appoint_btn").click(function(){
 		appoint();
+	});
+	$("#delete_post").click(function(){
+		delete_post();
+	});
+	$("#delete_reply").click(function(){
+		delete_reply();
 	});
 	
 });
@@ -57,7 +66,7 @@ function appoint(){
 	});
 }
 function get_report(page){
-		$.ajax({
+	$.ajax({
 		type:"post",
 		url:baseurl+"admin/get_report_info",
 		dataType:"json",
@@ -77,6 +86,64 @@ function get_report(page){
 		},
 		error:function(data){
 
+		}
+	});
+}
+
+function get_user_advice(page){
+	$.ajax({
+		type:"post",
+		url:baseurl+"admin/get_advice",
+		dataType:"json",
+		data:{
+			page:page
+		},
+		success:function(data){
+			$("#advice_table tr:first-child() ~ tr").remove();
+
+			var advice = data.data; 
+			for(var i=0;i<advice.length;i++){
+				$("#advice_table").append('<tr><td>'+advice[i].content+'</td></tr>');
+			}
+		},
+		error:function(data){
+
+		}
+	});
+}
+function delete_post(){
+	$.ajax({
+		type:"post",
+		url:baseurl+"admin/delete_post",
+		dataType:"json",
+		data:{
+			post_url:$("#delete_post_url").val(),
+			reason:$("#delete_reason").val(),
+		},
+		success:function(data){
+			alert(data.info);
+		},
+		error:function(data){
+			alert("删除失败！");
+		}
+	});
+}
+
+function delete_reply(){
+	$.ajax({
+		type:"post",
+		url:baseurl+"admin/delete_reply",
+		dataType:"json",
+		data:{
+			post_url:$("#delete_reply_url").val(),
+			floor:$("#delete_floor").val(),
+			reason:$("#delete_reply_reason").val(),
+		},
+		success:function(data){
+			alert(data.info);
+		},
+		error:function(data){
+			alert("删除失败！");
 		}
 	});
 }

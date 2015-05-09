@@ -23,6 +23,9 @@ body {
 th,td{
 	text-align: center;
 }
+#advice_table td{
+	text-align: left;
+}
 td button{
 	margin-left: 10px;
 }

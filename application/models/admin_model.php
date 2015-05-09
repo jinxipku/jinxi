@@ -145,5 +145,22 @@ class admin_model extends CI_Model{
 			return $this->db->update("jx_admin",$admin);
 		}
 	}
+
+	public function delete_post($post_id,$post_type,$reason=""){
+		//TODO:write admin log
+		$map['post_id'] = $post_id;
+		$table = get_post_table($post_type);
+		$update['active'] = -1;
+		$this->db->where($map);
+		$res = $this->db->update($table,$update);
+		return $res;
+	}
+
+	public function delete_reply($post_id,$post_type,$floor,$reason=""){
+		$map['post_id'] = $post_id;
+		$map['type'] = $post_type;
+		$map['floor'] = $floor;
+		return $this->db->delete("jx_reply",$map);
+	}
 }
 ?>
