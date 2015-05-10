@@ -29,7 +29,7 @@
 			<div id="register_alter">
 				<p>已有今昔网账号？</p>
 				<a href="{$baseurl}account/login" type="button" class="btn btn-info btn-lg btn-block">立即登录</a>
-				<img class="passive" src="{$baseurl}img/jinxibig.jpg" alt="http://www.xn--wmqr18c.cn"/>
+				<img class="passive" src="{$baseurl}img/jinxismall.jpg" alt="http://www.xn--wmqr18c.cn"/>
 			</div>
 		</div>
 
