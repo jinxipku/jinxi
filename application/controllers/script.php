@@ -247,6 +247,11 @@ echo '</pre>';
 	public function test_is_favorite(){
 		echo $this->post_model->is_favorite(51,1,1);
 	}
+
+	public function test_tips(){
+		$value = show_tips(4);
+		var_dump($value);
+	}
 	//用于发一火车皮帖子
 	public function auto_make_post(){
 		$num = 200;

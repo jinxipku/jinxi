@@ -139,4 +139,9 @@ class Info extends MY_Controller {
 		$this->ajaxReturn(null,"",$status);
 	}
 
+	public function get_tips(){
+		$num = $_POST['num'];
+		$this->ajaxReturn(show_tips($num),"",1);
+	}
+
 }

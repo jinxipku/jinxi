@@ -23,21 +23,40 @@ function getClientIp() {
     return $ip;
 }
 
-
+//num   0~x   random   all
 if (! function_exists ( 'show_tips' )) {
-    function show_tips() {
+    function show_tips($num="random") {
         $quotes = array (
             "我们是谁？#我们来自北京市海淀区三所高校，是一个致力于为大学生提供便利的高校创业团队，您的支持是我们不断改进的动力，我们将竭诚为您服务！",
-            "今昔能干什么？#今昔网致力于为您提供最全面的校园二手信息。",
-            "新版今昔有哪些新功能？#新版今昔网强化了自动匹配功能，提供了教材专区并强力推出绑定校园BBS跳蚤版面功能，更好的界面，更多功能，更多便利！小伙伴们快去尝试吧！",
-            "商品品质是什么？#今昔网商品四种品质S、A、B、C描述了商品的新旧程度、外观及功能现状。",
-            "今昔网四大特色#1、系统自动匹配；<br/>&nbsp;&nbsp;&nbsp;&nbsp;2、教材专区；<br/>&nbsp;&nbsp;&nbsp;&nbsp;3、绑定本校BBS；<br/>&nbsp;&nbsp;&nbsp;&nbsp;4、精心制作的网页UI" 
+            "今昔能干什么？#今昔网是一个高校二手物品信息中心，在这里你可以便捷地发布自己的二手信息或需求，也可以方便地获取丰富的二手信息！",
+            "为什么叫今昔？#今昔意寓昔日的物品今天依然有价值！所以，小伙伴们快把你们的闲置物品都放上来吧~",
+            "今昔网四大特色#1、精心制作的网页UI<br/>2、系统自动匹配需求<br/>3、手机扫码上传照片；<br/>4、买卖分离，分类筛选",
+            "物品品质是什么？#今昔网商品四种品质S、A、B、C描述了商品的新旧程度、外观及功能现状。<br/>S：全新物品，手工自制或未拆分正品<br/>A：九成新物品，外观完好，功能正常<br/>B：七成新物品，外观稍有磨损，功能正常<br/>C：五成新物品，外观明显磨损，功能基本正常",            
             );
-        $str = random_element ( $quotes );
-        $array = explode ( '#', $str );
-        $ret ['strtit'] = $array[0];
-        $ret ['strcon'] = $array[1];
-        return $ret;
+        if($num=="random"){
+            $str = random_element ( $quotes );
+            $array = explode ( '#', $str );
+            $ret ['strtit'] = $array[0];
+            $ret ['strcon'] = $array[1];
+            return $ret;
+        }elseif($num=="all"){
+            $rets = array();
+            foreach ($quotes as $key => $value) {
+                $array = explode ( '#', $value );
+                $ret ['strtit'] = $array[0];
+                $ret ['strcon'] = $array[1];
+                $rets[] = $ret;
+            }
+            return $rets;
+        }elseif(is_numeric($num) && is_int($num + 0)){
+            if($num>=count($quotes)) return null;
+            $str = $quotes[$num];
+            $array = explode ( '#', $str );
+            $ret ['strtit'] = $array[0];
+            $ret ['strcon'] = $array[1];
+            return $ret;
+        }
+        return null;
     }
 }
 
