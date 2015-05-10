@@ -199,6 +199,7 @@ function register(){
   			},
   			'json'
   		);
+  		$("#btn_register").html('<i class="icon-spinner icon-spin"></i> 处理中');
 		$("#btn_register").attr("disable",true);
 	}
 }
@@ -236,6 +237,8 @@ function login(mem) {
 			},
 			'json'
 		);
+		$("#btn_login").html('<i class="icon-spinner icon-spin"></i> 处理中');
+		$("#btn_login").attr("disable",true);
 	}
 }
 function logout() {

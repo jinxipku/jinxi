@@ -11,7 +11,10 @@ class Index extends MY_Controller {
 		$login_user =  $this->session->userdata('login_user');
 		if (!empty($login_user)) {
 			$this->assign('login_user', $login_user);
-			$this->assign('digital', $this->get_three_from_recommend());
+			$recommend = $this->get_three_from_recommend();
+			if (count($recommend) > 0) {
+				$this->assign('recommend', $this->get_three_from_recommend());
+			}
 		}
 		
 		$this->assign('digital', $this->get_six_from_category(1));

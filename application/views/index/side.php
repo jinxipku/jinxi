@@ -10,7 +10,7 @@
 						<input id="password" name="password" type="password" placeholder="密码" class="form-control flat" onblur="check_pw()" onpaste="return false"> 
 						<span class="danger" id="check_pw"> </span>
 					</div>
-					<button type="button" class="btn btn-primary btn-block" onClick="login(0)">登录</button>
+					<button id="btn_login" type="button" class="btn btn-primary btn-block" onClick="login(0)">登录</button>
 					<p class="p_info">还木有账号？</p>
 					<a href="{$baseurl}account/register" type="button" class="btn btn-info btn-block">立即注册</a>
 				</form>
