@@ -218,10 +218,11 @@ class post_model extends CI_Model {
 		$this->sphinx->SetServer ( '127.0.0.1', 9312);
 		$this->sphinx->SetArrayResult ( true );
 		$this->sphinx->SetMatchMode(SPH_MATCH_EXTENDED2);
-		$this->sphinx->SetRankingMode ( SPH_RANK_PROXIMITY_BM25 );
+		//$this->sphinx->SetRankingMode ( SPH_RANK_PROXIMITY_BM25 );
 	//$this->
-		$this->sphinx->SetFieldWeights(array('brand' => 10, 'model' => 10, 'description' => 4));
-
+		$this->sphinx->SetFieldWeights(array('brand' => 20, 'model' => 10, 'description' => 4,'c1_name'=>1,'c2_name'=>1));
+		$this->sphinx->SetSortMode(SPH_SORT_ATTR_DESC, "createat");
+		
 		//$this->sphinx->SetMatchMode(SPH_MATCH_FULLSCAN);
 		$recommends = array();//所有找到的推荐
 
@@ -242,18 +243,17 @@ class post_model extends CI_Model {
 			$f_post = $this->db->get()->row_array();
 
 			//$this->sphinx->setFilter('type',array($res['type']));
-			$this->sphinx->setFilter('category1',array($f_post['category1']));
-			$this->sphinx->setFilter('category2',array($f_post['category2']));
-			$this->sphinx->setFilter('user_id',array($user_id),true);
-			
+			$this->sphinx->SetFilter('category1',array($f_post['category1']));
+			$this->sphinx->SetFilter('category2',array($f_post['category2']));
+			$this->sphinx->SetFilter('user_id',array($user_id),true);
 			//$this->sphinx->setFilter('post_id',array($f_post['post_id']),true);
-			//TODO:排除掉已经收藏的
-			$this->sphinx->SetSortMode(SPH_SORT_ATTR_DESC, "createat"); //按创建时间降序排列
-			//var_dump($f_post);exit;
-			$keyword = $f_post['brand']." ".$f_post['model'];
-			//$keyword = "苹果 air";
-			$keyword = "air";
-			//echo $keyword;exit;
+			$f_post['brand'] = trim($f_post['brand']);
+			$f_post['model'] = trim($f_post['model']);
+			$keyword = $f_post['brand'];
+			if(!empty($f_post['model'])){
+				$keyword = $keyword." ".$f_post['model'];
+			}
+			//echo "accordingtomine:".$keyword;
 			$source = get_sphinx_index($res['type']);
 			$res = $this->sphinx->Query($keyword,$source);
 			//var_dump($res);
@@ -272,25 +272,25 @@ class post_model extends CI_Model {
 
 		$res = $this->user_model->get_newest_post($user_id);
 		if(!empty($res)){
-			$table = get_post_table($res['type']);
-			$this->db->where("post_id",$res['post_id']);
-			$this->db->from($table);
-			$f_post = $this->db->get()->row_array();
+			$f_post = $res;
 			//这里用相反的
 			//$this->sphinx->setFilter('type',array(1-$res['type']));
-			$this->sphinx->setFilter('category1',array($f_post['category1']));
-			$this->sphinx->setFilter('category2',array($f_post['category2']));
-			$this->sphinx->setFilter('user_id',array($user_id),true);
-			$this->sphinx->SetSortMode(SPH_SORT_ATTR_DESC, "createat"); //按创建时间降序排列
+			$this->sphinx->ResetFilters();
+			$this->sphinx->SetFilter('category1',array($f_post['category1']));
+			$this->sphinx->SetFilter('category2',array($f_post['category2']));
+			$this->sphinx->SetFilter('user_id',array($user_id),true);
+			//$this->sphinx->SetSortMode(SPH_SORT_ATTR_DESC, "createat"); //按创建时间降序排列
+			$f_post['brand'] = trim($f_post['brand']);
+			$f_post['model'] = trim($f_post['model']);
 
-			$keyword = $f_post['brand']." ".$f_post['model'];
-			//echo $res['type'];exit;
-			$source = get_sphinx_index($res['type']);
-		
-			//$res = $this->sphinx->Query("吉他","*");
-			$res = $this->sphinx->Query($keyword,"*");
-			// var_dump($res);
-			// exit;
+			$keyword = $f_post['brand'];
+			if(!empty($f_post['model'])){
+				$keyword = $keyword." ".$f_post['model'];
+			}
+			$source = get_sphinx_index(1-$res['type']);
+			//echo "accordingtoothers:".$keyword;
+			$res = $this->sphinx->Query($keyword,$source);
+			//var_dump($res);
 			if(empty($res)||empty($res['matches'])){
 			}else{
 				$matches = $res['matches'];
