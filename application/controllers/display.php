@@ -33,7 +33,7 @@ class Display extends MY_Controller {
 		if (!empty($login_user)) {
 			$this->assign('login_user', $login_user);
 		} else if($area == 'school') {
-			redirect('display/sell/global');
+			redirect(str_replace("school", "global", $_SERVER['PHP_SELF']));
 		}
 
 		$this->assign('type', 'sell');
@@ -112,7 +112,7 @@ class Display extends MY_Controller {
 		if (!empty($login_user)) {
 			$this->assign('login_user', $login_user);
 		} else if($area == 'school') {
-			redirect('display/buy/global');
+			redirect(str_replace("school", "global", $_SERVER['PHP_SELF']));
 		}
 
 		$this->assign('type', 'buy');

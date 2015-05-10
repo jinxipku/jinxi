@@ -200,7 +200,7 @@ function register(){
   			'json'
   		);
   		$("#btn_register").html('<i class="icon-spinner icon-spin"></i> 处理中');
-		$("#btn_register").attr("disable",true);
+		$("#btn_register").attr("disabled",true);
 	}
 }
 function pre_login() {
@@ -233,12 +233,14 @@ function login(mem) {
 					$("#check_pw").html("密码输入错误，请重新输入！")
 					$("#check_pw").removeClass("fui-check success");
 					$("#check_pw").addClass("fui-cross danger");
+					$("#btn_login").html('登录');
+					$("#btn_login").attr("disabled",false);
 				}
 			},
 			'json'
 		);
 		$("#btn_login").html('<i class="icon-spinner icon-spin"></i> 处理中');
-		$("#btn_login").attr("disable",true);
+		$("#btn_login").attr("disabled",true);
 	}
 }
 function logout() {
