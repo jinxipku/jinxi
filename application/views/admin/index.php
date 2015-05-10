@@ -73,6 +73,24 @@
 							<p>开放的转让贴总数： <span>{$post_info[0].active_total}</span></p>
 							<p>求购贴总数： <span>{$post_info[1].total}</span></p>
 							<p>开放的求购贴总数： <span>{$post_info[1].active_total}</span></p>
+							<table class="table">
+								<tr>
+									<th>分类</th>
+									<th>卖贴</th>
+									<th>买贴</th>
+								</tr>
+							{foreach from = $post_info['category'] item = post_cat}
+							<tr>
+								<td>{$post_cat['name']}</td>
+								<td>
+									{$post_cat[0]}
+								</td>
+								<td>
+									{$post_cat[1]}
+								</td>
+							</tr>
+							{/foreach}
+							</table>
 						</div>
 					</div>
 				</div>

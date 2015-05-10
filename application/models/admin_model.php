@@ -54,6 +54,16 @@ class admin_model extends CI_Model{
 			$this->db->from($table);
 			$res = $this->db->count_all_results();
 			$post_info[$type]['active_total'] = $res;
+
+			for($cat1=1;$cat1<=8;$cat1++){
+
+				$this->db->where("active",1);
+				$this->db->where("category1",$cat1);
+				$this->db->from($table);
+				$res = $this->db->count_all_results();
+				$post_info['category'][$cat1][$type] = $res;
+				$post_info['category'][$cat1]['name'] = get_category1_name2($cat1);
+			}
 		}
 		return $post_info;
 		

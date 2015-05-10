@@ -79,4 +79,16 @@ class Index extends MY_Controller {
 		}
 		return $result;
 	}
+
+	public function get_three_from_recommend(){
+		$login_user =  $this->session->userdata('login_user');
+		if(empty($login_user)){           
+			return array();
+		}
+		$res = $this->post_model->get_user_recommend($login_user['id']);
+		$posts = $res['posts'];
+		if(count($posts)>3)
+			array_slice($posts, 0, 3);
+		return $posts;
+	}
 }

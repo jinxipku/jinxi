@@ -12,7 +12,12 @@ class advice_model extends CI_Model {
 	}
 
 	public function get_advice($page){
-		return $this->db->get("jx_advice")->result_array();
+		$this->db->order_by("addat","desc");
+		$res = $this->db->get("jx_advice")->result_array();
+		foreach ($res as $key => $value) {
+			$res[$key]['addat'] = format_time($value['addat']);
+		}
+		return $res;
 	}
 }
 

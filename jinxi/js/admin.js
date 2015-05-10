@@ -103,7 +103,7 @@ function get_user_advice(page){
 
 			var advice = data.data; 
 			for(var i=0;i<advice.length;i++){
-				$("#advice_table").append('<tr><td>'+advice[i].content+'</td></tr>');
+				$("#advice_table").append('<tr><td>'+advice[i].content+'</td><td>'+advice[i].addat+'</td></tr>');
 			}
 		},
 		error:function(data){
