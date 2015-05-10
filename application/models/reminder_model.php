@@ -33,6 +33,7 @@ class reminder_model extends CI_Model {
 		$map['to_user_id'] = $user_id;
 		$this->db->select("jx_reminder.*,jx_user.nick,jx_user.nick_color,jx_user.thumb");
 		$this->db->where($map);
+		$this->db->order_by("id","desc");
 		$this->db->from("jx_reminder");
 		$this->db->join("jx_user","jx_user.id=jx_reminder.from_user_id","left");
 		$res = $this->db->get()->result_array();
