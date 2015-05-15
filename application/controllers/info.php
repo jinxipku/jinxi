@@ -83,6 +83,8 @@ class Info extends MY_Controller {
 			$this->assign('login_user', $login_user);
 		}
 
+		$this->assign('helps', show_tips('all'));
+
 		$this->assign('nav_tab', 5);
 		$this->assign('title', '今昔网-帮助');
 		$this->assign('baseurl', base_url());
