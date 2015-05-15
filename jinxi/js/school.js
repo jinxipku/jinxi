@@ -48,7 +48,8 @@
     },
     {
         "id": 1012,
-        "name": "\u5317\u4eac\u6797\u4e1a\u5927\u5b66"
+        "name": "\u5317\u4eac\u6797\u4e1a\u5927\u5b66",
+        "surfix": "@bjfu.edu.cn"
     },
     {
         "id": 1013,
@@ -1032,7 +1033,8 @@
     },
     {
         "id": 3012,
-        "name": "\u9ed1\u9f99\u6c5f\u5927\u5b66"
+        "name": "\u9ed1\u9f99\u6c5f\u5927\u5b66",
+        "surfix": "@hlju.edu.cn"
     },
     {
         "id": 3013,
@@ -6808,7 +6810,8 @@
     "id": 15,
     "school": [{
         "id": 15001,
-        "name": "\u56db\u5ddd\u5927\u5b66"
+        "name": "\u56db\u5ddd\u5927\u5b66",
+        "surfix": "@scu.edu.cn"
     },
     {
         "id": 15002,

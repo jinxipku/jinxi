@@ -24,6 +24,12 @@
                 </a> 
             </div>
 
+            {if isset($recommend)}
+            <div class="main_title">我的推荐
+                <a class="pull-right" href="{$baseurl}user/profile/{$login_user.id}">全部</a>
+            </div>
+            {/if}
+
             <div class="main_title">电子数码
                 <a class="pull-right" href="{$baseurl}display/sell/school/time/1">全部</a>
             </div>
