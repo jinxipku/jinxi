@@ -192,6 +192,12 @@ div.main_title a:hover {
 div#post_items_block.index_show {
 	display: block;
 }
+div#post_items_box.index_show {
+	display: block;
+}
+div#post_items_box.index_show hr {
+	margin-top: 0px;
+}
 div#side {
 	float: left;
 	width: 264px;

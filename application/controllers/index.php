@@ -13,7 +13,7 @@ class Index extends MY_Controller {
 			$this->assign('login_user', $login_user);
 			$recommend = $this->get_three_from_recommend();
 			if (count($recommend) > 0) {
-				$this->assign('recommend', $this->get_three_from_recommend());
+				$this->assign('recommend', $recommend);
 			}
 		}
 		

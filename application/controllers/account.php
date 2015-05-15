@@ -275,19 +275,19 @@ class Account extends MY_Controller {
 
 		10px; padding-top: 8px;">
 		<p class="footer">
-		<a href="#" class="footer">关于今昔</a><span> &nbsp;&nbsp;| &nbsp;&nbsp;</span>
-		<a href="#" class="footer">今昔历程</a><span> &nbsp;&nbsp;| &nbsp;&nbsp;</span>
-		<a href="#" class="footer">联系我们</a><span> &nbsp;&nbsp;| &nbsp;&nbsp;</span>
-		<a href="#" class="footer">用户协议</a><span> &nbsp;&nbsp;| &nbsp;&nbsp;</span>
-		<a href="#" class="footer">帮助中心</a><span> &nbsp;&nbsp;| &nbsp;&nbsp;</span>
-		<a href="#" class="footer">意见建议</a>
+		<a href="' . base_url() . '" class="footer">今昔主页</a><span> &nbsp;&nbsp;| &nbsp;&nbsp;</span>
+		<a href="' . base_url('info/about/contact') . '" class="footer">联系我们</a><span> &nbsp;&nbsp;| &nbsp;&nbsp;</span>
+		<a href="' . base_url('info/about/history') . '" class="footer">今昔历程</a><span> &nbsp;&nbsp;| &nbsp;&nbsp;</span>
+		<a href="' . base_url('info/about/suggest') . '" class="footer">意见建议</a><span> &nbsp;&nbsp;| &nbsp;&nbsp;</span>
+		<a href="' . base_url('info/help') . '" class="footer">帮助中心</a><span> &nbsp;&nbsp;| &nbsp;&nbsp;</span>
+		<a href="' . base_url('info/agreement') . '" class="footer">用户协议</a>
 		</p>
 		</div>
 
 		<div style="text-align: center; margin-bottom: 40px; margin-top: 10px;">
 		<p class="footerinfo">&copy; 2013 今昔网 &middot;
 		版权所有&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 京ICP备13053152号</p>
-		<p class="footerinfo">后夏科技&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;地址：北京市海淀区</p>
+		<p class="footerinfo">后夏天火科技&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;地址：北京市海淀区</p>
 		<p class="footerinfo">Designed and Developed by JINXI</p>
 		</div>
 		';
