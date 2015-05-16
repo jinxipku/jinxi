@@ -2,6 +2,35 @@
 <div class="set_content">
 	<div class="set_table">
 		<hr/>
+		<p class="set_table_title">昵称颜色</p>
+		<div class="set_table_content">
+			<div id="nick_color_box">
+				<div class="colordis">绿色</div>
+				<div class="colordis">蓝色</div>
+				<div class="colordis">红色</div>
+				<div class="colordis">黄色</div>
+				<div class="colordis">紫色</div>
+			</div>
+			<select id="nick_color">
+				<option value=0 {if $login_user.nick_color == 'text-primary'}selected{/if}>绿色</option>
+				<option value=1 {if $login_user.nick_color == 'text-info'}selected{/if}>蓝色</option>
+				<option value=2 {if $login_user.nick_color == 'text-danger'}selected{/if}>红色</option>
+				<option value=3 {if $login_user.nick_color == 'text-warning'}selected{/if}>黄色</option>
+				<option value=4 {if $login_user.nick_color == 'text-purple'}selected{/if}>紫色</option>
+			</select>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$("#nick_color").selectpicker(
+			{
+				style: 'btn-default',
+				menuStyle: 'dropdown'
+			}
+		);
+	</script>
+
+	<div class="set_table">
+		<hr/>
 		<p class="set_table_title">个人设置</p>
 		<div class="set_table_content">
 			<div class="set_row">

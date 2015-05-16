@@ -573,6 +573,7 @@ function save_account(){
 	$.post(
 		baseurl + "user/save_info",
 		{
+			nick_color: $("#nick_color").val(),
 			is_email_public: $("#email_check").is(':checked') ? 1 : 0,
 			is_qq_public: $("#qq_check").is(':checked') ? 1 : 0,
 			is_weixin_public: $("#weixin_check").is(':checked') ? 1 : 0,
@@ -608,38 +609,6 @@ function save_account(){
   	);
 	$("#btn_saveaccount").html('<i class="icon-spinner icon-spin"></i> 保存中');
 	$("#btn_saveaccount").attr('disabled', true);
-}
-function save_star(){
-	$.post(
-		baseurl + "user/save_info",
-		{
-			nick_color: $("#nick_color").val()
-		},
-		function(res) {
-			if (res.status == 1) {
-				$("#info_modal").find('.modal-title').text("设置成功");
-				$("#info_modal").find('.modal-cont').text("恭喜，设置成功！");
-				$("#info_modal").find('.btn-default').css('display','none');
-				$("#info_modal").find('.btn-primary').bind('click',function() {
-					window.location.href = baseurl + "user/setup/4";
-				});
-				$("#info_modal").modal();
-			} else {
-				$("#info_modal").find('.modal-title').text("设置失败");
-				$("#info_modal").find('.modal-cont').text("对不起，您还没有达到所需等级！");
-				$("#info_modal").find('.btn-default').css('display','none');
-				$("#info_modal").find('.btn-primary').bind('click',function() {
-					$("#btn_savestar").html('保 存');
-					$("#btn_savestar").attr('disabled', false);
-					$("#info_modal").modal('hide');
-				});
-				$("#info_modal").modal();
-			}
-    	},
-    	'json'
-  	);
-	$("#btn_savestar").html('<i class="icon-spinner icon-spin"></i> 保存中');
-	$("#btn_savestar").attr('disabled', true);
 }
 function type2category(type) {
 	$("#post_type").val(type);

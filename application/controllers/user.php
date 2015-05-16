@@ -202,11 +202,11 @@ class User extends MY_Controller {
 			unset($_POST['pwa']);
 		}
 
-		if(isset($_POST['nick_color'])&&$_POST['nick_color']!=0){
-			if($user['level'] < 15){
-				$this->ajaxReturn(null,"未达到等级",0);
-			}
-		}
+		// if(isset($_POST['nick_color'])&&$_POST['nick_color']!=0){
+		// 	if($user['level'] < 15){
+		// 		$this->ajaxReturn(null,"未达到等级",0);
+		// 	}
+		// }
 		
 		//$_POST['signature'] = parse_tag($_POST['signature']);
 

@@ -11,9 +11,6 @@
 					<li {if $set_tab == 3}class="active"{/if}>
 						<a href="#set_pw" data-toggle="tab">账户设置</a>
 					</li>
-					<li {if $set_tab == 4}class="active"{/if}>
-						<a href="#set_star" data-toggle="tab">星级用户</a>
-					</li>
 				</ul>
 			</div>
 			<div id="set_panels" class="panel panel-default">
@@ -26,9 +23,6 @@
 					</div>
 					<div id="set_pw" class="tab-pane fade{if $set_tab == 3} in active{/if}">
 						{$this->display ( 'setup/setaccount.php' )}
-					</div>
-					<div id="set_star" class="tab-pane fade{if $set_tab == 4} in active{/if}">
-						{$this->display ( 'setup/setstar.php' )}
 					</div>
 				</div>
 			</div>
