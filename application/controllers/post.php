@@ -509,7 +509,6 @@ class Post extends MY_Controller {
 		$file_name = $source;
 
 			//crop
-			$source = $data['file_name'];  
 			$thumb = $this->picture_path.$user_id.'/thumb_'.substr($res['file_name'],2);
 			$config3 ['source_image'] = $source;
 			$config3 ['new_image'] = $thumb;
@@ -553,23 +552,22 @@ class Post extends MY_Controller {
 
 	public function rotate_picture(){
 		$image_url = $_POST['image_url'];
+		$angle = $_POST['angle'];
 //		$image_url = "http://asf/1xJJBkpNqF1cXqujxhR1431763267.JPG";
 		$array = explode("/",$image_url);
 		$image_name = $array[count($array)-1];
-
+		$image_name = "1x".$image_name;
 		$user = $this->session->userdata ( 'login_user' );
 		if( empty($user) ){
 				$this->ajaxReturn(null,"未登录",0);
 		}
 		$user_id = $user['id'];
-
-		$new_image = "new.png";
 		$image_url = $this->picture_path.'1/'.$image_name;
 		$this->load->library ( 'image_lib');
 		$config['image_library'] = 'gd2';
 		$config['source_image'] = $image_url;
 		$config['quality'] = '100%';
-		$config['rotation_angle'] = '90';
+		$config['rotation_angle'] = ''.$angle;
 
 
 
@@ -582,7 +580,8 @@ class Post extends MY_Controller {
 			$size = getimagesize($image_url);
 			$arg['image_width'] = $size[0];
 			$arg['image_height'] = $size[1];
-			$this->crop_batch($arg,$user_id);
+			$data = $this->crop_batch($arg,$user_id);
+			$this->ajaxReturn($data,null,1);
 		}
 	}
 
