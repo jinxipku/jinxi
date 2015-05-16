@@ -202,7 +202,8 @@
 		window.onbeforeunload = function() {
 			var picture_url = "";
 			$("#preview_boxes>div img").each(function() {
-				picture_url += $(this).attr("alt") + "," + $(this).attr("src") + ","
+				var opic = $(this).attr("src").replace("thumb_", "1x");
+				picture_url += opic + "," + $(this).attr("alt") + "," + $(this).attr("src") + ","
 			});
 			if ($("#form_picture_upload").attr("name") == 0 && picture_url == "")
 				return;

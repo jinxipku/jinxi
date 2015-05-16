@@ -506,6 +506,7 @@ class Post extends MY_Controller {
 			$source =   $this->picture_path.$user_id.'/'.substr($res['file_name'],2);
 			copy($data['file_name'],$source);
 		}
+		$file_name = $source;
 
 			//crop
 			$source = $data['file_name'];  
@@ -545,7 +546,7 @@ class Post extends MY_Controller {
 				}
 
 				$data['file_name_thumb'] = $thumb;
-				$data['file_name'] = base_url($data['file_name']);
+				$data['file_name'] = base_url($file_name);
 				$data['file_name_thumb'] = base_url($data['file_name_thumb']);
 				return $data;
 	}
