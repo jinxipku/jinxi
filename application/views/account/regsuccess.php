@@ -10,6 +10,6 @@
 				{else}
 				<a href="{$baseurl}" type="button" class="btn btn-info btn-hg" title="返回主页">返回主页</a>
 				{/if}
-				<a href="{$baseurl}setup" type="button" class="btn btn-info btn-hg" title="前往设置页面">设置页面</a>
+				<a href="{$baseurl}user/setup" type="button" class="btn btn-info btn-hg" title="前往设置页面">设置页面</a>
 			</div>
 		</div>
