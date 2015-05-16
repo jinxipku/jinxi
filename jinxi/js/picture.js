@@ -146,7 +146,17 @@
 			rotate1.attr("type", "button");
 			rotate1.addClass("btn btn-warning btn-xs");
 			rotate1.html('<i class="icon-repeat"></i>');
+
+			var rotate2 = $("<button></button>");
+			rotate2.attr("type", "button");
+			rotate2.addClass("btn btn-warning btn-xs");
+			rotate2.html('<i class="icon-undo"></i>');
+
 			rotate1.click(function() {
+				rotate1.html('<i class="icon-spinner icon-spin"></i>');
+				rotate1.attr('disabled', true);
+				rotate2.html('<i class="icon-spinner icon-spin"></i>');
+				rotate2.attr('disabled', true);
 				$.post(
 					baseurl + "post/rotate_picture",
 					{
@@ -160,12 +170,47 @@
 							picture.attr("src", file_thumb + "?t=" + Math.random());
 							picture.attr("alt", file + "?t=" + Math.random());
 						}
+						rotate1.html('<i class="icon-repeat"></i>');
+						rotate1.attr('disabled', false);
+						rotate2.html('<i class="icon-undo"></i>');
+						rotate2.attr('disabled', false);
 		  			},
 		  			'json'
 		  		);
 		  		
 			});
+			
+			rotate2.click(function() {
+				rotate1.html('<i class="icon-spinner icon-spin"></i>');
+				rotate1.attr('disabled', true);
+				rotate2.html('<i class="icon-spinner icon-spin"></i>');
+				rotate2.attr('disabled', true);
+				$.post(
+					baseurl + "post/rotate_picture",
+					{
+						image_url: file,
+						angle: 90
+					},
+					function(res) {
+						if(res.status == 0) {
+							alert("旋转失败！");
+						} else {
+							picture.attr("src", file_thumb + "?t=" + Math.random());
+							picture.attr("alt", file + "?t=" + Math.random());
+						}
+						rotate1.html('<i class="icon-repeat"></i>');
+						rotate1.attr('disabled', false);
+						rotate2.html('<i class="icon-undo"></i>');
+						rotate2.attr('disabled', false);
+		  			},
+		  			'json'
+		  		);
+		  		
+			});
+
 			div2.append(rotate1);
+			div2.append(rotate2);
+
 			preview_box.append(div2);
 
 			$("#preview_boxes").append(preview_box);
