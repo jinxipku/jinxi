@@ -142,15 +142,16 @@
 			});
 			div2.append(button);
 
-			var rotate = $("<button></button>");
-			rotate.attr("type", "button");
-			rotate.addClass("btn btn-warning btn-xs");
-			rotate.html('<i class="icon-repeat"></i>');
-			rotate.click(function() {
+			var rotate1 = $("<button></button>");
+			rotate1.attr("type", "button");
+			rotate1.addClass("btn btn-warning btn-xs");
+			rotate1.html('<i class="icon-repeat"></i>');
+			rotate1.click(function() {
 				$.post(
 					baseurl + "post/rotate_picture",
 					{
 						image_url: file,
+						angle: 270
 					},
 					function(res) {
 						if(res.status == 0) {
@@ -164,7 +165,7 @@
 		  		);
 		  		
 			});
-			div2.append(rotate);
+			div2.append(rotate1);
 			preview_box.append(div2);
 
 			$("#preview_boxes").append(preview_box);
