@@ -412,6 +412,9 @@ class Post extends MY_Controller {
 
 		//TODO:替换为ajax返回参数形式
 		//同时需要返回一个时间戳
+		if(!file_exists($this->picture_path.$user_id)){  //生成用户专属图片目录
+			mkdir($this->picture_path.$user_id);
+		}
 		$myfile = fopen($this->picture_path.$userid.'/'.$timespec."$.tmp", "w");
 		$data['timespec'] = $timespec;
 		$data['qrimg'] = $qrfile;        //qrfile形如   img/qrcode/.......

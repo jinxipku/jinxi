@@ -163,7 +163,7 @@
 					}
 					else {
 						$.each(res.data, function(name, value) {
-							alert(value.file_name);
+							//alert(value.file_name);
 							addView(value.file_name, value.file_name_thumb, true);
 							number++;
 						});
