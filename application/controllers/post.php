@@ -636,6 +636,7 @@ class Post extends MY_Controller {
 			$array = explode(",",$_POST['picture_url']);
 			foreach ($array as $key => $value) {
 				unlink(substr($value, strpos($value,"img/")));
+				//TODO:删除原图
 			}
 		}
 		
