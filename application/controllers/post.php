@@ -455,6 +455,7 @@ class Post extends MY_Controller {
 		}
 		else $config ['file_name'] = genFileName($user_id,'');
 
+		$config ['file_name'] = "1x".$config['file_name']; //原图以1x为前缀
 
 		$this->load->library('upload',$config);
 
@@ -462,24 +463,38 @@ class Post extends MY_Controller {
 			$this->ajaxReturn(null, $this->upload->display_errors ( '', '' ),0);
 		}else{			
 			$res = $this->upload->data();
-			$this->load->library ( 'image_lib');
+			
+			// $init_image = $config['file_name'];
+			// $result = $this->crop_batch($init_image,$res['image_width'],$res['image_height'],$user_id);
+			// $this->ajaxReturn($result,$res['image_width'].$res['image_height'],0);
+			// if($result['success']==false){
+			// 	$this->ajaxReturn(null,"上传失败",0);
+			// }
+
+			// $data['file_name'] = base_url($result['file_name']);
+			// $data['file_name_thumb'] = base_url($result['file_name_thumb']);
+			$data = $this->crop_batch($res,$user_id);
+			$this->ajaxReturn($data,"上传成功",1);
+		}
+	}
+	public function crop_batch($res,$user_id){
+		$this->load->library ( 'image_lib');
 			// $data['file_name'] = $res['file_name'];  //返回上传后的文件名
 			// $data['image_width'] = $res['image_width'];
 			//$data['image_height'] = $res['image_height'];
-			$data['file_name'] = $this->picture_path.$user_id.'/'.$res['file_name'];
+		$data['file_name'] = $this->picture_path.$user_id.'/'.$res['file_name'];
 
-			$image_width = $res['image_width'];
-			$image_height = $res['image_height'];
-			if($res['image_width']>800){
-				
-				$source = $data['file_name'];  
-				$config2 ['image_library'] = 'gd2';
-				$config2 ['source_image'] = $source;
-				$config2 ['new_image'] = $source;
+		$image_width = $res['image_width'];
+		$image_height = $res['image_height'];
+		if($res['image_width']>800){
+			$source =   $this->picture_path.$user_id.'/'.substr($res['file_name'],2);
+			$config2 ['image_library'] = 'gd2';
+			$config2 ['source_image'] = $data['file_name'];
+			$config2 ['new_image'] = $source;
 				//$config2 ['maintain_ratio'] = TRUE; 
-				$config2 ['width'] = 800;
-				$config2 ['height'] = $image_height*800/$image_width;
-				$this->image_lib->initialize($config2);
+			$config2 ['width'] = 800;
+			$config2 ['height'] = $image_height*800/$image_width;
+			$this->image_lib->initialize($config2);
 				$flag1 = $this->image_lib->resize ();  //resize结果
 				if(!$flag1){
 					$this->ajaxReturn(null,"因图片太宽导致裁剪错误");
@@ -487,11 +502,14 @@ class Post extends MY_Controller {
 				
 				$image_height = $image_height*800/$image_width;
 				$image_width = 800;
-			}
+		}else{  //需要拷贝一份
+			$source =   $this->picture_path.$user_id.'/'.substr($res['file_name'],2);
+			copy($data['file_name'],$source);
+		}
 
 			//crop
 			$source = $data['file_name'];  
-			$thumb = $this->picture_path.$user_id.'/thumb_'.$res['file_name'];
+			$thumb = $this->picture_path.$user_id.'/thumb_'.substr($res['file_name'],2);
 			$config3 ['source_image'] = $source;
 			$config3 ['new_image'] = $thumb;
 			$config3 ['image_library'] = 'gd2';
@@ -514,25 +532,56 @@ class Post extends MY_Controller {
 				$this->ajaxReturn(null,"crop错误",0);
 			}
 
-
-	
-				$config4 ['image_library'] = 'gd2';
-				$config4 ['source_image'] = $thumb;
-				$config4 ['new_image'] = $thumb;
+			$config4 ['image_library'] = 'gd2';
+			$config4 ['source_image'] = $thumb;
+			$config4 ['new_image'] = $thumb;
 				//$config4 ['maintain_ratio'] = TRUE; // 保证设置的长宽有效
-				$config4 ['width'] =  225;
-				$config4 ['height'] = 225;
-				$this->image_lib->initialize($config4);
+			$config4 ['width'] =  225;
+			$config4 ['height'] = 225;
+			$this->image_lib->initialize($config4);
 				$flag1 = $this->image_lib->resize();  //resize结果
 				if(!$flag1){
 					$this->ajaxReturn(null,"resize错误",0);
 				}
-			
-			$data['file_name_thumb'] = $thumb;
-			$data['file_name'] = base_url($data['file_name']);
-			$data['file_name_thumb'] = base_url($data['file_name_thumb']);
 
-			$this->ajaxReturn($data,"上传成功",1);
+				$data['file_name_thumb'] = $thumb;
+				$data['file_name'] = base_url($data['file_name']);
+				$data['file_name_thumb'] = base_url($data['file_name_thumb']);
+				return $data;
+	}
+
+	public function rotate_picture(){
+		$image_url = $_POST['image_url'];
+//		$image_url = "http://asf/1xJJBkpNqF1cXqujxhR1431763267.JPG";
+		$array = explode("/",$image_url);
+		$image_name = $array[count($array)-1];
+
+		$user = $this->session->userdata ( 'login_user' );
+		if( empty($user) ){
+				$this->ajaxReturn(null,"未登录",0);
+		}
+		$user_id = $user['id'];
+
+		$new_image = "new.png";
+		$image_url = $this->picture_path.'1/'.$image_name;
+		$this->load->library ( 'image_lib');
+		$config['image_library'] = 'gd2';
+		$config['source_image'] = $image_url;
+		$config['quality'] = '100%';
+		$config['rotation_angle'] = '90';
+
+
+
+		$this->image_lib->initialize($config); 
+
+		if ( ! $this->image_lib->rotate()){
+		    $this->ajaxReturn(null,$this->image_lib->display_errors(),0);
+		}else{
+			$arg['file_name'] = $image_name;
+			$size = getimagesize($image_url);
+			$arg['image_width'] = $size[0];
+			$arg['image_height'] = $size[1];
+			$this->crop_batch($arg,$user_id);
 		}
 	}
 
