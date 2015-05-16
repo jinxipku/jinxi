@@ -11,6 +11,7 @@ create table jx_account(
 	primary key(id),
 	unique key(email)
 )DEFAULT CHARSET=utf8 COMMENT='账户表';
+alter table jx_account AUTO_INCREMENT=10000;
 drop table if exists jx_user;
 create table jx_user(
 	id int(11) not null comment '用户账户id',
