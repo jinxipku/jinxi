@@ -141,6 +141,30 @@
 				});
 			});
 			div2.append(button);
+
+			var rotate = $("<button></button>");
+			rotate.attr("type", "button");
+			rotate.addClass("btn btn-warning btn-xs");
+			rotate.html('<i class="icon-repeat"></i>');
+			rotate.click(function() {
+				$.post(
+					baseurl + "post/rotate_picture",
+					{
+						image_url: file,
+					},
+					function(res) {
+						if(res.status == 0) {
+							alert("旋转失败！");
+						} else {
+							picture.attr("src", file_thumb + "?t=" + Math.random());
+							picture.attr("alt", file + "?t=" + Math.random());
+						}
+		  			},
+		  			'json'
+		  		);
+		  		
+			});
+			div2.append(rotate);
 			preview_box.append(div2);
 
 			$("#preview_boxes").append(preview_box);
