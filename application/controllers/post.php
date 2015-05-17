@@ -255,7 +255,7 @@ class Post extends MY_Controller {
 					foreach ($files as $key => $filename) {
 						if( strpos($filename, $_POST['timespec']. ".") !=false && strpos($filename,"thumb_")===false ){
 							
-							if( !strpos($filename,"1x")===false ){
+							if( !strpos("**".$filename,"1x")===false ){
 								//此时删除原图
 								continue;
 							}
@@ -601,7 +601,7 @@ class Post extends MY_Controller {
 		$return = array();
 		foreach ($files as $key => $filename) {
 			if( strpos($filename, $timespec. ".") !=false && strpos($filename,"thumb_")===false ){
-				if( strpos($filename,"1x")!=false ){
+				if( strpos("**".$filename,"1x")!=false ){//加上**防止出现0判断
 					continue;
 				}
 				$k = filemtime($this->picture_path.$user_id.'/'.$filename);

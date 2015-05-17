@@ -85,6 +85,13 @@ class Script extends MY_Controller {
 		// $this->session->set_userdata('login_user',$user);
 		// var_dump($user);	
 		echo ("3"==0)?"yy":"xx";
+		$x = "1x3123";
+		echo strpos($x, "1x");
+		if(strpos($x, "1x")!=false){
+			echo 'asdf';
+		}else echo '**';
+		if(0!=false) echo '1';
+		if(1!=false) echo '2';
 	}
 
 	public function testPost(){

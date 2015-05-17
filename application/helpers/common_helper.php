@@ -325,7 +325,7 @@ function map_to_cat1($class){
 /* 生成文件名 其中uniquedata为区别符 ext为后缀 time为指定一时间戳*/
 function genFileName($uniquedata,$ext='',$time=null){
     $rand = '';
-    $char_array = 'ABCDEFGHIJKMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789';
+    $char_array = 'ABCDEFGHIJKMNPQRSTUVWXYZabcdefghijkmnpqrstuvwyz23456789';
     if($time!=null){
         $tmp = time() - $time;
         for($i = 0; $i < 8 - strlen($tmp+''); $i ++) {
