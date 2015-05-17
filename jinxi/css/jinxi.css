@@ -1469,13 +1469,6 @@ div.lovee_user_content span {
 div.lovee_user_content p {
 	margin: 0px;
 }
-div.lovee_user_content span:nth-child(2) {
-	font-size: 14px;
-}
-div.lovee_user_content span:nth-child(3) {
-	font-size: 13px;
-	color: #666;
-}
 
 div.lovee_user_post {
 	float: left;
