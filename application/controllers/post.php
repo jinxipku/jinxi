@@ -601,6 +601,9 @@ class Post extends MY_Controller {
 		$return = array();
 		foreach ($files as $key => $filename) {
 			if( strpos($filename, $timespec. ".") !=false && strpos($filename,"thumb_")===false ){
+				if( !strpos($filename,"1x")===false ){
+					continue;
+				}
 				$k = filemtime($this->picture_path.$user_id.'/'.$filename);
 				$return[$k]['file_name'] = base_url($this->picture_path.$user_id.'/'.$filename);
 				$return[$k]['file_name_thumb'] = base_url($this->picture_path.$user_id.'/thumb_'.$filename);
