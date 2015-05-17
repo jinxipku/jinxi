@@ -103,9 +103,9 @@
 	<script type="text/javascript">
 		$("html,body").animate(
 			{
-				scrollTop: $("div.reply_box[data-rid={$reply_id}]").offset().top 
+				scrollTop: $("div.reply_box[data-rid={$reply_id}]").offset().top - 50
 			},
-			700
+			100
 		);
 	</script>
 	{/if}
