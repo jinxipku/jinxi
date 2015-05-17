@@ -712,7 +712,7 @@ function confirm_post() {
 	var picture = new Array();
 	$("div#preview_boxes div.preview_box").each(function() {
 		var tp = new Object();
-		tp.picture_url = $(this).find("img").attr("alt");
+		tp.picture_url = $(this).find("img").attr("data-opic");
 		tp.picture_des = $(this).find("textarea").val();
 		picture.push(tp);
 	});

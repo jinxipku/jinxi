@@ -84,6 +84,7 @@
 			picture.addClass("passive");
 			picture.attr("src", file_thumb);
 			picture.attr("alt", file);
+			picture.attr("data-opic", file);
 			div1.append(picture);
 			var preview_p = $("<p></p>");
 			preview_p.text("点击预览");
