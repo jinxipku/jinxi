@@ -497,7 +497,7 @@ class Post extends MY_Controller {
 			$this->image_lib->initialize($config2);
 				$flag1 = $this->image_lib->resize ();  //resize结果
 				if(!$flag1){
-					$this->ajaxReturn(null,"因图片太宽导致裁剪错误");
+					$this->ajaxReturn(null,"因图片太宽导致裁剪错误",0);
 				}
 				
 				$image_height = $image_height*800/$image_width;

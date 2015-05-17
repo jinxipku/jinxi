@@ -89,7 +89,7 @@
 			preview_p.text("点击预览");
 			div1.append(preview_p);
 			div1.click(function() {
-				$("#big_picture_view").attr("src", file);
+				$("#big_picture_view").attr("src", file + "?t=" + Math.random());
 				$("#picture_modal").modal();
 			});
 			preview_box.append(div1);
