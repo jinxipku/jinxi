@@ -601,7 +601,7 @@ class Post extends MY_Controller {
 		$return = array();
 		foreach ($files as $key => $filename) {
 			if( strpos($filename, $timespec. ".") !=false && strpos($filename,"thumb_")===false ){
-				if( !strpos($filename,"1x")===false ){
+				if( strpos($filename,"1x")!=false ){
 					continue;
 				}
 				$k = filemtime($this->picture_path.$user_id.'/'.$filename);
