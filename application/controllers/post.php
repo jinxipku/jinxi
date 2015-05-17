@@ -253,7 +253,12 @@ class Post extends MY_Controller {
 					unset( $tf_path );
 					$files = directory_map($this->picture_path.$user_id.'/');
 					foreach ($files as $key => $filename) {
-						if( strpos($filename, $_POST['timespec']. ".") !=false && strpos($filename,"thumb_")===false){
+						if( strpos($filename, $_POST['timespec']. ".") !=false && strpos($filename,"thumb_")===false ){
+							
+							if( strpos($filename,"1x")===false ){
+								//此时删除原图
+								continue;
+							}
 							$temp = base_url($this->picture_path.$user_id."/".$filename);
 							//if(isset($picture)&&$pic)
 							$new_ele['picture_url'] = $temp;
