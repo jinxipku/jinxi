@@ -80,18 +80,9 @@ class Script extends MY_Controller {
 	}
 
 	public function test(){
-		//echo genFileName(2,'',2222222);
-		// $user = $this->user_model->get_info(1);
-		// $this->session->set_userdata('login_user',$user);
-		// var_dump($user);	
-		echo ("3"==0)?"yy":"xx";
-		$x = "1x3123";
-		echo strpos($x, "1x");
-		if(strpos($x, "1x")!=false){
-			echo 'asdf';
-		}else echo '**';
-		if(0!=false) echo '1';
-		if(1!=false) echo '2';
+		$time = 1431846597;
+		$this->load->library('encrypt');
+		echo date('Y-m-d H:i:s',$time);
 	}
 
 	public function testPost(){

@@ -46,6 +46,7 @@ class user_model extends CI_Model {
 
 		if($info_type=="profile"){  //需要返回最新一篇帖子
 			$post = $this->get_newest_post($user['id']);
+			var_dump($post);
 			if(empty($post)) $user['newest_post'] = null;
 			else{
 				$post['category1_name'] = get_category1_name2($post['category1']);
