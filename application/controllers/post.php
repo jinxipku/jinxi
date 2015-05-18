@@ -567,7 +567,7 @@ class Post extends MY_Controller {
 				$this->ajaxReturn(null,"未登录",0);
 		}
 		$user_id = $user['id'];
-		$image_url = $this->picture_path.'1/'.$image_name;
+		$image_url = $this->picture_path.$user['id'].'/'.$image_name;
 		$this->load->library ( 'image_lib');
 		$config['image_library'] = 'gd2';
 		$config['source_image'] = $image_url;

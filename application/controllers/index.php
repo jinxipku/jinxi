@@ -67,7 +67,7 @@ class Index extends MY_Controller {
 			$temp[$value['createat']]['post_type'] = 1;
 		}
 
-		ksort($temp);
+		krsort($temp);
 		$i = 0;
 		$result = array();
 		foreach ($temp as $key => $value) {
