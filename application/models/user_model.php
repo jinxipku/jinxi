@@ -46,7 +46,6 @@ class user_model extends CI_Model {
 
 		if($info_type=="profile"){  //需要返回最新一篇帖子
 			$post = $this->get_newest_post($user['id']);
-			var_dump($post);
 			if(empty($post)) $user['newest_post'] = null;
 			else{
 				$post['category1_name'] = get_category1_name2($post['category1']);
@@ -54,10 +53,12 @@ class user_model extends CI_Model {
 				$post['deal'] = get_deal_name($post['deal'],$post['type']);
 				$post['createat'] = format_time($post['createat']);
 				$hasimg = false;
-				$picture = unserialize($post['picture']);
-				if(!empty($picture)){
-					$hasimg = true;
-				}else $post['picture'] = array();
+				if($post['type']!=1){
+					$picture = unserialize($post['picture']);
+					if(!empty($picture)){
+						$hasimg = true;
+					}
+				}
 				$post['title'] = get_title($post['type'],$post['deal'],$post['class'],$hasimg,$post['category1_name'],$post['category2_name'],$post['brand'],$post['model']);
 				$post['plain_title'] = get_plain_title($post['type'],$post['deal'],$post['class'],$hasimg,$post['category1_name'],$post['category2_name'],$post['brand'],$post['model']);			
 				$user['newest_post'] = $post;
