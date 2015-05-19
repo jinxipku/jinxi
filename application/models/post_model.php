@@ -218,12 +218,8 @@ class post_model extends CI_Model {
 		$this->sphinx->SetServer ( '127.0.0.1', 9312);
 		$this->sphinx->SetArrayResult ( true );
 		$this->sphinx->SetMatchMode(SPH_MATCH_EXTENDED2);
-		//$this->sphinx->SetRankingMode ( SPH_RANK_PROXIMITY_BM25 );
-	//$this->
 		$this->sphinx->SetFieldWeights(array('brand' => 20, 'model' => 10, 'description' => 4,'c1_name'=>1,'c2_name'=>1));
 		$this->sphinx->SetSortMode(SPH_SORT_ATTR_DESC, "createat");
-		
-		//$this->sphinx->SetMatchMode(SPH_MATCH_FULLSCAN);
 		$recommends = array();//所有找到的推荐
 
 		$this->db->order_by("addat","desc");
@@ -235,6 +231,8 @@ class post_model extends CI_Model {
 			$user_favorites[] = $value['post_id']."#".$value['type'];
 		}
 
+		//根据收藏贴做推荐
+		/*
 		if(!empty($res)){
 			$res = $res[0];
 			$table = get_post_table($res['type']);
@@ -268,29 +266,23 @@ class post_model extends CI_Model {
 					$recommends[] = $temp;
 				}
 			}
-		}
+		}*/
 
-		$res = $this->user_model->get_newest_post($user_id);
-		if(!empty($res)){
-			$f_post = $res;
-			//这里用相反的
-			//$this->sphinx->setFilter('type',array(1-$res['type']));
+		$newposts = $this->user_model->get_newestnposts($user_id);
+		foreach ($newposts as $key => $value) {
+			$f_post = $value;
 			$this->sphinx->ResetFilters();
 			$this->sphinx->SetFilter('category1',array($f_post['category1']));
 			$this->sphinx->SetFilter('category2',array($f_post['category2']));
 			$this->sphinx->SetFilter('user_id',array($user_id),true);
-			//$this->sphinx->SetSortMode(SPH_SORT_ATTR_DESC, "createat"); //按创建时间降序排列
 			$f_post['brand'] = trim($f_post['brand']);
 			$f_post['model'] = trim($f_post['model']);
-
 			$keyword = $f_post['brand'];
 			if(!empty($f_post['model'])){
 				$keyword = $keyword." ".$f_post['model'];
 			}
-			$source = get_sphinx_index(1-$res['type']);
-			//echo "accordingtoothers:".$keyword;
+			$source = get_sphinx_index(1-$f_post['type']);
 			$res = $this->sphinx->Query($keyword,$source);
-			//var_dump($res);
 			if(empty($res)||empty($res['matches'])){
 			}else{
 				$matches = $res['matches'];
@@ -303,6 +295,16 @@ class post_model extends CI_Model {
 				}
 			}
 		}
+		//推荐不能重复
+		$vars[] = array();
+		foreach ($recommends as $key => $value) {
+			$temp = $value['type']."#".$value['post_id'];
+			if(!in_array($temp, $vars)){
+				$vars[] = $temp;
+			}else{
+				unset($recommends[$key]);
+			}
+		}
 
 		//根据recommends提取数据
 		$num_per_page = $this->config->item("num_per_page2");
@@ -311,6 +313,11 @@ class post_model extends CI_Model {
 		$data['total'] = $total;
 		if($total==0){
 			$data['posts'] = array();
+			$data['total'] = 0;
+			$data['post_num'] = 0;
+			$data['page_num'] = 0;
+			$data['cur_page'] = 0;
+			return $data;
 		}else{
 			//先对recommends预处理，按照时间排序
 			foreach ($recommends as $key => $value) {
@@ -324,7 +331,7 @@ class post_model extends CI_Model {
 
 			$offset = ($page-1)*$num_per_page;
 			$length = $num_per_page;
-			array_slice($rec,$offset,$length);
+			$rec = array_slice($rec,$offset,$length);
 			$posts = array();
 			foreach ($rec as $key => $value) {
 				$temp = $this->get_post($value['post_id'],$value['type'],true);

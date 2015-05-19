@@ -83,6 +83,8 @@ class Script extends MY_Controller {
 		$time = 1431846597;
 		$this->load->library('encrypt');
 		echo date('Y-m-d H:i:s',$time);
+		$r = $this->user_model->get_newestnposts(1);
+		var_dump($r);
 	}
 
 	public function testPost(){

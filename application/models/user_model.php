@@ -66,7 +66,6 @@ class user_model extends CI_Model {
 		}
 		return $user;
 	}
-
 	public function get_newest_post($user_id){
 		$map['user_id'] = $user_id;
 		$map['active'] = 1;
@@ -97,6 +96,37 @@ class user_model extends CI_Model {
 			$post['type'] = 0;
 		}
 		return $post;
+	}
+
+	public function get_newestnposts($user_id,$n=3){
+		$map['user_id'] = $user_id;
+		$map['active'] = 1;
+		$results = array();
+		$this->db->order_by("createat","desc");
+		$this->db->limit($n,0);
+		$this->db->where($map);
+		$query = $this->db->get("jx_seller_post");
+		$newest_seller_posts = $query->result_array();
+		foreach ($newest_seller_posts as $key => $value) {
+			$value['type'] = 0;
+			$results[$value['createat']] = $value;
+		}
+
+		$this->db->order_by("createat","desc");
+		$this->db->limit($n,0);
+		$this->db->where($map);
+		$query = $this->db->get("jx_buyer_post");
+		$newest_buyer_posts = $query->result_array();
+		foreach ($newest_buyer_posts as $key => $value) {
+			$value['type'] = 1;
+			$results[$value['createat']] = $value;
+		}
+
+		krsort($results);
+		$results = array_slice($results,0,$n);
+		return $results;
+		
+
 	}
 
 	//TODO:根据公开等字段返回相应的信息，当前为全部返回
