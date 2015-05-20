@@ -26,12 +26,12 @@
 					<div class="post_item_block_user">
 						<div>
 							<a href="{$baseurl}user/profile/{$hotest.user_id}" target="_blank">
-								<img class="passive" src="{$hotest.user.thumb}" alt="{$hotest.user.nick}" />	
+								<img class="passive" src="{$hotest.user.thumb}" alt="{$hotest.user.nick}" title="{$hotest.user.school_name}"/>	
 							</a>
 						</div>
 						<div>
 							<p>
-								<a href="{$baseurl}user/profile/{$hotest.user_id}" class="{$hotest.user.nick_color}" target="_blank">{$hotest.user.nick}</a><small>{$hotest.user.school_name}</small>
+								<a href="{$baseurl}user/profile/{$hotest.user_id}" class="{$hotest.user.nick_color}" target="_blank" title="{$hotest.user.school_name}">{$hotest.user.nick}</a><small>{$hotest.user.school_name}</small>
 							</p>
 							<p>
 								<small>{$hotest.createat}</small>
@@ -91,12 +91,12 @@
 					<div class="post_item_block_user">
 						<div>
 							<a href="{$baseurl}user/profile/{$newest.user_id}" target="_blank">
-								<img class="passive" src="{$newest.user.thumb}" alt="{$newest.user.nick}" />	
+								<img class="passive" src="{$newest.user.thumb}" alt="{$newest.user.nick}" title="{$newest.user.school_name}"/>	
 							</a>
 						</div>
 						<div>
 							<p>
-								<a href="{$baseurl}user/profile/{$newest.user_id}" class="{$newest.user.nick_color}" target="_blank">{$newest.user.nick}</a><small>{$newest.user.school_name}</small>
+								<a href="{$baseurl}user/profile/{$newest.user_id}" class="{$newest.user.nick_color}" target="_blank"  title="{$newest.user.school_name}">{$newest.user.nick}</a><small>{$newest.user.school_name}</small>
 							</p>
 							<p>
 								<small>{$newest.createat}</small>
@@ -166,12 +166,12 @@
 					<h6>{$thispost.plain_title}</h6>
 					<div>
 						<a href="{$baseurl}user/profile/{$thispost.user_id}">
-							<img class="side_view_head" src="{$thispost.user.thumb}" alt="{$thispost.user.nick}" />
+							<img class="side_view_head" src="{$thispost.user.thumb}" alt="{$thispost.user.nick}" title="{$thispost.user.school_name}"/>
 						</a>
 					</div>
 					<div>
 						<div>
-							<a class="{$thispost.user.nick_color}" href="{$baseurl}user/profile/{$thispost.user_id}">{$thispost.user.nick}</a>
+							<a class="{$thispost.user.nick_color}" href="{$baseurl}user/profile/{$thispost.user_id}" title="{$thispost.user.school_name}">{$thispost.user.nick}</a>
 							<small class="post_user_school"> {$thispost.user.school_name}</small>
 						</div>
 						<div>
