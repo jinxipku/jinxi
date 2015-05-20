@@ -70,18 +70,19 @@
 				$.post(
 					'http://www.xn--wmqr18c.cn/user/delete_file/' + file,
 					function(){
-						//window.location.href = "http://www.xn--wmqr18c.cn/user/setup/2";
+						window.location.href = "http://www.xn--wmqr18c.cn/user/setup/2";
 					}
 				);
-				window.onbeforeunload = function() { 
-				} 
+				window.onbeforeunload = function() {
+					$.post('http://www.xn--wmqr18c.cn/user/delete_file/' + file);
+				}
 			});
 			window.onbeforeunload = function() {
 				$.post('http://www.xn--wmqr18c.cn/user/delete_file/' + file);
 			} 
 		}
 		function saveResponse(data) {
-			window.onbeforeunload = function() { 
+			window.onbeforeunload = function() {
 			}
 			if (data.status == 1) {
 				$("#info_modal").find('.modal-title').text("设置成功");
@@ -120,7 +121,7 @@
 					setSelect : [ 100, 100, 200, 200 ]
 				// 初始化选中区域
 				});
-			}, 100);
+			}, 300);
 		}
 		function show_preview(coords) { // 显示剪切后图片预览
 			if (parseInt(coords.w) > 0) {
