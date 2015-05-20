@@ -1,6 +1,6 @@
 	<div id="body" class="row">
 		<div id="main" class="search">
-			<h6><strong>今昔网 搜索结果（{$keyword}）</strong></h6>
+			<h6><strong>今昔网 搜索结果{if isset($keyword)}（{$keyword}）{/if}</strong></h6>
 
 			{if $total > 0}
 			<div id="post_page_header" class="panel panel-default">
