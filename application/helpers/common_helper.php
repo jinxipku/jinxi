@@ -331,12 +331,12 @@ function genFileName($uniquedata,$ext='',$time=null){
     if($time!=null){
         $tmp = time() - $time;
         for($i = 0; $i < 8 - strlen($tmp+''); $i ++) {
-            $rand = $rand . $char_array[mt_rand(0,55)];
+            $rand = $rand . $char_array[mt_rand(0,54)];
         }
         $rand = $rand . $tmp;
     }else{
         for($i = 0; $i < 8; $i ++) {
-            $rand = $rand . $char_array[mt_rand(0,55)];
+            $rand = $rand . $char_array[mt_rand(0,54)];
         }
     }
 
