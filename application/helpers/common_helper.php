@@ -342,7 +342,7 @@ function genFileName($uniquedata,$ext='',$time=null){
 
     $rand = $rand.$uniquedata;    
     for($i = 0; $i < 8; $i ++) {
-        $rand = $rand . $char_array[mt_rand(0,47)];
+        $rand = $rand . $char_array[mt_rand(0,46)];
     }
     if($time == null){
         $rand = $rand. time();
