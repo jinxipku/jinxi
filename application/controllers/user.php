@@ -108,8 +108,8 @@ class User extends MY_Controller {
 		$this->assign('posts', $data['posts']);
 
 		if ($data['page_num'] > 0) {
-			$this->assign('st_page', floor($data['cur_page'] / 10) * 10 + 1);
-			$end_page = floor($data['cur_page'] / 10 + 1) * 10;
+			$this->assign('st_page', floor(($data['cur_page'] - 1) / 10) * 10 + 1);
+			$end_page = floor(($data['cur_page'] - 1) / 10 + 1) * 10;
 			if ($end_page > $data['page_num'])
 				$end_page = $data['page_num'];
 			$this->assign('ed_page', $end_page);
