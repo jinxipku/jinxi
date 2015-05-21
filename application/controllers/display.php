@@ -290,6 +290,7 @@ class Display extends MY_Controller {
 		$this->sphinx->SetServer ( '127.0.0.1', 9312);
 		$keyword = urldecode($keyword);//decode url
 		//以下设置用于返回数组形式的结果
+		
 		$this->sphinx->SetArrayResult ( true );
 		if(isset($type)){  
 			$this->sphinx->setFilter('type',array($type));
@@ -301,13 +302,14 @@ class Display extends MY_Controller {
 		if(isset($category2)){
 			$this->sphinx->setFilter('category2',array($category2));
 		}
+		//$this->sphinx->SetMatchMode(SPH_MATCH_ANY);
 		$this->sphinx->SetMatchMode(SPH_MATCH_EXTENDED2);
 		$this->sphinx->SetFieldWeights(array('brand' => 10, 'model' => 10, 'description' => 4));
 		$this->sphinx->SetSortMode(SPH_SORT_ATTR_DESC, "createat"); //按创建时间降序排列
 		$num_per_page = $this->config->item("num_per_page");
 		$this->sphinx->SetLimits($num_per_page*($page-1),$num_per_page);
 		$res = $this->sphinx->Query($keyword,"*");
-		//var_dump($res);
+
 		if(empty($res)||empty($res['matches'])){
 			$data['total'] = 0;
 			$data['posts'] = array();

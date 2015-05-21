@@ -217,8 +217,9 @@ class post_model extends CI_Model {
 		$this->load->library('sphinx_client', NULL, 'sphinx');
 		$this->sphinx->SetServer ( '127.0.0.1', 9312);
 		$this->sphinx->SetArrayResult ( true );
-		$this->sphinx->SetMatchMode(SPH_MATCH_EXTENDED2);
-		$this->sphinx->SetFieldWeights(array('brand' => 20, 'model' => 10, 'description' => 4,'c1_name'=>1,'c2_name'=>1));
+		$this->sphinx->SetMatchMode(SPH_MATCH_ANY);
+		//$this->sphinx->SetMatchMode(SPH_MATCH_EXTENDED2);
+		//$this->sphinx->SetFieldWeights(array('brand' => 20, 'model' => 10, 'description' => 4,'c1_name'=>1,'c2_name'=>1));
 		$this->sphinx->SetSortMode(SPH_SORT_ATTR_DESC, "createat");
 		$recommends = array();//所有找到的推荐
 
