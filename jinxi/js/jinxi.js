@@ -1300,3 +1300,16 @@ function confirm_search() {
 		$("form#search_box").submit();
 	}
 }
+function delete_all_reminder() {
+	$.post(
+		baseurl + "reminder/delete_all",
+		function(res) {
+			if (res.status == 1) {
+				$("div#reminders_box").html("");
+				$("#unread_message").text(0);
+			} else {
+				
+			}
+		}
+	)
+}

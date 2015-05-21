@@ -1,5 +1,5 @@
 <div class="modal-header">
-	<h4 class="modal-title">消息提醒({$cnt})</h4>
+	<h4 class="modal-title">消息提醒({$cnt})<small><a href="" onclick="delete_all_reminder();return false;" title="删除全部提醒">&nbsp;&nbsp;<i class="icon-trash"></i></a></small></h4>
 </div>
 <div class="modal-body">
 	<div id="reminders_box">

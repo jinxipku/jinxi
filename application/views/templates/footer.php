@@ -121,10 +121,6 @@
 			mouseoverColor: '#1ABC9C'
 		};
 	</script>
-	<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?uid=1867235"></script>
-	<a id="ujian" href="http://www.ujian.cc">
-		<img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐"/>
-	</a>
 	<script type="text/javascript">
 		var jiathis_config={
 			url:"http://www.今昔.cn",
