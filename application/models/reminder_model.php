@@ -29,6 +29,10 @@ class reminder_model extends CI_Model {
 		return $this->db->delete("jx_reminder",array("id"=>$reminder_id));
 	}
 
+	public function delete_all($user_id){
+		return $this->db->delete("jx_reminder",array("to_user_id"=>$user_id));
+	}
+
 	public function get_user_reminder($user_id){
 		$map['to_user_id'] = $user_id;
 		$this->db->select("jx_reminder.*,jx_user.nick,jx_user.nick_color,jx_user.thumb");

@@ -80,11 +80,7 @@ class Script extends MY_Controller {
 	}
 
 	public function test(){
-		$time = 1431846597;
-		$this->load->library('encrypt');
-		echo date('Y-m-d H:i:s',$time);
-		$r = $this->user_model->get_newestnposts(1);
-		var_dump($r);
+		$this->reminder_model->delete_all(1);
 	}
 
 	public function testPost(){
@@ -264,7 +260,7 @@ echo '</pre>';
 			"推荐同学们购买",
 			"资料很不错"
 		);
-		$length = count($dict);
+		$length = count($dict)-1;
 		for( $i=0; $i<$num;$i=$i+1){
 			$post['user_id'] = rand(1,2);
 			$class = rand(0,50);
@@ -274,7 +270,7 @@ echo '</pre>';
 			$post['brand'] = $dict[rand(0,$length)];
 			$post['model'] = $dict[rand(0,$length)];
 			$post['class'] = rand(0,4);
-			$post['description'] = $desc_dict[rand(0,count($desc_dict))];
+			$post['description'] = $desc_dict[rand(0,count($desc_dict)-1)];
 			$post['price'] = rand(0,9999);
 			$post['deal'] = rand(1,4);
 			$post['contactby'] = rand(0,4);
@@ -296,7 +292,7 @@ echo '</pre>';
 			$post['brand'] = $dict[rand(0,$length)];
 			$post['model'] = $dict[rand(0,$length)];
 			$post['class'] = rand(0,4);
-			$post['description'] = $desc_dict[rand(0,count($desc_dict))];
+			$post['description'] = $desc_dict[rand(0,count($desc_dict)-1)];
 			$post['price'] = rand(0,9999);
 			$post['deal'] = rand(1,4);
 			$post['contactby'] = rand(0,4);

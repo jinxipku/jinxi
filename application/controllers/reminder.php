@@ -73,6 +73,14 @@ class Reminder extends MY_Controller {
 		}
 	}
 //ajax 轮询调用
+	public function delete_all(){
+		$login_user =  $this->session->userdata('login_user');
+		if(empty($login_user)) {
+			$this->ajaxReturn(null,"未登录",0);
+		}
+		$this->reminder_model->delete_all($login_user['id']);
+		$this->ajaxReturn(null,"",1);
+	}
 	public function reminder_number(){
 		$login_user =  $this->session->userdata('login_user');
 		if(empty($login_user)) {
