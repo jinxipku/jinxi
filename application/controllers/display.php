@@ -295,7 +295,6 @@ class Display extends MY_Controller {
 		if(isset($type)){  
 			$this->sphinx->setFilter('type',array($type));
 		}
-
 		if(isset($category1)){
 			$this->sphinx->setFilter('category1',array($category1));
 		}
@@ -308,6 +307,7 @@ class Display extends MY_Controller {
 		$this->sphinx->SetSortMode(SPH_SORT_ATTR_DESC, "createat"); //按创建时间降序排列
 		$num_per_page = $this->config->item("num_per_page");
 		$this->sphinx->SetLimits($num_per_page*($page-1),$num_per_page);
+
 		$res = $this->sphinx->Query($keyword,"*");
 
 		if(empty($res)||empty($res['matches'])){

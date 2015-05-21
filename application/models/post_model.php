@@ -217,7 +217,7 @@ class post_model extends CI_Model {
 		$this->load->library('sphinx_client', NULL, 'sphinx');
 		$this->sphinx->SetServer ( '127.0.0.1', 9312);
 		$this->sphinx->SetArrayResult ( true );
-		$this->sphinx->SetMatchMode(SPH_MATCH_ANY);
+		//$this->sphinx->SetMatchMode(SPH_MATCH_ANY);
 		//$this->sphinx->SetMatchMode(SPH_MATCH_EXTENDED2);
 		//$this->sphinx->SetFieldWeights(array('brand' => 20, 'model' => 10, 'description' => 4,'c1_name'=>1,'c2_name'=>1));
 		$this->sphinx->SetSortMode(SPH_SORT_ATTR_DESC, "createat");
@@ -281,6 +281,11 @@ class post_model extends CI_Model {
 			$keyword = $f_post['brand'];
 			if(!empty($f_post['model'])){
 				$keyword = $keyword." ".$f_post['model'];
+			}
+			if(trim($keyword)==""){//为空
+				$this->sphinx->SetMatchMode(SPH_MATCH_EXTENDED2);
+			}else{
+				$this->sphinx->SetMatchMode(SPH_MATCH_ANY);
 			}
 			$source = get_sphinx_index(1-$f_post['type']);
 			$res = $this->sphinx->Query($keyword,$source);
