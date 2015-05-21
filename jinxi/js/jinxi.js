@@ -23,6 +23,11 @@ $("input#search_key").keydown(function(){
 		confirm_search();
 	}
 });
+$("input#password").keydown(function(){
+	if(event.keyCode==13){
+		$("#btn_login").click();
+	}
+});
 $("input#qq,input#weixin,input#phone").bind('blur', function() {
 	if ($(this).val().length == 0) {
 		$(this).val("未填写");
