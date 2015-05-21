@@ -5,7 +5,7 @@ $(document).ready( function() {
 	$(':radio').radio();
 	$("img.lazy").lazyload({effect: "fadeIn"});
 	get_reminder();
-	setInterval(get_reminder, 10000);
+	setInterval(get_reminder, 30000);
 });
 $(window).bind('scroll', function() {
 	$(this).scrollTop() > 510 + head_height ? $("#back_to_top").fadeIn(500) : $("#back_to_top").fadeOut(500);
