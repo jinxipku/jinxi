@@ -1303,13 +1303,16 @@ function confirm_search() {
 function delete_all_reminder() {
 	$.post(
 		baseurl + "reminder/delete_all",
+		{},
 		function(res) {
 			if (res.status == 1) {
 				$("div#reminders_box").html("");
+				$("#reminder_modal div.modal-content h4").html('消息提醒(0)');
 				$("#unread_message").text(0);
 			} else {
 				
 			}
-		}
+		},
+		'json'
 	)
 }
