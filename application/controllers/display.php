@@ -192,7 +192,12 @@ class Display extends MY_Controller {
 		$this->assign('newest', $newest);
 		$this->assign('random', $random);
 
-		$keyword = $_POST['search_key'];
+		if (isset($_POST['search_key'])) {
+			$keyword = $_POST['search_key'];
+		} else {
+			$keyword = "无";
+		}
+		
 		$data = $this->get_posts(null,null,null,null,null,1,$keyword);
 		$this->assign('keyword', $keyword);
 		$this->assign('total', $data['total']);
