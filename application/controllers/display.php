@@ -197,11 +197,28 @@ class Display extends MY_Controller {
 		} else {
 			$keyword = "无";
 		}
+		$search_page = 1;
+		if (isset($_POST['search_page'])) {
+			$search_page = $_POST['search_page'];
+		}
 		
-		$data = $this->get_posts(null,null,null,null,null,1,$keyword);
-		$this->assign('keyword', $keyword);
+		$data = $this->get_posts(null,null,null,null,null,$search_page,$keyword);
+
+
 		$this->assign('total', $data['total']);
+		$this->assign('page_num', $data['page_num']);
+		$this->assign('cur_page', $data['cur_page']);
+		$this->assign('post_num', $data['post_num']);
 		$this->assign('posts', $data['posts']);
+
+		if ($data['page_num'] > 0) {
+			$this->assign('st_page', floor(($data['cur_page'] - 1) / 10) * 10 + 1);
+			$end_page = floor(($data['cur_page'] - 1) / 10 + 1) * 10;
+			if ($end_page > $data['page_num'])
+				$end_page = $data['page_num'];
+			$this->assign('ed_page', $end_page);
+		}
+		$this->assign('keyword', $keyword);
 
 		$this->display ( 'templates/header.php' );
 		$this->display ( 'info/search.php' );
