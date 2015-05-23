@@ -231,9 +231,6 @@ class Account extends MY_Controller {
 // | 私有函数
 // +----------------------------------------------------------------------
 	
-	/**
-	**TODO: 修改baseurl
-	*/
 	private function _sendVerifyEmail( $user ){
 		$this->load->library ( 'email' );
 		// 设置Email参数
