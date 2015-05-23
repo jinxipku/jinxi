@@ -285,6 +285,9 @@ class Display extends MY_Controller {
 					$data['posts'][] = $this->get_post_info($value,$type);
 				}
 			}
+			$data['post_num'] = count($data['posts']);
+			$data['page_num'] = intval(ceil($data['total']/$num_per_page));
+			$data['cur_page'] = $page;
 			
 		}
 		foreach ($data['posts'] as $key => $value) {
@@ -293,9 +296,7 @@ class Display extends MY_Controller {
 				$data['posts'][$key]['has_collect'] = 1;
 			}else $data['posts'][$key]['has_collect'] = 0;
 		}
-		$data['post_num'] = count($data['posts']);
-		$data['page_num'] = intval(ceil($data['total']/$num_per_page));
-		$data['cur_page'] = $page;
+		
 		// echo '<pre>';
 		// print_r($data);
 		// echo '</pre>';
