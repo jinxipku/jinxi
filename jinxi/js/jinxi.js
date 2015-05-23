@@ -1300,6 +1300,10 @@ function confirm_search() {
 		$("form#search_box").submit();
 	}
 }
+function search_page(page) {
+	$("input#search_page").val(page);
+	$("form#search_box").submit();
+}
 function delete_all_reminder() {
 	$.post(
 		baseurl + "reminder/delete_all",

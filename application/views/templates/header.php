@@ -31,6 +31,7 @@
 		<div class="form-group">
 			<form id="search_box" action="{$baseurl}display/search" method="post">
 				<input id="search_key" name="search_key" type="text" placeholder="请输入关键词搜索" class="form-control flat" enctype="text/plain" accept-charset="utf-8"/>
+				<input id="search_page" name="search_page" type="hidden" enctype="text/plain" accept-charset="utf-8" value="1"/>
 				<span class="fui-search input-search" onclick="confirm_search()"></span>
 			</form>
 		</div>
