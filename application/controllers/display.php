@@ -326,30 +326,44 @@ class Display extends MY_Controller {
 		$this->sphinx->SetFieldWeights(array('brand' => 10, 'model' => 10, 'description' => 4));
 		$this->sphinx->SetSortMode(SPH_SORT_ATTR_DESC, "createat"); //按创建时间降序排列
 		$num_per_page = $this->config->item("num_per_page");
-		$this->sphinx->SetLimits($num_per_page*($page-1),$num_per_page);
+		//$this->sphinx->SetLimits($num_per_page*($page-1),$num_per_page);
 
 		$res = $this->sphinx->Query($keyword,"*");
 
 		if(empty($res)||empty($res['matches'])){
 			$data['total'] = 0;
 			$data['posts'] = array();
+			$data['post_num'] = 0;
+			$data['page_num'] = 0;
+			$data['cur_page'] = 0;			
 			return $data;
 		}
 		$posts = array();
 		$matches = $res['matches'];
-		if(empty($matches)){
-			$data['total'] = 0;
-			$data['posts'] = array();
-			return $data;
-		}
+
+		$total = count($matches);
+
+		$page_num = intval(ceil($total/$num_per_page));
+		$page = $page%$page_num;
+		$page = ($page==0)? $page_num : $page;
+
+		$offset1 = ($page-1)*$num_per_page;
+		$offset2 = $page*$num_per_page;
+		$i = 0;
 		foreach ($matches as $key => $value) {
-			$post_id = $value['id'];
-			$type = $value['attrs']['type'];
-			$temp_post = $this->get_post_info($post_id,$type,true);
-			$posts[] = $temp_post;
+			if($i>=$offset1&&$i<$offset2){
+				$post_id = $value['id'];
+				$type = $value['attrs']['type'];
+				$temp_post = $this->get_post_info($post_id,$type,true);
+				$posts[] = $temp_post;
+			}
+			$i++;
 		}
-		$data['total'] = $res['total'];
+		$data['total'] = $total;
 		$data['posts'] = $posts;
+		$data['cur_page'] = $page;
+		$data['page_num'] = $page_num;
+		$data['post_num'] = count($posts);
 		return $data;
 	}
 
