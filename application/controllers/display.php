@@ -179,7 +179,6 @@ class Display extends MY_Controller {
 		if (!empty($login_user)) {
 			$this->assign('login_user', $login_user);
 		}
-
 		$this->assign('nav_tab', 0);
 		$this->assign('title', '今昔网-搜索');
 		$this->assign('baseurl', base_url());
@@ -192,11 +191,11 @@ class Display extends MY_Controller {
 		$this->assign('newest', $newest);
 		$this->assign('random', $random);
 
+		$keyword = "无";
 		if (isset($_POST['search_key'])) {
 			$keyword = $_POST['search_key'];
-		} else {
-			$keyword = "无";
 		}
+
 		$search_page = 1;
 		if (isset($_POST['search_page'])) {
 			$search_page = $_POST['search_page'];
