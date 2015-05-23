@@ -17,7 +17,7 @@ class Script extends MY_Controller {
 		$this->load->model("favorites_model");
 		$this->load->model("reminder_model");
 		$this->load->database();
-		exit;//禁用script
+		//exit;//禁用script
 	}
 
 	public function object_array($array){
@@ -278,7 +278,7 @@ echo '</pre>';
 			$post['createat'] = rand(1000000,time());
 			
 			$this->post_model->insert_post($post, $type);
-			//echo 'i';
+			echo 'i';
 		}
 
 		$type = 1;//发求购贴

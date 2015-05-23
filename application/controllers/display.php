@@ -327,6 +327,7 @@ class Display extends MY_Controller {
 		$this->sphinx->SetSortMode(SPH_SORT_ATTR_DESC, "createat"); //按创建时间降序排列
 		$num_per_page = $this->config->item("num_per_page");
 		//$this->sphinx->SetLimits($num_per_page*($page-1),$num_per_page);
+		$this->sphinx->SetLimits(0,1000);
 
 		$res = $this->sphinx->Query($keyword,"*");
 
