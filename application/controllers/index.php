@@ -92,7 +92,7 @@ class Index extends MY_Controller {
 		$res = $this->post_model->get_user_recommend($login_user['id']);
 		$posts = $res['posts'];
 		if(count($posts)>3)
-			array_slice($posts, 0, 3);
+			$posts = array_slice($posts, 0, 3);
 		return $posts;
 	}
 }
