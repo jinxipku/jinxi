@@ -288,7 +288,7 @@ function check_email(login) {
 		$("#check_email").html("邮箱长度不要超过30个字符！");
 		$("#check_email").removeClass("fui-check success");
 		$("#check_email").addClass("fui-cross danger");
-	} else if (email.indexOf("edu") < 0) {
+	} else if ($('#nomail').val() == 0 && email.indexOf("edu") < 0) {
 		$("#check_email").html("请使用你的校园邮箱！");
 		$("#check_email").removeClass("fui-check success");
 		$("#check_email").addClass("fui-cross danger");

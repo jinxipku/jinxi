@@ -43,6 +43,7 @@ function initSchool(provinceID){
 		var item=$(this);
 		var school = item.attr('school-id');
 		var surfix = item.attr('surfix');
+		var nomail = item.attr('nomail');
 
 		//更新选择大学文本框中的值
 		$("#school").val(item.text());
@@ -51,11 +52,15 @@ function initSchool(provinceID){
 			$("#email").css('width','180px');
 			$("#email").css('display','inline');
 			$("#email_surfix").text(surfix);
-		}
-		else {
+		} else {
 			$("#email").css('width','300px');
 			$("#email").css('display','block');
 			$("#email_surfix").text("");
+		}
+		if (nomail != 'undefined') {
+			$('#nomail').val(1);
+		} else {
+			$('#nomail').val(0);
 		}
 
 		//关闭弹窗

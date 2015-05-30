@@ -6,6 +6,7 @@
 					<div class="form-group">
 						<input id="school" name="school" type="text" placeholder="学校" class="form-control flat input-lg" onclick="chooseUniversity()" maxlength=15 />
 						<input id="school_id" name="school_id" type="hidden"/>
+						<input id="nomail" name="nomail" type="hidden"/>
 						<script type="text/javascript" src="{$baseurl}js/school.js"></script>
 						<script type="text/javascript" src="{$baseurl}js/myschool.js"></script>
 						<span class="danger" id="check_school"></span>
