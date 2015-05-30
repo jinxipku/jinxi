@@ -48,7 +48,7 @@
 
 		$("#picture").change(function(){
 			if ($("#picture").val() == '') {
-				$("#file_info").html('请先选择一张图片！支持gif、jpg、png图片格式，大小不要超过2M');
+				$("#file_info").html('请先选择一张图片！支持gif、jpg、png图片格式，大小不要超过5M');
 				return;
 			}
 			// 判断上传格式，判断图片大小好像只能在服务端检测，所以预览图片必须先传上去
@@ -64,9 +64,15 @@
 			
 		});
 		function showResponse(data){
-			$("#upload_btn").attr('disabled',false);
-			$("#upload_btn").css('font-size','6em');
-			$("#upload_btn").html('上传成功<br>继续上传或回电脑预览');
+			if(data.status==1){
+				$("#upload_btn").attr('disabled',false);
+				$("#upload_btn").css('font-size','6em');
+				$("#upload_btn").html('上传成功<br>继续上传或回电脑预览');
+			}else{
+				$("#upload_btn").attr('disabled',false);
+				$("#upload_btn").css('font-size','6em');
+				$("#upload_btn").html('上传失败<br>请检查图片格式和大小');
+			}
 		}
 		function showError(data){
 			$("#upload_btn").attr('disabled',false);

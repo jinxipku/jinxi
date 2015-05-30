@@ -33,12 +33,12 @@
 		function showResponse(data) {
 			$("#btn_upload_picture").html('<span>本地上传图片</span><br/>点击左侧相机可手机上传图片');
 			$("#btn_upload_picture").attr('disabled', false);
-			$("#file_info").text("支持jpg和png图片格式，大小不要超过2M。");
+			$("#file_info").text("支持jpg和png图片格式，大小不要超过5M。");
 			if (data.status == 0) {
 				if (data.data == 'The filetype you are attempting to upload is not allowed.')
 					$("#file_info").text('您上传的图片格式不符合要求，请重新上传。');
 				else if (data.data == 'The uploaded file exceeds the maximum allowed size in your PHP configuration file.')
-					$("#file_info").text('您上传的图片大小超过了2M，请重新上传。');
+					$("#file_info").text('您上传的图片大小超过了5M，请重新上传。');
 				else
 					$("#file_info").text(data.data + "点击左侧相机图片可进行手机拍照上传。");
 				return;

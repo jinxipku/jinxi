@@ -34,7 +34,7 @@
 				if (data.data == 'The filetype you are attempting to upload is not allowed.')
 					$("#file_info").html('您上传的图片格式不符合要求，请重新上传。');
 				else if (data.data == 'The uploaded file exceeds the maximum allowed size in your PHP configuration file.')
-					$("#file_info").html('您上传的图片大小超过了2M，请重新上传。');
+					$("#file_info").html('您上传的图片大小超过了5M，请重新上传。');
 				else
 					$("#file_info").html(data.data);
 				return;

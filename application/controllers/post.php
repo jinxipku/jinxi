@@ -449,7 +449,7 @@ class Post extends MY_Controller {
 		}
 		$config ['upload_path'] = $this->picture_path.$user_id.'/';
 		$config ['allowed_types'] = 'jpg|png';
-		$config ['max_size'] = '2048';
+		$config ['max_size'] = '10240';
 		$config ['overwrite'] = true;
 
 		if(isset($_POST['timespec'])){

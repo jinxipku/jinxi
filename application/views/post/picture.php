@@ -21,7 +21,7 @@
 
 							<div class="form-group">
 								<input type="file" id="picture" name="picture">
-								<p id="file_info" class="help-block">支持jpg和png图片格式，大小不要超过2M。</p>
+								<p id="file_info" class="help-block">支持jpg和png图片格式，大小不要超过5M。</p>
 							</div>
 						</form>
 						<p>确认请按下一步。</p>
