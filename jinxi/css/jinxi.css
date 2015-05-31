@@ -12,6 +12,9 @@ img.passive {
 h4, h5, h6 {
 	font-family: 微软雅黑,黑体,幼圆,宋体;
 }
+h5 {
+	line-height: 1.4;
+}
 input,textarea {
 	font-family: 微软雅黑,黑体,幼圆,宋体 !important;
 }

@@ -12,13 +12,13 @@
 			<p>您可以通过以下方式联系我们：</p>
 			<div id="contact_us_box">
 				<div class="contact_us">
-					<p><strong>微信公众号</strong></p>
-					<a href="#" target="_blank" title="今昔网微信公众号"><img src="{$baseurl}img/wbewm.png" alt="今昔网微信公众号"></a>
+					<p><strong>新浪微博官方账号</strong></p>
+					<a href="http://weibo.com/u/3894185518" target="_blank" title="新浪微博官方账号"><img src="{$baseurl}img/wbewm.png" alt="今昔二手新浪微博主页"></a>
 				</div>
 
 				<div class="contact_us">
 					<p><strong>新浪微博官方账号</strong></p>
-					<a href="http://weibo.com/u/3894185518" target="_blank" title="今昔二手新浪微博主页"><img src="{$baseurl}img/wbewm.png" alt="今昔二手新浪微博主页"></a>
+					<a href="http://weibo.com/u/3894185518" target="_blank" title="新浪微博官方账号"><img src="{$baseurl}img/wbewm.png" alt="今昔二手新浪微博主页"></a>
 				</div>
 
 				<div class="contact_us">
