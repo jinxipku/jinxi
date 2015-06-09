@@ -57,6 +57,7 @@ function initSchool(provinceID){
 			$("#email").css('display','block');
 			$("#email_surfix").text("");
 		}
+		alert(nomail);
 		if (nomail != 'undefined') {
 			$('#nomail').val(1);
 		} else {
