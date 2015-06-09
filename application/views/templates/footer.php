@@ -126,7 +126,7 @@
 			url:"http://www.今昔.cn",
 			summary:"亲，有闲置不用的小物件么？想要便宜实用的二手商品？快加入今昔吧，加入专属大学生的二手交易世界^-^",
 			title:"今昔网欢迎您！ #今昔二手#",
-			pic:"http://jinxi.net/img/jinxibig.jpg",
+			pic:"{$baseurl}img/icon/icon.png",
 			marginTop:500,
 			ralateuid:{
 				"tsina":"3894185518"
