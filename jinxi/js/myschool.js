@@ -35,7 +35,7 @@ function initSchool(provinceID){
 	$('#choose-a-school').html('');
 	var schools = schoolList[provinceID-1].school;
 	for(i=0;i<schools.length;i++){
-		$('#choose-a-school').append('<a href="javascript:void(0);" class="school-item" school-id="'+schools[i].id+'" surfix="'+schools[i].surfix+'">'+schools[i].name+'</a>');
+		$('#choose-a-school').append('<a href="javascript:void(0);" class="school-item" school-id="'+schools[i].id+'" surfix="'+schools[i].surfix+'" nomail="'+schools[i].nomail+'">'+schools[i].name+'</a>');
 	}
 	
 	//添加大学列表项的click事件
@@ -57,7 +57,6 @@ function initSchool(provinceID){
 			$("#email").css('display','block');
 			$("#email_surfix").text("");
 		}
-		alert(nomail);
 		if (nomail != 'undefined') {
 			$('#nomail').val(1);
 		} else {
