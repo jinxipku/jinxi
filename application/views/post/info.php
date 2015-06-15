@@ -3,8 +3,8 @@
 						<img class="passive" src="{$baseurl}img/info/info.png" alt="填写基本信息">
 					</div>
 					<div class="post_cont">
-						<input id="brand" name="brand" type="text" class="form-control flat" placeholder="请输入物品品牌/名称" maxlength=15 />
-						<input id="model" name="model" type="text" class="form-control flat" placeholder="请输入物品型号" maxlength=15 />
+						<input id="brand" name="brand" type="text" class="form-control flat" placeholder="请输入物品品牌/名称" maxlength=30 />
+						<input id="model" name="model" type="text" class="form-control flat" placeholder="请输入物品型号" maxlength=50 />
 						<p>请选择物品状态：</p>
 						<select id="class" name="class">
 							<option value=0 selected>S级别（正品）</option>

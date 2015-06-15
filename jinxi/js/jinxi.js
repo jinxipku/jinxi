@@ -635,6 +635,7 @@ function category2info() {
 		$("#brand").attr("placeholder", "请输入物品品牌/名称");
 		$("#model").attr("placeholder", "请输入物品型号");
 	}
+	$("input#brand").focus();
 	$("#newpost_category").fadeOut(300, function() {
 		$("#newpost_info").fadeIn(300);
 	});
@@ -656,6 +657,7 @@ function info2price() {
 	});
 }
 function price2info() {
+	$("input#brand").focus();
 	$("#newpost_price").fadeOut(300, function() {
 		$("#newpost_info").fadeIn(300);
 	});
